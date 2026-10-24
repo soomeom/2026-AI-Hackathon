@@ -9,6 +9,8 @@ import { isInitialAssessmentVisible } from './src/ui/initial-assessment.js';
 import { mergeCatalogParts } from './src/content/catalog.js';
 import { createDemoSession, prepareDemoRole, cancelPendingDemoAI } from './src/state/demo-session.js';
 import { renderDemoEntry, hasUnsavedSessionForm } from './src/ui/demo-entry.js';
+import { renderSubjectSelection } from './src/ui/subject-selection.js';
+import { isSubjectEnabled } from './src/content/subjects.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
 
@@ -49,7 +51,8 @@ const freshUi = () => ({
   initialChoices: {}, initialAssessmentOpen: false, initialAssessmentDismissed: false, initialError: null,
   initialAssessmentFor: null, initialConceptId: null, initialQuestionId: null, initialReason: '', initialPlanError: null,
 });
-const ui = { ...freshUi(), role: demoSession.role, health: null };
+const ui = { ...freshUi(), role: demoSession.role, subjectId: demoSession.subjectId, health: null };
+const inWorkspace = () => Boolean(ui.role && isSubjectEnabled(ui.subjectId));
 
 const persist = { savedRevision: 0, status: storage ? 'idle' : 'unavailable', blocked: false };
 
@@ -86,18 +89,23 @@ function save(state) {
 function render() {
   const state = store.getState();
   document.getElementById('session-controls').hidden = !ui.role;
-  document.getElementById('reset').hidden = !ui.role;
+  document.getElementById('reset').hidden = !inWorkspace();
+  document.getElementById('change-subject').hidden = !inWorkspace();
   document.getElementById('reset').textContent = ui.confirmReset ? '정말 초기화할까요? 한 번 더 누르기' : '시연 초기화';
   const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
-  document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'} · ${ui.role === 'mentor' ? '멘토' : '멘티'}` : '';
+  document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'} · ${ui.role === 'mentor' ? '멘토' : '멘티'}${inWorkspace() ? ' · 수학' : ''}` : '';
   document.getElementById('entry-session-note').hidden = !ui.role || demoSession.persistent;
   app.onclick = null;
   app.onchange = null;
   app.oninput = null;
-  app.classList.toggle('entry-main', !ui.role);
-  app.classList.toggle('learner-main', ui.role === 'learner');
+  app.classList.toggle('entry-main', !inWorkspace());
+  app.classList.toggle('learner-main', inWorkspace() && ui.role === 'learner');
   if (!ui.role) {
     renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent });
+    return;
+  }
+  if (!inWorkspace()) {
+    renderSubjectSelection({ root: app, state, role: ui.role, onSelect: selectSubject });
     return;
   }
   const props = {
@@ -114,7 +122,7 @@ function render() {
 // 멘티 화면이 보이지 않을 때(탭 숨김·멘토 화면 전환)는 풀이 시간을 멈춘다
 function syncVisibility() {
   const state = store.getState();
-  const visiblePath = ui.role === 'learner' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
+  const visiblePath = inWorkspace() && ui.role === 'learner' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
   for (const p of state.paths ?? []) {
     if (!p.routeId || p.status !== 'active') continue;
     const visible = p.id === visiblePath?.id;
@@ -122,27 +130,46 @@ function syncVisibility() {
   }
 }
 
-function setRole(role) {
-  demoSession.enter(role);
-  prepareDemoRole(ui, store.getState(), role);
-  syncVisibility();
-  render();
-  app.focus();
+function focusScreen() {
+  app.focus({ preventScroll: true });
+  window.scrollTo?.({ top: 0, left: 0, behavior: 'instant' });
 }
 
-function leaveRole() {
+function setRole(role) {
+  demoSession.enter(role);
+  Object.assign(ui, { role, subjectId: null, confirmReset: false, flash: null });
+  syncVisibility();
+  render();
+  focusScreen();
+}
+
+function selectSubject(subjectId) {
+  if (!ui.role || !isSubjectEnabled(subjectId)) return;
+  demoSession.selectSubject(subjectId);
+  ui.subjectId = demoSession.subjectId;
+  prepareDemoRole(ui, store.getState(), ui.role);
+  syncVisibility();
+  render();
+  focusScreen();
+}
+
+function leaveWorkspace({ changeRole = false } = {}) {
+  if (!ui.role) return;
   if (ui.role === 'mentor' && hasUnsavedSessionForm(app)
-    && !window.confirm('저장하지 않은 회기 입력이 있어요. 역할을 바꾸면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+    && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
   cancelPendingDemoAI(ui);
-  demoSession.leave();
-  ui.role = null;
+  if (changeRole) demoSession.leave();
+  else demoSession.clearSubject();
+  ui.role = demoSession.role;
+  ui.subjectId = demoSession.subjectId;
   ui.confirmReset = false;
   syncVisibility();
   render();
-  app.focus();
+  focusScreen();
 }
 
 function resetDemo() {
+  if (!inWorkspace()) return;
   if (!ui.confirmReset) { ui.confirmReset = true; render(); return; }
   if (storage) {
     const result = resetState(storage, { confirmed: true });
@@ -190,11 +217,12 @@ async function start() {
   }
 
   store = createStore({ initialState: initial, catalog });
-  if (ui.role) prepareDemoRole(ui, initial, ui.role);
+  if (inWorkspace()) prepareDemoRole(ui, initial, ui.role);
   store.subscribe((state) => { save(state); syncVisibility(); render(); });
   showSaveStatus();
 
-  document.getElementById('change-role').addEventListener('click', leaveRole);
+  document.getElementById('change-role').addEventListener('click', () => leaveWorkspace({ changeRole: true }));
+  document.getElementById('change-subject').addEventListener('click', () => leaveWorkspace());
   document.getElementById('reset').addEventListener('click', resetDemo);
   document.addEventListener('visibilitychange', syncVisibility);
   // 다른 탭이 같은 기록을 바꾸면 이 탭의 쓰기를 멈춘다 (덮어쓰기 방지)

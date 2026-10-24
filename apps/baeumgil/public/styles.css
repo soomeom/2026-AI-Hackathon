@@ -331,10 +331,21 @@ main.entry-main { max-width: 980px; padding-top: 48px; }
 .entry-learner > button:hover { background: var(--primary-soft); }
 .entry-card > .entry-next { font-size: 13px; color: var(--muted); }
 .entry-footnote { text-align: center; color: var(--ink-2); }
+.subject-selection { display: grid; gap: var(--space-6); }
+.subject-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+.subject-card { display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-3); padding: var(--space-5); border: 1px solid var(--line); border-radius: var(--radius-lg, 20px); background: var(--surface); }
+.subject-card h2 { font-size: 25px; margin: 0; }
+.subject-card p { margin: 0; color: var(--ink-2); }
+.subject-ready { border: 2px solid var(--primary-ink); box-shadow: var(--shadow); }
+.subject-ready h2 { font-size: 32px; }
+.subject-ready button { margin-top: auto; width: 100%; justify-content: space-between; }
+.subject-upcoming { background: var(--surface-2); }
+@media (max-width: 800px) { .subject-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) {
   main.entry-main { padding-top: var(--space-5); }
   .entry-roles { grid-template-columns: 1fr; gap: var(--space-4); }
   .entry-card { padding: var(--space-5); gap: var(--space-3); }
   .entry-card h2 { font-size: 21px; }
   .session-controls { gap: var(--space-1); }
+  .subject-grid { grid-template-columns: 1fr; }
 }
