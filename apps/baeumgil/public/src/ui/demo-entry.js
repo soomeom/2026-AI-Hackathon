@@ -72,14 +72,13 @@ function demoAccounts(state) {
       : assessment ? '진행하던 첫 수준 확인을 이어서 할 수 있어요.' : '영역별 첫 수준 확인으로 배움의 시작점을 찾아요.';
   const rows = DEMO_ACCOUNTS.map(account => `<li class="demo-account">
         <span class="demo-account-role">${esc(account.label)} <small class="muted">${esc(names[account.role])}</small></span>
-        <span class="demo-account-cred">아이디 <code>${esc(account.loginId)}</code> · 비밀번호 <code>${esc(account.password)}</code>${account.role === 'learner' ? `<small class="muted">${learnerNext}</small>` : ''}</span>
+        <span class="demo-account-cred">${account.role === 'learner' ? `<small class="muted">${learnerNext}</small>` : ''}</span>
         <button type="button" class="secondary small" data-enter-role="${account.role}">${QUICK[account.role] ?? '바로 들어가기'}</button>
       </li>`).join('');
   return `<section class="demo-accounts" aria-labelledby="demo-accounts-title">
       <h2 id="demo-accounts-title">시연 계정</h2>
-      <p class="muted small">심사·체험용 공개 계정이에요. 실제 서비스 비밀번호가 아니에요.</p>
+      <p class="muted small">심사·체험용 시연 계정이에요. 버튼을 누르면 바로 들어가요.</p>
       <ul class="demo-account-list">${rows}</ul>
-      <p class="muted small">${esc(learner?.name ?? '하늘(가명)')} 학생 기록은 역할을 바꿔도 그대로 이어져요.</p>
     </section>`;
 }
 

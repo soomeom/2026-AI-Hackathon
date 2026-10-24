@@ -596,3 +596,11 @@ test('signup submission stores nothing in either storage', async t => {
   click(h.app, { authAction: 'login-view' });
   assert.match(h.app.innerHTML, /id="login-form"/);
 });
+
+test('the top note stays hidden unless there is a storage warning', async t => {
+  const h = await boot(t, { saved: seeded() });
+  assert.equal(h.node('demo-note').hidden, true);
+  assert.equal(h.node('save-note').textContent, '');
+  click(h.app, { enterRole: 'guardian' });
+  assert.equal(h.node('demo-note').hidden, true);
+});

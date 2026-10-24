@@ -76,14 +76,20 @@ let hints;
 
 function showSaveStatus() {
   const text = {
-    idle: '이 브라우저에 자동 저장돼요.',
-    saved: '이 브라우저에 저장됨.',
+    // 평소에는 상단 안내를 비워 두고, 저장 문제가 있을 때만 경고를 보여 준다
+    idle: '',
+    saved: '',
     failed: '⚠ 이 브라우저에 저장하지 못했어요. 화면의 내용은 유지돼요.',
     conflict: '⚠ 다른 탭에서 기록이 바뀌었어요. 덮어쓰지 않도록 저장을 멈췄어요. 새로고침해 최신 기록을 여세요.',
     unavailable: '⚠ 이 브라우저는 저장을 쓸 수 없어 새로고침하면 처음부터 시작해요.',
   };
   saveNote.textContent = text[persist.status] ?? '';
   saveNote.classList.toggle('warn-text', ['failed', 'conflict', 'unavailable'].includes(persist.status));
+  syncDemoNote();
+}
+
+function syncDemoNote() {
+  document.getElementById('demo-note').hidden = !saveNote.textContent && document.getElementById('entry-session-note').hidden;
 }
 
 function save(state) {
@@ -140,6 +146,7 @@ function render() {
   const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
   document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'}${ui.role==='guardian'?'의 보호자':''} · ${{mentor:'멘토',learner:'멘티',guardian:'보호자'}[ui.role]}${inWorkspace() ? ' · 수학' : ''}` : '';
   document.getElementById('entry-session-note').hidden = !ui.role || demoSession.persistent;
+  syncDemoNote();
   app.onclick = null;
   app.onchange = null;
   app.oninput = null;

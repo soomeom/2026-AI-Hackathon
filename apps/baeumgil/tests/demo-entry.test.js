@@ -190,7 +190,8 @@ test('login screen enters only with a matching demo account and keeps the typed 
   const press = dataset => root.onclick({ target: { closest: () => ({ dataset }) } });
   renderDemoEntry({ root, state: createDemoState(), onEnter: r => roles.push(r), persistent: true });
   assert.match(root.innerHTML, /id="login-form"/);
-  assert.match(root.innerHTML, /mentor01/); assert.match(root.innerHTML, /실제 서비스 비밀번호가 아니에요/);
+  for (const shown of [/mentor01/, /mentor1234/, /learner1234/, /parent1234/, /역할을 바꿔도/]) assert.doesNotMatch(root.innerHTML, shown);
+  assert.match(root.innerHTML, /멘토로 바로 들어가기/);
   press({ authAction: 'login' });
   assert.match(root.innerHTML, /아이디와 비밀번호를 입력해 주세요/);
   fields['login-id'].value = 'learner01'; fields['login-password'].value = 'wrong';
