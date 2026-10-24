@@ -4,7 +4,7 @@ import { buildLearnerSummary } from '../mentoring/summary.js';
 import { listAssignableQuestions } from '../content/catalog.js';
 import { buildAIInput } from '../ai/contracts.js';
 import {
-  esc, STAGE_LABEL, EVIDENCE_LABEL, FLAG_TEXT, resultBadge, formatSeconds, stepsBar, mentorTabs, ICON,
+  esc, STAGE_LABEL, EVIDENCE_LABEL, FLAG_TEXT, resultBadge, formatSeconds, stepsBar, mentorTabs, ICON, questionLabelHtml,
 } from './text.js';
 import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } from './ai-panel.js';
 import { renderSessions } from './sessions.js';
@@ -82,6 +82,7 @@ export function renderMentor(props) {
     }
     if (b.dataset.path) { ui.mentorPathId = b.dataset.path; rerender(); return; }
     if (b.dataset.evidence) { ui.openEvidence[b.dataset.evidence] = !ui.openEvidence[b.dataset.evidence]; rerender(); return; }
+    if (b.dataset.level) { ui.assignLevel = b.dataset.level; rerender(); return; }
     if (b.dataset.action === 'assign') {
       const questionId = root.querySelector('#assign-select').value;
       ui.mentorPathId = assignQuestion({ questionId });
@@ -111,7 +112,7 @@ function homeView(state, catalog, summary, paths, ui) {
     const latest = (state.logs ?? []).filter((l) => l.sessionId === s.id).sort((a, b) => b.revision - a.revision)[0];
     return !latest || latest.status !== 'confirmed' || buildLogFacts(state, s.id).requiresReview;
   });
-  const promptOf = (p) => esc(questionOf(catalog, p.questionId)?.prompt ?? p.questionId);
+  const promptOf = (p) => questionLabelHtml(questionOf(catalog, p.questionId), catalog);
   const todo = ({ icon, title, count, items, action, empty }) => `<article class="todo${count ? ' attention' : ''}">
     <span class="title">${icon} ${title}</span>
     <span class="count">${count}</span>
@@ -134,12 +135,7 @@ function homeView(state, catalog, summary, paths, ui) {
     <div class="grid">
       <section class="card">
         <h3>${ICON.book} 문제 지정</h3>
-        <label class="field">지원 문항
-          <select id="assign-select">${listAssignableQuestions(catalog).map((q) => `
-            <option value="${esc(q.id)}">${esc(q.reference?.questionType ?? q.id)} — ${esc(q.prompt)}</option>`).join('')}
-          </select>
-        </label>
-        <p class="muted small">모든 문항은 팀이 자체 제작한 ‘기출 유형’ 문항이에요. 공식 기출이 아니에요.</p>
+${assignPicker(catalog, ui)}
         <div class="row"><button class="primary" data-action="assign">학생에게 지정</button></div>
       </section>
       <section class="card">
@@ -148,6 +144,27 @@ function homeView(state, catalog, summary, paths, ui) {
         ${paths.length ? `<h4>진행 중인 학습</h4>${pathList(paths.slice(-3).reverse(), null, catalog, 'learning')}` : ''}
       </section>
     </div>`;
+}
+
+// 문제 지정: 학교급으로 거르고 회차별로 묶는다 (기출 360문항 + 자체 제작)
+const LEVEL_FILTER = [['high', '고졸 기출'], ['middle', '중졸 기출'], ['authored', '자체 제작']];
+function assignPicker(catalog, ui) {
+  const level = ui.assignLevel ?? 'high';
+  const list = listAssignableQuestions(catalog).filter((q) => (level === 'authored' ? q.kind !== 'official' : q.reference?.qualification === (level === 'high' ? '고졸' : '중졸')));
+  const groups = new Map();
+  for (const q of list) {
+    const key = q.reference?.year ? `${q.reference.year}년 ${q.reference.session}회 ${q.reference.qualification}` : '자체 제작 (중1 기초)';
+    groups.set(key, [...(groups.get(key) ?? []), q]);
+  }
+  const keys = [...groups.keys()].sort().reverse();
+  const unit = (q) => catalog.concepts.find((c) => c.id === q.conceptIds?.[0])?.name ?? '';
+  const label = (q) => (q.reference?.year ? `${q.reference.questionNumber}번 · ${unit(q)}${q.format === 'image' ? '' : ' (수식 전사)'}` : q.prompt.replace(/\$/g, ''));
+  return `<div class="tabs" role="group" aria-label="학교급">${LEVEL_FILTER.map(([v, t]) => `<button data-level="${v}" aria-selected="${v === level}">${t}</button>`).join('')}</div>
+    <label class="field" style="margin-top:12px">문항 (${list.length}개)
+      <select id="assign-select">${keys.map((k) => `<optgroup label="${esc(k)}">${groups.get(k).sort((a, b) => (a.reference?.questionNumber ?? 0) - (b.reference?.questionNumber ?? 0)).map((q) => `<option value="${esc(q.id)}">${esc(label(q))}</option>`).join('')}</optgroup>`).join('')}</select>
+    </label>
+    <p class="muted small">${level === 'authored' ? '팀이 자체 제작한 중1 기초 문항이에요. 공식 기출이 아니에요.'
+    : '출처: 한국교육과정평가원 검정고시 기출(확정 정답). 원본 이미지 문항은 육안 검수·이용 조건 확인 전이에요. 2026년 2회는 가안 정답이라 제외했어요.'}</p>`;
 }
 
 function statTiles(summary) {
@@ -170,7 +187,7 @@ function pathList(paths, selectedPath, catalog, gotoTab) {
       : p.status === 'completed' ? '<span class="pill ok">완료</span>'
         : p.status === 'paused' ? '<span class="pill neutral">멈춤</span>' : `<span class="pill primary">${STAGE_LABEL[p.stage] ?? ''}</span>`;
     return `<div class="path-item${p.id === selectedPath?.id ? ' selected' : ''}">
-      <div><div class="q">${esc(questionOf(catalog, p.questionId)?.prompt ?? p.questionId)}</div>
+      <div><div class="q">${questionLabelHtml(questionOf(catalog, p.questionId), catalog)}</div>
         <div class="mini-steps" aria-hidden="true">${learnStages.map((s) => `<i class="${s === p.stage ? 'now' : visited.has(s) ? 'done' : ''}"></i>`).join('')}</div>
         <div class="row small" style="margin-top:6px">${pill}${p.needsReview ? '<span class="pill warn">건너뜀 있음</span>' : ''}${p.mentorRequests?.length ? `<span class="pill bad">도움 요청 ${p.mentorRequests.length}</span>` : ''}</div>
       </div>
@@ -184,7 +201,7 @@ function lessonPanel(state, catalog, summary, ui) {
   const slot = ui.ai.lesson;
   const conceptName = (id) => catalog.concepts.find((c) => c.id === id)?.name ?? id;
   const evidenceName = (id) => summary.evidence.find((e) => e.id === id)?.conceptName ?? id;
-  const promptOf = (id) => catalog.questions.find((q) => q.id === id)?.prompt ?? '연습 문제';
+  const promptOf = (id) => questionLabelHtml(catalog.questions.find((q) => q.id === id), catalog) || '연습 문제';
   const out = slot?.status === 'ok' ? slot.output : null;
   return `<section class="card">
     <h3>AI 수업 제안 <span class="muted small">${esc(availability.text)}</span></h3>
@@ -206,7 +223,7 @@ function lessonPanel(state, catalog, summary, ui) {
       <h4>학생에게 던질 확인 질문</h4>
       <ul>${out.mentorQuestions.map((q) => `<li>${esc(q.text)}</li>`).join('')}</ul>
       <h4>수업 흐름</h4>
-      <ol>${out.plan.map((p) => `<li>${esc(p.minutes)}분 · ${esc(p.activity)}${p.questionIds.length ? ` <span class="muted small">(${p.questionIds.map((id) => esc(promptOf(id))).join(', ')})</span>` : ''}</li>`).join('')}</ol>
+      <ol>${out.plan.map((p) => `<li>${esc(p.minutes)}분 · ${esc(p.activity)}${p.questionIds.length ? ` <span class="muted small">(${p.questionIds.map((id) => promptOf(id)).join(', ')})</span>` : ''}</li>`).join('')}</ol>
       <p class="muted small">실제 AI 응답이에요. 근거 ID 가 학생 기록과 맞는지 확인한 결과만 보여 줘요.</p>
       ${decisionHtml(state, slot.artifactId)}
     </div>` : ''}
@@ -235,10 +252,10 @@ function pathDetail(path, catalog, state, ui) {
 
 function attemptRow(a, path, catalog) {
   const item = [...(path.pastItems ?? []), ...(path.items ?? [])].find((i) => i.id === a.itemId);
-  const prompt = item?.prompt ?? questionOf(catalog, a.sourceQuestionId)?.prompt ?? a.itemId;
+  const prompt = questionLabelHtml(item ?? questionOf(catalog, a.sourceQuestionId), catalog) || esc(a.itemId);
   return `<div class="attempt ${a.result}">
     <span class="stage">${STAGE_LABEL[a.stage] ?? a.stage}${a.round ? ` ${a.round}회차` : ''}</span>
-    <span>${esc(prompt)} &nbsp;${resultBadge(a.result)}</span>
+    <span>${prompt} &nbsp;${resultBadge(a.result)}</span>
     <span class="facts">${a.helpUsed ? '도움 사용 · ' : ''}${NOVELTY_TEXT[a.noveltyAtPresentation] ?? '—'} · ${formatSeconds(a.activeMs)}</span>
   </div>`;
 }
@@ -251,6 +268,6 @@ function evidenceView(e, summary, catalog, ui) {
     <div>${esc(e.observation)}</div>
     <div class="q">확인 질문: ${esc(e.mentorQuestion)}</div>
     ${e.attemptIds.length ? `<button class="ghost small" data-evidence="${esc(e.id)}" aria-expanded="${Boolean(open)}">근거 응답 ${e.attemptIds.length}개 ${open ? '닫기' : '보기'}</button>` : ''}
-    ${open ? `<ul class="evidence-rows">${rows.map((t) => `<li>${STAGE_LABEL[t.stage] ?? t.stage} · ${esc(questionOf(catalog, t.questionId)?.prompt ?? '연습 문제')} · ${resultBadge(t.result)}${t.helpUsed ? ' · 도움 사용' : ''}</li>`).join('')}</ul>` : ''}
+    ${open ? `<ul class="evidence-rows">${rows.map((t) => `<li>${STAGE_LABEL[t.stage] ?? t.stage} · ${questionLabelHtml(questionOf(catalog, t.questionId), catalog) || '연습 문제'} · ${resultBadge(t.result)}${t.helpUsed ? ' · 도움 사용' : ''}</li>`).join('')}</ul>` : ''}
   </div>`;
 }

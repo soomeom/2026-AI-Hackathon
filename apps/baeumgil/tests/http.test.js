@@ -27,7 +27,9 @@ test('상태·검수된 카탈로그·가명 초기 상태를 조회하고 서�
   const bootstrap = await (await fetch(`${url}/api/bootstrap`)).json();
   assert.equal(bootstrap.state.learners[0].id, 'learner-1');
   assert.equal(bootstrap.state.assignments[0].questionId, 'q-eq-1');
-  assert.equal(bootstrap.assignableQuestions.length, 2);
+  // 자체 제작 원 문항 2개 + 확정 정답 회차의 검정고시 기출 360개
+  assert.equal(bootstrap.assignableQuestions.length, 362);
+  assert.ok(bootstrap.assignableQuestions.some((q) => q.id === 'q-eq-1'));
   assert.equal(bootstrap.state.sessions.length, 0);
 });
 

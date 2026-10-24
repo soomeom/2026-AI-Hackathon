@@ -18,7 +18,13 @@ const LOG_ERRORS = {
 const errorText = (err) => (err instanceof LogError ? LOG_ERRORS[err.code] ?? `처리하지 못했어요 (${err.code})` : String(err.message ?? err));
 const pctText = (s) => (s.attempted ? `${s.correct}/${s.attempted} 정답` : '기록 없음');
 
-const questionPrompt = (catalog, id) => catalog.questions.find((q) => q.id === id)?.prompt ?? id;
+// 일지 글(일반 텍스트)용 문항 이름: 기출은 회차·번호, 자체 제작은 문제 글
+const questionPrompt = (catalog, id) => {
+  const q = catalog.questions.find((x) => x.id === id);
+  const r = q?.reference;
+  if (r?.year) return `${r.year}년 ${r.session}회 ${r.qualification} 검정고시 수학 ${r.questionNumber}번`;
+  return (q?.prompt ?? id).replace(/\$/g, '');
+};
 
 // 코드로 만든 사실 기반 초안. 정서·태도 문장은 넣지 않고, 멘토 관찰은 메모 그대로 인용한다.
 export function factDraft(facts, state, catalog) {

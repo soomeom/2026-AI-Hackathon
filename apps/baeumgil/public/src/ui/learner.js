@@ -1,8 +1,9 @@
 // 멘티 화면 (Brilliant 참고: 한 번에 한 문제, 진행 표시, 답한 뒤 바로 피드백 → 계속).
 // 채점·다음 단계 계산은 하지 않고 엔진 결과만 보여 준다.
 // renderLearner({ root, state, catalog, dispatch, ui, rerender })
-import { esc, FLOW, STAGE_LABEL, REASON_TEXT, SKIPPABLE, ORIGIN_LABEL, RESULT, ICON } from './text.js';
+
 import { renderInitialAssessment, initialLearningNote } from './initial-assessment.js';
+import { esc, FLOW, STAGE_LABEL, REASON_TEXT, SKIPPABLE, ORIGIN_LABEL, RESULT, ICON, mathHtml, choiceHtml, sourceLabel, questionBodyHtml, questionLabelHtml } from './text.js';
 
 const LEARN_STAGES = FLOW.filter((s) => s !== 'completed');
 const KEYS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -47,7 +48,7 @@ export function renderLearner(props) {
   if (paths.length > 1) {
     html += `<div class="tabs" role="tablist" aria-label="지정된 문제">${paths.map((p) => `
       <button role="tab" aria-selected="${p.id === path.id}" data-path="${esc(p.id)}">
-        ${esc(questionOf(catalog, p.questionId)?.prompt ?? p.questionId)} <span class="muted small">· ${STAGE_LABEL[p.stage] ?? ''}</span>
+        ${questionLabelHtml(questionOf(catalog, p.questionId), catalog)} <span class="muted small">· ${STAGE_LABEL[p.stage] ?? ''}</span>
       </button>`).join('')}</div>`;
   }
 
@@ -144,7 +145,7 @@ function body(path, catalog, ui) {
   }
   if (path.stage === 'completed') return completedView(path);
 
-  if (showingFeedback(path, ui)) return feedbackView(path, ui, flash);
+  if (showingFeedback(path, ui)) return feedbackView(path, ui, flash, catalog);
 
   const item = path.items.find((i) => !i.answered);
   if (!item) return nextView(path, flash);
@@ -160,21 +161,22 @@ function body(path, catalog, ui) {
       ${concepts.map((c) => `<span class="pill neutral">${esc(c)}</span>`).join('')}
       <span class="dots" aria-label="${path.items.length}문제 중 ${done + 1}번째">${path.items.map((_, i) => `<i class="${i < done ? 'done' : i === done ? 'now' : ''}"></i>`).join('')}</span>
     </div>
-    <p class="meta">${esc(STAGE_HINT[path.stage] ?? '')} · ${esc(ORIGIN_LABEL[item.origin] ?? '')}</p>
-    <p class="prompt" id="q-prompt">${esc(item.prompt)}</p>
-    <div class="choices" role="radiogroup" aria-labelledby="q-prompt">${item.choices.map((c, i) => `
-      <button role="radio" aria-checked="${selected === c.id}" class="choice${selected === c.id ? ' selected' : ''}" data-choice="${esc(c.id)}">
-        <span class="key" aria-hidden="true">${KEYS[i] ?? i + 1}</span><span>${esc(c.value)}</span></button>`).join('')}
+    <p class="meta">${esc(STAGE_HINT[path.stage] ?? '')}</p>
+    ${item.reference ? `<p class="source-line">${ICON.doc} ${esc(sourceLabel(item))}</p>` : `<p class="meta">${esc(ORIGIN_LABEL[item.origin] ?? '')}</p>`}
+    ${questionBodyHtml(item, { promptId: 'q-prompt' })}
+    <div class="choices${item.format === 'image' ? ' compact' : ''}" role="radiogroup" aria-labelledby="q-prompt">${item.choices.map((c, i) => `
+      <button role="radio" aria-checked="${selected === c.id}" class="choice${selected === c.id ? ' selected' : ''}" data-choice="${esc(c.id)}"${item.format === 'image' ? ` aria-label="${i + 1}번"` : ''}>
+        ${item.format === 'image' ? '' : `<span class="key" aria-hidden="true">${KEYS[i] ?? i + 1}</span>`}<span>${choiceHtml(c)}</span></button>`).join('')}
     </div>
-    ${help ? `<div class="solution">${ICON.bulb} ${(help === 1 ? item.solutionSteps.slice(0, 1) : item.solutionSteps).map((s) => esc(s)).join(' → ')}
+    ${help ? `<div class="solution">${ICON.bulb} ${(help === 1 ? item.solutionSteps.slice(0, 1) : item.solutionSteps).map((s) => mathHtml(s)).join(' → ')}
       <div class="muted small">${help === 1 ? '첫 단계만 보여 줬어요.' : '풀이를 본 문제는 혼자 푼 기록과 구분돼요.'}</div></div>` : ''}
     <div class="action-bar">
       <button class="primary large" data-action="submit" ${selected ? '' : 'disabled'}>제출하기</button>
       <button class="large" data-action="abstain">잘 모르겠어요</button>
     </div>
     <div class="help-row" aria-label="도움">
-      <button class="ghost" data-action="hint">${ICON.bulb} 힌트</button>
-      <button class="ghost" data-action="solution">${ICON.book} 풀이 보기</button>
+      ${item.solutionSteps?.length ? `<button class="ghost" data-action="hint">${ICON.bulb} 힌트</button>
+      <button class="ghost" data-action="solution">${ICON.book} 풀이 보기</button>` : ''}
       <button class="ghost" data-action="mentor">${ICON.hand} 멘토에게 도움 요청</button>
       <button class="ghost" data-action="pause">${ICON.pause} 잠시 멈추기</button>
       ${SKIPPABLE.includes(path.stage) ? skipControl(path, ui) : ''}
@@ -188,7 +190,7 @@ function skipControl(path, ui) {
     <div class="row"><button data-action="skip">건너뛰기</button><button class="ghost" data-action="skip-cancel">계속 풀기</button></div></div>`;
 }
 
-function feedbackView(path, ui, flash) {
+function feedbackView(path, ui, flash, catalog) {
   const item = path.items.find((i) => i.id === ui.feedback.itemId);
   const fb = FEEDBACK[item.result];
   const last = path.items.every((i) => i.answered);
@@ -197,7 +199,7 @@ function feedbackView(path, ui, flash) {
     ${flash}
     <p class="feedback-title">${icon} ${fb.title}</p>
     <p>${fb.text}</p>
-    <p class="muted small">문제: ${esc(item.prompt)}</p>
+    <p class="muted small">문제: ${questionLabelHtml(item, catalog)}</p>
     ${last ? nextBox(path) : '<div class="action-bar"><button class="primary large" data-action="continue">계속 ' + ICON.arrow + '</button></div>'}
   </section>`;
 }

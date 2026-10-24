@@ -4,12 +4,12 @@ import { readFile, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute, extname } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createInitialState, validateAIInput } from './public/src/domain/contracts.js';
-import { listAssignableQuestions } from './public/src/content/catalog.js';
+import { listAssignableQuestions, mergeCatalogParts } from './public/src/content/catalog.js';
 import { validateAIOutput } from './public/src/ai/contracts.js';
 import { createModelProvider, withDeadline, AIProviderError } from './server/ai-provider.mjs';
 
 const DEFAULT_PUBLIC = fileURLToPath(new URL('./public/', import.meta.url));
-const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon' };
+const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf' };
 const ERROR_MESSAGES = {
   invalid_ai_input: 'AI 입력 형식을 확인해 주세요.', invalid_json: 'JSON 요청을 확인해 주세요.', payload_too_large: '요청 데이터가 너무 큽니다.',
   ai_not_configured: '서버의 AI 키와 모델 설정이 필요합니다. 수동 작성은 계속할 수 있습니다.',
@@ -21,7 +21,7 @@ const ERROR_MESSAGES = {
 };
 function readCatalog() {
   const content = new URL('./public/src/content/', import.meta.url);
-  return Object.assign({}, ...['questions.json', 'concepts.json', 'routes.json', 'review.json'].map(name => JSON.parse(readFileSync(new URL(name, content), 'utf8'))));
+  return mergeCatalogParts(['questions.json', 'concepts.json', 'routes.json', 'review.json', 'exam-bank.json'].map(name => JSON.parse(readFileSync(new URL(name, content), 'utf8'))));
 }
 function json(res, status, value) {
   if (res.destroyed) return;

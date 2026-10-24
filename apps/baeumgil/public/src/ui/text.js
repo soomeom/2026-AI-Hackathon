@@ -100,3 +100,44 @@ export const ICON = {
   trophy: svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>'),
   spark: svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>'),
 };
+
+// ---------- 문항 표시 (수식·원본 이미지·출처) ----------
+// $...$ 구간은 KaTeX 로 그리고 나머지는 글자로 둔다. KaTeX 를 못 불러오면 원문을 그대로 보여 준다.
+export function mathHtml(text) {
+  const katex = globalThis.katex;
+  return String(text ?? '').split('$').map((part, i) => {
+    if (i % 2 === 0 || !katex) return esc(part);
+    try { return katex.renderToString(part, { throwOnError: false, trust: false, output: 'html' }); } catch { return esc(part); }
+  }).join('');
+}
+
+export const choiceHtml = (c) => (c.latex ? mathHtml(`$${c.latex}$`) : esc(c.text ?? c.value));
+
+export function sourceLabel(item) {
+  const r = item?.reference;
+  if (!r?.year) return item?.kind === 'official' ? '검정고시 기출' : '';
+  return `${r.year}년 ${r.session}회 ${r.qualification} 검정고시 수학 ${r.questionNumber}번 · ${r.institution ?? '한국교육과정평가원'}${r.answerStatus === 'final' ? ' · 확정 정답' : ''}`;
+}
+
+// 문제 본문: 원본 이미지 문항은 이미지, 전사 문항은 수식, 도형·원본 이미지가 있으면 함께
+export function questionBodyHtml(item, { promptId } = {}) {
+  const idAttr = promptId ? ` id="${promptId}"` : '';
+  if (item.format === 'image' && item.image) {
+    return `<figure class="exam-image"${idAttr}><img src="${esc(item.image)}" alt="${esc(sourceLabel(item))} 원본 문항 (발문·그림·선택지 포함)" loading="lazy">
+      <figcaption class="muted small">원본 문항 이미지 · 선택지 번호(①~④)로 답해요</figcaption></figure>`;
+  }
+  return `<p class="prompt"${idAttr}>${mathHtml(item.prompt)}</p>
+    ${item.figure?.src ? `<img class="figure" src="${esc(item.figure.src)}" alt="${esc(item.figure.alt ?? '문항 그림')}">` : ''}
+    ${item.sourceImage ? `<details class="source"><summary>원본 문항 이미지 보기</summary><img src="${esc(item.sourceImage)}" alt="원본 문항"></details>` : ''}`;
+}
+
+// 목록용 짧은 이름 (기출은 회차·번호·단원, 자체 제작은 문제 글)
+export function questionLabelHtml(q, catalog) {
+  if (!q) return '';
+  const r = q.reference;
+  if (r?.year) {
+    const unit = catalog?.concepts?.find((c) => c.id === q.conceptIds?.[0])?.name;
+    return `${r.year}년 ${r.session}회 ${r.qualification} ${r.questionNumber}번${unit ? ` · ${esc(unit)}` : ''}`;
+  }
+  return mathHtml(q.prompt);
+}

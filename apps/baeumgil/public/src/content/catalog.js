@@ -163,11 +163,53 @@ export function validateCatalog(catalog) {
   return { ok: errors.length === 0, errors };
 }
 
-// 승인되었고 검증 오류가 없는 원 기출 문항만 출제 가능하다.
+// 콘텐츠 파일 여러 개를 하나의 카탈로그로 합친다. 배열(questions, routes, concepts, reviews, templates)은 이어 붙인다.
+export function mergeCatalogParts(parts) {
+  const merged = {};
+  for (const part of parts) {
+    for (const [key, value] of Object.entries(part ?? {})) {
+      merged[key] = Array.isArray(value) && Array.isArray(merged[key]) ? [...merged[key], ...value] : value;
+    }
+  }
+  return merged;
+}
+
+// 기출 문제은행 경로(kind: exam_pool) 검사: 원 문항·개념 확인 문항이 승인돼 있고, 단계별 기출 목록이 충분한가
+export function validateExamRoutes(catalog) {
+  const questionById = new Map((catalog.questions ?? []).map((q) => [q.id, q]));
+  const conceptIds = new Set((catalog.concepts ?? []).map((c) => c.id));
+  const approved = (id) => questionById.get(id)?.contentStatus === 'approved';
+  const errors = [];
+  for (const route of (catalog.routes ?? []).filter((r) => r.kind === 'exam_pool')) {
+    const broken = (message) => errors.push({ code: 'brokenRouteRejected', routeId: route.id, message, questionIds: [route.questionId] });
+    const q = questionById.get(route.questionId);
+    if (!q || !approved(q.id)) { broken(`기출 경로 ${route.id} 의 원 문항이 없거나 승인되지 않음`); continue; }
+    if (!(q.conceptIds ?? []).every((id) => conceptIds.has(id))) broken(`기출 ${q.id} 가 없는 개념을 참조함`);
+    if (!new Set(q.choices.map((c) => c.value)).has(q.answer)) broken(`기출 ${q.id} 의 정답이 선택지에 없음`);
+    const checks = route.conceptCheckQuestionIds ?? [];
+    if (checks.length < 1 || checks.length > MAX_CONCEPT_CHECKS || !checks.every(approved)) broken(`기출 경로 ${route.id} 의 개념 확인 문항이 1~${MAX_CONCEPT_CHECKS}개 승인 문항이 아님`);
+    for (const [key, stage] of [['foundationQuestionIds', 'foundation_practice'], ['similarQuestionIds', 'similar_practice'], ['transferQuestionIds', 'transfer_check']]) {
+      const pool = (route[key] ?? []).filter((id) => approved(id) && id !== q.id);
+      if (pool.length < STAGE_ITEM_COUNT[stage]) broken(`기출 경로 ${route.id} 의 ${stage} 문항이 ${STAGE_ITEM_COUNT[stage]}개보다 적음`);
+    }
+  }
+  return { ok: errors.length === 0, errors };
+}
+
+// 승인되었고 검증 오류가 없는 원 문항만 출제 가능하다.
+// - 자체 제작 원 문항(role: original): 문항 틀 경로 검사(validateCatalog) 통과
+// - 검정고시 기출: 기출 문제은행 경로(validateExamRoutes) 통과
 // pending / link_only / retired 는 contentStatus 가 approved 가 아니므로 제외된다.
+const assignableCache = new WeakMap();
 export function listAssignableQuestions(catalog) {
-  const blocked = new Set(validateCatalog(catalog).errors.flatMap((e) => e.questionIds ?? []));
-  return (catalog.questions ?? []).filter(
-    (q) => q.role === 'original' && q.contentStatus === 'approved' && !blocked.has(q.id),
+  const signature = `${catalog.questions?.length}:${catalog.routes?.length}:${catalog.concepts?.length}`;
+  const cached = assignableCache.get(catalog);
+  if (cached?.signature === signature) return cached.list;
+  const blocked = new Set([...validateCatalog(catalog).errors, ...validateExamRoutes(catalog).errors].flatMap((e) => e.questionIds ?? []));
+  const examIds = new Set((catalog.routes ?? []).filter((r) => r.kind === 'exam_pool').map((r) => r.questionId));
+  const list = (catalog.questions ?? []).filter(
+    (q) => (q.role === 'original' || examIds.has(q.id)) && q.contentStatus === 'approved' && !blocked.has(q.id),
   );
+  assignableCache.set(catalog, { signature, list });
+  return list;
 }
