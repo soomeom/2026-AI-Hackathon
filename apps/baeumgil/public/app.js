@@ -7,9 +7,10 @@ import { renderMentor } from './src/ui/mentor.js';
 import { esc } from './src/ui/text.js';
 import { isInitialAssessmentVisible } from './src/ui/initial-assessment.js';
 import { mergeCatalogParts } from './src/content/catalog.js';
+import { createDemoSession, prepareDemoRole, cancelPendingDemoAI } from './src/state/demo-session.js';
+import { renderDemoEntry, hasUnsavedSessionForm } from './src/ui/demo-entry.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
-const ROLE_KEY = 'baeumgil:ui:role';
 
 const app = document.getElementById('app');
 const saveNote = document.getElementById('save-note');
@@ -38,8 +39,7 @@ function getStorage() {
   try { return window.localStorage; } catch { return null; }
 }
 const storage = getStorage();
-const readRole = () => { try { return storage?.getItem(ROLE_KEY); } catch { return null; } };
-const writeRole = (role) => { try { storage?.setItem(ROLE_KEY, role); } catch { /* 저장 불가여도 화면은 동작 */ } };
+const demoSession = createDemoSession((() => { try { return window.sessionStorage; } catch { return null; } })());
 
 const freshUi = () => ({
   selected: {}, help: {}, openEvidence: {}, ai: {}, logDraft: {}, reviewed: {},
@@ -49,7 +49,7 @@ const freshUi = () => ({
   initialChoices: {}, initialAssessmentOpen: false, initialAssessmentDismissed: false, initialError: null,
   initialAssessmentFor: null, initialConceptId: null, initialQuestionId: null, initialReason: '', initialPlanError: null,
 });
-const ui = { ...freshUi(), role: readRole() === 'learner' ? 'learner' : 'mentor', health: null };
+const ui = { ...freshUi(), role: demoSession.role, health: null };
 
 const persist = { savedRevision: 0, status: storage ? 'idle' : 'unavailable', blocked: false };
 
@@ -84,18 +84,29 @@ function save(state) {
 }
 
 function render() {
-  for (const b of document.querySelectorAll('.roles button')) b.setAttribute('aria-pressed', String(b.dataset.role === ui.role));
+  const state = store.getState();
+  document.getElementById('session-controls').hidden = !ui.role;
+  document.getElementById('reset').hidden = !ui.role;
   document.getElementById('reset').textContent = ui.confirmReset ? '정말 초기화할까요? 한 번 더 누르기' : '시연 초기화';
+  const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
+  document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'} · ${ui.role === 'mentor' ? '멘토' : '멘티'}` : '';
+  document.getElementById('entry-session-note').hidden = !ui.role || demoSession.persistent;
+  app.onclick = null;
+  app.onchange = null;
+  app.oninput = null;
+  app.classList.toggle('entry-main', !ui.role);
+  app.classList.toggle('learner-main', ui.role === 'learner');
+  if (!ui.role) {
+    renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent });
+    return;
+  }
   const props = {
-    root: app, state: store.getState(), catalog, ui, rerender: render,
+    root: app, state, catalog, ui, rerender: render,
     dispatch: store.dispatch, assignQuestion: store.assignQuestion, update: store.update, getState: store.getState,
     startInitialAssessment: store.startInitialAssessment, presentInitialQuestion: store.presentInitialQuestion,
     submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
     syncVisibility,
   };
-  app.onchange = null;
-  app.oninput = null;
-  app.classList.toggle('learner-main', ui.role === 'learner');
   if (ui.role === 'learner') renderLearner(props);
   else renderMentor(props);
 }
@@ -112,9 +123,20 @@ function syncVisibility() {
 }
 
 function setRole(role) {
-  ui.role = role;
-  ui.flash = null;
-  writeRole(role);
+  demoSession.enter(role);
+  prepareDemoRole(ui, store.getState(), role);
+  syncVisibility();
+  render();
+  app.focus();
+}
+
+function leaveRole() {
+  if (ui.role === 'mentor' && hasUnsavedSessionForm(app)
+    && !window.confirm('저장하지 않은 회기 입력이 있어요. 역할을 바꾸면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+  cancelPendingDemoAI(ui);
+  demoSession.leave();
+  ui.role = null;
+  ui.confirmReset = false;
   syncVisibility();
   render();
   app.focus();
@@ -126,7 +148,7 @@ function resetDemo() {
     const result = resetState(storage, { confirmed: true });
     if (!result.ok) { ui.confirmReset = false; persist.status = 'failed'; showSaveStatus(); render(); return; }
   }
-  Object.values(ui.ai).forEach((slot) => slot?.controller?.abort());
+  cancelPendingDemoAI(ui);
   Object.assign(ui, freshUi(), { flash: '시연 기록을 초기화했어요.' });
   Object.assign(persist, { savedRevision: 0, blocked: false, status: storage ? 'idle' : 'unavailable' });
   store.replaceState(createDemoState());
@@ -168,13 +190,11 @@ async function start() {
   }
 
   store = createStore({ initialState: initial, catalog });
+  if (ui.role) prepareDemoRole(ui, initial, ui.role);
   store.subscribe((state) => { save(state); syncVisibility(); render(); });
   showSaveStatus();
 
-  document.querySelector('.roles').addEventListener('click', (ev) => {
-    const b = ev.target.closest('button[data-role]');
-    if (b) setRole(b.dataset.role);
-  });
+  document.getElementById('change-role').addEventListener('click', leaveRole);
   document.getElementById('reset').addEventListener('click', resetDemo);
   document.addEventListener('visibilitychange', syncVisibility);
   // 다른 탭이 같은 기록을 바꾸면 이 탭의 쓰기를 멈춘다 (덮어쓰기 방지)

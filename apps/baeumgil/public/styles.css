@@ -303,3 +303,38 @@ img.figure { display: block; max-width: 100%; max-height: 260px; margin: 0 auto 
 details.source { margin: 0 0 var(--space-4); font-size: 14px; }
 details.source img { display: block; width: 100%; max-width: 640px; margin-top: var(--space-2); border: 1px solid var(--line); border-radius: var(--radius-sm); }
 .katex-display { overflow-x: auto; overflow-y: hidden; }
+
+/* 시연용 입장 화면: 학습 기록과 별개의 역할 선택 */
+[hidden] { display: none !important; }
+.session-controls { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.current-profile { color: var(--primary-ink); font-size: 14px; font-weight: 700; }
+main.entry-main { max-width: 980px; padding-top: 48px; }
+.demo-entry { display: grid; gap: var(--space-6); }
+.entry-intro { text-align: center; }
+.entry-intro > .pill { display: inline-flex; }
+.entry-intro h1 { font-size: clamp(30px, 4.5vw, 46px); line-height: 1.25; letter-spacing: -.04em; margin: 16px 0; text-wrap: balance; }
+.entry-intro p { color: var(--ink-2); line-height: 1.8; }
+.entry-roles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); }
+.entry-card { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; background: var(--surface); border: 1px solid var(--line-strong); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
+.entry-mentor { border-top: 4px solid var(--primary-ink); }
+.entry-learner { border-top: 4px solid var(--accent); }
+.entry-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: var(--primary-ink); background: var(--primary-soft); }
+.entry-icon .icon { width: 26px; height: 26px; }
+.entry-learner .entry-icon { color: var(--accent); background: var(--accent-soft); }
+.entry-card h2 { font-size: 23px; }
+.entry-card > p { color: var(--ink-2); margin: 0; }
+.entry-profile { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-2) 0; }
+.entry-avatar { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); font-size: 13px; font-weight: 700; }
+.entry-profile small { display: block; font-size: 12px; color: var(--muted); }
+.entry-card > button { width: 100%; justify-content: space-between; background: var(--primary-ink); color: white; border-color: var(--primary-ink); }
+.entry-learner > button { background: var(--surface); color: var(--primary-ink); }
+.entry-learner > button:hover { background: var(--primary-soft); }
+.entry-card > .entry-next { font-size: 13px; color: var(--muted); }
+.entry-footnote { text-align: center; color: var(--ink-2); }
+@media (max-width: 600px) {
+  main.entry-main { padding-top: var(--space-5); }
+  .entry-roles { grid-template-columns: 1fr; gap: var(--space-4); }
+  .entry-card { padding: var(--space-5); gap: var(--space-3); }
+  .entry-card h2 { font-size: 21px; }
+  .session-controls { gap: var(--space-1); }
+}

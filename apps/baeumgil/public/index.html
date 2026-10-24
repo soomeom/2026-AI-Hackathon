@@ -19,13 +19,13 @@
       </svg>
       배움길 <span class="muted">학생의 배움을 잇고, 멘토의 부담을 덜다</span>
     </div>
-    <nav class="roles" aria-label="역할 전환">
-      <button data-role="mentor" aria-pressed="false">멘토</button>
-      <button data-role="learner" aria-pressed="false">멘티</button>
-    </nav>
-    <button id="reset" class="ghost small">시연 초기화</button>
+    <div id="session-controls" class="session-controls" hidden>
+      <span id="current-profile" class="current-profile"></span>
+      <button id="change-role" class="ghost small">역할 바꾸기</button>
+    </div>
+    <button id="reset" class="ghost small" hidden>시연 초기화</button>
   </header>
-  <p class="demo-note" role="note">시연용 화면이에요. 가명 데이터를 쓰고, 역할 전환은 보안 기능이 아니에요. <span id="save-note"></span></p>
+  <p class="demo-note" role="note">가상 계정을 사용하는 시연이에요. 실제 로그인 기능은 아니에요. <span id="save-note"></span> <span id="entry-session-note" hidden>입장 상태를 저장할 수 없어 새로고침하면 역할을 다시 선택해야 할 수 있어요.</span></p>
   <main id="app" tabindex="-1"><p class="muted">불러오는 중…</p></main>
   <script type="module" src="./app.js"></script>
 </body>
