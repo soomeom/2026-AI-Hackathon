@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>배움길 엔진 미리보기</title>
+<style>
+  :root { --bg:#f6f7f9; --card:#fff; --ink:#1d2433; --muted:#667085; --line:#e4e7ec; --accent:#2f6fde; --ok:#12805c; --bad:#c4320a; --warn:#b54708; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: "Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; background:var(--bg); color:var(--ink); }
+  header { padding:16px 24px; background:var(--card); border-bottom:1px solid var(--line); display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  header h1 { font-size:18px; margin:0 12px 0 0; }
+  .tag { font-size:12px; padding:2px 8px; border-radius:99px; background:#fff4e5; color:var(--warn); }
+  main { display:grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1fr); gap:16px; padding:16px 24px; max-width:1200px; margin:0 auto; }
+  @media (max-width: 820px) { main { grid-template-columns: 1fr; padding:16px; } }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  h2 { font-size:15px; margin:0 0 12px; color:var(--muted); font-weight:600; }
+  .steps { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:16px; }
+  .step { font-size:12px; padding:4px 8px; border-radius:6px; background:#f2f4f7; color:var(--muted); }
+  .step.done { background:#e7f6ef; color:var(--ok); }
+  .step.now { background:var(--accent); color:#fff; }
+  .prompt { font-size:20px; margin:8px 0 16px; line-height:1.5; }
+  .meta { font-size:13px; color:var(--muted); }
+  .choices { display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:8px; }
+  button { font:inherit; border-radius:8px; border:1px solid var(--line); background:#fff; padding:10px 14px; cursor:pointer; }
+  button:hover { border-color:var(--accent); }
+  button:focus-visible { outline:3px solid #9ec0ff; outline-offset:1px; }
+  button.primary { background:var(--accent); color:#fff; border-color:var(--accent); }
+  button.ghost { background:transparent; }
+  .row { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+  .msg { margin-top:16px; padding:12px 14px; border-radius:8px; background:#eef4ff; }
+  .msg.warn { background:#fff4e5; }
+  .result { font-weight:600; }
+  .result.correct { color:var(--ok); } .result.incorrect { color:var(--bad); } .result.abstained { color:var(--warn); }
+  .solution { margin-top:12px; padding:10px 14px; background:#f9fafb; border-radius:8px; font-size:14px; }
+  table { width:100%; border-collapse:collapse; font-size:14px; }
+  td, th { padding:6px 4px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  .ev { padding:10px 0; border-bottom:1px solid var(--line); font-size:14px; }
+  .badge { font-size:11px; padding:2px 6px; border-radius:4px; margin-right:6px; }
+  .observed { background:#e7f6ef; color:var(--ok); } .inferred { background:#f2f4f7; color:var(--muted); } .needs_review { background:#fff4e5; color:var(--warn); }
+  .q { color:var(--muted); margin-top:4px; }
+  .log { font-size:12px; color:var(--muted); max-height:160px; overflow:auto; font-family:Consolas,monospace; }
+  select { font:inherit; padding:8px; border-radius:8px; border:1px solid var(--line); }
+</style>
+</head>
+<body>
+<header>
+  <h1>배움길 · 학습 엔진 미리보기</h1>
+  <span class="tag">시연용 · 자체 제작 문항 · AI 미연결</span>
+  <label>문항 <select id="question"></select></label>
+  <button id="reset" class="ghost">처음부터</button>
+</header>
+<main>
+  <section class="card" aria-live="polite">
+    <h2>멘티 화면</h2>
+    <div id="learner"></div>
+  </section>
+  <section class="card">
+    <h2>멘토 대시보드 (근거 요약)</h2>
+    <div id="mentor"></div>
+    <h2 style="margin-top:20px">엔진 이벤트</h2>
+    <div id="log" class="log"></div>
+  </section>
+</main>
+<script type="module">
+import { applyLearningCommand } from '../public/src/learning/engine.js';
+import { buildLearnerSummary } from '../public/src/mentoring/summary.js';
+import { listAssignableQuestions } from '../public/src/content/catalog.js';
+
+const base = '../public/src/content/';
+const parts = await Promise.all(['questions', 'concepts', 'routes', 'review'].map((f) => fetch(`${base}${f}.json`).then((r) => r.json())));
+const catalog = Object.assign({}, ...parts);
+
+const STAGE_LABEL = {
+  original_attempt: '기출 풀이', concept_check: '개념 확인', foundation_practice: '기초 연습', similar_practice: '유사 문제',
+  original_retry: '기출 재도전', transfer_check: '새 문제 확인', completed: '완료', needs_mentor: '멘토 확인',
+};
+const FLOW = ['original_attempt', 'concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
+const REASON_TEXT = {
+  originalCorrect: '맞혔어요! 처음 보는 문제로 한 번 더 확인해 볼까요?',
+  originalIncorrect: '어디서 막혔는지 짧게 확인해 봐요.',
+  originalAbstained: '괜찮아요. 어디서 막혔는지 짧게 확인해 봐요.',
+  conceptCheckDone: '필요한 기초부터 연습해요.',
+  conceptCheckAllCorrect: '기초는 확인했어요. 비슷한 문제로 넘어가요.',
+  foundationPassed: '좋아요, 비슷한 문제에 적용해 봐요.',
+  foundationRetry: '한 번 더 연습해 봐요.',
+  foundationMaxRounds: '멘토와 함께 확인해요.',
+  similarDone: '처음 틀렸던 문제에 다시 도전해요.',
+  retryDone: '처음 보는 문제로 확인해요.',
+  transferDone: '오늘 학습을 정리해요.',
+};
+const RESULT_TEXT = { correct: '✓ 정답', incorrect: '✗ 오답', abstained: '? 모름' };
+
+const sel = document.getElementById('question');
+for (const q of listAssignableQuestions(catalog)) sel.add(new Option(q.prompt, q.id));
+
+let state, seq, log, showSolution;
+const now = () => new Date().toISOString();
+
+function send(cmd) {
+  const r = applyLearningCommand(state, { id: `cmd-${++seq}`, pathId: 'path-1', learnerId: 'learner-1', at: now(), ...cmd }, { catalog });
+  state = r.state;
+  log.unshift(...r.events.map((e) => JSON.stringify(e)));
+  return r;
+}
+
+function reset() {
+  seq = 0; log = []; showSolution = false;
+  state = {
+    learnerId: 'learner-1', mentorId: 'mentor-1', revision: 0,
+    assignments: [{ id: 'assignment-1', learnerId: 'learner-1', mentorId: 'mentor-1', questionId: sel.value }],
+    paths: [{ id: 'path-1', assignmentId: 'assignment-1' }], attempts: [], exposures: [],
+  };
+  send({ type: 'START_PATH' });
+  render();
+}
+
+const path = () => state.paths[0];
+const currentItem = () => path().items.find((i) => !i.answered);
+
+function render() {
+  const p = path();
+  const el = document.getElementById('learner');
+  const nowIdx = FLOW.indexOf(p.stage);
+  let html = '<div class="steps">' + FLOW.map((s, i) => {
+    const cls = s === p.stage ? 'now' : (nowIdx > i || p.stageHistory.some((h) => h.to === s) && s !== p.stage) ? 'done' : '';
+    return `<span class="step ${cls}">${STAGE_LABEL[s]}</span>`;
+  }).join('') + '</div>';
+
+  if (p.stage === 'needs_mentor') {
+    html += `<div class="msg warn"><b>멘토와 함께 확인해요.</b><br>기록은 저장되어 멘토에게 전달돼요.</div>`;
+  } else if (p.stage === 'completed') {
+    html += `<div class="msg"><b>오늘 학습 완료!</b><br>원래 문제 재도전: ${RESULT_TEXT[p.retryResult] ?? '해당 없음'} · 새 문제 확인: ${RESULT_TEXT[p.transferResult] ?? '미측정'}</div>`;
+  } else {
+    const item = currentItem();
+    const done = p.items.filter((i) => i.answered).length;
+    html += `<div class="meta">${STAGE_LABEL[p.stage]}${p.stage === 'foundation_practice' ? ` ${p.foundationRound}회차` : ''} · ${Math.min(done + 1, p.items.length)} / ${p.items.length}
+      · ${item?.origin === 'generated' ? '숫자를 바꿔 만든 연습 문제' : item?.origin === 'spare' ? '예비 문항' : '자체 제작 문항'}</div>`;
+    if (item) {
+      if (!item.presentedAt) send({ type: 'PRESENT_QUESTION', itemId: item.id });
+      html += `<div class="prompt">${item.prompt}</div><div class="choices">` +
+        item.choices.map((c) => `<button data-choice="${c.id}">${c.value}</button>`).join('') + '</div>' +
+        `<div class="row"><button data-abstain>잘 모르겠어요</button><button data-hint class="ghost">풀이 보기</button></div>`;
+      if (showSolution) html += `<div class="solution">${item.solutionSteps.map((s) => `→ ${s}`).join('<br>')}</div>`;
+    }
+    const last = [...p.items].reverse().find((i) => i.answered);
+    if (last) html += `<div class="meta" style="margin-top:12px">방금 응답: <span class="result ${last.result}">${RESULT_TEXT[last.result]}</span></div>`;
+    if (p.recommendation) {
+      const r = p.recommendation;
+      html += `<div class="msg ${r.nextStage === 'needs_mentor' || r.mentorCheckSuggested ? 'warn' : ''}">${REASON_TEXT[r.reason] ?? r.reason}
+        ${r.mentorCheckSuggested ? '<br>유사 문제가 어려웠어요. 멘토와 함께 확인하는 것도 좋아요.' : ''}
+        <div class="row"><button class="primary" data-next>다음: ${STAGE_LABEL[r.nextStage]}</button>
+        ${['concept_check', 'foundation_practice', 'similar_practice'].includes(p.stage) ? '' : ''}</div></div>`;
+    } else if (['concept_check', 'foundation_practice', 'similar_practice'].includes(p.stage)) {
+      html += `<div class="row"><button class="ghost" data-skip>이 단계 건너뛰기</button></div>`;
+    }
+  }
+  el.innerHTML = html;
+  renderMentor();
+}
+
+function renderMentor() {
+  const s = buildLearnerSummary(state, 'learner-1', { catalog });
+  const pct = (x) => (x.rate === null ? '—' : `${Math.round(x.rate * 100)}% (${x.correct}/${x.attempted})`);
+  let html = `<table><tr><th>구분</th><th>정답률 (모름 제외)</th><th>모름</th></tr>
+    <tr><td>최초 기출</td><td>${pct(s.originalStats)}</td><td>${s.originalStats.abstained}</td></tr>
+    <tr><td>기출 재도전</td><td>${pct(s.retryStats)}</td><td>${s.retryStats.abstained}</td></tr>
+    <tr><td>새 문제 (독립 적용)</td><td>${pct(s.transferStats)}</td><td>${s.transferStats.abstained}</td></tr></table>`;
+  if (s.unmeasuredCount) html += `<div class="meta" style="margin-top:6px">독립 적용 미측정·제외: ${s.unmeasuredCount}건</div>`;
+  const label = { observed: '직접 확인', inferred: '추정', needs_review: '확인 필요' };
+  html += '<div style="margin-top:12px">' + (s.evidence.length ? s.evidence.map((e) => `<div class="ev">
+    <span class="badge ${e.status}">${label[e.status]}</span><b>${e.conceptName}</b>
+    <div>${e.observation}</div><div class="q">멘토 질문: ${e.mentorQuestion}</div></div>`).join('') : '<div class="meta">아직 응답이 없어요.</div>') + '</div>';
+  if (s.reviewFlags.length) html += `<div class="meta" style="margin-top:8px">검토 표시: ${s.reviewFlags.map((f) => f.code).join(', ')}</div>`;
+  document.getElementById('mentor').innerHTML = html;
+  document.getElementById('log').innerHTML = log.slice(0, 40).map((l) => `<div>${l.replace(/</g, '&lt;')}</div>`).join('');
+}
+
+document.getElementById('learner').addEventListener('click', (ev) => {
+  const b = ev.target.closest('button');
+  if (!b) return;
+  const item = currentItem();
+  if (b.dataset.choice && item) { send({ type: 'SUBMIT_ANSWER', itemId: item.id, submissionId: `sub-${seq + 1}`, choiceId: b.dataset.choice }); showSolution = false; }
+  else if ('abstain' in b.dataset && item) { send({ type: 'SUBMIT_ANSWER', itemId: item.id, submissionId: `sub-${seq + 1}`, abstained: true }); showSolution = false; }
+  else if ('hint' in b.dataset && item) { send({ type: 'USE_HELP', itemId: item.id, helpType: 'solution' }); showSolution = true; }
+  else if ('next' in b.dataset) send({ type: 'ADVANCE' });
+  else if ('skip' in b.dataset) send({ type: 'ADVANCE', mode: 'skip' });
+  render();
+});
+document.getElementById('reset').addEventListener('click', reset);
+sel.addEventListener('change', reset);
+document.addEventListener('visibilitychange', () => { send({ type: 'SET_VISIBILITY', visible: !document.hidden }); });
+reset();
+</script>
+</body>
+</html>
