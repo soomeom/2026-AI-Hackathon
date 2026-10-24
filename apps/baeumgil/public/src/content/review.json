@@ -1,12 +1,716 @@
 {
   "reviews": [
-    { "questionId": "q-eq-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-rat-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-cc-distribute-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-cc-transpose-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-cc-intadd-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-cc-reciprocal-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-eq-spare-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
-    { "questionId": "q-rat-spare-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } }
+    {
+      "questionId": "q-eq-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-rat-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-cc-distribute-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-cc-transpose-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-cc-intadd-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-cc-reciprocal-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-eq-spare-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "q-rat-spare-1",
+      "reviewers": [
+        "다은",
+        "수영"
+      ],
+      "reviewedOn": "2026-10-24",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      }
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q01",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q03",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q05",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q06",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q07",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q16",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q10",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q11",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q14",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q15",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q19",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-high-2025-1-math-q20",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q01",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q02",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q03",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q04",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q05",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q06",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q07",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q09",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q10",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q11",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q12",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q13",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q14",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q15",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q16",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q17",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q18",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q19",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "ged-middle-2025-1-math-q20",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": false,
+        "visualCompared": true,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-set-basic",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-set-count",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-count-basic",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-count-one",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-quadratic-vertex",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-expand",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "astra-expand-check",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_transcription",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true,
+        "visualCompared": false,
+        "latexParsed": true
+      },
+      "educatorValidated": false
+    }
   ]
 }
