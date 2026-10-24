@@ -15,7 +15,24 @@ test('기본 카탈로그는 오류 없이 통과하고 대표 문항 2개를 �
   assert.deepEqual(assignableIds(catalog), ['q-eq-1', 'q-rat-1']);
 });
 
-test('대표 문항은 자체 제작 기출 유형이며 허위 연도·회차 메타데이터가 없다', () => {
+test('대표 문항은 고졸 출제 범위의 중학 기초 개념을 보충하는 자체 제작 문항으로 표기된다', () => {
+  // 2026 출제 계획: 고졸 수학은 2015 개정 고등학교 '수학'에서 출제, 고졸은 기출 재출제 미적용.
+  // 일차방정식·유리수 계산은 중1 개념이므로 고졸 출제 유형처럼 표기하지 않는다.
+  const catalog = makeCatalog();
+  for (const q of catalog.questions.filter((x) => x.role === 'original' || x.role === 'transfer_spare')) {
+    const { questionType, note = '' } = q.reference;
+    assert.match(questionType, /기초/, q.id);
+    assert.match(questionType, /중1/, q.id);
+    assert.doesNotMatch(`${questionType} ${note}`, /출제 유형|기출 원문/, q.id);
+  }
+  for (const id of ['q-eq-1', 'q-rat-1']) {
+    const { note } = catalog.questions.find((x) => x.id === id).reference;
+    assert.match(note, /고등학교 '수학'/);
+    assert.match(note, /실제 검정고시 문항이 아니다/);
+  }
+});
+
+test('대표 문항은 자체 제작 문항이며 허위 연도·회차 메타데이터가 없다', () => {
   const catalog = makeCatalog();
   for (const id of ['q-eq-1', 'q-rat-1']) {
     const q = catalog.questions.find((x) => x.id === id);

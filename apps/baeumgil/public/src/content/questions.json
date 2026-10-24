@@ -6,9 +6,9 @@
       "contentStatus": "approved",
       "role": "original",
       "reference": {
-        "questionType": "고졸 검정고시 수학 · 괄호가 있는 일차방정식",
+        "questionType": "고졸 수학 대비 기초 · 괄호가 있는 일차방정식 (중1)",
         "authored": true,
-        "note": "검정고시 출제 유형을 참고해 팀이 자체 제작한 문항이며 실제 기출 원문이 아니다."
+        "note": "고졸 검정고시 수학은 2015 개정 교육과정 고등학교 '수학'에서 출제된다. 이 문항은 그 단원(여러 가지 방정식, 여러 가지 부등식 등)의 선수 개념인 중1 일차방정식을 보충하려고 팀이 자체 제작한 문항이며, 실제 검정고시 문항이 아니다."
       },
       "prompt": "방정식 2(x - 3) = -x + 9 의 해는?",
       "answerFormat": "choice",
@@ -28,9 +28,9 @@
       "contentStatus": "approved",
       "role": "original",
       "reference": {
-        "questionType": "고졸 검정고시 수학 · 부호가 있는 유리수의 혼합 계산",
+        "questionType": "고졸 수학 대비 기초 · 부호가 있는 유리수의 혼합 계산 (중1)",
         "authored": true,
-        "note": "검정고시 출제 유형을 참고해 팀이 자체 제작한 문항이며 실제 기출 원문이 아니다."
+        "note": "고졸 검정고시 수학은 2015 개정 교육과정 고등학교 '수학'에서 출제된다. 이 문항은 그 단원(다항식의 연산 등)의 계산 바탕이 되는 중1 정수·유리수 계산을 보충하려고 팀이 자체 제작한 문항이며, 실제 검정고시 문항이 아니다."
       },
       "prompt": "(-3/4) ÷ (3/2) - (-1/2) 의 값은?",
       "answerFormat": "choice",
@@ -121,7 +121,7 @@
       "kind": "authored",
       "contentStatus": "approved",
       "role": "transfer_spare",
-      "reference": { "questionType": "새 적용 예비 문항 · 괄호가 있는 일차방정식", "authored": true },
+      "reference": { "questionType": "새 적용 예비 문항 · 기초 · 괄호가 있는 일차방정식 (중1)", "authored": true },
       "prompt": "방정식 4(x - 2) = 2x + 6 의 해는?",
       "answerFormat": "choice",
       "choices": [
@@ -139,7 +139,7 @@
       "kind": "authored",
       "contentStatus": "approved",
       "role": "transfer_spare",
-      "reference": { "questionType": "새 적용 예비 문항 · 부호가 있는 유리수의 혼합 계산", "authored": true },
+      "reference": { "questionType": "새 적용 예비 문항 · 기초 · 부호가 있는 유리수의 혼합 계산 (중1)", "authored": true },
       "prompt": "(-2/3) × (-9/4) + (-2) 의 값은?",
       "answerFormat": "choice",
       "choices": [
