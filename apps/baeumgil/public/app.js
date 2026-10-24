@@ -1,58 +1,299 @@
-import {buildRoadmap,submitRoadmapPractice,STEP_NAMES} from './src/learning/roadmap.js';
-import {startDiagnostic,submitDiagnostic,diagnosticReport,LEVELS} from './src/learning/diagnostic.js';
-const root=document.querySelector('#app'),status=document.querySelector('#status');
-let bank,config,state=null,selection=null,helpUsed=false,feedback=null;
-let practiceView=null;
-const STORE='astra-diagnostic-v2',SEEN='astra-exposure-v1';let seen=[];
-function el(tag,cls,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e;}
-function math(parent,text){for(const [i,part] of String(text).split('$').entries()){if(i%2){const s=el('span');try{window.katex.render(part,s,{throwOnError:true,trust:false});}catch{status.textContent='일부 수식을 표시하지 못했습니다. 원본 이미지를 확인해주세요.';s.textContent=part;s.className='math-error';}parent.append(s);}else parent.append(document.createTextNode(part));}}
-function button(label,action,cls=''){const b=el('button',cls,label);b.type='button';b.onclick=action;return b;}
-function save(){try{localStorage.setItem(STORE,JSON.stringify(state));localStorage.setItem(SEEN,JSON.stringify(seen));}catch{status.textContent='저장 공간을 사용할 수 없습니다. 현재 화면에서는 계속 풀 수 있지만 새로고침 후 복원되지 않을 수 있어요.';}}
-function remember(id){if(!seen.includes(id)){seen.push(id);save();}}
-function panel(){return el('div','panel');}
-function source(q,container){if(q.figure){const im=el('img','figure');im.src=q.figure.src;im.alt=q.figure.alt;im.onerror=()=>{status.textContent='도형을 불러오지 못했습니다. 원본 문항을 확인해주세요.';};container.append(im);}if(q.sourceImage){const d=el('details');d.append(el('summary',null,'원본 문항 이미지 확인'));const im=el('img','source-image');im.src=q.sourceImage;im.alt='발문·도형·선택지를 포함한 원본 문항';d.append(im);container.append(d);}}
-function start(){state=startDiagnostic(bank,config,{previouslySeen:seen});feedback=null;save();render();}
-function restart(){const d=el('dialog');d.append(el('h3',null,'새 진단을 시작할까요?'),el('p',null,'이전 진단 결과가 교체됩니다. 이미 본 문항은 독립 수행 판정에서 제외됩니다.'));d.append(button('취소',()=>{d.close();d.remove();}),button('새 진단 시작',()=>{d.close();d.remove();start();},'primary'));document.body.append(d);d.showModal();}
-function intro(){const hero=el('section','hero');hero.append(el('div','eyebrow','ADAPTIVE MATH CHECK'),el('h1',null,'지금 나에게 맞는\n수학의 시작점을 찾아요.'));hero.append(el('p',null,'고졸 핵심 문제부터 시작해요. 어려운 문제가 나오면 연결된 중학교 기초 개념을 확인하며, 영역마다 어디서부터 다시 공부하면 좋을지 알려드려요.'));const a=el('div','actions');a.append(button('수학 진단 시작하기',start,'primary'));hero.append(a);root.append(hero);const info=el('div','overview');for(const [a,b] of [['6개 핵심 영역','수와 식 · 방정식 · 함수 · 도형 · 집합 · 경우의 수'],['12~30문항','답변에 따라 문제 수준과 문항 수가 달라져요.'],['기록은 이 브라우저에','언제든 중단하고 이어서 풀 수 있어요.']]){const c=el('article');c.append(el('strong',null,a),el('span','muted',b));info.append(c);}root.append(info,el('p','notice','선별 문항 기반의 진단 시제품입니다. 결과는 수업 시작점 추정이며, 학년 전체의 숙달이나 합격을 보장하지 않습니다.'));}
-function answer(abstained=false){if(!abstained&&!selection){status.textContent='답을 고르거나 “잘 모르겠어요”를 선택해주세요.';return;}const q=bank.find(q=>q.id===state.currentId);const next=submitDiagnostic(state,{id:crypto.randomUUID(),questionId:q.id,choiceId:selection,abstained,helpUsed},bank,config);const last=next.attempts.at(-1);feedback={q,result:last.result};state=next;save();render();}
-function render(){root.replaceChildren();selection=null;helpUsed=false;if(practiceView){renderPractice();return;}if(!state){intro();return;}if(feedback){const p=panel();p.append(el('div','eyebrow','응답 기록 완료'),el('h2',null,{correct:'맞혔어요.',incorrect:'어느 기초 개념을 확인할지 살펴볼게요.',abstained:'모름으로 기록했어요.'}[feedback.result]));p.append(el('p','muted','풀이와 정답은 진단을 마친 후 한 번에 확인할 수 있어요.'),el('p','muted',state.transition),button(state.status==='completed'?'진단 결과 보기':'다음 문제',()=>{feedback=null;render();},'primary'));root.append(p);return;}
-if(state.status==='completed'){result();return;}const q=bank.find(q=>q.id===state.currentId);remember(q.id);const top=el('div','question-top');top.append(el('span','eyebrow',`QUESTION ${String(state.attempts.length+1).padStart(2,'0')}`),el('span','muted',`최대 ${config.maxQuestions}문항 · ${state.completedDomains.length}/6 영역 확인`));root.append(top);const prog=el('div','progress');const bar=el('span');bar.style.width=`${state.completedDomains.length/6*100}%`;prog.append(bar);root.append(prog);const layout=el('div','grid');const p=panel();p.append(el('span','pill',`${q.curriculum.major} · ${LEVELS[q.level]}`),el('h2',null,'문제를 읽고 답을 골라주세요.'));p.append(el('div','source-label',q.kind==='official'?`2025년 1회 ${q.reference.qualification} 검정고시 · ${q.reference.questionNumber}번 · 확정 정답`:'Astra 자체 제작 · 선수 개념 확인'));const prompt=el('div','question');math(prompt,q.prompt);p.append(prompt);source(q,p);const choices=el('div','choices');for(const c of q.choices){const b=button('',()=>{selection=c.id;choices.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));},'choice');b.setAttribute('aria-pressed','false');b.append(el('span','number',String('abcd'.indexOf(c.id)+1)));const t=el('span');math(t,c.latex?'$'+c.latex+'$':c.text);b.append(t);choices.append(b);}p.append(choices);const actions=el('div','actions');actions.append(button('답 제출',()=>answer(),'primary'),button('잘 모르겠어요',()=>answer(true)));p.append(actions);const help=el('label','notice');const check=el('input');check.type='checkbox';check.onchange=()=>{helpUsed=check.checked;};help.append(check,document.createTextNode(' 다른 사람이나 자료의 도움을 받았어요'));p.append(help);const aside=el('aside','panel');aside.append(el('h3',null,'이번 진단의 배움길'));const track=el('ol','track');config.domains.forEach((d,i)=>{const li=el('li',i===state.domainIndex?'current':'');li.append(el('span',null,d.name),el('span',null,i<state.domainIndex?'확인됨':i===state.domainIndex?'진행 중':'대기'));track.append(li);});aside.append(track,el('p','muted',state.transition));if(state.seenBefore.includes(q.id))aside.append(el('p','notice','이전에 본 문항입니다. 이번 정답은 독립 수행 판정에서 제외돼요.'));aside.append(button('중단하고 현재 결과 보기',()=>{state.status='completed';state.stopReason='user_paused';save();render();}));layout.append(p,aside);root.append(layout);}
-function result(){const report=diagnosticReport(state,bank,config);root.append(el('div','eyebrow','YOUR LEARNING START'));const title=el('div','result-title');title.append(el('span',null,'현재 추천 학습 시작점 · 추정'),el('h1',null,report.tier),el('p','muted',report.disclaimer));root.append(title,el('p','muted',`${report.attempts}문항 응답 · 독립 수행 ${report.independentCount}문항`));const grid=el('div','report-grid');for(const d of report.domains){const p=panel();p.append(el('h3',null,d.name),el('div','report-level',d.label),el('p','muted',`${d.attempted}문항 중 ${d.correct}정답${d.provisional?' · 확인 미완료':''}`));const list=el('ul');for(const w of d.weak)list.append(el('li',null,`${w}부터 복습을 권해요.`));if(!d.weak.length)list.append(el('li',null,d.attempted?'다른 문항과 풀이 설명으로 다시 확인해보세요.':'아직 이 영역의 응답이 없어요.'));p.append(list);grid.append(p);}root.append(grid,el('p','notice',report.rule));renderRoadmap();const actions=el('div','actions');if(state.stopReason==='user_paused')actions.append(button('이어서 풀기',()=>{state.status='active';state.stopReason=null;save();render();},'primary'));actions.append(button('새 진단',restart),button('결과 JSON 저장',()=>{const blob=new Blob([JSON.stringify({report,attempts:state.attempts,roadmap:buildRoadmap(state,bank,config),practiceAttempts:state.practiceAttempts??[]},null,2)],{type:'application/json'});const a=el('a');a.href=URL.createObjectURL(blob);a.download='astra-diagnostic-result.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}));root.append(actions);const details=el('details');details.append(el('summary',null,'응답별 문제와 해설 보기'));for(const a of state.attempts){const q=bank.find(q=>q.id===a.questionId);const p=panel();const t=el('p');math(t,q.prompt);p.append(t,el('p','muted',`${a.result==='correct'?'정답':a.result==='abstained'?'모름':'오답'} · ${config.stageLabels[a.stage]??''} · ${q.curriculum.core}`));const s=el('p');math(s,q.solutionSteps.join(' '));p.append(s);details.append(p);}root.append(details);}
-async function init(){try{[bank,config]=await Promise.all(['questions.json','diagnostic.json'].map(async f=>{const r=await fetch(`src/content/${f}`);if(!r.ok)throw new Error(`파일 로드 실패: ${f}`);return r.json();}));bank=bank.questions;try{const exposure=JSON.parse(localStorage.getItem(SEEN)||'[]');if(!Array.isArray(exposure)||!exposure.every(x=>typeof x==='string'))throw new Error('badHistory');seen=exposure;const stored=JSON.parse(localStorage.getItem(STORE)||'null');if(stored){if(stored.version!==config.version||!Array.isArray(stored.attempts)||!Array.isArray(stored.seenBefore))throw new Error('badState');let restored=startDiagnostic(bank,config,{previouslySeen:stored.seenBefore});for(const a of stored.attempts)restored=submitDiagnostic(restored,{...a,abstained:a.result==='abstained'},bank,config);if(stored.stopReason==='user_paused'&&restored.status==='active'){restored.status='completed';restored.stopReason='user_paused';}for(const a of stored.practiceAttempts??[])restored=submitRoadmapPractice(restored,{...a,abstained:a.result==='abstained'},bank,config);state=restored;}}catch{status.textContent='저장 기록을 복원하지 못했습니다. 새 진단은 재노출 여부를 알 수 없어 독립 수행 판정에서 제외합니다.';seen=bank.filter(q=>q.role==='diagnostic').map(q=>q.id);state=null;}render();}catch(e){root.replaceChildren(el('h2',null,'문제은행을 불러오지 못했어요.'),el('p',null,e.message),button('다시 시도',init));}}
+// 앱 진입점: 카탈로그·저장본을 읽고, 저장소를 만들고, 역할에 맞는 화면을 그린다.
+// 학습 기록의 원본은 이 브라우저의 localStorage 다 (서버 DB 없음).
+import { createStore, createDemoState } from './src/state/store.js';
+import { loadState, saveState, resetState, STORAGE_KEY } from './src/state/persistence.js';
+import { renderLearner, activeLearnerPath } from './src/ui/learner.js';
+import { renderMentor } from './src/ui/mentor.js';
+import { esc } from './src/ui/text.js';
+import { isInitialAssessmentVisible } from './src/ui/initial-assessment.js';
+import { mergeCatalogParts } from './src/content/catalog.js';
+import { createDemoSession, prepareDemoRole, cancelPendingDemoAI } from './src/state/demo-session.js';
+import { renderDemoEntry, hasUnsavedSessionForm } from './src/ui/demo-entry.js';
+import { renderSubjectSelection } from './src/ui/subject-selection.js';
+import { isSubjectEnabled } from './src/content/subjects.js';
+import { renderRoadmapPage } from './src/ui/roadmap-page.js';
 
-function renderRoadmap(){
- const section=el('section','roadmap');section.append(el('h2',null,'나의 맞춤형 학습 로드맵'),el('p','muted','오답·모름 기록에서 확인이 필요한 가장 기초 개념부터 시작해요. 연습 완료는 진단 티어를 바꾸지 않아요.'));
- for(const domain of buildRoadmap(state,bank,config)){
-  const area=el('section','road-area');area.append(el('h3',null,domain.name));
-  if(!domain.measured){area.append(el('p','muted','미측정 · 이 영역을 먼저 진단해주세요.'));section.append(area);continue;}
-  const row=el('div','road-steps');
-  for(const step of [1,2,3]){const column=el('div','road-step');column.append(el('div','eyebrow',`STEP ${step}`),el('h3',null,STEP_NAMES[step]));const nodes=domain.nodes.filter(n=>n.step===step);
-   if(!nodes.length)column.append(el('p','muted',domain.complete?'이 단계의 오답 기록 없음':'진단하지 않은 개념은 추가 확인 필요'));
-   for(const node of nodes){const card=el('div','road-node');card.append(el('strong',null,node.name),el('p','muted',`${node.evidenceIds.length}개 응답 근거 · ${node.completedQuestions}/${node.questionIds.length}문항 연습`));
-    const evidence=el('details');evidence.append(el('summary',null,'오답 추적 근거 보기'));for(const id of node.evidenceIds){const a=state.attempts.find(a=>a.id===id);evidence.append(el('p','notice',`${config.stageLabels[a.stage]} · ${a.questionId} · ${a.result==='abstained'?'모름':'오답'}`));}card.append(evidence);
-    const label=node.status==='practiced'?'연습 완료 · 다시 보기':node.locked?'앞 단계 연습 후 시작':domain.startNodeId===node.id?'여기서 학습 시작':'해설·보충 문제 풀기';
-    const b=button(label,()=>{practiceView={nodeId:node.id,index:0,feedback:null};render();},node.status==='practiced'?'':'primary');b.disabled=node.locked;card.append(b);column.append(card);
-   }row.append(column);
-  }area.append(row);
-  if(domain.passed.length){const passed=el('div','passed');passed.append(el('strong',null,'✓ 진단 통과'));for(const item of domain.passed)passed.append(el('span','pill',item.name+' · 통과'));passed.append(el('p','notice','해당 문항의 독립 정답에 따른 통과이며, 개념 전체의 영구 숙달을 뜻하지 않아요.'));area.append(passed);}
-  section.append(area);
- }root.append(section);
+const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
+
+const app = document.getElementById('app');
+const saveNote = document.getElementById('save-note');
+
+async function loadCatalog() {
+  const parts = await Promise.all(CONTENT_FILES.map(async (name) => {
+    const res = await fetch(`./src/content/${name}.json`);
+    if (!res.ok) throw new Error(`${name}.json 을 불러오지 못했어요 (${res.status})`);
+    return res.json();
+  }));
+  return mergeCatalogParts(parts);
 }
-function renderPractice(){
- const node=buildRoadmap(state,bank,config).flatMap(d=>d.nodes).find(n=>n.id===practiceView.nodeId);
- if(!node||node.locked){practiceView=null;render();return;}
- const q=bank.find(q=>q.id===node.questionIds[practiceView.index]);remember(q.id);
- const p=panel();p.append(button('← 로드맵으로 돌아가기',()=>{practiceView=null;render();}),el('h2',null,node.name),el('span','pill',`Step ${node.step} · 보충 연습 ${practiceView.index+1}/${node.questionIds.length}`));
- const explanation=el('details');explanation.append(el('summary',null,'개념 해설 먼저 보기'));const e=el('p');math(e,q.solutionSteps.join(' '));explanation.append(e);p.append(explanation);
- const prompt=el('p','question');math(prompt,q.prompt);p.append(prompt);source(q,p);
- if(practiceView.feedback){const box=el('div','feedback');box.append(el('strong',null,practiceView.feedback==='correct'?'정답이에요.':'해설을 보고 다시 연습해봐요.'));const sol=el('p');math(sol,q.solutionSteps.join(' '));const correct=q.choices.find(c=>c.value===q.answer);const answer=el('p');math(answer,`정답 ${q.answer}번: ${correct.latex?'$'+correct.latex+'$':correct.text}`);box.append(answer,sol);p.append(box);
-  const actions=el('div','actions');if(practiceView.feedback!=='correct')actions.append(button('다시 풀기',()=>{practiceView.feedback=null;render();},'primary'));
-  if(practiceView.index+1<node.questionIds.length)actions.append(button('다음 연습 문제',()=>{practiceView.index++;practiceView.feedback=null;render();}));
-  actions.append(button('로드맵에서 진행 확인',()=>{practiceView=null;render();}));p.append(actions);
- }else{
-  const choices=el('div','choices');for(const c of q.choices){const b=button('',()=>{selection=c.id;choices.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));},'choice');b.setAttribute('aria-pressed','false');b.append(el('span','number',String('abcd'.indexOf(c.id)+1)));const t=el('span');math(t,c.latex?'$'+c.latex+'$':c.text);b.append(t);choices.append(b);}p.append(choices);
-  const submit=(abstained=false)=>{if(!selection&&!abstained){status.textContent='답을 선택해주세요.';return;}status.textContent='';state=submitRoadmapPractice(state,{id:crypto.randomUUID(),nodeId:node.id,questionId:q.id,choiceId:selection,abstained},bank,config);practiceView.feedback=state.practiceAttempts.at(-1).result;save();render();};
-  const actions=el('div','actions');actions.append(button('연습 답 확인',()=>submit(),'primary'),button('모름 · 해설 보기',()=>submit(true)));p.append(actions);
- }root.append(p);
+
+async function loadHealth() {
+  try {
+    const res = await fetch('/api/health', { cache: 'no-store' });
+    const body = await res.json();
+    return { reachable: res.ok, aiConfigured: body.ai?.configured === true, model: body.ai?.model ?? null };
+  } catch {
+    return { reachable: false, aiConfigured: false, model: null };
+  }
 }
-init();
+
+// localStorage 접근 자체가 막힌 환경(시크릿 창 설정 등)에서도 화면은 동작해야 한다
+function getStorage() {
+  try { return window.localStorage; } catch { return null; }
+}
+const storage = getStorage();
+const demoSession = createDemoSession((() => { try { return window.sessionStorage; } catch { return null; } })());
+
+const freshUi = () => ({
+  selected: {}, help: {}, openEvidence: {}, ai: {}, logDraft: {}, reviewed: {},
+  learnerPathId: null, mentorPathId: null, mentorTab: 'home', learnerTab: 'learning', sessionId: null, editSession: false,
+  confirmSkip: null, confirmReset: false, flash: null, overrideError: null, sessionError: null, logError: null,
+  ledgerMonth: null, copyFallback: null,
+  initialChoices: {}, initialAssessmentOpen: false, initialAssessmentDismissed: false, initialError: null,
+  initialAssessmentFor: null, initialConceptId: null, initialQuestionId: null, initialReason: '', initialPlanError: null,
+});
+// 메뉴 접힘은 보는 사람 편의라서 이 브라우저에만 기억한다 (실패해도 화면은 동작)
+const NAV_KEY = 'baeumgil.navCollapsed';
+const readNavCollapsed = () => { try { return storage?.getItem(NAV_KEY) === '1'; } catch { return false; } };
+const ui = { ...freshUi(), role: demoSession.role, subjectId: demoSession.subjectId, health: null, navCollapsed: false, navOpen: false };
+const inWorkspace = () => Boolean(ui.role && isSubjectEnabled(ui.subjectId));
+
+const persist = { savedRevision: 0, status: storage ? 'idle' : 'unavailable', blocked: false };
+
+let store;
+let catalog;
+
+function showSaveStatus() {
+  const text = {
+    idle: '이 브라우저에 자동 저장돼요.',
+    saved: '이 브라우저에 저장됨.',
+    failed: '⚠ 이 브라우저에 저장하지 못했어요. 화면의 내용은 유지돼요.',
+    conflict: '⚠ 다른 탭에서 기록이 바뀌었어요. 덮어쓰지 않도록 저장을 멈췄어요. 새로고침해 최신 기록을 여세요.',
+    unavailable: '⚠ 이 브라우저는 저장을 쓸 수 없어 새로고침하면 처음부터 시작해요.',
+  };
+  saveNote.textContent = text[persist.status] ?? '';
+  saveNote.classList.toggle('warn-text', ['failed', 'conflict', 'unavailable'].includes(persist.status));
+}
+
+function save(state) {
+  if (!storage || persist.blocked || state.revision === persist.savedRevision) return;
+  const result = saveState(storage, state, persist.savedRevision);
+  if (result.ok) {
+    persist.savedRevision = state.revision;
+    persist.status = 'saved';
+  } else if (result.reason === 'conflict') {
+    persist.blocked = true;
+    persist.status = 'conflict';
+  } else {
+    persist.status = 'failed';
+  }
+  showSaveStatus();
+}
+
+const MENTOR_NAV = ['home', 'roadmap', 'learning', 'planning', 'sessions'];
+
+function renderNavigation() {
+  const hasNav = inWorkspace();
+  const shell = document.getElementById('shell');
+  shell.classList.toggle('has-nav', hasNav);
+  shell.classList.toggle('collapsed', ui.navCollapsed);
+  shell.classList.toggle('drawer-open', hasNav && ui.navOpen);
+  document.getElementById('sidenav').hidden = !hasNav;
+  document.getElementById('sidenav-scrim').hidden = !hasNav || !ui.navOpen;
+  const menu = document.getElementById('nav-menu');
+  menu.hidden = !hasNav;
+  menu.setAttribute('aria-expanded', String(hasNav && ui.navOpen));
+  const toggle = document.getElementById('sidenav-toggle');
+  const label = ui.navOpen ? '메뉴 닫기' : ui.navCollapsed ? '메뉴 펼치기' : '메뉴 접기';
+  toggle.setAttribute('aria-expanded', String(ui.navOpen || !ui.navCollapsed));
+  toggle.setAttribute('aria-label', label);
+  toggle.setAttribute('title', label);
+  document.getElementById('learner-navigation').hidden = !hasNav || ui.role !== 'learner';
+  document.getElementById('mentor-navigation').hidden = !hasNav || ui.role !== 'mentor';
+  document.getElementById('learner-learning').setAttribute('aria-current',ui.learnerTab==='roadmap'?'false':'page');
+  document.getElementById('learner-roadmap').setAttribute('aria-current',ui.learnerTab==='roadmap'?'page':'false');
+  // 진단 상세(assessment)는 학습 기록 아래 화면이다
+  const mentorActive = ui.mentorTab === 'assessment' ? 'learning' : ui.mentorTab;
+  for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).setAttribute('aria-current', mentorActive === tab ? 'page' : 'false');
+}
+
+function render() {
+  const state = store.getState();
+  renderNavigation();
+  document.getElementById('session-controls').hidden = !ui.role;
+  document.getElementById('reset').hidden = !inWorkspace();
+  document.getElementById('change-subject').hidden = !inWorkspace();
+  document.getElementById('reset').textContent = ui.confirmReset ? '정말 초기화할까요? 한 번 더 누르기' : '시연 초기화';
+  const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
+  document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'} · ${ui.role === 'mentor' ? '멘토' : '멘티'}${inWorkspace() ? ' · 수학' : ''}` : '';
+  document.getElementById('entry-session-note').hidden = !ui.role || demoSession.persistent;
+  app.onclick = null;
+  app.onchange = null;
+  app.oninput = null;
+  app.onkeydown = null;
+  app.classList.toggle('entry-main', !inWorkspace());
+  app.classList.toggle('learner-main', inWorkspace() && ui.role === 'learner');
+  if (!ui.role) {
+    renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent });
+    return;
+  }
+  if (!inWorkspace()) {
+    renderSubjectSelection({ root: app, state, role: ui.role, onSelect: selectSubject });
+    return;
+  }
+  const props = {
+    root: app, state, catalog, ui, rerender: render,
+    dispatch: store.dispatch, assignQuestion: store.assignQuestion, update: store.update, getState: store.getState,
+    startInitialAssessment: store.startInitialAssessment, presentInitialQuestion: store.presentInitialQuestion,
+    submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
+    syncVisibility,
+  };
+  if (ui.role === 'learner' && ui.learnerTab === 'roadmap') renderRoadmapPage(props);
+  else if (ui.role === 'learner') renderLearner(props);
+  else renderMentor(props);
+}
+
+// 멘티 화면이 보이지 않을 때(탭 숨김·멘토 화면 전환)는 풀이 시간을 멈춘다
+function syncVisibility() {
+  const state = store.getState();
+  const visiblePath = inWorkspace() && ui.role === 'learner' && ui.learnerTab !== 'roadmap' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
+  for (const p of state.paths ?? []) {
+    if (!p.routeId || p.status !== 'active') continue;
+    const visible = p.id === visiblePath?.id;
+    if (p.visible !== visible) store.dispatch({ type: 'SET_VISIBILITY', pathId: p.id, visible });
+  }
+}
+
+function focusScreen() {
+  app.focus({ preventScroll: true });
+  window.scrollTo?.({ top: 0, left: 0, behavior: 'instant' });
+}
+
+function setRole(role) {
+  demoSession.enter(role);
+  Object.assign(ui, { role, subjectId: null, confirmReset: false, flash: null });
+  syncVisibility();
+  render();
+  focusScreen();
+}
+
+function selectSubject(subjectId) {
+  if (!ui.role || !isSubjectEnabled(subjectId)) return;
+  demoSession.selectSubject(subjectId);
+  ui.subjectId = demoSession.subjectId;
+  prepareDemoRole(ui, store.getState(), ui.role);
+  syncVisibility();
+  render();
+  focusScreen();
+}
+
+function leaveWorkspace({ changeRole = false } = {}) {
+  if (!ui.role) return;
+  if (ui.role === 'mentor' && hasUnsavedSessionForm(app)
+    && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+  cancelPendingDemoAI(ui);
+  if (changeRole) demoSession.leave();
+  else demoSession.clearSubject();
+  ui.role = demoSession.role;
+  ui.subjectId = demoSession.subjectId;
+  ui.confirmReset = false;
+  syncVisibility();
+  render();
+  focusScreen();
+}
+
+function resetDemo() {
+  if (!inWorkspace()) return;
+  if (!ui.confirmReset) { ui.confirmReset = true; render(); return; }
+  if (storage) {
+    const result = resetState(storage, { confirmed: true });
+    if (!result.ok) { ui.confirmReset = false; persist.status = 'failed'; showSaveStatus(); render(); return; }
+  }
+  cancelPendingDemoAI(ui);
+  Object.assign(ui, freshUi(), { flash: '시연 기록을 초기화했어요.' });
+  Object.assign(persist, { savedRevision: 0, blocked: false, status: storage ? 'idle' : 'unavailable' });
+  store.replaceState(createDemoState());
+  showSaveStatus();
+}
+
+// 저장본을 읽을 수 없을 때: 자동으로 지우지 않고 원문을 보여 준 뒤 사용자가 고르게 한다
+function showRecovery(loaded) {
+  app.innerHTML = `<section class="card">
+    <h2>저장된 기록을 열 수 없어요</h2>
+    <p>이유: ${esc(loaded.reason)}. 기록은 지우지 않았어요. 필요하면 아래 원문을 복사해 보관하세요.</p>
+    <textarea rows="8" readonly class="raw">${esc(loaded.raw ?? '')}</textarea>
+    <div class="row"><button id="recovery-reset" class="primary">원문을 보관했어요. 새로 시작하기</button></div>
+  </section>`;
+  document.getElementById('recovery-reset').addEventListener('click', () => {
+    resetState(storage, { confirmed: true });
+    window.location.reload();
+  });
+}
+
+async function start() {
+  let health;
+  try {
+    [catalog, health] = await Promise.all([loadCatalog(), loadHealth()]);
+  } catch (err) {
+    app.innerHTML = `<div class="card error">문항 자료를 불러오지 못했어요. ${esc(err.message)}</div>`;
+    return;
+  }
+  ui.health = health;
+  ui.navCollapsed = readNavCollapsed();
+
+  let initial = createDemoState();
+  if (storage) {
+    const loaded = loadState(storage);
+    if (loaded.status === 'recovery_required') { showRecovery(loaded); return; }
+    if (loaded.status === 'ready') {
+      initial = loaded.state;
+      persist.savedRevision = loaded.state.revision;
+    }
+  }
+
+  store = createStore({ initialState: initial, catalog });
+  if (inWorkspace()) prepareDemoRole(ui, initial, ui.role);
+  store.subscribe((state) => { save(state); syncVisibility(); render(); });
+  showSaveStatus();
+
+  document.getElementById('change-role').addEventListener('click', () => leaveWorkspace({ changeRole: true }));
+  document.getElementById('change-subject').addEventListener('click', () => leaveWorkspace());
+  document.getElementById('reset').addEventListener('click', resetDemo);
+  for (const tab of ['learning','roadmap']) document.getElementById(`learner-${tab}`).addEventListener('click',()=>{
+    if (!inWorkspace() || ui.role!=='learner') return;
+    ui.learnerTab=tab; ui.navOpen=false; ui.mapOverviewOpen=false; syncVisibility(); render(); focusScreen();
+  });
+  for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).addEventListener('click', () => {
+    if (!inWorkspace() || ui.role !== 'mentor') return;
+    if (ui.mentorTab === 'sessions' && tab !== 'sessions' && hasUnsavedSessionForm(app)
+      && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+    ui.mentorTab = tab; ui.navOpen = false; ui.mapOverviewOpen = false; render(); focusScreen();
+  });
+  const narrow = () => window.matchMedia?.('(max-width: 900px)').matches ?? false;
+  document.getElementById('sidenav-toggle').addEventListener('click', () => {
+    if (narrow() || ui.navOpen) { ui.navOpen = false; renderNavigation(); document.getElementById('nav-menu').focus?.(); return; }
+    ui.navCollapsed = !ui.navCollapsed;
+    try { storage?.setItem(NAV_KEY, ui.navCollapsed ? '1' : '0'); } catch { /* 기억 못 해도 동작 */ }
+    renderNavigation();
+  });
+  document.getElementById('nav-menu').addEventListener('click', () => {
+    ui.navOpen = !ui.navOpen; renderNavigation();
+    if (ui.navOpen) document.getElementById('sidenav-toggle').focus?.();
+  });
+  document.getElementById('sidenav-scrim').addEventListener('click', () => { ui.navOpen = false; renderNavigation(); });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && ui.navOpen) { ui.navOpen = false; renderNavigation(); document.getElementById('nav-menu').focus?.(); }
+  });
+  document.addEventListener('visibilitychange', syncVisibility);
+  // 다른 탭이 같은 기록을 바꾸면 이 탭의 쓰기를 멈춘다 (덮어쓰기 방지)
+  window.addEventListener('storage', (ev) => {
+    if (ev.key !== STORAGE_KEY || persist.blocked) return;
+    persist.blocked = true;
+    persist.status = 'conflict';
+    showSaveStatus();
+  });
+  render();
+  syncVisibility();
+}
+
+start();

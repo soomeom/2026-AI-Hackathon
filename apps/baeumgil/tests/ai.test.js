@@ -18,7 +18,12 @@ const input = (kind = 'lesson_plan', note = '', state = baseState()) =>
 
 const validLessonPlan = (inp) => ({
   kind: 'lesson_plan',
-  priorities: [{ conceptId: 'c-distribute-sign', evidenceIds: ['ev-c-distribute-sign'], reason: '개념 확인 문항 q-cc-distribute-1 에서 오답이 관찰됨' }],
+  priorities: [{
+    conceptId: 'c-distribute-sign', evidenceIds: ['ev-c-distribute-sign'], reason: '개념 확인 문항 q-cc-distribute-1 에서 오답이 관찰됨',
+    misconceptionCandidate: '괄호 앞 음수를 뒤의 항에 곱하지 않았을 가능성',
+    explanationMethod: '-3 × (-2) 를 따로 떼어 부호 규칙을 먼저 확인한 뒤 전개하기',
+    uncertainty: '확인 문항 1개의 결과이므로 풀이 과정을 듣고 판단해야 함',
+  }],
   mentorQuestions: [{ text: '-3(x - 2)를 전개할 때 뒤의 항 부호를 어떻게 정했는지 설명해 볼래요?', conceptId: 'c-distribute-sign', evidenceIds: ['ev-c-distribute-sign'] }],
   plan: [{ minutes: 10, activity: '분배법칙 예제를 함께 전개하기', questionIds: ['q-cc-distribute-1'] }],
 });
@@ -35,7 +40,8 @@ test('AI 입력에는 가명·집계 사실·허용 ID·메모만 담기고 실�
   assert.equal(inp.kind, 'lesson_plan');
   assert.equal(inp.learnerAlias, '학습자 A');
   assert.deepEqual(Object.keys(inp).sort(), [
-    'allowedConceptIds', 'allowedEvidenceIds', 'allowedQuestionIds', 'constraints', 'contractVersion', 'facts', 'kind', 'learnerAlias', 'note', 'sessionId',
+    'allowedConceptIds', 'allowedEvidenceIds', 'allowedQuestionIds', 'constraints', 'contractVersion', 'facts', 'inputRevision', 'kind',
+    'learnerAlias', 'note', 'requestId', 'sessionId',
   ]);
   const text = JSON.stringify(inp);
   assert.ok(!text.includes('김실명'), '실명 노출 금지');
@@ -75,6 +81,27 @@ test('허용되지 않은 참조 ID 가 하나라도 있으면 거부한다', ()
   const badLog = validNarrative();
   badLog.sentences[0].questionIds.push('q-2025-official-3');
   assert.equal(validateAIOutput(log, badLog).ok, false);
+});
+
+test('입력에 요청 ID·입력 버전을 남기고 모델에는 보내지 않는다', () => {
+  const state = { ...baseState(), revision: 7 };
+  const inp = buildAIInput(state, { learnerId: 'learner-1', kind: 'lesson_plan', catalog, requestId: 'req-3' });
+  assert.equal(inp.requestId, 'req-3');
+  assert.equal(inp.inputRevision, 7);
+  const sent = buildAIPrompt(inp).userText;
+  assert.ok(!sent.includes('req-3'));
+  assert.ok(!sent.includes('inputRevision'));
+  // 지정하지 않으면 null (클라이언트가 늦은 응답 차단에 사용)
+  assert.equal(input().requestId, null);
+});
+
+test('수업 제안에 오개념 후보·설명 방법·불확실성이 없으면 거부한다', () => {
+  const inp = input();
+  for (const field of ['misconceptionCandidate', 'explanationMethod', 'uncertainty']) {
+    const out = validLessonPlan(inp);
+    delete out.priorities[0][field];
+    assert.ok(codes(validateAIOutput(inp, out)).includes('missingField'), field);
+  }
 });
 
 test('필수 필드가 누락되거나 형식이 다르면 거부한다', () => {

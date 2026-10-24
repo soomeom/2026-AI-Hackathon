@@ -70,9 +70,6 @@ for d,high,mid,low in plans:
   for id in ids:
    q=byid[id];q['fallback_question_id']=lower[0] if lower else None;q['prerequisite_concept']=byid[lower[0]]['conceptIds'] if lower else [];q['remedialPath']={'questionIds':lower,'reason':'관련 선수 개념의 수행을 직접 확인'}
  domains.append({'id':d,'name':NAMES[d],'levels':groups,'rootQuestionId':high[0]})
-# Prefer the concrete prerequisite of each root rather than a generic domain descent.
-for upper,lower in [(qid('h',1),qid('m',9)),(qid('h',6),qid('m',15)),(qid('h',16),qid('m',11)),(qid('h',10),qid('m',13))]:
- q=byid[upper];q['fallback_question_id']=lower;q['prerequisite_concept']=byid[lower]['conceptIds'];q['remedialPath']={'questionIds':[lower],'reason':'해당 문항에 필요한 계산·그래프·비례 선수 개념 확인'}
 # Safe merge preserves all pre-existing authored learning questions.
 bank=json.loads((C/'questions.json').read_text());ids=set(byid);bank['questions']=[q for q in bank['questions'] if q['id'] not in ids]+questions
 (C/'questions.json').write_text(json.dumps(bank,ensure_ascii=False,indent=2)+'\n')
@@ -100,4 +97,6 @@ for q in draftdata['questions']:
  if q['id'] in ids:q['importStatus']='registered';q['canonicalQuestionId']=q['id'];q['canonicalContentFile']='public/src/content/questions.json'
 draftfile.write_text(json.dumps(draftdata,ensure_ascii=False,indent=2)+'\n')
 
-subprocess.run([sys.executable,str(B/'scripts/correct_prerequisites.py')],check=True)
+# Reapply reviewed per-concept prerequisite links after transcription, then sync the embedded app config.
+subprocess.run(["node",str(B/"scripts/build-diagnostic-roadmap.mjs")],check=True)
+subprocess.run(["node",str(B/"scripts/build-exam-bank.mjs")],check=True)

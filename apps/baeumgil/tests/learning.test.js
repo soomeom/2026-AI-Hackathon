@@ -129,11 +129,33 @@ test('correctOriginalSkipsRemediation', () => {
   assert.equal(l.path.transferResult, 'incorrect');
 });
 
-test('foundationStopsAfterTwoRounds', () => {
+test('개념 확인을 모두 맞히면 원 기출의 핵심 개념 연습(유사 문제)으로 간다', () => {
   const l = learner();
   l.answer(0, 'incorrect');
   l.advance();
   l.answerAll(['correct', 'correct']);
+  assert.deepEqual(l.path.recommendation, { nextStage: 'similar_practice', reason: 'conceptCheckAllCorrect' });
+  l.advance();
+  assert.equal(l.path.stage, 'similar_practice');
+  assert.equal(l.path.foundationRound, 0);
+  assert.deepEqual(l.path.skippedStageIds, []);
+});
+
+test('유사 문제를 모두 틀리면 재도전은 추천하되 멘토 확인을 함께 제안한다', () => {
+  const l = learner();
+  l.answer(0, 'incorrect');
+  l.advance();
+  l.answerAll(['correct', 'correct']);
+  l.advance();
+  l.answerAll(['incorrect', 'abstained']);
+  assert.deepEqual(l.path.recommendation, { nextStage: 'original_retry', reason: 'similarDone', mentorCheckSuggested: true });
+});
+
+test('foundationStopsAfterTwoRounds', () => {
+  const l = learner();
+  l.answer(0, 'incorrect');
+  l.advance();
+  l.answerAll(['incorrect', 'correct']);
   l.advance();
   const round1Ids = l.path.items.map((i) => i.id);
   l.answerAll(['correct', 'incorrect', 'abstained']);
