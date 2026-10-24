@@ -174,7 +174,10 @@ function recommend(path) {
         : { nextStage: 'concept_check', reason: results[0] === 'abstained' ? 'originalAbstained' : 'originalIncorrect' };
       break;
     case 'concept_check':
-      recommendation = { nextStage: 'foundation_practice', reason: 'conceptCheckDone' };
+      // 확인 문항을 모두 맞혔으면 선수 개념 대신 원 기출의 핵심 개념을 연습한다 (기초를 다 안다고 판정하지는 않음)
+      recommendation = correctCount === results.length
+        ? { nextStage: 'similar_practice', reason: 'conceptCheckAllCorrect' }
+        : { nextStage: 'foundation_practice', reason: 'conceptCheckDone' };
       break;
     case 'foundation_practice':
       if (correctCount >= FOUNDATION_PASS_COUNT) recommendation = { nextStage: 'similar_practice', reason: 'foundationPassed' };
@@ -183,6 +186,7 @@ function recommend(path) {
       break;
     case 'similar_practice':
       recommendation = { nextStage: 'original_retry', reason: 'similarDone' };
+      if (correctCount === 0) recommendation.mentorCheckSuggested = true;
       break;
     case 'original_retry':
       path.retryResult = results[0];

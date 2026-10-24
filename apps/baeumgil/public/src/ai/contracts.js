@@ -27,7 +27,10 @@ const object = (fields) => ({ type: 'object', fields });
 export const OUTPUT_SCHEMAS = Object.freeze({
   lesson_plan: object({
     kind: { type: 'kind' },
-    priorities: list(object({ conceptId: CONCEPT, evidenceIds: EVIDENCE, reason: TEXT }), 1, 3),
+    priorities: list(object({
+      conceptId: CONCEPT, evidenceIds: EVIDENCE, reason: TEXT,
+      misconceptionCandidate: TEXT, explanationMethod: TEXT, uncertainty: TEXT,
+    }), 1, 3),
     mentorQuestions: list(object({ text: TEXT, conceptId: CONCEPT, evidenceIds: EVIDENCE }), 1, 5),
     plan: list(object({ minutes: NUMBER, activity: TEXT, questionIds: QUESTIONS }), 1, 6),
   }),
@@ -68,7 +71,8 @@ function sanitizeNote(note, realNames) {
     .replace(/0\d{1,2}[-\s.]?\d{3,4}[-\s.]?\d{4}/g, '[연락처]');
 }
 
-export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note } = {}) {
+// requestId·inputRevision 은 모델에 보내지 않고, 클라이언트가 늦게 온 이전 응답을 버리는 데 쓴다.
+export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note, requestId = null } = {}) {
   if (!AI_KINDS.includes(kind)) throw new Error(`buildAIInput: kind 는 ${AI_KINDS.join(' | ')} 중 하나여야 함`);
   const summary = buildLearnerSummary(state, learnerId, { catalog });
   const session = (state.sessions ?? []).find((s) => s.id === sessionId);
@@ -82,6 +86,8 @@ export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note 
 
   return {
     contractVersion: AI_CONTRACT_VERSION,
+    requestId,
+    inputRevision: state.revision ?? null,
     kind,
     sessionId: sessionId ?? null,
     learnerAlias: LEARNER_ALIAS,
@@ -109,7 +115,7 @@ export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note 
 /* ---------- 프롬프트 ---------- */
 
 const TASKS = {
-  lesson_plan: '멘토가 다음 대면 수업을 준비할 수 있도록 우선 확인할 개념(priorities), 멘토가 학습자에게 던질 확인 질문(mentorQuestions), 수업 흐름(plan)을 제안한다.',
+  lesson_plan: '멘토가 다음 대면 수업을 준비할 수 있도록 우선 확인할 개념(priorities: 근거, 확인할 오개념 후보, 설명 방법, 불확실한 부분 포함), 멘토가 학습자에게 던질 확인 질문(mentorQuestions), 수업 흐름(plan)을 제안한다.',
   log_narrative: '센터 제출용 멘토링 활동일지의 활동 내용 문장(sentences)을 작성한다. 각 문장은 사실에 근거해야 한다.',
 };
 
@@ -137,7 +143,7 @@ const isolate = (value) => JSON.stringify(value, null, 2)
   .replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
 
 export function buildAIPrompt(input) {
-  const { constraints, contractVersion, ...data } = input;
+  const { constraints, contractVersion, requestId, inputRevision, ...data } = input;
   return {
     systemInstruction: systemInstruction(input),
     userText: `아래 데이터를 바탕으로 과제를 수행하라.\n<data>\n${isolate(data)}\n</data>`,
