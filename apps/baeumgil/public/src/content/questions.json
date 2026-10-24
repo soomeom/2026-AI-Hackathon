@@ -13,14 +13,36 @@
       "prompt": "방정식 2(x - 3) = -x + 9 의 해는?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "1", "misconceptionConceptId": "c-eq-transpose" },
-        { "id": "b", "value": "4", "misconceptionConceptId": "c-distribute-sign" },
-        { "id": "c", "value": "5" },
-        { "id": "d", "value": "15", "misconceptionConceptId": "c-eq-transpose" }
+        {
+          "id": "a",
+          "value": "1",
+          "misconceptionConceptId": "c-eq-transpose"
+        },
+        {
+          "id": "b",
+          "value": "4",
+          "misconceptionConceptId": "c-distribute-sign"
+        },
+        {
+          "id": "c",
+          "value": "5"
+        },
+        {
+          "id": "d",
+          "value": "15",
+          "misconceptionConceptId": "c-eq-transpose"
+        }
       ],
       "answer": "5",
-      "solutionSteps": ["2x - 6 = -x + 9", "2x + x = 9 + 6", "3x = 15", "x = 5"],
-      "conceptIds": ["c-eq-solve"]
+      "solutionSteps": [
+        "2x - 6 = -x + 9",
+        "2x + x = 9 + 6",
+        "3x = 15",
+        "x = 5"
+      ],
+      "conceptIds": [
+        "c-eq-solve"
+      ]
     },
     {
       "id": "q-rat-1",
@@ -35,122 +57,3361 @@
       "prompt": "(-3/4) ÷ (3/2) - (-1/2) 의 값은?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "-1", "misconceptionConceptId": "c-int-addsub" },
-        { "id": "b", "value": "-5/8", "misconceptionConceptId": "c-frac-reciprocal" },
-        { "id": "c", "value": "0" },
-        { "id": "d", "value": "1", "misconceptionConceptId": "c-int-mul" }
+        {
+          "id": "a",
+          "value": "-1",
+          "misconceptionConceptId": "c-int-addsub"
+        },
+        {
+          "id": "b",
+          "value": "-5/8",
+          "misconceptionConceptId": "c-frac-reciprocal"
+        },
+        {
+          "id": "c",
+          "value": "0"
+        },
+        {
+          "id": "d",
+          "value": "1",
+          "misconceptionConceptId": "c-int-mul"
+        }
       ],
       "answer": "0",
-      "solutionSteps": ["(-3/4) × (2/3) - (-1/2)", "-1/2 - (-1/2)", "-1/2 + 1/2", "0"],
-      "conceptIds": ["c-rat-calc"]
+      "solutionSteps": [
+        "(-3/4) × (2/3) - (-1/2)",
+        "-1/2 - (-1/2)",
+        "-1/2 + 1/2",
+        "0"
+      ],
+      "conceptIds": [
+        "c-rat-calc"
+      ]
     },
     {
       "id": "q-cc-distribute-1",
       "kind": "authored",
       "contentStatus": "approved",
       "role": "concept_check",
-      "reference": { "questionType": "개념 확인 · 분배법칙과 부호", "authored": true },
+      "reference": {
+        "questionType": "개념 확인 · 분배법칙과 부호",
+        "authored": true
+      },
       "prompt": "-3(x - 2) 를 바르게 전개한 것은?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "-3x - 6" },
-        { "id": "b", "value": "-3x + 6" },
-        { "id": "c", "value": "-3x - 2" },
-        { "id": "d", "value": "3x + 6" }
+        {
+          "id": "a",
+          "value": "-3x - 6"
+        },
+        {
+          "id": "b",
+          "value": "-3x + 6"
+        },
+        {
+          "id": "c",
+          "value": "-3x - 2"
+        },
+        {
+          "id": "d",
+          "value": "3x + 6"
+        }
       ],
       "answer": "-3x + 6",
-      "solutionSteps": ["(-3) × x = -3x", "(-3) × (-2) = +6", "-3x + 6"],
-      "conceptIds": ["c-distribute-sign"]
+      "solutionSteps": [
+        "(-3) × x = -3x",
+        "(-3) × (-2) = +6",
+        "-3x + 6"
+      ],
+      "conceptIds": [
+        "c-distribute-sign"
+      ]
     },
     {
       "id": "q-cc-transpose-1",
       "kind": "authored",
       "contentStatus": "approved",
       "role": "concept_check",
-      "reference": { "questionType": "개념 확인 · 등식의 성질과 이항", "authored": true },
+      "reference": {
+        "questionType": "개념 확인 · 등식의 성질과 이항",
+        "authored": true
+      },
       "prompt": "x - 4 = 10 일 때, x 의 값은?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "6" },
-        { "id": "b", "value": "14" },
-        { "id": "c", "value": "-6" },
-        { "id": "d", "value": "-14" }
+        {
+          "id": "a",
+          "value": "6"
+        },
+        {
+          "id": "b",
+          "value": "14"
+        },
+        {
+          "id": "c",
+          "value": "-6"
+        },
+        {
+          "id": "d",
+          "value": "-14"
+        }
       ],
       "answer": "14",
-      "solutionSteps": ["양변에 4를 더한다", "x = 10 + 4", "x = 14"],
-      "conceptIds": ["c-eq-transpose"]
+      "solutionSteps": [
+        "양변에 4를 더한다",
+        "x = 10 + 4",
+        "x = 14"
+      ],
+      "conceptIds": [
+        "c-eq-transpose"
+      ]
     },
     {
       "id": "q-cc-intadd-1",
       "kind": "authored",
       "contentStatus": "approved",
       "role": "concept_check",
-      "reference": { "questionType": "개념 확인 · 정수의 덧셈과 뺄셈", "authored": true },
+      "reference": {
+        "questionType": "개념 확인 · 정수의 덧셈과 뺄셈",
+        "authored": true
+      },
       "prompt": "(-5) - (-3) 의 값은?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "-8" },
-        { "id": "b", "value": "-2" },
-        { "id": "c", "value": "2" },
-        { "id": "d", "value": "8" }
+        {
+          "id": "a",
+          "value": "-8"
+        },
+        {
+          "id": "b",
+          "value": "-2"
+        },
+        {
+          "id": "c",
+          "value": "2"
+        },
+        {
+          "id": "d",
+          "value": "8"
+        }
       ],
       "answer": "-2",
-      "solutionSteps": ["(-5) - (-3) = (-5) + 3", "-2"],
-      "conceptIds": ["c-int-addsub"]
+      "solutionSteps": [
+        "(-5) - (-3) = (-5) + 3",
+        "-2"
+      ],
+      "conceptIds": [
+        "c-int-addsub"
+      ]
     },
     {
       "id": "q-cc-reciprocal-1",
       "kind": "authored",
       "contentStatus": "approved",
       "role": "concept_check",
-      "reference": { "questionType": "개념 확인 · 분수의 나눗셈과 역수", "authored": true },
+      "reference": {
+        "questionType": "개념 확인 · 분수의 나눗셈과 역수",
+        "authored": true
+      },
       "prompt": "(-2/5) ÷ (4/5) 의 값은?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "-1/2" },
-        { "id": "b", "value": "-8/25" },
-        { "id": "c", "value": "1/2" },
-        { "id": "d", "value": "-2" }
+        {
+          "id": "a",
+          "value": "-1/2"
+        },
+        {
+          "id": "b",
+          "value": "-8/25"
+        },
+        {
+          "id": "c",
+          "value": "1/2"
+        },
+        {
+          "id": "d",
+          "value": "-2"
+        }
       ],
       "answer": "-1/2",
-      "solutionSteps": ["(-2/5) × (5/4)", "-10/20", "-1/2"],
-      "conceptIds": ["c-frac-reciprocal"]
+      "solutionSteps": [
+        "(-2/5) × (5/4)",
+        "-10/20",
+        "-1/2"
+      ],
+      "conceptIds": [
+        "c-frac-reciprocal"
+      ]
     },
     {
       "id": "q-eq-spare-1",
       "kind": "authored",
       "contentStatus": "approved",
       "role": "transfer_spare",
-      "reference": { "questionType": "새 적용 예비 문항 · 기초 · 괄호가 있는 일차방정식 (중1)", "authored": true },
+      "reference": {
+        "questionType": "새 적용 예비 문항 · 기초 · 괄호가 있는 일차방정식 (중1)",
+        "authored": true
+      },
       "prompt": "방정식 4(x - 2) = 2x + 6 의 해는?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "-1" },
-        { "id": "b", "value": "1" },
-        { "id": "c", "value": "3" },
-        { "id": "d", "value": "7" }
+        {
+          "id": "a",
+          "value": "-1"
+        },
+        {
+          "id": "b",
+          "value": "1"
+        },
+        {
+          "id": "c",
+          "value": "3"
+        },
+        {
+          "id": "d",
+          "value": "7"
+        }
       ],
       "answer": "7",
-      "solutionSteps": ["4x - 8 = 2x + 6", "4x - 2x = 6 + 8", "2x = 14", "x = 7"],
-      "conceptIds": ["c-eq-solve"]
+      "solutionSteps": [
+        "4x - 8 = 2x + 6",
+        "4x - 2x = 6 + 8",
+        "2x = 14",
+        "x = 7"
+      ],
+      "conceptIds": [
+        "c-eq-solve"
+      ]
     },
     {
       "id": "q-rat-spare-1",
       "kind": "authored",
       "contentStatus": "approved",
       "role": "transfer_spare",
-      "reference": { "questionType": "새 적용 예비 문항 · 기초 · 부호가 있는 유리수의 혼합 계산 (중1)", "authored": true },
+      "reference": {
+        "questionType": "새 적용 예비 문항 · 기초 · 부호가 있는 유리수의 혼합 계산 (중1)",
+        "authored": true
+      },
       "prompt": "(-2/3) × (-9/4) + (-2) 의 값은?",
       "answerFormat": "choice",
       "choices": [
-        { "id": "a", "value": "-7/2" },
-        { "id": "b", "value": "-1/2" },
-        { "id": "c", "value": "1/2" },
-        { "id": "d", "value": "7/2" }
+        {
+          "id": "a",
+          "value": "-7/2"
+        },
+        {
+          "id": "b",
+          "value": "-1/2"
+        },
+        {
+          "id": "c",
+          "value": "1/2"
+        },
+        {
+          "id": "d",
+          "value": "7/2"
+        }
       ],
       "answer": "-1/2",
-      "solutionSteps": ["(-2/3) × (-9/4) = 3/2", "3/2 + (-2)", "-1/2"],
-      "conceptIds": ["c-rat-calc"]
+      "solutionSteps": [
+        "(-2/3) × (-9/4) = 3/2",
+        "3/2 + (-2)",
+        "-1/2"
+      ],
+      "conceptIds": [
+        "c-rat-calc"
+      ]
+    },
+    {
+      "id": "ged-high-2025-1-math-q01",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "두 다항식 $A=2x^2+3x$, $B=ax^2+x$에 대하여 $A+B=bx$일 때, 두 상수 $a$와 $b$의 합은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "-2",
+          "text": "-2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "0",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "4",
+          "text": "4"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "$A+B=(2+a)x^2+4x$이므로 $a=-2$, $b=4$. 따라서 $a+b=2$."
+      ],
+      "conceptIds": [
+        "astra-algebra-l3-다항식의 덧셈"
+      ],
+      "domain": "algebra",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "다항식의 덧셈",
+        "core": "다항식의 덧셈"
+      },
+      "prerequisite_concept": [
+        "astra-algebra-l1-지수법칙"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 1,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q09"
+        ],
+        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-01.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q03",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "다항식 $x^3+8$을 인수분해한 식이 $(x+2)(x^2+ax+4)$일 때, 상수 $a$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "-2",
+          "text": "-2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "-1",
+          "text": "-1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "1",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "2",
+          "text": "2"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "합의 세제곱 인수분해 공식으로 $x^3+2^3=(x+2)(x^2-2x+4)$이므로 $a=-2$."
+      ],
+      "conceptIds": [
+        "astra-algebra-l3-인수분해"
+      ],
+      "domain": "algebra",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "인수분해",
+        "core": "인수분해"
+      },
+      "prerequisite_concept": [
+        "astra-algebra-l2-인수분해"
+      ],
+      "fallback_question_id": "astra-expand",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 3,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "astra-expand",
+          "astra-expand-check"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-03.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q05",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "이차방정식 $x^2+ax+4=0$이 서로 다른 두 실근을 가질 때, 자연수 $a$의 최솟값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "5",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "6",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "7",
+          "text": "7"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "판별식 $D=a^2-16>0$. 자연수 $a$는 $4$보다 커야 하므로 최솟값은 $5$."
+      ],
+      "conceptIds": [
+        "astra-equations-l3-판별식"
+      ],
+      "domain": "equations",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "판별식",
+        "core": "판별식"
+      },
+      "prerequisite_concept": [
+        "astra-equations-l2-이차방정식의 인수분해"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q16",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 5,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q16",
+          "ged-middle-2025-1-math-q15"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-05.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q06",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "이차방정식 $x^2-4x+a=0$의 두 근이 $2+\\sqrt{2}$, $2-\\sqrt{2}$일 때, 상수 $a$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "6",
+          "text": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "8",
+          "text": "8"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "두 근의 곱이 $a$이다. $a=(2+\\sqrt{2})(2-\\sqrt{2})=4-2=2$."
+      ],
+      "conceptIds": [
+        "astra-equations-l3-근과 계수의 관계"
+      ],
+      "domain": "equations",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "근과 계수의 관계",
+        "core": "근과 계수의 관계"
+      },
+      "prerequisite_concept": [
+        "astra-equations-l2-제곱근"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q15",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 6,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q15"
+        ],
+        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-06.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q07",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$-1\\le x\\le2$일 때, 이차함수 $y=(x-1)^2+2$의 최솟값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "-1",
+          "text": "-1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "0",
+          "text": "0"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "1",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "2",
+          "text": "2"
+        }
+      ],
+      "answer": "4",
+      "solutionSteps": [
+        "구간 안의 $x=1$에서 $(x-1)^2=0$이므로 최솟값은 $2$."
+      ],
+      "conceptIds": [
+        "astra-functions-l3-이차함수의 최솟값"
+      ],
+      "domain": "functions",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "이차함수의 최솟값",
+        "core": "이차함수의 최솟값"
+      },
+      "prerequisite_concept": [
+        "astra-functions-l2-이차함수의 꼭짓점"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q17",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 7,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q17",
+          "astra-quadratic-vertex"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-07.png",
+      "figure": {
+        "src": "/assets/exams/ged-high-2025-1-math/figure-07.png",
+        "alt": "이차함수의 최솟값 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          790,
+          340,
+          1015,
+          620
+        ]
+      }
+    },
+    {
+      "id": "ged-high-2025-1-math-q16",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "두 함수 $f(x)=3x-1$, $g(x)=-2x+5$에 대하여 $(g\\circ f)(1)$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "-3",
+          "text": "-3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "-1",
+          "text": "-1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "1",
+          "text": "1"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "3",
+          "text": "3"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "$f(1)=2$이므로 $g(f(1))=g(2)=-4+5=1$."
+      ],
+      "conceptIds": [
+        "astra-functions-l3-합성함수"
+      ],
+      "domain": "functions",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "합성함수",
+        "core": "합성함수"
+      },
+      "prerequisite_concept": [
+        "astra-functions-l1-일차함수의 기울기"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q11",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 16,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q11"
+        ],
+        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-16.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q10",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "좌표평면 위의 두 점 $A(-3,5)$, $B(6,-1)$에 대하여 선분 $AB$를 $1:2$로 내분하는 점의 좌표는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "(0,3)",
+          "text": "(0,3)"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "(1,2)",
+          "text": "(1,2)"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "(3,1)",
+          "text": "(3,1)"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "(4,0)",
+          "text": "(4,0)"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "내분점은 $\\left(\\frac{2(-3)+6}{3},\\frac{2(5)-1}{3}\\right)=(0,3)$."
+      ],
+      "conceptIds": [
+        "astra-geometry-l3-선분의 내분"
+      ],
+      "domain": "geometry",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "선분의 내분",
+        "core": "선분의 내분"
+      },
+      "prerequisite_concept": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 10,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q13"
+        ],
+        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-10.png",
+      "figure": {
+        "src": "/assets/exams/ged-high-2025-1-math/figure-10.png",
+        "alt": "선분의 내분 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          745,
+          1495,
+          1055,
+          1735
+        ]
+      }
+    },
+    {
+      "id": "ged-high-2025-1-math-q11",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "원점과 직선 $3x+4y-12=0$ 사이의 거리는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "\\frac{11}{5}",
+          "text": "\\frac{11}{5}"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "\\frac{12}{5}",
+          "text": "\\frac{12}{5}"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "\\frac{13}{5}",
+          "text": "\\frac{13}{5}"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "\\frac{14}{5}",
+          "text": "\\frac{14}{5}"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "거리 공식에 따라 $\\frac{|3(0)+4(0)-12|}{\\sqrt{3^2+4^2}}=\\frac{12}{5}$."
+      ],
+      "conceptIds": [
+        "astra-geometry-l3-점과 직선 사이의 거리"
+      ],
+      "domain": "geometry",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "점과 직선 사이의 거리",
+        "core": "점과 직선 사이의 거리"
+      },
+      "prerequisite_concept": [
+        "astra-geometry-l2-삼각비"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q18",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 11,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q18",
+          "ged-middle-2025-1-math-q19"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-11.png",
+      "figure": {
+        "src": "/assets/exams/ged-high-2025-1-math/figure-11.png",
+        "alt": "점과 직선 사이의 거리 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          140,
+          185,
+          475,
+          415
+        ]
+      }
+    },
+    {
+      "id": "ged-high-2025-1-math-q14",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "두 집합 $A=\\{1,3,5,7,9\\}$, $B=\\{3,4,5,6\\}$에 대하여 $n(A\\cup B)+n(A\\cap B)$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "6",
+          "text": "6"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "7",
+          "text": "7"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "8",
+          "text": "8"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "9",
+          "text": "9"
+        }
+      ],
+      "answer": "4",
+      "solutionSteps": [
+        "$A\\cup B=\\{1,3,4,5,6,7,9\\}$, $A\\cap B=\\{3,5\\}$. 따라서 $7+2=9$."
+      ],
+      "conceptIds": [
+        "astra-logic-l3-집합의 연산"
+      ],
+      "domain": "logic",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "집합의 연산",
+        "core": "집합의 연산"
+      },
+      "prerequisite_concept": [
+        "astra-logic-l1-집합의 원소"
+      ],
+      "fallback_question_id": "astra-set-basic",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 14,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "astra-set-basic",
+          "astra-set-count"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-14.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q15",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "두 조건 $p:x-3=0$, $q:x^2-ax-3=0$에 대하여 $q$가 $p$이기 위한 필요조건이 되도록 하는 상수 $a$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "0",
+          "text": "0"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "6",
+          "text": "6"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "$p\\Rightarrow q$여야 한다. $x=3$을 $q$에 대입하면 $9-3a-3=0$이므로 $a=2$."
+      ],
+      "conceptIds": [
+        "astra-logic-l3-필요조건"
+      ],
+      "domain": "logic",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "필요조건",
+        "core": "필요조건"
+      },
+      "prerequisite_concept": [
+        "astra-logic-l1-집합의 원소"
+      ],
+      "fallback_question_id": "astra-set-basic",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 15,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "astra-set-basic",
+          "astra-set-count"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-15.png"
+    },
+    {
+      "id": "ged-high-2025-1-math-q19",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "숫자 $1,2,3,4,5$가 각각 적힌 카드 5장 중 2장을 동시에 뽑을 때, 카드에 적힌 수의 합이 3의 배수인 경우의 수는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "5",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "6",
+          "text": "6"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "조건을 만족하는 쌍은 $(1,2),(1,5),(2,4),(4,5)$로 $4$가지이다."
+      ],
+      "conceptIds": [
+        "astra-counting-l3-경우의 수"
+      ],
+      "domain": "counting",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "경우의 수",
+        "core": "경우의 수"
+      },
+      "prerequisite_concept": [
+        "astra-counting-l1-확률"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q14",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 19,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q14",
+          "astra-count-basic",
+          "astra-count-one"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-19.png",
+      "figure": {
+        "src": "/assets/exams/ged-high-2025-1-math/figure-19.png",
+        "alt": "경우의 수 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          750,
+          1170,
+          1180,
+          1285
+        ]
+      }
+    },
+    {
+      "id": "ged-high-2025-1-math-q20",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "그림과 같이 아이스크림 위에 올릴 토핑 5종류가 있다. 이 중에서 서로 다른 토핑 4개를 선택하는 경우의 수는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "1",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "5",
+          "text": "5"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "10",
+          "text": "10"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "15",
+          "text": "15"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "제외할 토핑 1개를 고르는 것과 같으므로 $\\binom{5}{4}=5$가지이다."
+      ],
+      "conceptIds": [
+        "astra-counting-l3-조합"
+      ],
+      "domain": "counting",
+      "level": 3,
+      "difficulty": "고졸 핵심",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "조합",
+        "core": "조합"
+      },
+      "prerequisite_concept": [
+        "astra-counting-l1-확률"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q14",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "고졸",
+        "questionNumber": 20,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-high-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q14",
+          "astra-count-basic",
+          "astra-count-one"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-high-2025-1-math/question-20.png",
+      "figure": {
+        "src": "/assets/exams/ged-high-2025-1-math/figure-20.png",
+        "alt": "조합 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          750,
+          1510,
+          1180,
+          1680
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q01",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "다음은 $45$를 소인수분해하는 과정을 나타낸 것이다. $45$를 소인수분해한 결과로 옳은 것은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "3^2",
+          "text": "3^2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "3\\times5",
+          "text": "3\\times5"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "3^2\\times5",
+          "text": "3^2\\times5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "3^2\\times5^2",
+          "text": "3^2\\times5^2"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "$45=3\\times15=3\\times3\\times5=3^2\\times5$."
+      ],
+      "conceptIds": [
+        "astra-algebra-l1-소인수분해"
+      ],
+      "domain": "algebra",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "소인수분해",
+        "core": "소인수분해"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 1,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-01.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-01.png",
+        "alt": "소인수분해 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          245,
+          380,
+          345,
+          490
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q02",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$6+(-4)$를 계산한 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "1",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "4",
+          "text": "4"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "음수를 더하는 것은 그 절댓값을 빼는 것이다. $6-4=2$."
+      ],
+      "conceptIds": [
+        "astra-algebra-l1-정수의 덧셈"
+      ],
+      "domain": "algebra",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "정수의 덧셈",
+        "core": "정수의 덧셈"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 2,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-02.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q03",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "한 송이에 $2000$원인 장미꽃 $a$송이의 가격을 문자가 사용된 식으로 바르게 나타낸 것은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "(2000+a)",
+          "text": "(2000+a)"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "(2000-a)",
+          "text": "(2000-a)"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "(2000\\times a)",
+          "text": "(2000\\times a)"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "(2000\\div a)",
+          "text": "(2000\\div a)"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "한 송이 가격에 송이 수를 곱하므로 $2000\\times a$원이다."
+      ],
+      "conceptIds": [
+        "astra-algebra-l1-문자와 식"
+      ],
+      "domain": "algebra",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "문자와 식",
+        "core": "문자와 식"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 3,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-03.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q04",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "일차방정식 $2x-3=5$의 해는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "5",
+          "text": "5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "6",
+          "text": "6"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "$2x=8$이므로 $x=4$."
+      ],
+      "conceptIds": [
+        "astra-equations-l1-일차방정식"
+      ],
+      "domain": "equations",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "일차방정식",
+        "core": "일차방정식"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 4,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-04.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q05",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "다음은 5km 단축 마라톤 대회에 참가한 어느 학생의 시간에 따른 이동 거리를 나타낸 그래프이다. 출발한 후 10분부터 25분까지 이동한 거리는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "2\\mathrm{km}",
+          "text": "2\\mathrm{km}"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "3\\mathrm{km}",
+          "text": "3\\mathrm{km}"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "4\\mathrm{km}",
+          "text": "4\\mathrm{km}"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "5\\mathrm{km}",
+          "text": "5\\mathrm{km}"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "10분에는 $2$km, 25분에는 $4$km이므로 $4-2=2$km."
+      ],
+      "conceptIds": [
+        "astra-functions-l1-그래프 읽기"
+      ],
+      "domain": "functions",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "그래프 읽기",
+        "core": "그래프 읽기"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 5,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-05.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-05.png",
+        "alt": "그래프 읽기 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          150,
+          1140,
+          470,
+          1365
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q06",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "원 $O$에서 부채꼴 $AOB$의 넓이는 $3\\mathrm{cm}^2$, 부채꼴 $COD$의 넓이는 $5\\mathrm{cm}^2$이다. $\\angle AOB=60^\\circ$일 때, $\\angle COD$의 크기는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "90^\\circ",
+          "text": "90^\\circ"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "100^\\circ",
+          "text": "100^\\circ"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "110^\\circ",
+          "text": "110^\\circ"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "120^\\circ",
+          "text": "120^\\circ"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "같은 원에서 넓이는 중심각에 비례한다. $60\\times\\frac{5}{3}=100^\\circ$."
+      ],
+      "conceptIds": [
+        "astra-geometry-l1-부채꼴과 비례"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "부채꼴과 비례",
+        "core": "부채꼴과 비례"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 6,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-06.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-06.png",
+        "alt": "부채꼴과 비례 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          145,
+          1490,
+          415,
+          1720
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q07",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "학생 20명의 통학 시간을 조사한 표이다. 10분 이상 20분 미만인 학생은 12명이다. 이 구간의 상대도수 $a$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "0.5",
+          "text": "0.5"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "0.6",
+          "text": "0.6"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "0.7",
+          "text": "0.7"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "0.8",
+          "text": "0.8"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "상대도수는 해당 도수를 전체 도수로 나눈 값이다. $a=12/20=0.6$."
+      ],
+      "conceptIds": [
+        "astra-statistics-l1-상대도수"
+      ],
+      "domain": "statistics",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "통계",
+        "unit": "상대도수",
+        "core": "상대도수"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 7,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "해당 세트의 최하위 확인 또는 보조 문항"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-07.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-07.png",
+        "alt": "상대도수 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          750,
+          365,
+          1180,
+          535
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q09",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$a^2\\times a^7\\div a^3$을 간단히 한 것은? (단, $a\\ne0$)",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "a^4",
+          "text": "a^4"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "a^5",
+          "text": "a^5"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "a^6",
+          "text": "a^6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "a^7",
+          "text": "a^7"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "같은 밑의 곱셈은 지수를 더하고 나눗셈은 뺀다. $a^{2+7-3}=a^6$."
+      ],
+      "conceptIds": [
+        "astra-algebra-l1-지수법칙"
+      ],
+      "domain": "algebra",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "지수법칙",
+        "core": "지수법칙"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 9,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-09.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q10",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "연립방정식 $\\begin{cases}x-y=1\\\\2x-y=3\\end{cases}$의 해는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "x=1,y=1",
+          "text": "x=1,y=1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "x=2,y=1",
+          "text": "x=2,y=1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "x=3,y=2",
+          "text": "x=3,y=2"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "x=4,y=3",
+          "text": "x=4,y=3"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "아래 식에서 위 식을 빼면 $x=2$. $2-y=1$에서 $y=1$."
+      ],
+      "conceptIds": [
+        "astra-equations-l1-연립일차방정식"
+      ],
+      "domain": "equations",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "연립일차방정식",
+        "core": "연립일차방정식"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 10,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-10.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q11",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "그림은 일차함수 $y=ax+4$의 그래프이다. 상수 $a$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "5",
+          "text": "5"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "그래프가 $(-2,0)$을 지나므로 $0=-2a+4$. 따라서 $a=2$."
+      ],
+      "conceptIds": [
+        "astra-functions-l1-일차함수의 기울기"
+      ],
+      "domain": "functions",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "일차함수의 기울기",
+        "core": "일차함수의 기울기"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 11,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-11.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-11.png",
+        "alt": "일차함수의 기울기 문항의 원본 도형·표",
+        "sourcePage": 1,
+        "referenceBounds": [
+          720,
+          1475,
+          1005,
+          1720
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q12",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$AB=AC$인 이등변삼각형 $ABC$에서 $\\angle A=80^\\circ$일 때, 그림의 외각 $x$의 크기는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "130^\\circ",
+          "text": "130^\\circ"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "140^\\circ",
+          "text": "140^\\circ"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "150^\\circ",
+          "text": "150^\\circ"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "160^\\circ",
+          "text": "160^\\circ"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "밑각은 $(180-80)/2=50^\\circ$. 외각은 $180-50=130^\\circ$."
+      ],
+      "conceptIds": [
+        "astra-geometry-l1-이등변삼각형"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "이등변삼각형",
+        "core": "이등변삼각형"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 12,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-12.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-12.png",
+        "alt": "이등변삼각형 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          140,
+          220,
+          445,
+          405
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q13",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "삼각형 $ABC$에서 $BC$와 평행한 직선이 $AB,AC$와 만나는 점을 $D,E$라 하자. $AD=6\\mathrm{cm}$, $DB=3\\mathrm{cm}$, $AE=8\\mathrm{cm}$, $EC=x\\mathrm{cm}$일 때, $x$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "1",
+          "text": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "4",
+          "text": "4"
+        }
+      ],
+      "answer": "4",
+      "solutionSteps": [
+        "평행선에 의해 $AD:DB=AE:EC$이다. $6:3=8:x$이므로 $6x=24$, $x=4$."
+      ],
+      "conceptIds": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "삼각형의 닮음",
+        "core": "삼각형의 닮음"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 13,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-13.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-13.png",
+        "alt": "삼각형의 닮음 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          150,
+          670,
+          475,
+          880
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q14",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "1부터 10까지의 자연수가 적힌 공 10개 중 임의로 한 개를 꺼낼 때, 5의 배수가 나올 확률은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "\\frac15",
+          "text": "\\frac15"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "\\frac3{10}",
+          "text": "\\frac3{10}"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "\\frac25",
+          "text": "\\frac25"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "\\frac12",
+          "text": "\\frac12"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "5의 배수는 $5,10$ 두 개이므로 $2/10=1/5$."
+      ],
+      "conceptIds": [
+        "astra-counting-l1-확률"
+      ],
+      "domain": "counting",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "확률",
+        "core": "확률"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 14,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-14.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-14.png",
+        "alt": "확률 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          270,
+          1080,
+          510,
+          1225
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q15",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$2\\sqrt5=\\sqrt a$일 때, $a$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "10",
+          "text": "10"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "15",
+          "text": "15"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "20",
+          "text": "20"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "25",
+          "text": "25"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "양변을 제곱하면 $a=2^2\\times5=20$."
+      ],
+      "conceptIds": [
+        "astra-equations-l2-제곱근"
+      ],
+      "domain": "equations",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "제곱근",
+        "core": "제곱근"
+      },
+      "prerequisite_concept": [
+        "astra-equations-l1-일차방정식"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q04",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 15,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q04",
+          "ged-middle-2025-1-math-q10"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-15.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q16",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "이차방정식 $x^2-3x+2=0$의 한 근이 1이다. 다른 한 근은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "5",
+          "text": "5"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "$(x-1)(x-2)=0$이므로 두 근은 $1,2$이다."
+      ],
+      "conceptIds": [
+        "astra-equations-l2-이차방정식의 인수분해"
+      ],
+      "domain": "equations",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "이차방정식의 인수분해",
+        "core": "이차방정식의 인수분해"
+      },
+      "prerequisite_concept": [
+        "astra-equations-l1-일차방정식"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q04",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 16,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q04",
+          "ged-middle-2025-1-math-q10"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-16.png"
+    },
+    {
+      "id": "ged-middle-2025-1-math-q17",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "이차함수 $y=x^2+2$의 그래프에 대한 설명으로 옳은 것은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": null,
+          "text": "위로 볼록하다."
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": null,
+          "text": "점 $(1,4)$를 지난다."
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": null,
+          "text": "직선 $y=1$을 축으로 한다."
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": null,
+          "text": "꼭짓점의 좌표는 $(0,2)$이다."
+        }
+      ],
+      "answer": "4",
+      "solutionSteps": [
+        "$y=x^2$를 위로 2만큼 옮긴 그래프이다. 꼭짓점은 $(0,2)$, 축은 $x=0$이며 아래로 볼록하다."
+      ],
+      "conceptIds": [
+        "astra-functions-l2-이차함수의 꼭짓점"
+      ],
+      "domain": "functions",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "이차함수의 꼭짓점",
+        "core": "이차함수의 꼭짓점"
+      },
+      "prerequisite_concept": [
+        "astra-functions-l1-일차함수의 기울기"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q11",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 17,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q11",
+          "ged-middle-2025-1-math-q05"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-17.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-17.png",
+        "alt": "이차함수의 꼭짓점 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          820,
+          180,
+          1090,
+          415
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q18",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "직각삼각형 $ABC$에서 $AB=8$, $BC=17$, $CA=15$일 때, $\\sin B$의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "\\frac8{17}",
+          "text": "\\frac8{17}"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "\\frac8{15}",
+          "text": "\\frac8{15}"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "\\frac{15}{17}",
+          "text": "\\frac{15}{17}"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "\\frac{15}{8}",
+          "text": "\\frac{15}{8}"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "빗변은 $BC$, 각 $B$의 대변은 $CA$이다. $\\sin B=CA/BC=15/17$."
+      ],
+      "conceptIds": [
+        "astra-geometry-l2-삼각비"
+      ],
+      "domain": "geometry",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "삼각비",
+        "core": "삼각비"
+      },
+      "prerequisite_concept": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 18,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q13",
+          "ged-middle-2025-1-math-q12",
+          "ged-middle-2025-1-math-q06"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-18.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-18.png",
+        "alt": "삼각비 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          825,
+          775,
+          1080,
+          935
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q19",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "두 점 $A,B$는 점 $P$에서 원 $O$에 그은 두 접선의 접점이다. $PB=5\\mathrm{cm}$, $\\angle PBA=60^\\circ$일 때, $AB$의 길이는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "5\\mathrm{cm}",
+          "text": "5\\mathrm{cm}"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "6\\mathrm{cm}",
+          "text": "6\\mathrm{cm}"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "7\\mathrm{cm}",
+          "text": "7\\mathrm{cm}"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "8\\mathrm{cm}",
+          "text": "8\\mathrm{cm}"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "$PA=PB$이므로 삼각형 $PAB$는 이등변삼각형이다. 밑각이 $60^\\circ$이므로 정삼각형이며 $AB=5$cm."
+      ],
+      "conceptIds": [
+        "astra-geometry-l2-원의 접선"
+      ],
+      "domain": "geometry",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "원의 접선",
+        "core": "원의 접선"
+      },
+      "prerequisite_concept": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 19,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q13",
+          "ged-middle-2025-1-math-q12",
+          "ged-middle-2025-1-math-q06"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-19.png",
+      "figure": {
+        "src": "/assets/exams/ged-middle-2025-1-math/figure-19.png",
+        "alt": "원의 접선 문항의 원본 도형·표",
+        "sourcePage": 2,
+        "referenceBounds": [
+          735,
+          1220,
+          1055,
+          1450
+        ]
+      }
+    },
+    {
+      "id": "ged-middle-2025-1-math-q20",
+      "kind": "official",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "다음 중 표준편차가 가장 큰 자료는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "1,1,1,1,1",
+          "text": "1,1,1,1,1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "1,2,1,2,1",
+          "text": "1,2,1,2,1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "2,3,2,3,2",
+          "text": "2,3,2,3,2"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "2,4,2,4,2",
+          "text": "2,4,2,4,2"
+        }
+      ],
+      "answer": "4",
+      "solutionSteps": [
+        "①은 산포가 0이다. ②와 ③의 분산은 $0.24$, ④의 분산은 $0.96$이므로 ④의 표준편차가 가장 크다."
+      ],
+      "conceptIds": [
+        "astra-statistics-l2-자료의 산포"
+      ],
+      "domain": "statistics",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "통계",
+        "unit": "자료의 산포",
+        "core": "자료의 산포"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "institution": "한국교육과정평가원",
+        "year": 2025,
+        "session": 1,
+        "qualification": "중졸",
+        "questionNumber": 20,
+        "answerStatus": "final",
+        "sourceUrl": "https://www.kice.re.kr",
+        "sourceUrlScope": "institution_homepage",
+        "providedFile": "ged-middle-2025-1-math",
+        "usageReviewStatus": "unverified",
+        "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "해당 세트의 최하위 확인 또는 보조 문항"
+      },
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-20.png"
+    },
+    {
+      "id": "astra-set-basic",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$A=\\{1,2,3\\}$, $B=\\{2,3,4\\}$일 때 $A\\cap B$는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "\\{1,4\\}",
+          "text": "\\{1,4\\}"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "\\{2,3\\}",
+          "text": "\\{2,3\\}"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "\\{1,2,3,4\\}",
+          "text": "\\{1,2,3,4\\}"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "\\varnothing",
+          "text": "\\varnothing"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "두 집합에 공통으로 들어 있는 원소 $2,3$을 모은다."
+      ],
+      "conceptIds": [
+        "astra-logic-l1-집합의 원소"
+      ],
+      "domain": "logic",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "집합의 원소",
+        "core": "집합의 원소"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
+    },
+    {
+      "id": "astra-set-count",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$1,2,3,4,5,6$ 중 짝수의 개수는?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "6",
+          "text": "6"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "짝수는 $2,4,6$이므로 3개이다."
+      ],
+      "conceptIds": [
+        "astra-logic-l1-조건에 맞는 원소 세기"
+      ],
+      "domain": "logic",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "조건에 맞는 원소 세기",
+        "core": "조건에 맞는 원소 세기"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
+    },
+    {
+      "id": "astra-count-basic",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "동전 한 개를 두 번 던질 때 가능한 결과는 모두 몇 가지인가?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "2",
+          "text": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "3",
+          "text": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "4",
+          "text": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "6",
+          "text": "6"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "앞앞, 앞뒤, 뒤앞, 뒤뒤로 4가지이다."
+      ],
+      "conceptIds": [
+        "astra-counting-l1-경우 나열"
+      ],
+      "domain": "counting",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "경우 나열",
+        "core": "경우 나열"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
+    },
+    {
+      "id": "astra-count-one",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "숫자 $1,2,3,4$가 적힌 카드에서 한 장을 뽑을 때 홀수가 나올 확률은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "\\frac14",
+          "text": "\\frac14"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "\\frac12",
+          "text": "\\frac12"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "\\frac34",
+          "text": "\\frac34"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "1",
+          "text": "1"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "홀수는 $1,3$ 두 장이다. 전체 4장 중 2장이므로 $1/2$."
+      ],
+      "conceptIds": [
+        "astra-counting-l1-전체와 조건의 개수"
+      ],
+      "domain": "counting",
+      "level": 1,
+      "difficulty": "기초",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "전체와 조건의 개수",
+        "core": "전체와 조건의 개수"
+      },
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
+    },
+    {
+      "id": "astra-quadratic-vertex",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$y=(x-2)^2+3$의 꼭짓점은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "(2,3)",
+          "text": "(2,3)"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "(-2,3)",
+          "text": "(-2,3)"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "(2,-3)",
+          "text": "(2,-3)"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "(3,2)",
+          "text": "(3,2)"
+        }
+      ],
+      "answer": "1",
+      "solutionSteps": [
+        "제곱항이 0인 $x=2$에서 $y=3$이다."
+      ],
+      "conceptIds": [
+        "astra-functions-l2-이차함수의 꼭짓점"
+      ],
+      "domain": "functions",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "이차함수의 꼭짓점",
+        "core": "이차함수의 꼭짓점"
+      },
+      "prerequisite_concept": [
+        "astra-functions-l1-일차함수의 기울기"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q11",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q11",
+          "ged-middle-2025-1-math-q05"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
+    },
+    {
+      "id": "astra-expand",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x^2+5x+6$을 인수분해한 것은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "(x+1)(x+6)",
+          "text": "(x+1)(x+6)"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "(x+2)(x+3)",
+          "text": "(x+2)(x+3)"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "(x-2)(x-3)",
+          "text": "(x-2)(x-3)"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "(x+2)(x-3)",
+          "text": "(x+2)(x-3)"
+        }
+      ],
+      "answer": "2",
+      "solutionSteps": [
+        "합이 5, 곱이 6인 두 수는 2와 3이다."
+      ],
+      "conceptIds": [
+        "astra-algebra-l2-인수분해"
+      ],
+      "domain": "algebra",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "인수분해",
+        "core": "인수분해"
+      },
+      "prerequisite_concept": [
+        "astra-algebra-l1-지수법칙"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q09",
+          "ged-middle-2025-1-math-q03",
+          "ged-middle-2025-1-math-q02",
+          "ged-middle-2025-1-math-q01"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
+    },
+    {
+      "id": "astra-expand-check",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x^2-9$를 인수분해한 것은?",
+      "answerFormat": "choice",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "latex": "(x-3)^2",
+          "text": "(x-3)^2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "latex": "(x+3)^2",
+          "text": "(x+3)^2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "latex": "(x-3)(x+3)",
+          "text": "(x-3)(x+3)"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "latex": "(x-9)(x+1)",
+          "text": "(x-9)(x+1)"
+        }
+      ],
+      "answer": "3",
+      "solutionSteps": [
+        "제곱의 차 공식 $a^2-b^2=(a-b)(a+b)$를 적용한다."
+      ],
+      "conceptIds": [
+        "astra-algebra-l2-인수분해"
+      ],
+      "domain": "algebra",
+      "level": 2,
+      "difficulty": "중간",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "인수분해",
+        "core": "인수분해"
+      },
+      "prerequisite_concept": [
+        "astra-algebra-l1-지수법칙"
+      ],
+      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "review": {
+        "method": "source_visual_comparison_and_independent_solution",
+        "reviewer": "Codex",
+        "date": "2026-10-24",
+        "educatorValidated": false
+      },
+      "reference": {
+        "authored": true
+      },
+      "remedialPath": {
+        "questionIds": [
+          "ged-middle-2025-1-math-q09",
+          "ged-middle-2025-1-math-q03",
+          "ged-middle-2025-1-math-q02",
+          "ged-middle-2025-1-math-q01"
+        ],
+        "reason": "관련 선수 개념의 수행을 직접 확인"
+      }
     }
   ]
 }

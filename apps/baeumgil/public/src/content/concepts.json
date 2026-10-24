@@ -16,31 +16,296 @@
       "id": "c-frac-reciprocal",
       "name": "분수의 나눗셈과 역수",
       "summary": "분수로 나누는 것은 그 분수의 역수를 곱하는 것과 같다. 예: a ÷ (b/c) = a × (c/b)",
-      "prerequisiteIds": ["c-int-mul"]
+      "prerequisiteIds": [
+        "c-int-mul"
+      ]
     },
     {
       "id": "c-rat-calc",
       "name": "부호가 있는 유리수의 혼합 계산",
       "summary": "곱셈·나눗셈을 먼저 하고 덧셈·뺄셈을 나중에 하며, 각 단계에서 부호를 확인한다.",
-      "prerequisiteIds": ["c-int-addsub", "c-int-mul", "c-frac-reciprocal"]
+      "prerequisiteIds": [
+        "c-int-addsub",
+        "c-int-mul",
+        "c-frac-reciprocal"
+      ]
     },
     {
       "id": "c-distribute-sign",
       "name": "분배법칙과 부호",
       "summary": "괄호 앞의 수를 괄호 안의 모든 항에 부호까지 곱한다. 예: -3(x - 2) = -3x + 6",
-      "prerequisiteIds": ["c-int-mul"]
+      "prerequisiteIds": [
+        "c-int-mul"
+      ]
     },
     {
       "id": "c-eq-transpose",
       "name": "등식의 성질과 이항",
       "summary": "등식의 양변에 같은 수를 더하거나 빼도 등식은 성립하므로, 항을 반대편으로 옮기면 부호가 바뀐다.",
-      "prerequisiteIds": ["c-int-addsub"]
+      "prerequisiteIds": [
+        "c-int-addsub"
+      ]
     },
     {
       "id": "c-eq-solve",
       "name": "괄호가 있는 일차방정식의 풀이",
       "summary": "괄호를 풀고, x항과 상수항을 양쪽으로 모은 뒤, x의 계수로 양변을 나눈다.",
-      "prerequisiteIds": ["c-distribute-sign", "c-eq-transpose"]
+      "prerequisiteIds": [
+        "c-distribute-sign",
+        "c-eq-transpose"
+      ]
+    },
+    {
+      "id": "astra-algebra-l3-다항식의 덧셈",
+      "name": "다항식의 덧셈",
+      "summary": "$A+B=(2+a)x^2+4x$이므로 $a=-2$, $b=4$. 따라서 $a+b=2$.",
+      "prerequisiteIds": [
+        "astra-algebra-l1-지수법칙"
+      ]
+    },
+    {
+      "id": "astra-algebra-l3-인수분해",
+      "name": "인수분해",
+      "summary": "합의 세제곱 인수분해 공식으로 $x^3+2^3=(x+2)(x^2-2x+4)$이므로 $a=-2$.",
+      "prerequisiteIds": [
+        "astra-algebra-l2-인수분해"
+      ]
+    },
+    {
+      "id": "astra-equations-l3-판별식",
+      "name": "판별식",
+      "summary": "판별식 $D=a^2-16>0$. 자연수 $a$는 $4$보다 커야 하므로 최솟값은 $5$.",
+      "prerequisiteIds": [
+        "astra-equations-l2-이차방정식의 인수분해"
+      ]
+    },
+    {
+      "id": "astra-equations-l3-근과 계수의 관계",
+      "name": "근과 계수의 관계",
+      "summary": "두 근의 곱이 $a$이다. $a=(2+\\sqrt{2})(2-\\sqrt{2})=4-2=2$.",
+      "prerequisiteIds": [
+        "astra-equations-l2-제곱근"
+      ]
+    },
+    {
+      "id": "astra-functions-l3-이차함수의 최솟값",
+      "name": "이차함수의 최솟값",
+      "summary": "구간 안의 $x=1$에서 $(x-1)^2=0$이므로 최솟값은 $2$.",
+      "prerequisiteIds": [
+        "astra-functions-l2-이차함수의 꼭짓점"
+      ]
+    },
+    {
+      "id": "astra-functions-l3-합성함수",
+      "name": "합성함수",
+      "summary": "$f(1)=2$이므로 $g(f(1))=g(2)=-4+5=1$.",
+      "prerequisiteIds": [
+        "astra-functions-l1-일차함수의 기울기"
+      ]
+    },
+    {
+      "id": "astra-geometry-l3-선분의 내분",
+      "name": "선분의 내분",
+      "summary": "내분점은 $\\left(\\frac{2(-3)+6}{3},\\frac{2(5)-1}{3}\\right)=(0,3)$.",
+      "prerequisiteIds": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ]
+    },
+    {
+      "id": "astra-geometry-l3-점과 직선 사이의 거리",
+      "name": "점과 직선 사이의 거리",
+      "summary": "거리 공식에 따라 $\\frac{|3(0)+4(0)-12|}{\\sqrt{3^2+4^2}}=\\frac{12}{5}$.",
+      "prerequisiteIds": [
+        "astra-geometry-l2-삼각비"
+      ]
+    },
+    {
+      "id": "astra-logic-l3-집합의 연산",
+      "name": "집합의 연산",
+      "summary": "$A\\cup B=\\{1,3,4,5,6,7,9\\}$, $A\\cap B=\\{3,5\\}$. 따라서 $7+2=9$.",
+      "prerequisiteIds": [
+        "astra-logic-l1-집합의 원소"
+      ]
+    },
+    {
+      "id": "astra-logic-l3-필요조건",
+      "name": "필요조건",
+      "summary": "$p\\Rightarrow q$여야 한다. $x=3$을 $q$에 대입하면 $9-3a-3=0$이므로 $a=2$.",
+      "prerequisiteIds": [
+        "astra-logic-l1-집합의 원소"
+      ]
+    },
+    {
+      "id": "astra-counting-l3-경우의 수",
+      "name": "경우의 수",
+      "summary": "조건을 만족하는 쌍은 $(1,2),(1,5),(2,4),(4,5)$로 $4$가지이다.",
+      "prerequisiteIds": [
+        "astra-counting-l1-확률"
+      ]
+    },
+    {
+      "id": "astra-counting-l3-조합",
+      "name": "조합",
+      "summary": "제외할 토핑 1개를 고르는 것과 같으므로 $\\binom{5}{4}=5$가지이다.",
+      "prerequisiteIds": [
+        "astra-counting-l1-확률"
+      ]
+    },
+    {
+      "id": "astra-algebra-l1-소인수분해",
+      "name": "소인수분해",
+      "summary": "$45=3\\times15=3\\times3\\times5=3^2\\times5$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-algebra-l1-정수의 덧셈",
+      "name": "정수의 덧셈",
+      "summary": "음수를 더하는 것은 그 절댓값을 빼는 것이다. $6-4=2$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-algebra-l1-문자와 식",
+      "name": "문자와 식",
+      "summary": "한 송이 가격에 송이 수를 곱하므로 $2000\\times a$원이다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-equations-l1-일차방정식",
+      "name": "일차방정식",
+      "summary": "$2x=8$이므로 $x=4$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-functions-l1-그래프 읽기",
+      "name": "그래프 읽기",
+      "summary": "10분에는 $2$km, 25분에는 $4$km이므로 $4-2=2$km.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-geometry-l1-부채꼴과 비례",
+      "name": "부채꼴과 비례",
+      "summary": "같은 원에서 넓이는 중심각에 비례한다. $60\\times\\frac{5}{3}=100^\\circ$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-statistics-l1-상대도수",
+      "name": "상대도수",
+      "summary": "상대도수는 해당 도수를 전체 도수로 나눈 값이다. $a=12/20=0.6$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-algebra-l1-지수법칙",
+      "name": "지수법칙",
+      "summary": "같은 밑의 곱셈은 지수를 더하고 나눗셈은 뺀다. $a^{2+7-3}=a^6$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-equations-l1-연립일차방정식",
+      "name": "연립일차방정식",
+      "summary": "아래 식에서 위 식을 빼면 $x=2$. $2-y=1$에서 $y=1$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-functions-l1-일차함수의 기울기",
+      "name": "일차함수의 기울기",
+      "summary": "그래프가 $(-2,0)$을 지나므로 $0=-2a+4$. 따라서 $a=2$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-geometry-l1-이등변삼각형",
+      "name": "이등변삼각형",
+      "summary": "밑각은 $(180-80)/2=50^\\circ$. 외각은 $180-50=130^\\circ$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-geometry-l1-삼각형의 닮음",
+      "name": "삼각형의 닮음",
+      "summary": "평행선에 의해 $AD:DB=AE:EC$이다. $6:3=8:x$이므로 $6x=24$, $x=4$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-counting-l1-확률",
+      "name": "확률",
+      "summary": "5의 배수는 $5,10$ 두 개이므로 $2/10=1/5$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-equations-l2-제곱근",
+      "name": "제곱근",
+      "summary": "양변을 제곱하면 $a=2^2\\times5=20$.",
+      "prerequisiteIds": [
+        "astra-equations-l1-일차방정식"
+      ]
+    },
+    {
+      "id": "astra-equations-l2-이차방정식의 인수분해",
+      "name": "이차방정식의 인수분해",
+      "summary": "$(x-1)(x-2)=0$이므로 두 근은 $1,2$이다.",
+      "prerequisiteIds": [
+        "astra-equations-l1-일차방정식"
+      ]
+    },
+    {
+      "id": "astra-functions-l2-이차함수의 꼭짓점",
+      "name": "이차함수의 꼭짓점",
+      "summary": "$y=x^2$를 위로 2만큼 옮긴 그래프이다. 꼭짓점은 $(0,2)$, 축은 $x=0$이며 아래로 볼록하다.",
+      "prerequisiteIds": [
+        "astra-functions-l1-일차함수의 기울기"
+      ]
+    },
+    {
+      "id": "astra-geometry-l2-삼각비",
+      "name": "삼각비",
+      "summary": "빗변은 $BC$, 각 $B$의 대변은 $CA$이다. $\\sin B=CA/BC=15/17$.",
+      "prerequisiteIds": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ]
+    },
+    {
+      "id": "astra-geometry-l2-원의 접선",
+      "name": "원의 접선",
+      "summary": "$PA=PB$이므로 삼각형 $PAB$는 이등변삼각형이다. 밑각이 $60^\\circ$이므로 정삼각형이며 $AB=5$cm.",
+      "prerequisiteIds": [
+        "astra-geometry-l1-삼각형의 닮음"
+      ]
+    },
+    {
+      "id": "astra-statistics-l2-자료의 산포",
+      "name": "자료의 산포",
+      "summary": "①은 산포가 0이다. ②와 ③의 분산은 $0.24$, ④의 분산은 $0.96$이므로 ④의 표준편차가 가장 크다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-logic-l1-집합의 원소",
+      "name": "집합의 원소",
+      "summary": "두 집합에 공통으로 들어 있는 원소 $2,3$을 모은다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-logic-l1-조건에 맞는 원소 세기",
+      "name": "조건에 맞는 원소 세기",
+      "summary": "짝수는 $2,4,6$이므로 3개이다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-counting-l1-경우 나열",
+      "name": "경우 나열",
+      "summary": "앞앞, 앞뒤, 뒤앞, 뒤뒤로 4가지이다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-counting-l1-전체와 조건의 개수",
+      "name": "전체와 조건의 개수",
+      "summary": "홀수는 $1,3$ 두 장이다. 전체 4장 중 2장이므로 $1/2$.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "astra-algebra-l2-인수분해",
+      "name": "인수분해",
+      "summary": "합이 5, 곱이 6인 두 수는 2와 3이다.",
+      "prerequisiteIds": [
+        "astra-algebra-l1-지수법칙"
+      ]
     }
   ]
 }
