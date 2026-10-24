@@ -169,7 +169,8 @@ async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), 
   const node = id => {
     if (!nodes.has(id)) nodes.set(id, {
       id, innerHTML: '', textContent: '', hidden: false, value: '', listeners: {}, fields: [],
-      classList: { toggle() {} }, setAttribute() {}, focus() { focused = id; },
+      classes: new Set(), attrs: {},
+      classList: { toggle(name,value) { const n=nodes.get(id);const on=value??!n.classes.has(name);if(on)n.classes.add(name);else n.classes.delete(name); }, contains(name){return nodes.get(id).classes.has(name);} }, setAttribute(name,value) {this.attrs[name]=value;}, focus() { focused = id; },
       addEventListener(event, handler) { (this.listeners[event] ??= []).push(handler); },
       querySelectorAll() { return this.fields; }, querySelector(selector) { return node(selector.slice(1)); },
     });
@@ -177,7 +178,7 @@ async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), 
   };
   if (saved) local.setItem(STORAGE_KEY, JSON.stringify(saved));
   const original = { document: globalThis.document, window: globalThis.window, fetch: globalThis.fetch };
-  globalThis.document = { hidden: false, getElementById: node, querySelector: () => node('legacy-roles'), querySelectorAll: () => [], addEventListener() {} };
+  globalThis.document = { hidden: false, documentElement:node('html'), getElementById: node, querySelector: () => node('legacy-roles'), querySelectorAll: () => [], addEventListener() {} };
   globalThis.window = { localStorage: local, sessionStorage: tab, confirm, addEventListener() {}, location: { reload() {} } };
   globalThis.fetch = async (url,options) => ({ ok: true, json: async () => url === '/api/practice' ? practiceRequest(JSON.parse(options.body)) : url === '/api/health'
     ? { ai: { configured: Boolean(practiceRequest) } }
@@ -217,6 +218,32 @@ test('real app starts at entry, role changes retain a submitted answer and exist
   assert.equal(h.saved().attempts.length, 1);
 });
 
+test('guardian entry and refresh are read only, preserve answers/logs, and show only explicitly shared mentor text',async t=>{
+ const initial=seeded();const h=await boot(t,{saved:initial});
+ enterMath(h,'mentor');h.node('guardian-message').value='이번 주에는 부호 계산을 함께 확인해 주세요.';
+ click(h.app,{action:'share-guardian-message'});
+ assert.equal(h.saved().guardianMessages.at(-1).text,'이번 주에는 부호 계산을 함께 확인해 주세요.');
+ click(h.node('change-role'));enterMath(h,'guardian');
+ assert.match(h.app.innerHTML,/최근 7일/);assert.match(h.app.innerHTML,/부호 계산/);
+ assert.doesNotMatch(h.app.innerHTML,/기존 확정 일지|기존 회기|data-action="submit"|data-ai=/);
+ assert.equal(h.node('reset').hidden,true);assert.equal(h.node('mentor-navigation').hidden,true);
+ assert.equal(h.node('guardian-navigation').hidden,false);assert.match(h.node('current-profile').textContent,/보호자/);
+ const before=h.local.getItem(STORAGE_KEY);click(h.node('reset'));click(h.app,{action:'submit'});
+ const fresh=await boot(t,{local:h.local,tab:h.tab});assert.match(fresh.app.innerHTML,/학습 소식/);
+ assert.equal(fresh.local.getItem(STORAGE_KEY),before);assert.deepEqual(fresh.saved().logs,initial.logs);
+ click(fresh.node('change-role'));enterMath(fresh,'learner');await tick();assert.match(fresh.app.innerHTML,/제출하기/);
+});
+
+test('large text never rerenders a dirty form or mutates learning records and survives role changes and reload',async t=>{
+ const h=await boot(t,{saved:seeded()});enterMath(h,'mentor');click(h.app,{goto:'sessions'});
+ h.app.fields=[{tagName:'TEXTAREA',value:'입력 중',defaultValue:''}];const fields=h.app.fields,html=h.app.innerHTML,before=h.local.getItem(STORAGE_KEY);
+ click(h.node('large-text'));assert.equal(h.node('html').classes.has('large-text'),true);
+ assert.equal(h.node('large-text').attrs['aria-pressed'],'true');assert.equal(h.app.innerHTML,html);assert.equal(h.app.fields,fields);assert.equal(h.local.getItem(STORAGE_KEY),before);
+ h.app.fields=[];click(h.node('change-role'));enterMath(h,'guardian');assert.equal(h.node('html').classes.has('large-text'),true);
+ const fresh=await boot(t,{local:h.local,tab:h.tab});assert.equal(fresh.node('html').classes.has('large-text'),true);
+ click(fresh.node('large-text'));assert.equal(fresh.node('html').classes.has('large-text'),false);
+});
+
 test('refresh restores a tab role, returning to entry removes it, and another tab starts at entry', async t => {
   const local = memoryStorage(), tab = memoryStorage();
   const first = await boot(t, { local, tab });
@@ -247,7 +274,7 @@ test('canceling a dirty form exit keeps the mentor screen; accepted exit preserv
   assert.equal(h.saved().logs[0].content, '기존 확정 일지');
 });
 
-test('learner solving time excludes time on entry and mentor screens', async t => {
+test('learner solving time excludes time on entry, mentor and guardian screens', async t => {
   const initial = seeded();
   const start = Date.parse('2026-10-24T10:00:00Z');
   t.mock.timers.enable({ apis: ['Date'], now: start });
@@ -258,6 +285,8 @@ test('learner solving time excludes time on entry and mentor screens', async t =
   t.mock.timers.tick(60000);
   enterMath(h, 'mentor');
   t.mock.timers.tick(60000);
+  click(h.node('change-role')); enterMath(h, 'guardian');
+  t.mock.timers.tick(120000);
   click(h.node('change-role')); enterMath(h, 'learner'); await tick();
   t.mock.timers.tick(5000);
   click(h.app, { choice: 'c' }); click(h.app, { action: 'submit' });

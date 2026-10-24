@@ -14,6 +14,9 @@ import { isSubjectEnabled } from './src/content/subjects.js';
 import { renderRoadmapPage } from './src/ui/roadmap-page.js';
 import { createPracticeController } from './src/ai/practice-client.js';
 import { renderAIPractice } from './src/ui/ai-practice.js';
+import { renderGuardian } from './src/ui/guardian.js';
+import { installDisplayControls } from './src/state/display-preferences.js';
+import { installImageViewer } from './src/ui/image-viewer.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
 
@@ -44,6 +47,8 @@ function getStorage() {
   try { return window.localStorage; } catch { return null; }
 }
 const storage = getStorage();
+installDisplayControls({document,storage});
+installImageViewer(document);
 const demoSession = createDemoSession((() => { try { return window.sessionStorage; } catch { return null; } })());
 
 const freshUi = () => ({
@@ -113,6 +118,7 @@ function renderNavigation() {
   toggle.setAttribute('title', label);
   document.getElementById('learner-navigation').hidden = !hasNav || ui.role !== 'learner';
   document.getElementById('mentor-navigation').hidden = !hasNav || ui.role !== 'mentor';
+  document.getElementById('guardian-navigation').hidden = !hasNav || ui.role !== 'guardian';
   document.getElementById('learner-learning').setAttribute('aria-current',ui.learnerTab==='roadmap'?'false':'page');
   document.getElementById('learner-roadmap').setAttribute('aria-current',ui.learnerTab==='roadmap'?'page':'false');
   // 진단 상세(assessment)는 학습 기록 아래 화면이다
@@ -124,11 +130,11 @@ function render() {
   const state = store.getState();
   renderNavigation();
   document.getElementById('session-controls').hidden = !ui.role;
-  document.getElementById('reset').hidden = !inWorkspace();
+  document.getElementById('reset').hidden = !inWorkspace() || ui.role==='guardian';
   document.getElementById('change-subject').hidden = !inWorkspace();
   document.getElementById('reset').textContent = ui.confirmReset ? '정말 초기화할까요? 한 번 더 누르기' : '시연 초기화';
   const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
-  document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'} · ${ui.role === 'mentor' ? '멘토' : '멘티'}${inWorkspace() ? ' · 수학' : ''}` : '';
+  document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'}${ui.role==='guardian'?'의 보호자':''} · ${{mentor:'멘토',learner:'멘티',guardian:'보호자'}[ui.role]}${inWorkspace() ? ' · 수학' : ''}` : '';
   document.getElementById('entry-session-note').hidden = !ui.role || demoSession.persistent;
   app.onclick = null;
   app.onchange = null;
@@ -151,6 +157,7 @@ function render() {
     submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
     syncVisibility, practice,
   };
+  if(ui.role==='guardian'){renderGuardian({root:app,state,catalog});return;}
   if (renderAIPractice(props)) return;
   if (ui.role === 'learner' && ui.learnerTab === 'roadmap') renderRoadmapPage(props);
   else if (ui.role === 'learner') renderLearner(props);
@@ -208,7 +215,7 @@ function leaveWorkspace({ changeRole = false } = {}) {
 }
 
 function resetDemo() {
-  if (!inWorkspace()) return;
+  if (!inWorkspace() || ui.role==='guardian') return;
   if (!ui.confirmReset) { ui.confirmReset = true; render(); return; }
   if (storage) {
     const result = resetState(storage, { confirmed: true });

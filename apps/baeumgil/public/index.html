@@ -11,6 +11,8 @@
   <link rel="stylesheet" href="roadmap.css">
   <link rel="stylesheet" href="overview.css">
   <link rel="stylesheet" href="sidenav.css">
+  <link rel="stylesheet" href="guardian.css">
+  <link rel="stylesheet" href="accessibility.css">
 </head>
 <body>
   <header class="topbar">
@@ -23,6 +25,8 @@
       </svg>
       배움길 <span class="muted">학생의 배움을 잇고, 멘토의 부담을 덜다</span>
     </div>
+    <button id="large-text" class="ghost small" aria-pressed="false">큰글씨</button>
+    <span id="display-status" class="sr-only" role="status"></span>
     <div id="session-controls" class="session-controls" hidden>
       <span id="current-profile" class="current-profile"></span>
       <button id="change-subject" class="ghost small" hidden>과목 선택</button>
@@ -39,6 +43,7 @@
         <button id="learner-learning" class="sidenav-item" title="나의 학습" ><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5V21h16"/></svg><span class="sidenav-label">나의 학습</span></button>
         <button id="learner-roadmap" class="sidenav-item" title="로드맵" ><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></svg><span class="sidenav-label">로드맵</span></button>
       </nav>
+      <nav id="guardian-navigation" class="sidenav-nav" aria-label="보호자 메뉴" hidden><p class="sidenav-group">함께 응원하기</p><span class="sidenav-item" aria-current="page">학습 소식</span></nav>
       <nav id="mentor-navigation" class="sidenav-nav" aria-label="멘토 메뉴" hidden>
         <p class="sidenav-group">학생</p>
         <button id="mentor-nav-home" class="sidenav-item" title="멘토 홈" data-nav-tab="home"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span class="sidenav-label">멘토 홈</span></button>
@@ -52,6 +57,7 @@
     <div id="sidenav-scrim" class="sidenav-scrim" hidden></div>
     <main id="app" tabindex="-1"><p class="muted">불러오는 중…</p></main>
   </div>
+  <dialog id="image-viewer" aria-labelledby="viewer-title"><div class="viewer-head"><h2 id="viewer-title">원본 문항 크게 보기</h2><button id="viewer-size" aria-pressed="false">더 크게</button><button id="viewer-close" autofocus>닫기</button></div><p class="muted small">더 크게 보기를 켜면 이미지를 상하·좌우로 이동하며 볼 수 있어요.</p><div class="viewer-scroll" tabindex="0" aria-label="확대한 문항 이미지"><img id="viewer-image" alt=""></div></dialog>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

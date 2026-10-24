@@ -1,24 +1,24 @@
 /* Summary and result screens only; solving controls keep their existing styles. */
 .mentor-overview,.overview-result {width:100%;max-width:1040px;margin:0 auto 24px;}
 .overview-heading {margin:24px 0;}
-.overview-heading h2 {font-size:28px;letter-spacing:-.7px;margin:6px 0 10px;line-height:1.35;}
+.overview-heading h2 {font-size:1.75rem;letter-spacing:-.7px;margin:6px 0 10px;line-height:1.35;}
 .overview-heading p {margin:6px 0;color:var(--muted,#526574);}
 .overview-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid #dce5e8;border-radius:14px;overflow:hidden;background:#dce5e8;margin-bottom:20px;}
 .overview-metrics>div {background:#fff;padding:19px 24px;display:flex;flex-direction:column;gap:6px;}
-.overview-metrics span,.overview-metrics small {color:#526574;font-size:13px;}
-.overview-metrics strong {font-size:24px;line-height:1.4;color:#183b43;}
+.overview-metrics span,.overview-metrics small {color:#526574;font-size:0.8125rem;}
+.overview-metrics strong {font-size:1.5rem;line-height:1.4;color:#183b43;}
 .overview-next {display:flex;align-items:center;justify-content:space-between;gap:28px;background:#eef8f6;border:1px solid #bdded6;border-radius:14px;padding:26px;margin:20px 0;}
 .overview-next>div {min-width:0;}
-.overview-eyebrow {color:#206451;font-size:13px;font-weight:700;}
-.overview-next h3 {margin:9px 0;font-size:22px;line-height:1.4;letter-spacing:-.3px;}
-.overview-next p {margin:0;color:#405b59;font-size:14px;line-height:1.7;max-width:640px;}
+.overview-eyebrow {color:#206451;font-size:0.8125rem;font-weight:700;}
+.overview-next h3 {margin:9px 0;font-size:1.375rem;line-height:1.4;letter-spacing:-.3px;}
+.overview-next p {margin:0;color:#405b59;font-size:0.875rem;line-height:1.7;max-width:640px;}
 .overview-next>button {flex-shrink:0;min-height:48px;}
 .overview-task-list {border:1px solid #dce5e8;border-radius:14px;overflow:hidden;background:white;}
 .overview-task {display:flex;width:100%;align-items:center;gap:18px;min-height:82px;border:0;border-bottom:1px solid #e6edef;border-radius:0;background:white;padding:17px 24px;text-align:left;}
 .overview-task:last-child {border-bottom:0;}
 .overview-task>span:first-child {flex:1;display:flex;flex-direction:column;gap:6px;min-width:0;}
-.overview-task strong {font-size:15px;color:#243e47;}
-.overview-task small {font-size:13px;color:#526574;font-weight:400;}
+.overview-task strong {font-size:0.9375rem;color:#243e47;}
+.overview-task small {font-size:0.8125rem;color:#526574;font-weight:400;}
 .overview-task>b {background:#eef3f5;color:#405761;min-width:28px;text-align:center;padding:4px;border-radius:7px;}
 .overview-task:hover {background:#f5faf9;}
 .overview-links {display:flex;flex-wrap:wrap;gap:10px;margin:18px 0;}
@@ -32,50 +32,50 @@
 .student-bar nav.tabs {flex-wrap:wrap;}
 @media(max-width:700px) {
   .overview-heading {margin:18px 0;}
-  .overview-heading h2 {font-size:24px;}
+  .overview-heading h2 {font-size:1.5rem;}
   .overview-next {flex-direction:column;align-items:stretch;padding:20px;gap:18px;}
-  .overview-next h3 {font-size:20px;}
+  .overview-next h3 {font-size:1.25rem;}
   .overview-metrics>div {padding:14px 10px;}
-  .overview-metrics strong {font-size:20px;}
-  .overview-metrics small {font-size:11px;}
+  .overview-metrics strong {font-size:1.25rem;}
+  .overview-metrics small {font-size:0.6875rem;}
   .overview-task {padding:16px;}
   .overview-links {flex-direction:column;align-items:stretch;}
 }
 
 /* 멘토 홈 다이어그램 1: 멘토링 흐름 (완료 → 지금 단계 → 대기) */
 .flow-diagram,.domain-bars{background:#fff;border:1px solid #dce5e8;border-radius:14px;padding:18px 20px;margin:0 0 20px}
-.flow-diagram h3,.domain-bars h3{margin:0 0 14px;font-size:15px;color:#243e47}
+.flow-diagram h3,.domain-bars h3{margin:0 0 14px;font-size:0.9375rem;color:#243e47}
 .flow-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0}
 .flow-step{position:relative;min-width:0}
 .flow-step:not(:last-child)::after{content:"";position:absolute;top:22px;left:calc(50% + 26px);right:calc(-50% + 26px);height:2px;background:#d5e1dd}
 .flow-step.done:not(:last-child)::after{background:#2f8a5f}
 .flow-node{display:flex;flex-direction:column;align-items:center;gap:8px;width:100%;min-height:0;padding:0 6px;border:0;background:transparent;text-align:center;border-radius:12px}
 .flow-node:hover:not(:disabled){border:0;background:#f5faf9}
-.flow-dot{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-weight:800;font-size:16px;background:#eef3f2;color:#6b7f74;border:2px solid #d5e1dd;position:relative;z-index:1}
+.flow-dot{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;font-weight:800;font-size:1rem;background:#eef3f2;color:#6b7f74;border:2px solid #d5e1dd;position:relative;z-index:1}
 .flow-step.done .flow-dot{background:#2f8a5f;border-color:#2f8a5f;color:#fff}
 .flow-step.current .flow-dot{background:#fff;border-color:#0d9488;color:#0b766d;box-shadow:0 0 0 5px #0d948826}
 .flow-text{display:flex;flex-direction:column;gap:2px;min-width:0}
-.flow-text b{font-size:14px;color:#243e47}.flow-text small{font-size:12px;color:#526574;line-height:1.4}
-.flow-text em{font-style:normal;font-size:11px;font-weight:700;color:#8a9a94;margin-top:2px}
+.flow-text b{font-size:0.875rem;color:#243e47}.flow-text small{font-size:0.75rem;color:#526574;line-height:1.4}
+.flow-text em{font-style:normal;font-size:0.6875rem;font-weight:700;color:#8a9a94;margin-top:2px}
 .flow-step.done .flow-text em{color:#2f8a5f}.flow-step.current .flow-text em{color:#0b766d}
 .flow-step.current .flow-node{padding-bottom:6px;background:#f1f8f6}
 
 /* 멘토 홈 다이어그램 2: 영역별 개념 상태 (누적 막대, 길이 = 개념 수) */
 .domain-bars-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
 .domain-bars-head h3{margin:0}
-.domain-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:#526574}
+.domain-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:0.75rem;color:#526574}
 .domain-legend span{display:inline-flex;align-items:center;gap:6px}
-.domain-legend i{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:4px;font-style:normal;font-size:10px;color:#fff}
+.domain-legend i{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:4px;font-style:normal;font-size:0.625rem;color:#fff}
 .domain-legend i.unmeasured{color:#6b7f74}
 .domain-rows{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px}
 .domain-rows li{display:grid;grid-template-columns:120px minmax(0,1fr) 92px;align-items:center;gap:12px}
-.domain-name{justify-content:flex-start;min-height:28px;padding:0;border:0;background:transparent;font-size:13px;font-weight:600;color:#243e47;text-align:left}
+.domain-name{justify-content:flex-start;min-height:28px;padding:0;border:0;background:transparent;font-size:0.8125rem;font-weight:600;color:#243e47;text-align:left}
 .domain-name:hover:not(:disabled){border:0;text-decoration:underline}
 .domain-track{display:flex;gap:2px;height:14px}
 .domain-track .seg{height:100%;min-width:4px}
 .domain-track .seg:first-child{border-radius:4px 0 0 4px}.domain-track .seg:last-child{border-radius:0 4px 4px 0}.domain-track .seg:only-child{border-radius:4px}
 .seg.done{background:#2f8a5f}.seg.recheck{background:#7c66b8}.seg.learn{background:#c46a1c}.seg.unmeasured{background:#dfe6e3}
-.domain-count{font-size:12px;color:#526574;white-space:nowrap}.domain-count b{color:#183b43;font-size:14px}
+.domain-count{font-size:0.75rem;color:#526574;white-space:nowrap}.domain-count b{color:#183b43;font-size:0.875rem}
 @media(max-width:700px){
   .flow-steps{grid-template-columns:1fr;gap:4px}
   .flow-step:not(:last-child)::after{top:48px;bottom:-4px;left:27px;right:auto;width:2px;height:auto}
@@ -92,25 +92,25 @@
 
 /* ① 풀이 여정 */
 .journey{margin:14px 0 6px;padding:12px 14px;border:1px solid #e3ebe7;border-radius:12px;background:#fbfcfb}
-.journey figcaption{font-weight:700;font-size:14px;color:#243e47;margin-bottom:6px}
+.journey figcaption{font-weight:700;font-size:0.875rem;color:#243e47;margin-bottom:6px}
 .journey-scroll{overflow-x:auto}
 .journey svg{display:block;font-family:inherit}
-.j-lane{font-size:11px;fill:#526574}.j-grid{stroke:#e6edea;stroke-width:1}
+.j-lane{font-size:0.6875rem;fill:#526574}.j-grid{stroke:#e6edea;stroke-width:1}
 .j-path{fill:none;stroke:#9fb8ae;stroke-width:2;stroke-linejoin:round}
-.j-dot circle{stroke:#fff;stroke-width:2}.j-dot text{font-size:11px;font-weight:800;fill:#fff}
+.j-dot circle{stroke:#fff;stroke-width:2}.j-dot text{font-size:0.6875rem;font-weight:800;fill:#fff}
 .j-dot.correct circle{fill:var(--res-ok)}.j-dot.incorrect circle{fill:var(--res-bad)}.j-dot.abstained circle{fill:var(--res-unknown)}
 .j-dot.helped circle{stroke:#243e47;stroke-dasharray:3 2}
-.result-key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:12px;color:#526574}
+.result-key{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:6px;font-size:0.75rem;color:#526574}
 .result-key span{display:inline-flex;align-items:center;gap:5px}
-.result-key i{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;font-style:normal;font-size:10px;font-weight:800;color:#fff}
+.result-key i{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;font-style:normal;font-size:0.625rem;font-weight:800;color:#fff}
 .result-key .correct i{background:var(--res-ok)}.result-key .incorrect i{background:var(--res-bad)}.result-key .abstained i{background:var(--res-unknown)}
 
 /* ② 처음 풀이 → 재도전 → 새 문제 */
 .outcome-flow{list-style:none;margin:0 0 20px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
 .outcome-flow li{position:relative;display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid #dce5e8;border-radius:12px;background:#fff}
-.outcome-flow li:not(:last-child)::after{content:"→";position:absolute;right:-22px;top:50%;transform:translateY(-50%);color:#8aa39a;font-weight:700;font-size:18px}
+.outcome-flow li:not(:last-child)::after{content:"→";position:absolute;right:-22px;top:50%;transform:translateY(-50%);color:#8aa39a;font-weight:700;font-size:1.125rem}
 .outcome-flow div{display:flex;flex-direction:column;gap:2px;min-width:0}
-.outcome-flow span{font-size:13px;color:#526574}.outcome-flow strong{font-size:18px;color:#183b43}.outcome-flow small{font-size:12px;color:#6b7f74}
+.outcome-flow span{font-size:0.8125rem;color:#526574}.outcome-flow strong{font-size:1.125rem;color:#183b43}.outcome-flow small{font-size:0.75rem;color:#6b7f74}
 .flow-result{display:grid;place-items:center;flex:none;width:36px;height:36px;border-radius:50%;font-style:normal;font-weight:800;color:#fff;background:#9fb0aa}
 .flow-result.correct{background:var(--res-ok)}.flow-result.incorrect{background:var(--res-bad)}.flow-result.abstained{background:var(--res-unknown)}
 .flow-result.mixed{background:linear-gradient(90deg,var(--res-ok) 50%,var(--res-bad) 50%)}
@@ -120,21 +120,21 @@
 
 /* ③ 영역별 수준 사다리 */
 .ladder-card{background:#fff;border:1px solid #dce5e8;border-radius:14px;padding:16px 20px;margin:0 0 20px}
-.ladder-card h3{margin:0 0 10px;font-size:15px}
-.ladder-legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:#526574;margin-bottom:8px}
+.ladder-card h3{margin:0 0 10px;font-size:0.9375rem}
+.ladder-legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:0.75rem;color:#526574;margin-bottom:8px}
 .ladder-legend span{display:inline-flex;align-items:center;gap:5px}
 .ladder-table{width:100%;border-collapse:separate;border-spacing:4px 4px}
-.ladder-table th{font-size:12px;color:#526574;font-weight:600;text-align:center}
-.ladder-table tbody th{text-align:left;font-size:13px;color:#243e47;white-space:nowrap;padding-right:8px}
+.ladder-table th{font-size:0.75rem;color:#526574;font-weight:600;text-align:center}
+.ladder-table tbody th{text-align:left;font-size:0.8125rem;color:#243e47;white-space:nowrap;padding-right:8px}
 .ladder-table td{padding:0}
-.cell{display:inline-grid;place-items:center;width:100%;min-width:22px;height:26px;border-radius:6px;font-size:12px;font-weight:700;background:var(--res-none);color:#7d8d87}
-.ladder-legend .cell{width:18px;height:18px;min-width:0;font-size:10px}
+.cell{display:inline-grid;place-items:center;width:100%;min-width:22px;height:26px;border-radius:6px;font-size:0.75rem;font-weight:700;background:var(--res-none);color:#7d8d87}
+.ladder-legend .cell{width:18px;height:18px;min-width:0;font-size:0.625rem}
 .cell.pass{background:var(--res-ok);color:#fff}
 .cell.above{background:#d6ebdf;color:#2f6f4d}
 .cell.pending{background:#e9e3f6;color:#5d4b98}
 .cell.blocked{background:#fbe6d4;color:#9a4f12;box-shadow:inset 0 0 0 1.5px var(--res-bad)}
 .ladder-inline{display:inline-flex;gap:3px;vertical-align:middle}
-.ladder-inline .cell{width:22px;height:20px;font-size:10px}
+.ladder-inline .cell{width:22px;height:20px;font-size:0.625rem}
 
 /* ④ 진단 진행 6칸 막대 */
 .domain-steps{list-style:none;margin:10px 0 4px;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
@@ -142,7 +142,7 @@
 .domain-steps i{display:block;height:6px;border-radius:99px;background:#e3ebe7}
 .domain-steps li.done i{background:var(--primary,#0d9488)}
 .domain-steps li.now i{background:linear-gradient(90deg,var(--primary,#0d9488) 40%,#bfe3dd 40%)}
-.domain-steps span{font-size:11px;color:#7d8d87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.domain-steps span{font-size:0.6875rem;color:#7d8d87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .domain-steps li.now span{color:#0b766d;font-weight:700}.domain-steps li.done span{color:#526574}
 
 /* ⑤ 개념별 근거 카드 격자 + 미니 막대 */
@@ -152,7 +152,7 @@
 .mini-bar{display:flex;gap:2px;width:96px;height:8px;flex:none}
 .mini-bar i{height:100%}.mini-bar i:first-child{border-radius:4px 0 0 4px}.mini-bar i:last-child{border-radius:0 4px 4px 0}.mini-bar i:only-child{border-radius:4px}
 .mini-bar .correct{background:var(--res-ok)}.mini-bar .incorrect{background:var(--res-bad)}.mini-bar .abstained{background:var(--res-unknown)}
-.mini-count{font-size:12px;color:#526574}
+.mini-count{font-size:0.75rem;color:#526574}
 
 /* ⑥ 수업 준비 안의 영역 막대는 조금 작게 */
 .card .domain-bars{border:0;padding:4px 0 0;margin:8px 0 12px}

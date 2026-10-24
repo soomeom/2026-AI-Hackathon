@@ -14,6 +14,7 @@ import { initialAssessmentPanel, handleInitialAssessmentAction } from './initial
 import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 import { renderRoadmapPage } from './roadmap-page.js';
 import { renderMentorAIPractice } from './ai-practice.js';
+import { renderGuardianMessage } from './guardian-message.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unknown: '확인 불가' };
@@ -53,6 +54,7 @@ export function renderMentor(props) {
           ${summary.reviewFlags.length ? `<h4>검토할 점</h4><ul>${[...new Set(summary.reviewFlags.map((f) => FLAG_TEXT[f.code] ?? f.code))].map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
         </section>
       </div>`}
+      ${tab==='home'?renderGuardianMessage(state,ui):''}
       ${['home','learning','planning'].includes(tab)?renderMentorAIPractice(state,catalog):''}`;
   ui.flash = null;
 
@@ -64,11 +66,18 @@ export function renderMentor(props) {
   };
   root.oninput = event => {
     if (event.target.id === 'initial-reason') ui.initialReason = event.target.value;
+    if (event.target.id === 'guardian-message') ui.guardianMessageDraft = event.target.value;
   };
 
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
+    if(b.dataset.action==='share-guardian-message'){
+      const text=(root.querySelector('#guardian-message')?.value??'').trim();
+      if(!text||text.length>500){root.querySelector('#guardian-message-status').textContent='1~500자로 안내를 적어 주세요.';return;}
+      ui.guardianMessageDraft=text;ui.flash='보호자 학습 소식에 안내를 공유했어요.';
+      props.update(s=>({...s,guardianMessages:[...(s.guardianMessages??[]),{learnerId:s.learnerId,mentorId:s.mentorId,text,sharedAt:new Date().toISOString()}]}));return;
+    }
     if (handleInitialAssessmentAction(b, props)) return;
     if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); root.focus?.(); return; }
     if (b.dataset.goto) {

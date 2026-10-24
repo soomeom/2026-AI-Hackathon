@@ -1,0 +1,22 @@
+/* 크기만 변경한다. DOM 재생성이나 학습 명령을 실행하지 않는다. */
+html{font-size:100%}html.large-text{font-size:125%}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#large-text[aria-pressed="true"]{background:var(--primary-soft);color:var(--primary-ink);border:1px solid var(--primary)}
+.large-text body{line-height:1.7}.large-text button{white-space:normal;min-height:48px}.large-text .badge,.large-text .pill{white-space:normal}
+.large-text .sidenav-item{white-space:normal}.large-text .sidenav{top:0;height:100vh}
+.large-text .map-lesson,.large-text .rm-order{max-height:none}.large-text .map-page-heading{flex-wrap:wrap}
+.large-text .ev-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.large-text .table{display:block;overflow-x:auto}.large-text .attempt{grid-template-columns:1fr}.large-text .attempt .facts{text-align:left;white-space:normal}
+.large-text .segment-labels{grid-template-columns:repeat(3,minmax(0,1fr))}
+.large-text .rm-canvas{overflow-x:auto}.large-text .rm-canvas svg{min-width:1500px}
+.large-text .rm-node-t,.large-text .rm-domain{font-size:14px}.large-text .rm-domain-sub,.large-text .rm-step{font-size:12px}
+.large-text .brand .muted{display:none}.large-text .topbar{position:relative}
+.large-text .entry-intro h1{font-size:2.5rem}
+.large-text .entry-roles{grid-template-columns:1fr}
+.large-text .domain-steps span{white-space:normal;overflow:visible;text-overflow:clip}
+.large-text .outcome-flow,.large-text .mentor-flow{overflow-wrap:anywhere}
+#image-viewer{border:1px solid var(--line);border-radius:var(--radius-lg);padding:1.2rem;width:min(95vw,1100px);max-width:95vw;max-height:94vh;color:var(--ink);background:var(--surface)}
+#image-viewer::backdrop{background:rgba(10,30,30,.65)}.viewer-head{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:1rem}.viewer-head h2{margin-right:auto}
+.viewer-scroll{overflow:auto;max-height:65vh;border:1px solid var(--line);background:white}.viewer-scroll img{display:block;max-width:100%;height:auto;margin:auto}
+.natural-size .viewer-scroll img{max-width:none;min-width:1200px}
+@media(max-width:700px){.large-text main{padding:1rem}.large-text .grid{grid-template-columns:1fr}.large-text .card{padding:1rem}.large-text .student-bar{flex-wrap:wrap}.large-text .current-profile{overflow-wrap:anywhere}.large-text .map-summary{grid-template-columns:1fr}.large-text .topbar{gap:.5rem;padding:.6rem .8rem}.large-text .session-controls{flex-wrap:wrap}}
