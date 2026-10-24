@@ -1,0 +1,16 @@
+{
+  "name": "baeumgil",
+  "version": "0.1.0",
+  "private": true,
+  "description": "배움길 해커톤 MVP: 브라우저 앱과 Node.js 로컬 서버(/api/ai)",
+  "type": "module",
+  "engines": {
+    "node": ">=20.12"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test",
+    "ai:check": "node server/ai/check.mjs"
+  }
+}
