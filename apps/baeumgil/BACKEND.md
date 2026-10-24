@@ -155,7 +155,7 @@ const response = await fetch('/api/ai', {
 ```json
 {
   "ok": true, "requestId": "ai-req-3f2c", "inputVersion": "rev-12", "kind": "lesson_plan",
-  "source": "live_ai", "provider": "gemini", "model": "gemini-3.8-flash",
+  "source": "live_ai", "provider": "gemini", "model": "gemini-3.5-flash-lite",
   "output": { "kind": "lesson_plan", "priorities": [...], "mentorQuestions": [...], "plan": [...] },
   "completedAt": "2026-10-24T07:00:00.000Z"
 }
@@ -190,7 +190,7 @@ const response = await fetch('/api/ai', {
 ### 준비 상태 (`GET /api/health`)
 
 ```json
-{ "ok": true, "ai": { "configured": true, "provider": "gemini", "model": "gemini-3.8-flash" } }
+{ "ok": true, "ai": { "configured": true, "provider": "gemini", "model": "gemini-3.5-flash-lite" } }
 ```
 
 ## 팀원에게 확인받을 것
@@ -198,7 +198,8 @@ const response = await fetch('/api/ai', {
 | 대상 | 확인할 것 |
 |---|---|
 | 다은·수영 | 앱 기록 모양(위 절)을 `tests/fixtures.js`의 `makeState`와 같은 것으로 확정해도 되는지 |
-| 다은·수영 | Gemini 3.6 이상은 `temperature`를 무시한다. `buildGeminiRequest`의 `temperature: 0.2`는 효과가 없을 수 있음 |
+| 다은·수영 | Gemini 3 문서는 `temperature`를 기본값 1.0으로 두라고 권장한다(낮추면 반복·품질 저하 가능). `buildGeminiRequest`의 `temperature: 0.2`를 뺄지 |
+| 다은·수영·PM | 기본 모델은 `gemini-3.5-flash-lite`. 2026-10-24 실측으로 수업 제안 1회가 약 4초에 검증까지 통과했다. `gemini-3.8-flash`는 60초 이상 걸려 15초 제한을 넘는다 |
 | 예서 | 저장 호출 순서(직렬 `await`, 반환 state 사용)와 오류 문구를 그대로 쓸지 |
 | PM | 무료 등급 Gemini 키 발급 담당, 시연 PC에서 `npm run ai:check` 확인 |
 | PM·예서 | 본선 다른 기기 지원 시 `/api/state`·DB 도입 (역할 문서 5절 7가지 기록 필요) |

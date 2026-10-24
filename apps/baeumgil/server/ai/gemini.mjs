@@ -5,7 +5,9 @@
 import { ERROR_CODES } from '../../public/src/domain/contracts.js';
 
 const API_BASE = 'https://generativelanguage.googleapis.com/v1beta';
-export const DEFAULT_GEMINI_MODEL = 'gemini-3.8-flash';
+// 2026-10-24 실측(팀 수업 제안 1회): gemini-3.8-flash는 60초 이상, 생각 강도 low여도 47초라 15초 제한을 넘는다.
+// gemini-3.5-flash-lite는 약 4초에 팀 출력 검증까지 통과했다.
+export const DEFAULT_GEMINI_MODEL = 'gemini-3.5-flash-lite';
 
 export class ProviderError extends Error {
   constructor(code, message, { status, cause } = {}) {
