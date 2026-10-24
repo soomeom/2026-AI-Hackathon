@@ -372,9 +372,9 @@
         "core": "다항식의 덧셈"
       },
       "prerequisite_concept": [
-        "astra-algebra-l1-지수법칙"
+        "astra-algebra-l1-정수의 덧셈"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "fallback_question_id": "ged-middle-2025-1-math-q02",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -396,7 +396,7 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q09"
+          "ged-middle-2025-1-math-q02"
         ],
         "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
       },
@@ -1211,9 +1211,9 @@
         "core": "경우의 수"
       },
       "prerequisite_concept": [
-        "astra-counting-l1-확률"
+        "astra-counting-l1-경우 나열"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q14",
+      "fallback_question_id": "astra-count-basic",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -1235,9 +1235,9 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q14",
           "astra-count-basic",
-          "astra-count-one"
+          "astra-count-one",
+          "ged-middle-2025-1-math-q14"
         ],
         "reason": "관련 선수 개념의 수행을 직접 확인"
       },
@@ -1304,9 +1304,9 @@
         "core": "조합"
       },
       "prerequisite_concept": [
-        "astra-counting-l1-확률"
+        "astra-counting-l1-경우 나열"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q14",
+      "fallback_question_id": "astra-count-basic",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -1328,9 +1328,9 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q14",
           "astra-count-basic",
-          "astra-count-one"
+          "astra-count-one",
+          "ged-middle-2025-1-math-q14"
         ],
         "reason": "관련 선수 개념의 수행을 직접 확인"
       },
@@ -2472,10 +2472,8 @@
         "unit": "제곱근",
         "core": "제곱근"
       },
-      "prerequisite_concept": [
-        "astra-equations-l1-일차방정식"
-      ],
-      "fallback_question_id": "ged-middle-2025-1-math-q04",
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2496,10 +2494,7 @@
         "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
       },
       "remedialPath": {
-        "questionIds": [
-          "ged-middle-2025-1-math-q04",
-          "ged-middle-2025-1-math-q10"
-        ],
+        "questionIds": [],
         "reason": "관련 선수 개념의 수행을 직접 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-15.png"
@@ -2820,9 +2815,9 @@
         "core": "원의 접선"
       },
       "prerequisite_concept": [
-        "astra-geometry-l1-삼각형의 닮음"
+        "astra-geometry-l1-이등변삼각형"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "fallback_question_id": "ged-middle-2025-1-math-q12",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2844,8 +2839,8 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q13",
           "ged-middle-2025-1-math-q12",
+          "ged-middle-2025-1-math-q13",
           "ged-middle-2025-1-math-q06"
         ],
         "reason": "관련 선수 개념의 수행을 직접 확인"

@@ -1,14 +1,39 @@
 // POST /api/ai 처리 (담당: 지훈, PRD 10절)
-// 화면은 다은·수영님 ai/contracts.js의 buildAIInput 결과(input)를 보낸다.
-// 서버는 같은 모듈의 buildGeminiRequest로 Gemini 본문을 만들고, validateAIOutput을 통과한 결과만 돌려준다.
+// 화면은 AI 계약 모듈의 입력 생성 함수 결과(input)를 보낸다. input.kind로 계약을 고른다.
+//   lesson_plan·log_narrative → 다은·수영님 ai/contracts.js
+//   roadmap_route              → roadmap/ai-route.js
+// 서버는 그 계약의 함수로 Gemini 본문을 만들고, 출력 검증을 통과한 결과만 돌려준다.
 // 서버가 하는 일: 형식 검사, 15초 제한, 공급자 호출, 오류 분류.
 
 import { AI_CONTRACT_VERSION, AI_KINDS, buildGeminiRequest, validateAIOutput } from '../../public/src/ai/contracts.js';
 import { ERROR_CODES, fail, succeed } from '../../public/src/domain/contracts.js';
+import {
+  ROADMAP_AI_CONTRACT_VERSION,
+  ROADMAP_AI_KIND,
+  buildRoadmapGeminiRequest,
+  validateRoadmapAIOutput,
+} from '../../public/src/roadmap/ai-route.js';
 
 export const AI_TIMEOUT_MS = 15_000;
 const MAX_ID_CHARS = 200;
-const ALLOWED_ID_FIELDS = ['allowedConceptIds', 'allowedEvidenceIds', 'allowedQuestionIds'];
+
+const AI_CONTRACTS = [
+  {
+    kinds: AI_KINDS,
+    version: AI_CONTRACT_VERSION,
+    idListFields: ['allowedConceptIds', 'allowedEvidenceIds', 'allowedQuestionIds'],
+    buildRequest: buildGeminiRequest,
+    validateOutput: validateAIOutput,
+  },
+  {
+    kinds: [ROADMAP_AI_KIND],
+    version: ROADMAP_AI_CONTRACT_VERSION,
+    idListFields: ['allowedNodeIds', 'allowedAttemptIds', 'startCandidateIds'],
+    nonEmptyField: 'allowedNodeIds', // 로드맵 데이터를 받기 전에는 비어 있어 요청이 거부된다
+    buildRequest: buildRoadmapGeminiRequest,
+    validateOutput: validateRoadmapAIOutput,
+  },
+];
 
 const STATUS_BY_CODE = {
   [ERROR_CODES.INVALID_REQUEST]: 400,
@@ -28,6 +53,10 @@ const RETRYABLE = new Set([
   ERROR_CODES.AI_INVALID_OUTPUT,
 ]);
 
+export function findAiContract(kind) {
+  return AI_CONTRACTS.find((contract) => contract.kinds.includes(kind)) ?? null;
+}
+
 export function parseAiRequest(body) {
   if (!isPlainObject(body)) {
     return fail(ERROR_CODES.INVALID_REQUEST, { field: 'body' });
@@ -42,43 +71,41 @@ export function parseAiRequest(body) {
   if (!isPlainObject(input)) {
     return fail(ERROR_CODES.INVALID_REQUEST, { field: 'input' });
   }
-  if (input.contractVersion !== AI_CONTRACT_VERSION) {
-    return fail(ERROR_CODES.INVALID_REQUEST, { field: 'input.contractVersion' });
-  }
-  if (!AI_KINDS.includes(input.kind)) {
+  const contract = findAiContract(input.kind);
+  if (!contract) {
     return fail(ERROR_CODES.INVALID_REQUEST, { field: 'input.kind' });
   }
-  for (const field of ALLOWED_ID_FIELDS) {
+  if (input.contractVersion !== contract.version) {
+    return fail(ERROR_CODES.INVALID_REQUEST, { field: 'input.contractVersion' });
+  }
+  for (const field of contract.idListFields) {
     if (!Array.isArray(input[field]) || !input[field].every((id) => typeof id === 'string')) {
       return fail(ERROR_CODES.INVALID_REQUEST, { field: `input.${field}` });
     }
   }
+  if (contract.nonEmptyField && input[contract.nonEmptyField].length === 0) {
+    return fail(ERROR_CODES.INVALID_REQUEST, { field: `input.${contract.nonEmptyField}`, reason: 'roadmap_empty' });
+  }
   if (!isPlainObject(input.constraints)) {
     return fail(ERROR_CODES.INVALID_REQUEST, { field: 'input.constraints' });
   }
-  return succeed({ requestId, inputVersion, input });
+  return succeed({ requestId, inputVersion, input, contract });
 }
 
 /**
  * @param {object} options
  * @param {{ name: string, model: string, generate: Function } | null} options.provider 키가 없으면 null
- * @param {(input: object) => object} [options.buildRequest] Gemini 본문 생성. 실험 도구(ai:lab)만 바꾸고 서버는 팀 기본값을 쓴다
+ * @param {(input: object) => object} [options.buildRequest] Gemini 본문 생성. 실험 도구(ai:lab)만 바꾸고 서버는 계약 기본값을 쓴다
  * @returns {(body: unknown, context?: { signal?: AbortSignal }) => Promise<{ status: number, payload: object }>}
  */
-export function createAiHandler({
-  provider,
-  buildRequest = buildGeminiRequest,
-  timeoutMs = AI_TIMEOUT_MS,
-  now = () => new Date(),
-  log = () => {},
-}) {
+export function createAiHandler({ provider, buildRequest, timeoutMs = AI_TIMEOUT_MS, now = () => new Date(), log = () => {} }) {
   return async function handleAiRequest(body, { signal: clientSignal } = {}) {
     const parsed = parseAiRequest(body);
     if (!parsed.ok) {
       const echo = { requestId: body?.requestId ?? null, inputVersion: body?.inputVersion ?? null, kind: body?.input?.kind ?? null };
       return failure(echo, parsed.error);
     }
-    const { requestId, inputVersion, input } = parsed.value;
+    const { requestId, inputVersion, input, contract } = parsed.value;
     // 늦게 도착한 이전 요청을 화면이 걸러낼 수 있도록 요청 ID와 입력 버전을 그대로 돌려준다 (AC-10)
     const echo = { requestId, inputVersion, kind: input.kind };
     if (!provider) {
@@ -91,11 +118,12 @@ export function createAiHandler({
     let outcome = 'ok';
     let detail;
     try {
-      // 시스템 지시는 kind와 메모 유무로만 정해지므로 화면이 프롬프트를 바꿀 수 없다
-      const result = await provider.generate({ request: buildRequest(input), signal });
+      // 시스템 지시는 계약 모듈이 만들므로 화면이 프롬프트를 바꿀 수 없다
+      const request = (buildRequest ?? contract.buildRequest)(input);
+      const result = await provider.generate({ request, signal });
 
-      // 허용 ID 밖 참조, 필수 필드 누락, 단정적·정서 표현이 있으면 채택하지 않는다 (AC-09)
-      const verdict = validateAIOutput(input, result.text);
+      // 허용 ID 밖 참조, 필수 필드 누락, 순서·표현 규칙 위반이 있으면 채택하지 않는다 (AC-09)
+      const verdict = contract.validateOutput(input, result.text);
       if (!verdict.ok) {
         outcome = ERROR_CODES.AI_INVALID_OUTPUT;
         return failure(echo, fail(ERROR_CODES.AI_INVALID_OUTPUT, { errors: verdict.errors }).error);

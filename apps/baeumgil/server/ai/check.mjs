@@ -5,6 +5,7 @@
 //   npm run ai:check -- --kind=log_narrative --note="메모"   일지 문장, 관찰 메모 포함
 //   npm run ai:prompt                                  Gemini에 보낼 프롬프트만 출력 (호출 안 함, 키 불필요)
 //   npm run ai:lab -- --kind=lesson_plan               prompt-lab/<kind>.txt의 규칙으로 바꿔 호출 (팀 파일은 안 바뀜)
+//   npm run ai:check -- --kind=roadmap_route --goal="간호사"   실제 로드맵·30분 레벨테스트 예시 결과로 루트 1회 호출
 //   --show-prompt                                      호출 전에 프롬프트도 출력
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -12,39 +13,70 @@ import path from 'node:path';
 import { parseArgs } from 'node:util';
 
 import { AI_KINDS, buildAIInput, buildAIPrompt, buildGeminiRequest } from '../../public/src/ai/contracts.js';
+import {
+  ROADMAP_AI_KIND,
+  buildRoadmapAIInput,
+  buildRoadmapAIPrompt,
+  buildRoadmapGeminiRequest,
+} from '../../public/src/roadmap/ai-route.js';
+import { getLevelTestQuestion, startLevelTest, submitLevelTestAnswer, summarizeLevelTest } from '../../public/src/roadmap/level-test.js';
 import { makeAttempt, makeCatalog, stateWithAttempts } from '../../tests/fixtures.js';
 import { APP_ROOT, loadConfig } from '../config.mjs';
 import { createAiHandler } from './handler.mjs';
 
+const KINDS = [...AI_KINDS, ROADMAP_AI_KIND];
 const { values: options } = parseArgs({
   options: {
     kind: { type: 'string', default: 'lesson_plan' },
     note: { type: 'string', default: '' },
+    goal: { type: 'string', default: '' },
     'show-prompt': { type: 'boolean', default: false },
     'prompt-only': { type: 'boolean', default: false },
     lab: { type: 'boolean', default: false },
   },
 });
-if (!AI_KINDS.includes(options.kind)) {
-  console.error(`--kind는 ${AI_KINDS.join(' 또는 ')}만 가능해요.`);
+if (!KINDS.includes(options.kind)) {
+  console.error(`--kind는 ${KINDS.join(', ')} 중 하나만 가능해요.`);
   process.exit(1);
 }
 
-// 원 기출 오답 → 분배법칙 확인 문항 오답 → 이항 확인 문항 정답
-const state = stateWithAttempts([
-  makeAttempt({ id: 'original-1', choiceId: 'b', result: 'incorrect' }),
-  makeAttempt({ stage: 'concept_check', sourceQuestionId: 'q-cc-distribute-1', choiceId: 'a', result: 'incorrect' }),
-  makeAttempt({ stage: 'concept_check', sourceQuestionId: 'q-cc-transpose-1', choiceId: 'b', result: 'correct' }),
-]);
-const input = buildAIInput(state, { learnerId: 'learner-1', kind: options.kind, catalog: makeCatalog(), note: options.note });
+let input;
+let buildPrompt;
+let baseBuildRequest;
+if (options.kind === ROADMAP_AI_KIND) {
+  // 실제 로드맵(28개 개념)과 30분 레벨테스트에서 제곱근·근호 계산·근의 공식을 틀린 결과
+  const readRoadmapData = (name) => JSON.parse(readFileSync(path.join(APP_ROOT, 'public/src/roadmap', name), 'utf8'));
+  const graph = readRoadmapData('roadmap.json');
+  const levelTests = readRoadmapData('level-tests.json');
+  const wrong = new Set(['lt30-sqrt', 'lt30-radical', 'lt30-quad-formula']);
+  let session = startLevelTest(levelTests, 'full-30');
+  for (let n = 0; session.status === 'active'; n += 1) {
+    const question = getLevelTestQuestion(levelTests, session.currentId);
+    const choice = question.choices.find((entry) => (entry.value === question.answer) !== wrong.has(question.id));
+    session = submitLevelTestAnswer(session, { id: `lt${n}`, questionId: question.id, choiceId: choice.id }, levelTests);
+  }
+  input = buildRoadmapAIInput({ graph, diagnostic: summarizeLevelTest(session, levelTests, graph), goal: options.goal });
+  buildPrompt = buildRoadmapAIPrompt;
+  baseBuildRequest = buildRoadmapGeminiRequest;
+} else {
+  // 원 기출 오답 → 분배법칙 확인 문항 오답 → 이항 확인 문항 정답
+  const state = stateWithAttempts([
+    makeAttempt({ id: 'original-1', choiceId: 'b', result: 'incorrect' }),
+    makeAttempt({ stage: 'concept_check', sourceQuestionId: 'q-cc-distribute-1', choiceId: 'a', result: 'incorrect' }),
+    makeAttempt({ stage: 'concept_check', sourceQuestionId: 'q-cc-transpose-1', choiceId: 'b', result: 'correct' }),
+  ]);
+  input = buildAIInput(state, { learnerId: 'learner-1', kind: options.kind, catalog: makeCatalog(), note: options.note });
+  buildPrompt = buildAIPrompt;
+  baseBuildRequest = buildGeminiRequest;
+}
 
-// 실험용 규칙: 학생 기록 데이터와 응답 형식·검증은 팀 것 그대로 두고 시스템 지시만 파일 내용으로 바꾼다
-let buildRequest = buildGeminiRequest;
+// 실험용 규칙: 학생 기록 데이터와 응답 형식·검증은 계약 것 그대로 두고 시스템 지시만 파일 내용으로 바꾼다
+let buildRequest = baseBuildRequest;
 if (options.lab) {
   const labFile = path.join(APP_ROOT, 'prompt-lab', `${options.kind}.txt`);
   if (!existsSync(labFile)) {
     mkdirSync(path.dirname(labFile), { recursive: true });
-    writeFileSync(labFile, `${buildAIPrompt(input).systemInstruction}\n`, 'utf8');
+    writeFileSync(labFile, `${buildPrompt(input).systemInstruction}\n`, 'utf8');
     console.log(`실험용 프롬프트 파일을 만들었어요: ${labFile}`);
     console.log('지금 팀 프롬프트 규칙이 들어 있어요. 고쳐서 저장한 뒤 다시 실행하세요.');
     process.exit(0);
@@ -55,11 +87,11 @@ if (options.lab) {
     process.exit(1);
   }
   console.log(`실험용 프롬프트 사용 중: ${labFile}`);
-  buildRequest = (aiInput) => ({ ...buildGeminiRequest(aiInput), systemInstruction: { parts: [{ text: labSystem }] } });
+  buildRequest = (aiInput) => ({ ...baseBuildRequest(aiInput), systemInstruction: { parts: [{ text: labSystem }] } });
 }
 
 if (options['show-prompt'] || options['prompt-only']) {
-  const prompt = buildAIPrompt(input);
+  const prompt = buildPrompt(input);
   console.log('===== 시스템 지시 (규칙) =====');
   console.log(buildRequest(input).systemInstruction.parts[0].text);
   console.log('\n===== 사용자 입력 (학생 기록 데이터) =====');

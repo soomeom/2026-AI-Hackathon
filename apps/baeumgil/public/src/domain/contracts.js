@@ -84,6 +84,12 @@ export const LOG_STATUSES = Object.freeze({
   CONFIRMED: 'confirmed',
 });
 
+// 로드맵 루트 상태. 검사를 통과한 AI 루트는 바로 적용되고, 새 루트가 오면 이전 루트는 교체됨으로 남는다
+export const ROADMAP_PLAN_STATUSES = Object.freeze({
+  ACTIVE: 'active',
+  REPLACED: 'replaced',
+});
+
 export const ERROR_CODES = Object.freeze({
   // 저장 (FR-09)
   STORAGE_UNAVAILABLE: 'storage_unavailable',
@@ -104,6 +110,8 @@ export const ERROR_CODES = Object.freeze({
   INVALID_ACTIVITY_MINUTES: 'invalid_activity_minutes',
   REVIEW_REQUIRED: 'review_required',
   EMPTY_LOG_TEXT: 'empty_log_text',
+  // 로드맵
+  INVALID_ROADMAP: 'invalid_roadmap',
   // AI (PRD 10.2)
   INVALID_REQUEST: 'invalid_request',
   AI_NOT_CONFIGURED: 'ai_not_configured',
@@ -133,6 +141,7 @@ export const ERROR_MESSAGES = Object.freeze({
   invalid_activity_minutes: '실제 활동 시간(분)을 1 이상의 정수로 입력해 주세요.',
   review_required: '작성 내용을 검토했다는 확인이 필요해요.',
   empty_log_text: '일지 내용을 입력해 주세요.',
+  invalid_roadmap: '로드맵 데이터의 연결이 올바르지 않아요.',
   invalid_request: 'AI 요청 형식이 올바르지 않아요.',
   ai_not_configured: 'AI 키가 서버에 설정되지 않았어요.',
   ai_timeout: 'AI 응답이 15초 안에 오지 않았어요. 다시 시도하거나 직접 작성해 주세요.',
@@ -173,6 +182,9 @@ export function createEmptyAppState() {
     sessions: [], // 실제 멘토링 회기 (mentoring/logs.js)
     logs: [], // 활동일지 개정본 (mentoring/logs.js)
     aiArtifacts: [], // AI 결과와 채택 여부
+    diagnostics: [], // 레벨테스트 진행 기록 (roadmap/diagnostic-log.js)
+    roadmapPlans: [], // 학생별 로드맵 루트, 적용 중·교체됨 (roadmap/plans.js)
+    roadmapPractices: [], // 로드맵 순서대로 푼 연습 기록 (roadmap/practice.js)
   };
 }
 

@@ -1,0 +1,426 @@
+{
+  "version": 2,
+  "note": "reference.basis가 official_variant인 문항은 한국교육과정평가원 검정고시 기출의 숫자만 바꾼 변형이다(derivedFrom = data/exam-sources/question-drafts.json의 원문 ID). authored인 문항은 같은 개념의 기출이 없거나, 그림이 있어야 하거나, 기출의 개념이 로드맵 개념과 달라 팀이 만든 문항이다. 기출 이용 조건은 확인 전(usageReviewStatus: unverified)이고, 정답은 tests/level-test.test.js가 다시 계산해 검사하지만 교육자 검토(educatorValidated) 전이다.",
+  "review": { "method": "answer_recomputed_in_tests", "reviewer": "Claude", "date": "2026-10-24", "educatorValidated": false },
+  "tests": [
+    {
+      "id": "quick-10",
+      "name": "10분 레벨테스트",
+      "timeLimitMinutes": 10,
+      "purpose": "고1 핵심 주제 8문항으로 출발점을 빠르게 추정한다. 틀린 문항은 관련 로드맵 개념을 '확인 필요'로 표시한다.",
+      "questionIds": ["lt10-poly-ops", "lt10-factor-cubic", "lt10-discriminant", "lt10-vieta", "lt10-quad-min", "lt10-cubic-eq", "lt10-quad-ineq", "lt10-distance"]
+    },
+    {
+      "id": "full-30",
+      "name": "30분 레벨테스트",
+      "timeLimitMinutes": 30,
+      "purpose": "로드맵 28개 개념을 한 문항씩 직접 확인한다.",
+      "questionIds": [
+        "lt30-arith", "lt30-fraction", "lt30-integer", "lt30-power",
+        "lt30-letters", "lt30-expr-value", "lt30-linear-expr",
+        "lt30-eq-property", "lt30-linear-eq", "lt30-ineq-property", "lt30-linear-eq-app", "lt30-system", "lt30-linear-ineq", "lt30-system-app", "lt30-quad-eq", "lt30-quad-formula", "lt30-discriminant", "lt30-vieta",
+        "lt30-coordinate", "lt30-proportion", "lt30-linear-fn", "lt30-quad-graph", "lt30-quad-fn-eq",
+        "lt30-exponent", "lt30-sqrt", "lt30-mult-formula", "lt30-radical", "lt30-factor"
+      ]
+    }
+  ],
+  "questions": [
+    {
+      "id": "lt10-poly-ops", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "다항식의 연산", "cluster": "polynomials", "grade": "고1",
+      "prompt": "두 다항식 A = 2x² + 5x, B = ax² + x에 대하여 A + B = bx일 때, 두 상수 a와 b의 합은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−2" }, { "id": "b", "value": "0" }, { "id": "c", "value": "2" }, { "id": "d", "value": "4" }],
+      "answer": "4",
+      "solutionSteps": ["A + B = (2 + a)x² + 6x", "x²의 계수가 0이어야 하므로 a = −2, b = 6", "a + b = 4"],
+      "conceptIds": ["hs-poly-ops"], "relatedNodeIds": ["rm-linear-expr", "rm-integer"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2025-1-math-q01", "qualification": "고졸", "year": 2025, "session": 1, "questionNumber": 1, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-factor-cubic", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "인수분해", "cluster": "polynomials", "grade": "고1",
+      "prompt": "다항식 x³ + 27을 인수분해한 식이 (x + 3)(x² + ax + 9)일 때, 상수 a의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−9" }, { "id": "b", "value": "−3" }, { "id": "c", "value": "3" }, { "id": "d", "value": "9" }],
+      "answer": "−3",
+      "solutionSteps": ["a³ + b³ = (a + b)(a² − ab + b²)", "x³ + 3³ = (x + 3)(x² − 3x + 9)", "a = −3"],
+      "conceptIds": ["hs-factor-cubic"], "relatedNodeIds": ["rm-factor", "rm-mult-formula"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2025-1-math-q03", "qualification": "고졸", "year": 2025, "session": 1, "questionNumber": 3, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-discriminant", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차방정식 (판별식)", "cluster": "equations", "grade": "고1",
+      "prompt": "이차방정식 x² + ax + 9 = 0이 서로 다른 두 실근을 가질 때, 자연수 a의 최솟값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "5" }, { "id": "b", "value": "6" }, { "id": "c", "value": "7" }, { "id": "d", "value": "8" }],
+      "answer": "7",
+      "solutionSteps": ["서로 다른 두 실근이면 판별식 D > 0", "a² − 36 > 0, 자연수 a는 a > 6", "자연수 a의 최솟값은 7"],
+      "conceptIds": ["rm-discriminant"], "relatedNodeIds": [],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2025-1-math-q05", "qualification": "고졸", "year": 2025, "session": 1, "questionNumber": 5, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-vieta", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차방정식 (근과 계수의 관계)", "cluster": "equations", "grade": "고1",
+      "prompt": "이차방정식 x² − 6x + a = 0의 두 근이 3 + √2, 3 − √2일 때, 상수 a의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "6" }, { "id": "b", "value": "7" }, { "id": "c", "value": "9" }, { "id": "d", "value": "11" }],
+      "answer": "7",
+      "solutionSteps": ["두 근의 곱은 a", "(3 + √2)(3 − √2) = 9 − 2", "a = 7"],
+      "conceptIds": ["rm-vieta"], "relatedNodeIds": ["rm-mult-formula", "rm-radical"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2025-1-math-q06", "qualification": "고졸", "year": 2025, "session": 1, "questionNumber": 6, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-quad-min", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차함수", "cluster": "functions", "grade": "고1",
+      "prompt": "−1 ≤ x ≤ 3일 때, 이차함수 y = (x − 2)² + 1의 최솟값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−1" }, { "id": "b", "value": "0" }, { "id": "c", "value": "1" }, { "id": "d", "value": "2" }],
+      "answer": "1",
+      "solutionSteps": ["꼭짓점의 x좌표 2가 −1 ≤ x ≤ 3 안에 있다", "x = 2일 때 최솟값 1"],
+      "conceptIds": ["hs-quad-minmax"], "relatedNodeIds": ["rm-quad-graph"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2025-1-math-q07", "qualification": "고졸", "year": 2025, "session": 1, "questionNumber": 7, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-cubic-eq", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "고차방정식", "cluster": "equations", "grade": "고1",
+      "prompt": "삼차방정식 x³ − 3x + a = 0의 한 근이 2일 때, 상수 a의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−4" }, { "id": "b", "value": "−3" }, { "id": "c", "value": "−2" }, { "id": "d", "value": "−1" }],
+      "answer": "−2",
+      "solutionSteps": ["x = 2를 대입하면 8 − 6 + a = 0", "a = −2"],
+      "conceptIds": ["hs-cubic-eq"], "relatedNodeIds": ["rm-expr-value", "rm-power"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2022-1-math-q08", "qualification": "고졸", "year": 2022, "session": 1, "questionNumber": 8, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-quad-ineq", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차부등식", "cluster": "equations", "grade": "고1",
+      "prompt": "이차부등식 (x − 1)(x − 5) ≤ 0의 해는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "x ≤ 1" }, { "id": "b", "value": "x ≥ 5" }, { "id": "c", "value": "1 ≤ x ≤ 5" }, { "id": "d", "value": "x ≤ 1 또는 x ≥ 5" }],
+      "answer": "1 ≤ x ≤ 5",
+      "solutionSteps": ["(x − 1)(x − 5) ≤ 0이면 x는 1과 5 사이(양 끝 포함)", "1 ≤ x ≤ 5"],
+      "conceptIds": ["hs-quad-ineq"], "relatedNodeIds": ["rm-linear-ineq", "rm-quad-fn-eq"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2024-1-math-q10", "qualification": "고졸", "year": 2024, "session": 1, "questionNumber": 10, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt10-distance", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "두 점 사이의 거리", "cluster": "functions", "grade": "고1",
+      "prompt": "어느 두 학교의 위치를 좌표평면 위에 두 점 A(2, 1), B(8, 9)로 나타냈다. 두 점 A, B 사이의 거리는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "8" }, { "id": "b", "value": "9" }, { "id": "c", "value": "10" }, { "id": "d", "value": "11" }],
+      "answer": "10",
+      "solutionSteps": ["AB = √{(8 − 2)² + (9 − 1)²}", "√(36 + 64) = √100 = 10"],
+      "conceptIds": ["hs-distance"], "relatedNodeIds": ["rm-coordinate", "rm-sqrt"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2026-2-math-q10", "qualification": "고졸", "year": 2026, "session": 2, "questionNumber": 10, "change": "숫자만 변경. 원문 그림은 빼고 발문에 있던 좌표만 씀", "usageReviewStatus": "unverified" }
+    },
+
+    {
+      "id": "lt30-arith", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "자연수의 사칙연산", "cluster": "basics", "grade": "초등",
+      "prompt": "6 + 4 × 3 의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "30" }, { "id": "b", "value": "18" }, { "id": "c", "value": "22" }, { "id": "d", "value": "14" }],
+      "answer": "18",
+      "solutionSteps": ["곱셈을 먼저 계산한다: 4 × 3 = 12", "6 + 12 = 18"],
+      "conceptIds": ["rm-arith"],
+      "reference": { "basis": "authored", "reason": "no_official", "note": "중졸·고졸 기출에 자연수 사칙연산 문항이 없음" }
+    },
+    {
+      "id": "lt30-fraction", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "분수와 소수", "cluster": "basics", "grade": "초등",
+      "prompt": "1/3 + 1/6 의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "2/9" }, { "id": "b", "value": "1/2" }, { "id": "c", "value": "1/9" }, { "id": "d", "value": "2/3" }],
+      "answer": "1/2",
+      "solutionSteps": ["통분하면 2/6 + 1/6 = 3/6", "약분하면 1/2"],
+      "conceptIds": ["rm-fraction"],
+      "reference": { "basis": "authored", "reason": "concept_mismatch", "candidate": "ged-middle-2024-1-math-q08", "note": "가장 가까운 기출은 중2 순환소수를 분수로 바꾸는 문항이라 초등 분수 계산과 다름" }
+    },
+    {
+      "id": "lt30-integer", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "정수와 음수 계산", "cluster": "basics", "grade": "중1",
+      "prompt": "(−3) × (+4)를 계산하면?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−12" }, { "id": "b", "value": "−1" }, { "id": "c", "value": "1" }, { "id": "d", "value": "12" }],
+      "answer": "−12",
+      "solutionSteps": ["부호가 다른 두 수의 곱은 음수", "3 × 4 = 12이므로 −12"],
+      "conceptIds": ["rm-integer"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2023-2-math-q02", "qualification": "중졸", "year": 2023, "session": 2, "questionNumber": 2, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-power", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "거듭제곱", "cluster": "basics", "grade": "중1",
+      "prompt": "3³ 의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "9" }, { "id": "b", "value": "27" }, { "id": "c", "value": "6" }, { "id": "d", "value": "81" }],
+      "answer": "27",
+      "solutionSteps": ["3 × 3 × 3 = 27"],
+      "conceptIds": ["rm-power"],
+      "reference": { "basis": "authored", "reason": "concept_mismatch", "candidate": "ged-middle-2024-2-math-q01", "note": "가장 가까운 기출은 소인수분해 결과를 고르는 문항(거듭제곱 표기 사용)이라 거듭제곱 값 계산과 다름" }
+    },
+    {
+      "id": "lt30-letters", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "문자를 사용한 식", "cluster": "expressions", "grade": "중1",
+      "prompt": "한 송이에 3000원인 장미꽃 a송이의 가격을 문자가 사용된 식으로 바르게 나타낸 것은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "(3000 + a)원" }, { "id": "b", "value": "(3000 − a)원" }, { "id": "c", "value": "(3000 × a)원" }, { "id": "d", "value": "(3000 ÷ a)원" }],
+      "answer": "(3000 × a)원",
+      "solutionSteps": ["(한 송이의 가격) × (송이 수)", "3000 × a"],
+      "conceptIds": ["rm-letters"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2025-1-math-q03", "qualification": "중졸", "year": 2025, "session": 1, "questionNumber": 3, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-expr-value", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "식의 값", "cluster": "expressions", "grade": "중1",
+      "prompt": "a = 4일 때, 3a + 2의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "10" }, { "id": "b", "value": "12" }, { "id": "c", "value": "14" }, { "id": "d", "value": "16" }],
+      "answer": "14",
+      "solutionSteps": ["3 × 4 + 2", "12 + 2 = 14"],
+      "conceptIds": ["rm-expr-value"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2024-1-math-q04", "qualification": "중졸", "year": 2024, "session": 1, "questionNumber": 4, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-linear-expr", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "일차식의 계산", "cluster": "expressions", "grade": "중1",
+      "prompt": "3(x + 2) − (x − 4) 를 간단히 하면 2x + □ 입니다. □는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "2" }, { "id": "b", "value": "10" }, { "id": "c", "value": "6" }, { "id": "d", "value": "−2" }],
+      "answer": "10",
+      "solutionSteps": ["3x + 6 − x + 4", "2x + 10"],
+      "conceptIds": ["rm-linear-expr"],
+      "reference": { "basis": "authored", "reason": "concept_mismatch", "candidate": "ged-middle-2024-2-math-q10", "note": "가장 가까운 기출은 중2 다항식의 덧셈 (5a − 2b) + (2a + 3b)라 분배법칙이 없고 학년이 다름" }
+    },
+    {
+      "id": "lt30-eq-property", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "등식의 성질", "cluster": "equations", "grade": "중1",
+      "prompt": "a = b 일 때 항상 옳은 것은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "a + 3 = b + 3" }, { "id": "b", "value": "a − 3 = b + 3" }, { "id": "c", "value": "3a = b + 3" }, { "id": "d", "value": "a ÷ 3 = b ÷ 2" }],
+      "answer": "a + 3 = b + 3",
+      "solutionSteps": ["등식의 양변에 같은 수를 더해도 등식은 성립한다"],
+      "conceptIds": ["rm-eq-property"],
+      "reference": { "basis": "authored", "reason": "no_official", "note": "중졸·고졸 기출에 등식의 성질 문항이 없음 (고졸 2번 항등식은 다른 개념)" }
+    },
+    {
+      "id": "lt30-linear-eq", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "일차방정식 풀이", "cluster": "equations", "grade": "중1",
+      "prompt": "일차방정식 4x − 7 = 2 + x의 해는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "1" }, { "id": "b", "value": "2" }, { "id": "c", "value": "3" }, { "id": "d", "value": "4" }],
+      "answer": "3",
+      "solutionSteps": ["4x − x = 2 + 7", "3x = 9", "x = 3"],
+      "conceptIds": ["rm-linear-eq"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2024-2-math-q04", "qualification": "중졸", "year": 2024, "session": 2, "questionNumber": 4, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-ineq-property", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "부등식의 성질", "cluster": "equations", "grade": "중2",
+      "prompt": "a < b 일 때 항상 옳은 것은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "a + 2 < b + 2" }, { "id": "b", "value": "−a < −b" }, { "id": "c", "value": "2a > 2b" }, { "id": "d", "value": "a − 3 > b − 3" }],
+      "answer": "a + 2 < b + 2",
+      "solutionSteps": ["양변에 같은 수를 더하거나 빼도 부등호 방향은 그대로다", "양변에 음수를 곱하면 부등호 방향이 바뀐다"],
+      "conceptIds": ["rm-ineq-property"],
+      "reference": { "basis": "authored", "reason": "no_official", "note": "중졸·고졸 기출에 부등식의 성질 문항이 없음" }
+    },
+    {
+      "id": "lt30-linear-eq-app", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "일차방정식의 활용", "cluster": "equations", "grade": "중1",
+      "prompt": "가로의 길이가 8 cm, 세로의 길이가 x cm인 직사각형이 있다. 이 직사각형의 둘레의 길이가 30 cm일 때, x의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "5" }, { "id": "b", "value": "6" }, { "id": "c", "value": "7" }, { "id": "d", "value": "8" }],
+      "answer": "7",
+      "solutionSteps": ["둘레 = 2 × (가로 + 세로)", "2(8 + x) = 30", "8 + x = 15, x = 7"],
+      "conceptIds": ["rm-linear-eq-app"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2022-1-math-q04", "qualification": "중졸", "year": 2022, "session": 1, "questionNumber": 4, "change": "숫자만 변경. 원문 그림은 빼고 발문에 있던 길이만 씀", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-system", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "연립일차방정식", "cluster": "equations", "grade": "중2",
+      "prompt": "연립방정식 x − y = 2, 2x − y = 7 의 해는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "x = 3, y = 1" }, { "id": "b", "value": "x = 4, y = 2" }, { "id": "c", "value": "x = 5, y = 3" }, { "id": "d", "value": "x = 6, y = 4" }],
+      "answer": "x = 5, y = 3",
+      "solutionSteps": ["두 번째 식에서 첫 번째 식을 빼면 x = 5", "5 − y = 2, y = 3"],
+      "conceptIds": ["rm-system"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2025-1-math-q10", "qualification": "중졸", "year": 2025, "session": 1, "questionNumber": 10, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-linear-ineq", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "일차부등식", "cluster": "equations", "grade": "중2",
+      "prompt": "일차부등식 15x ≥ 45를 풀면?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "x > 3" }, { "id": "b", "value": "x ≥ 3" }, { "id": "c", "value": "x ≤ 3" }, { "id": "d", "value": "x < 3" }],
+      "answer": "x ≥ 3",
+      "solutionSteps": ["양변을 양수 15로 나누면 부등호 방향은 그대로", "x ≥ 3"],
+      "conceptIds": ["rm-linear-ineq"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2024-1-math-q10", "qualification": "중졸", "year": 2024, "session": 1, "questionNumber": 10, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-system-app", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "연립방정식의 활용", "cluster": "equations", "grade": "중2",
+      "prompt": "300원짜리 연필과 500원짜리 지우개를 합쳐 6개 사고 2200원을 냈습니다. 지우개는 몇 개인가요?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "1" }, { "id": "b", "value": "2" }, { "id": "c", "value": "3" }, { "id": "d", "value": "4" }],
+      "answer": "2",
+      "solutionSteps": ["연필 x개, 지우개 y개: x + y = 6, 300x + 500y = 2200", "300(6 − y) + 500y = 2200", "200y = 400, y = 2"],
+      "conceptIds": ["rm-system-app"],
+      "reference": { "basis": "authored", "reason": "no_official", "note": "중졸 기출에 연립방정식 활용(문장제) 문항이 없음" }
+    },
+    {
+      "id": "lt30-quad-eq", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차방정식 (인수분해로 풀기)", "cluster": "equations", "grade": "중3",
+      "prompt": "이차방정식 x² − 5x + 6 = 0의 한 근이 2이다. 다른 한 근은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "3" }, { "id": "b", "value": "4" }, { "id": "c", "value": "5" }, { "id": "d", "value": "6" }],
+      "answer": "3",
+      "solutionSteps": ["(x − 2)(x − 3) = 0", "x = 2 또는 x = 3", "다른 한 근은 3"],
+      "conceptIds": ["rm-quad-eq"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2025-1-math-q16", "qualification": "중졸", "year": 2025, "session": 1, "questionNumber": 16, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-quad-formula", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "근의 공식", "cluster": "equations", "grade": "중3",
+      "prompt": "이차방정식 x² − 4x − 1 = 0 의 해는 x = 2 ± √□ 입니다. □는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "3" }, { "id": "b", "value": "5" }, { "id": "c", "value": "17" }, { "id": "d", "value": "20" }],
+      "answer": "5",
+      "solutionSteps": ["x = {4 ± √(16 + 4)} / 2 = (4 ± 2√5) / 2", "x = 2 ± √5"],
+      "conceptIds": ["rm-quad-formula"],
+      "reference": { "basis": "authored", "reason": "no_official", "note": "중졸 기출 이차방정식 문항은 인수분해·제곱근으로 풀리고 근의 공식 문항이 없음" }
+    },
+    {
+      "id": "lt30-discriminant", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "판별식", "cluster": "equations", "grade": "고1",
+      "prompt": "이차방정식 x² − 4x + a = 0이 중근을 가질 때, 상수 a의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "1" }, { "id": "b", "value": "2" }, { "id": "c", "value": "3" }, { "id": "d", "value": "4" }],
+      "answer": "4",
+      "solutionSteps": ["중근이면 판별식 D = 0", "16 − 4a = 0", "a = 4"],
+      "conceptIds": ["rm-discriminant"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2024-2-math-q05", "qualification": "고졸", "year": 2024, "session": 2, "questionNumber": 5, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-vieta", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "근과 계수의 관계", "cluster": "equations", "grade": "고1",
+      "prompt": "이차방정식 x² − 3x − 10 = 0의 서로 다른 두 실근을 α, β라고 할 때, α + β의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−10" }, { "id": "b", "value": "−3" }, { "id": "c", "value": "3" }, { "id": "d", "value": "10" }],
+      "answer": "3",
+      "solutionSteps": ["근과 계수의 관계: α + β = −(−3) ÷ 1", "α + β = 3"],
+      "conceptIds": ["rm-vieta"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-high-2024-2-math-q06", "qualification": "고졸", "year": 2024, "session": 2, "questionNumber": 6, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-coordinate", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "좌표평면", "cluster": "functions", "grade": "중1",
+      "prompt": "점 (−2, 5) 는 제몇사분면 위의 점인가요?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "제1사분면" }, { "id": "b", "value": "제2사분면" }, { "id": "c", "value": "제3사분면" }, { "id": "d", "value": "제4사분면" }],
+      "answer": "제2사분면",
+      "solutionSteps": ["x좌표는 음수, y좌표는 양수", "제2사분면"],
+      "conceptIds": ["rm-coordinate"],
+      "reference": { "basis": "authored", "reason": "figure_required", "candidate": "ged-middle-2024-1-math-q05", "note": "기출은 좌표평면 그림에서 점의 좌표를 읽는 문항이라 그림 없이는 숫자만 바꿀 수 없음" }
+    },
+    {
+      "id": "lt30-proportion", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "정비례와 반비례", "cluster": "functions", "grade": "중1",
+      "prompt": "y가 x에 정비례하고 x = 2일 때 y = 8입니다. x = 5일 때 y는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "11" }, { "id": "b", "value": "16" }, { "id": "c", "value": "20" }, { "id": "d", "value": "40" }],
+      "answer": "20",
+      "solutionSteps": ["y = ax에서 8 = 2a, a = 4", "y = 4 × 5 = 20"],
+      "conceptIds": ["rm-proportion"],
+      "reference": { "basis": "authored", "reason": "concept_mismatch", "candidate": "ged-middle-2026-2-math-q11", "note": "가장 가까운 기출은 함수 f(x) = −2x의 함숫값 f(3) 문항이라 f(x) 표기(중2 함수 개념)를 씀" }
+    },
+    {
+      "id": "lt30-linear-fn", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "일차함수와 그래프", "cluster": "functions", "grade": "중2",
+      "prompt": "일차함수 y = x − 5의 그래프의 y절편은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−5" }, { "id": "b", "value": "−1" }, { "id": "c", "value": "1" }, { "id": "d", "value": "5" }],
+      "answer": "−5",
+      "solutionSteps": ["y절편은 x = 0일 때의 y값", "y = 0 − 5 = −5"],
+      "conceptIds": ["rm-linear-fn"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2023-2-math-q11", "qualification": "중졸", "year": 2023, "session": 2, "questionNumber": 11, "change": "숫자만 변경. 식만으로 풀 수 있어 원문 그림 문장은 뺌", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-quad-graph", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차함수의 그래프", "cluster": "functions", "grade": "중3",
+      "prompt": "이차함수 y = (x − 2)² − 3의 그래프에 대한 설명으로 옳은 것은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "위로 볼록이다." }, { "id": "b", "value": "점 (0, 3)을 지난다." }, { "id": "c", "value": "직선 x = −2를 축으로 한다." }, { "id": "d", "value": "꼭짓점의 좌표는 (2, −3)이다." }],
+      "answer": "꼭짓점의 좌표는 (2, −3)이다.",
+      "solutionSteps": ["y = (x − p)² + q 의 꼭짓점은 (p, q), 축은 x = p", "x²의 계수가 양수라 아래로 볼록", "x = 0이면 y = 1", "꼭짓점은 (2, −3)"],
+      "conceptIds": ["rm-quad-graph"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2025-2-math-q17", "qualification": "중졸", "year": 2025, "session": 2, "questionNumber": 17, "change": "숫자만 변경. 식만으로 풀 수 있어 원문 그래프 그림은 뺌", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-quad-fn-eq", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "이차함수와 이차방정식", "cluster": "functions", "grade": "고1",
+      "prompt": "이차함수 y = x² − 2x − 8 의 그래프와 x축이 만나는 두 점 중 x좌표가 큰 점의 x좌표는?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−2" }, { "id": "b", "value": "2" }, { "id": "c", "value": "4" }, { "id": "d", "value": "8" }],
+      "answer": "4",
+      "solutionSteps": ["x² − 2x − 8 = 0", "(x − 4)(x + 2) = 0", "x = 4 또는 x = −2"],
+      "conceptIds": ["rm-quad-fn-eq"],
+      "reference": { "basis": "authored", "reason": "no_official", "note": "고졸 기출(2022~2026)에 이차함수 그래프와 x축의 교점 문항이 없음" }
+    },
+    {
+      "id": "lt30-exponent", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "지수법칙", "cluster": "polynomials", "grade": "중2",
+      "prompt": "a³ × a⁶ ÷ a⁴을 간단히 한 것은? (단, a ≠ 0)",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "a³" }, { "id": "b", "value": "a⁴" }, { "id": "c", "value": "a⁵" }, { "id": "d", "value": "a⁶" }],
+      "answer": "a⁵",
+      "solutionSteps": ["곱하면 지수끼리 더하고, 나누면 뺀다", "3 + 6 − 4 = 5"],
+      "conceptIds": ["rm-exponent"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2025-1-math-q09", "qualification": "중졸", "year": 2025, "session": 1, "questionNumber": 9, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-sqrt", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "제곱근", "cluster": "polynomials", "grade": "중3",
+      "prompt": "√{(−7)²}의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "−14" }, { "id": "b", "value": "−7" }, { "id": "c", "value": "7" }, { "id": "d", "value": "14" }],
+      "answer": "7",
+      "solutionSteps": ["(−7)² = 49", "√49 = 7 (제곱근 기호 √는 양수 쪽)"],
+      "conceptIds": ["rm-sqrt"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2023-2-math-q15", "qualification": "중졸", "year": 2023, "session": 2, "questionNumber": 15, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-mult-formula", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "곱셈 공식", "cluster": "polynomials", "grade": "중3",
+      "prompt": "(x + 3)(x + 4)를 전개한 식이 x² + mx + 12일 때, 수 m의 값은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "5" }, { "id": "b", "value": "6" }, { "id": "c", "value": "7" }, { "id": "d", "value": "8" }],
+      "answer": "7",
+      "solutionSteps": ["(x + a)(x + b) = x² + (a + b)x + ab", "m = 3 + 4 = 7"],
+      "conceptIds": ["rm-mult-formula"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2025-2-math-q16", "qualification": "중졸", "year": 2025, "session": 2, "questionNumber": 16, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-radical", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "근호를 포함한 식의 계산", "cluster": "polynomials", "grade": "중3",
+      "prompt": "4√3 + 2√3을 간단히 한 것은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "6√3" }, { "id": "b", "value": "7√3" }, { "id": "c", "value": "8√3" }, { "id": "d", "value": "9√3" }],
+      "answer": "6√3",
+      "solutionSteps": ["√3끼리 묶어 계수만 더한다", "(4 + 2)√3 = 6√3"],
+      "conceptIds": ["rm-radical"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2024-1-math-q15", "qualification": "중졸", "year": 2024, "session": 1, "questionNumber": 15, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    },
+    {
+      "id": "lt30-factor", "kind": "authored", "role": "level_test", "contentStatus": "approved", "approvalScope": "local_level_test",
+      "topic": "인수분해", "cluster": "polynomials", "grade": "중3",
+      "prompt": "다항식 x² + 7x + 12를 인수분해한 것은?",
+      "answerFormat": "choice",
+      "choices": [{ "id": "a", "value": "(x + 3)(x + 4)" }, { "id": "b", "value": "(x + 3)(x + 5)" }, { "id": "c", "value": "(x + 4)²" }, { "id": "d", "value": "(x + 5)(x + 6)" }],
+      "answer": "(x + 3)(x + 4)",
+      "solutionSteps": ["곱이 12, 합이 7인 두 수는 3과 4", "(x + 3)(x + 4)"],
+      "conceptIds": ["rm-factor"],
+      "reference": { "basis": "official_variant", "derivedFrom": "ged-middle-2022-2-math-q16", "qualification": "중졸", "year": 2022, "session": 2, "questionNumber": 16, "change": "숫자만 변경", "usageReviewStatus": "unverified" }
+    }
+  ]
+}
