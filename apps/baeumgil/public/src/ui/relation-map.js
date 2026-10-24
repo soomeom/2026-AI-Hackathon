@@ -98,7 +98,8 @@ export function renderRelationMap(map, ui, ctx) {
   const names = layout.columns.map(c => {
     const group = map.nodes.filter(n => n.domain === c.id && !n.legacy);
     const done = group.filter(n => n.status === 'mastered' || n.status === 'confirmed').length;
-    return `<text class="rm-domain" x="${c.x + c.width / 2}" y="${RELATION_HEIGHT - 26}" text-anchor="middle">${esc(c.name)}</text><text class="rm-domain-sub" x="${c.x + c.width / 2}" y="${RELATION_HEIGHT - 10}" text-anchor="middle">도움 없이 확인 ${done}/${group.length}</text>`;
+    const complete = group.length > 0 && group.every(n => n.courseComplete);
+    return `${complete ? `<g class="rm-domain-seal" transform="translate(${c.x + c.width / 2} 105) rotate(-8)" role="img" aria-label="${esc(c.name)} 이수 완료"><rect x="-40" y="-14" width="80" height="28" rx="3"/><text text-anchor="middle" y="5">이수 완료</text></g>` : ''}<text class="rm-domain" x="${c.x + c.width / 2}" y="${RELATION_HEIGHT - 26}" text-anchor="middle">${esc(c.name)}</text><text class="rm-domain-sub" x="${c.x + c.width / 2}" y="${RELATION_HEIGHT - 10}" text-anchor="middle">도움 없이 확인 ${done}/${group.length}</text>`;
   }).join('');
   const edges = map.edges.filter(e => layout.pos.has(e.from) && layout.pos.has(e.to)).map(e => {
     const a = layout.pos.get(e.from), b = layout.pos.get(e.to);
@@ -112,11 +113,12 @@ export function renderRelationMap(map, ui, ctx) {
   const nodes = map.nodes.filter(n => layout.pos.has(n.id)).map(n => {
     const p = layout.pos.get(n.id), r = rank.get(n.id);
     const inner = r ?? (n.status === 'mastered' || n.status === 'confirmed' ? '✓' : '');
-    const label = `${n.title} · ${STEP[n.level]} · ${MAP_STATUS[n.status] ?? '미확인'}${r ? ` · 학습 순서 ${r}` : ''}${n.practiceComplete ? ' · 보충 연습 완료' : ''}${n.id === map.nextNodeId ? ' · 지금 여기' : ''}`;
+    const label = `${n.courseComplete ? '이수 완료 · ' : ''}${n.title} · ${STEP[n.level]} · ${MAP_STATUS[n.status] ?? '미확인'}${r ? ` · 학습 순서 ${r}` : ''}${n.practiceComplete ? ' · 보충 연습 완료' : ''}${n.id === map.nextNodeId ? ' · 지금 여기' : ''}`;
     return `<g class="rm-node ${esc(n.status)}${n.level === 3 ? ' goal-step' : ''}${n.id === selected.id ? ' sel' : ''}${dim(n.id) ? ' dim' : ''}" data-map-action="select" data-map-node="${esc(n.id)}" role="button" tabindex="0" aria-pressed="${n.id === selected.id}" aria-label="${esc(label)}"><title>${esc(label)}</title>
       ${n.id === map.nextNodeId ? `<circle class="rm-halo" cx="${p.x}" cy="${p.y}" r="${R + 6}"/>` : ''}
       <circle class="rm-c" cx="${p.x}" cy="${p.y}" r="${R}"/>
-      ${inner !== '' ? `<text class="rm-num" x="${p.x}" y="${p.y + 4.5}" text-anchor="middle">${inner}</text>` : ''}
+      ${n.courseComplete ? `<g class="rm-seal" transform="translate(${p.x} ${p.y}) rotate(-12)" aria-hidden="true"><circle r="23"/><circle r="19"/><text y="-1" text-anchor="middle">이수</text><text class="rm-seal-small" y="11" text-anchor="middle">완료</text></g>` : ''}
+      ${inner !== '' && !n.courseComplete ? `<text class="rm-num" x="${p.x}" y="${p.y + 4.5}" text-anchor="middle">${inner}</text>` : ''}
       ${n.practiceComplete ? `<circle class="rm-badge" cx="${p.x + 13}" cy="${p.y - 13}" r="7"/><text class="rm-badge-t" x="${p.x + 13}" y="${p.y - 10}" text-anchor="middle">✓</text>` : ''}
       ${wrap(n.title).map((l, i) => `<text class="rm-name" x="${p.x}" y="${p.y + R + 14 + i * 13}" text-anchor="middle">${esc(l)}</text>`).join('')}</g>`;
   }).join('');
@@ -134,7 +136,7 @@ export function renderRelationMap(map, ui, ctx) {
     <div class="rm-canvas"><svg id="relation-svg" viewBox="${vb(start)}" data-target="${vb(target)}" data-layout-width="${layout.width}" preserveAspectRatio="xMidYMid meet" role="group" aria-label="개념 ${layout.pos.size}개의 선수 관계 지도. 노드를 고르면 그 개념까지 가는 길이 강조돼요.">
       <defs><marker id="rm-arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L8 4L0 8z"/></marker></defs>
       ${lanes}${ticks}${names}${goalEdges}${edges}${goal}${nodes}</svg></div>
-    <div class="map-legend rm-legend"><span class="map-key mastered"><i aria-hidden="true">✓</i>확인</span><span class="map-key needs_recheck"><i aria-hidden="true">◐</i>혼자 다시 확인</span><span class="map-key needs_learning"><i aria-hidden="true">1</i>보완 필요 · 숫자 = 학습 순서</span><span class="map-key unmeasured"><i aria-hidden="true"></i>미확인</span><span class="map-key"><i aria-hidden="true">✓</i>보충 연습 완료(작은 배지)</span><span class="map-key recommended"><i aria-hidden="true"></i>지금 여기</span></div>
+    <div class="map-legend rm-legend"><span class="map-key rm-seal-key"><i aria-hidden="true">印</i>도장 · 묶음 문제 모두 정답</span><span class="map-key mastered"><i aria-hidden="true">✓</i>확인</span><span class="map-key needs_recheck"><i aria-hidden="true">◐</i>혼자 다시 확인</span><span class="map-key needs_learning"><i aria-hidden="true">1</i>보완 필요 · 숫자 = 학습 순서</span><span class="map-key unmeasured"><i aria-hidden="true"></i>미확인</span><span class="map-key"><i aria-hidden="true">✓</i>보충 연습 완료(작은 배지)</span><span class="map-key recommended"><i aria-hidden="true"></i>지금 여기</span></div>
     <ul class="sr-only" aria-label="영역별 개념 목록">${list}</ul>
     <div class="rm-below">${lessonPanel(map, selected, { cards: [], entries: [], ...ctx })}<section class="rm-order-box" aria-labelledby="rm-order-title"><h4 id="rm-order-title">추천 학습 순서</h4>${chips}</section></div>
   </section>`;

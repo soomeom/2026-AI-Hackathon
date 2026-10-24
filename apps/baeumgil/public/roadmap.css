@@ -208,3 +208,15 @@ span.map-chapter-step{display:block}
   .rm-canvas::after{content:"← 옆으로 밀어 전체를 볼 수 있어요";display:block;padding:6px 12px;font-size:12px;color:#6b7f74}
 }
 @media(prefers-reduced-motion:reduce){.rm-node,.rm-edge{transition:none}}
+/* 이수 도장: 진단 통과와 별도로 묶음의 모든 문항 정답을 확인한다. */
+.rm-seal circle{fill:#fff7f4;stroke:#b43d32;stroke-width:2}.rm-seal circle+circle{fill:none;stroke-width:1;stroke-dasharray:2 2}
+.rm-seal text{fill:#a6332a;font-size:13px;font-weight:800;letter-spacing:1px}.rm-seal .rm-seal-small{font-size:9px;letter-spacing:2px}
+.rm-domain-seal rect{fill:#fff7f4;stroke:#b43d32;stroke-width:2;stroke-dasharray:4 1}.rm-domain-seal text{fill:#a6332a;font-size:14px;font-weight:800;letter-spacing:1px}
+.rm-node.dim:has(.rm-seal){opacity:.8}.rm-seal-key{color:#a6332a}.rm-seal,.rm-domain-seal{pointer-events:none}
+
+
+.rm-fireworks{pointer-events:none}.rm-spark{opacity:0;animation:completion-spark .9s ease-out forwards;transform-box:fill-box;transform-origin:center}.spark-0{fill:#efb62c}.spark-1{fill:#ed6e74}.spark-2{fill:#309f99}.spark-3{fill:#8b70cb}
+.rm-stamp-arrive circle:first-child{animation:stamp-arrive .25s ease-out}
+@keyframes stamp-arrive{0%{r:32;opacity:.2}65%{r:21;opacity:1}100%{r:23;opacity:1}}
+@keyframes completion-spark{0%{opacity:0;transform:translate(0,0) scale(.3)}15%{opacity:1}100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--spin)) scale(.6)}}
+@media(prefers-reduced-motion:reduce){.rm-spark,.rm-stamp-arrive circle:first-child{animation:none}}

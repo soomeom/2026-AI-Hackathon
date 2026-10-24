@@ -38,7 +38,12 @@ export function buildRoadmap(diagnostic, bank, config, practice = { attempts: []
       status: failed.length ? 'needs_learning' : independent ? (level === 3 ? 'mastered' : 'confirmed') : 'needs_recheck',
       reason: failed.some(a => a.result === 'incorrect') ? '오답에서 확인된 복습 대상' : failed.length ? '모름으로 답해 추가 확인 필요' : independent ? '처음 본 문항을 도움 없이 맞힘' : '도움·재노출 정답: 혼자 다시 확인 필요',
       practiceCorrect: questionIds.filter(id => correctIds.has(id)).length, practiceTotal: questionIds.length,
-      practiceComplete: questionIds.length > 0 && questionIds.every(id => correctIds.has(id)), dependsOn: [],
+      practiceComplete: questionIds.length > 0 && questionIds.every(id => correctIds.has(id)),
+      courseComplete: questionIds.length > 0 && questionIds.every(id => {
+        if (latestPractice.has(id)) return latestPractice.get(id) === 'correct';
+        const last = group.logs.filter(a => a.questionId === id).at(-1);
+        return last?.result === 'correct' && last.independent === true;
+      }), dependsOn: [],
     };
     if (card.status === 'mastered') mastered.push(card);
     else if (card.status === 'confirmed') confirmed.push(card);

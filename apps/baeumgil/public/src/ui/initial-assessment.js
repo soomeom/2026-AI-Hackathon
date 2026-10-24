@@ -1,3 +1,5 @@
+import { unlockCompletionAudio } from './stamp-sound.js';
+import { roadmapCards } from '../learning/roadmap.js';
 // 첫 수준 확인 화면 (적응형 6영역 진단). 멘티: 한 문제씩 풀기 / 멘토: 영역별 결과 확인·시작점 확정.
 import {
   initialAssessmentSummary, initialQuestionOptions, initialConceptOptions, pauseInitialAssessment, resumeInitialAssessment,
@@ -76,7 +78,7 @@ export function renderInitialAssessment(props) {
       <p class="muted">${point ? `멘토가 첫 수업 시작 단원을 ‘${esc(conceptName(catalog, point.conceptId))}’로 정했어요.` : '멘토가 결과를 보고 첫 수업 시작점과 문제를 정할 거예요.'}</p>
       ${domainTable(summary, { forMentor: false })}<p class="muted small">${caveat}</p>
       <details><summary>응답별 기록 보기</summary><ul class="initial-attempts">${summary.entries.map(e => `<li>${esc(e.domainName)} · ${esc(DIAGNOSTIC_STAGE_NAMES[e.stage] ?? e.levelName)} · ${esc(e.core)} — ${RESULT[e.result]} <span class="muted small">${esc(e.questionId)}</span></li>`).join('')}</ul></details></section>` : renderDiagnosticOverview(summary);
-    if (!summary.practice?.cardId) html += `<div class="action-bar overview-secondary">${paused && !point ? '<button class="ghost" data-initial-action="resume">중단한 수준 확인 이어서 풀기</button>' : ''}${dismiss}</div>`;
+    if (!summary.practice?.cardId) html += `<div class="action-bar overview-secondary">${paused && !point ? '<button class="ghost outlined" data-initial-action="resume">중단한 수준 확인 이어서 풀기</button>' : ''}${dismiss}</div>`;
   }
   root.innerHTML = `${summary?.status === 'completed' ? '' : '<div class="page-head"><h2>나의 첫 배움길</h2></div>'}${html}${ui.initialError ? `<p class="msg warn" role="alert">${esc(ui.initialError)}</p>` : ''}`;
   root.onchange = event => { if (event.target.id === 'initial-help') ui.initialHelp = event.target.checked; };
@@ -142,10 +144,10 @@ export function initialAssessmentPanel(state, catalog, ui, { mode = 'full' } = {
   return `<section class="card initial-mentor"><h3>${ICON.target} 첫 수준 확인 결과 ${summary.stopReason === 'user_paused' ? '<span class="pill warn">학생이 중간에 멈춤</span>' : ''}</h3>
     <p class="meta">현재 추정 수준 티어</p><p><b class="initial-tier">${esc(report.tier)}</b></p>
     <p>응답 ${summary.counts.total}문제 · 정답 ${summary.counts.correct} (혼자 처음 풀어 맞힘 ${summary.counts.independentCorrect}) · 추가 확인 ${summary.counts.incorrect} · 모름 ${summary.counts.abstained}</p>
-    ${mode === 'plan' ? `${renderDomainBars(domainProgress(summary, catalog))}<button class="ghost" data-goto="assessment">영역별 결과·응답 기록 확인</button>` : `${domainTable(summary, { forMentor: true })}
+    ${mode === 'plan' ? `${renderDomainBars(domainProgress(summary, catalog))}<button class="ghost outlined" data-goto="assessment">영역별 결과·응답 기록 확인</button>` : `${domainTable(summary, { forMentor: true })}
     <p class="muted small">${esc(report.rule)} ${esc(report.disclaimer)}</p>
     <details><summary>응답별 기록 보기</summary><ul class="initial-attempts">${attempts}</ul></details>
-    <div class="row"><button class="ghost small" data-initial-action="export">${ICON.doc} 결과 JSON 저장</button><button class="ghost small" data-goto="roadmap">맞춤형 학습 로드맵 보기</button></div>`}
+    <div class="row"><button class="ghost small" data-initial-action="export">${ICON.doc} 결과 JSON 저장</button><button class="ghost outlined small" data-goto="roadmap">맞춤형 학습 로드맵 보기</button></div>`}
     ${mode === 'report' ? '<button class="primary" data-goto="planning">수업 준비하기</button>' : point ? `<div class="initial-decision"><b>첫 수업 시작 단원: ${esc(conceptName(catalog, point.conceptId))}</b><p>첫 문제: ${esc(plainLabel(catalog.questions.find(q => q.id === point.questionId) ?? { id: point.questionId }))}</p>
       ${point.reason ? `<p class="muted">선택 이유: ${esc(point.reason)}</p>` : ''}<button class="ghost" data-goto="learning" data-path="${esc(point.pathId)}">지정한 학습 열기 ${ICON.arrow}</button></div>` : `
       ${rec ? `<div class="msg"><b>추천: ${esc(rec.domainName)} → ${esc(conceptName(catalog, rec.conceptId))}</b><p>${esc(rec.reason)} 추천은 바꿀 수 있어요.</p></div>` : ''}
@@ -195,7 +197,25 @@ function handleInitialRoadmapAction(button,props){
         props.ui.learnerTab = 'roadmap'; props.syncVisibility?.();
       }
     },
-    answer:input=>props.update(s=>answerInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,...input,at:now()},{catalog:props.catalog})),
+    answer:input=>{
+      const completed = () => {
+        const state=props.getState(), roadmap=initialAssessmentSummary(state,state.learnerId,{catalog:props.catalog})?.roadmap;
+        return new Set(roadmap ? roadmapCards(roadmap).filter(c=>c.courseComplete).map(c=>c.id) : []);
+      };
+      const before=completed();
+      props.update(s=>answerInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,...input,at:now()},{catalog:props.catalog}));
+      const newlyCompleted=[...completed()].filter(id=>!before.has(id));
+      if(newlyCompleted.length){
+        unlockCompletionAudio();
+        props.ui.pendingStampIds=[...new Set([...(props.ui.pendingStampIds??[]),...newlyCompleted])];
+        props.ui.mapView='relation';props.ui.mapNodeId=newlyCompleted[0];props.ui.relationZoom=true;
+        // A completed bundle returns directly to its seal, including when its
+        // last outstanding question was opened individually from the map.
+        if(props.ui.role==='learner')props.ui.learnerTab='roadmap';
+        props.update(s=>openInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,cardId:null,at:now()},{catalog:props.catalog}));
+        props.syncVisibility?.();
+      }
+    },
   });
 }
 

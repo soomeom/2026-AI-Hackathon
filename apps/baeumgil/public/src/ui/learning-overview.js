@@ -21,7 +21,7 @@ export function renderDiagnosticOverview(summary) {
     <section class="ladder-card"><h3>영역별 내 위치 <span class="muted small">기초 → 선수 → 고졸</span></h3>${renderLadder(levelLadder(summary))}</section>
     <section class="overview-next"><div><span class="overview-eyebrow">다음 학습${next?` · Step ${next.step}`:''}</span><h3>${esc(next?.title??'멘토와 다음 수업을 정해요')}</h3><p>${esc(reason)}</p></div>
       ${next?'<button class="primary" data-initial-action="next-practice">추천 개념 연습하기 →</button>':'<button class="primary" data-initial-action="roadmap">로드맵 확인하기 →</button>'}</section>
-    <div class="overview-links"><button class="ghost" data-initial-action="roadmap">맞춤형 학습 로드맵 보기</button><button class="ghost" data-initial-action="details">영역별 결과·응답 기록</button></div>
+    <div class="overview-links"><button class="ghost outlined" data-initial-action="roadmap">맞춤형 학습 로드맵 보기</button><button class="ghost outlined" data-initial-action="details">영역별 결과·응답 기록</button></div>
     <p class="muted small">${summary.startingPoint?'멘토가 정한 첫 수업은 기존 학습에서 이어갈 수 있어요.':'멘토가 결과를 보고 첫 수업 시작점을 정할 거예요.'} 보충 연습 완료는 최초 진단 판정을 바꾸지 않아요.</p>
   </div>`;
 }
@@ -62,7 +62,7 @@ export function renderMentorHome(state,catalog,summary,paths) {
       ${taskRow('학습 근거와 도움 요청',help.length?`진행 중 학습의 도움 요청 ${help.reduce((n,p)=>n+p.mentorRequests.length,0)}건`:'문항별 응답과 직접 확인한 근거','learning',null)}
       ${taskRow('회기·일지',pending.length?'수업 후 작성·확정할 일지가 있어요':'실제 수업 기록과 월별 대장','sessions',pending.length, pending[0]?`data-session="${esc(pending[0].id)}"`:'')}
     </section>
-    <div class="overview-links"><button class="ghost" data-goto="roadmap">개념 관계 지도 보기 →</button><button class="ghost" data-goto="planning">문제 지정·AI 수업 준비 →</button></div>
+    <div class="overview-links"><button class="ghost outlined" data-goto="roadmap">개념 관계 지도 보기 →</button><button class="ghost" data-goto="planning">문제 지정·AI 수업 준비 →</button></div>
   </div>`;
 }
 
