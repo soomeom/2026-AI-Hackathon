@@ -14,6 +14,7 @@ export function buildConceptMap(roadmap, bank, config) {
       nodes.set(id, { id, conceptId, domain: domain.id, domainName: domain.name,
         title: bundle?.title ?? card?.title ?? q.curriculum?.core ?? conceptId,
         level: bundle?.level ?? card?.level ?? q.level, status: card?.status ?? 'unmeasured',
+        courseComplete: card?.courseComplete ?? false,
         cardId: card?.id ?? null, practiceComplete: card?.practiceComplete ?? false,
         practiceCorrect: card?.practiceCorrect ?? 0, practiceTotal: card?.practiceTotal ?? 0,
         reason: card?.reason ?? '아직 직접 풀어 확인하지 않은 개념이에요.',

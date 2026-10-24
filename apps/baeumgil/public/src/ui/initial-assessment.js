@@ -1,3 +1,5 @@
+import { unlockCompletionAudio } from './stamp-sound.js';
+import { roadmapCards } from '../learning/roadmap.js';
 // 첫 수준 확인 화면 (적응형 6영역 진단). 멘티: 한 문제씩 풀기 / 멘토: 영역별 결과 확인·시작점 확정.
 import {
   initialAssessmentSummary, initialQuestionOptions, initialConceptOptions, pauseInitialAssessment, resumeInitialAssessment,
@@ -211,7 +213,25 @@ function handleInitialRoadmapAction(button,props){
         props.ui.learnerTab = 'roadmap'; props.syncVisibility?.();
       }
     },
-    answer:input=>props.update(s=>answerInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,...input,at:now()},{catalog:props.catalog})),
+    answer:input=>{
+      const completed = () => {
+        const state=props.getState(), roadmap=initialAssessmentSummary(state,state.learnerId,{catalog:props.catalog})?.roadmap;
+        return new Set(roadmap ? roadmapCards(roadmap).filter(c=>c.courseComplete).map(c=>c.id) : []);
+      };
+      const before=completed();
+      props.update(s=>answerInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,...input,at:now()},{catalog:props.catalog}));
+      const newlyCompleted=[...completed()].filter(id=>!before.has(id));
+      if(newlyCompleted.length){
+        unlockCompletionAudio();
+        props.ui.pendingStampIds=[...new Set([...(props.ui.pendingStampIds??[]),...newlyCompleted])];
+        props.ui.mapView='relation';props.ui.mapNodeId=newlyCompleted[0];props.ui.relationZoom=true;
+        // A completed bundle returns directly to its seal, including when its
+        // last outstanding question was opened individually from the map.
+        if(props.ui.role==='learner')props.ui.learnerTab='roadmap';
+        props.update(s=>openInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,cardId:null,at:now()},{catalog:props.catalog}));
+        props.syncVisibility?.();
+      }
+    },
   });
 }
 

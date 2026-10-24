@@ -133,3 +133,14 @@ test('practice persists separately, guards stale inputs, and preserves all origi
   assert.ok(s.exposures.some(e=>e.stage==='roadmap_practice'));
   const bad=structuredClone(s);bad.initialAssessments[0].roadmapPractice.attempts[0].result='made-up';assert.equal(validateState(bad).ok,false);
 });
+
+test('course stamp requires every bundle question correct; partial and assisted evidence do not qualify', () => {
+  const diagnostic = finish();
+  const card = buildRoadmap(diagnostic, bank, config).domains.flatMap(d => d.steps.flatMap(s => s.cards)).find(c => c.questionIds.length > 1);
+  const attempts = card.questionIds.map((questionId,i) => ({cardId:card.id,questionId,result:'correct'}));
+  const find = practice => buildRoadmap(diagnostic,bank,config,{attempts:practice}).domains.flatMap(d=>d.steps.flatMap(s=>s.cards)).find(c=>c.id===card.id);
+  assert.equal(find([]).courseComplete,false);
+  assert.equal(find(attempts.slice(1)).courseComplete,false);
+  assert.equal(find(attempts).courseComplete,true);
+  assert.equal(find([...attempts,{...attempts[0],result:'incorrect'}]).courseComplete,false);
+});

@@ -75,3 +75,14 @@ test('rendered map highlights the chain, dims the rest, and keeps the lesson pan
   assert.match(html, /<ul class="sr-only" aria-label="영역별 개념 목록">/);
   assert.match(renderRelationMap(map, { relationZoom: true }, { cards: [], canPractice: false }), /data-map-value="on" aria-pressed="true"/);
 });
+
+test('completion seal appears only on fully completed concepts and domain seals require every concept',()=>{
+  const map=diagnosed();
+  assert.doesNotMatch(renderRelationMap(map,{},{}),/class="rm-seal"/);
+  const first=map.nodes[0];first.courseComplete=true;
+  let html=renderRelationMap(map,{},{});
+  assert.match(html,/class="rm-seal"/);assert.match(html,/이수 완료 ·/);
+  assert.doesNotMatch(html,/class="rm-domain-seal"/);
+  map.nodes.filter(n=>n.domain===first.domain&&!n.legacy).forEach(n=>n.courseComplete=true);
+  html=renderRelationMap(map,{},{});assert.match(html,/class="rm-domain-seal"/);
+});
