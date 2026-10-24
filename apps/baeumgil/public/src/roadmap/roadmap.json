@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "source": "Concept Universe 프로토타입의 28개 개념. 학년(grade)과 연결(prerequisiteIds)은 2015 개정 수학과 교육과정 학년 순서를 따른 팀 초안이며, 성취기준(standards) 근거와 교육자 검토가 필요하다.",
+  "clusters": [
+    { "id": "basics", "name": "기초 연산" },
+    { "id": "expressions", "name": "문자와 식" },
+    { "id": "equations", "name": "방정식·부등식" },
+    { "id": "functions", "name": "함수" },
+    { "id": "polynomials", "name": "다항식·제곱근" }
+  ],
+  "nodes": [
+    { "id": "rm-arith", "name": "자연수의 사칙연산", "cluster": "basics", "grade": "초등", "prerequisiteIds": [], "conceptIds": ["rm-arith"], "standards": [] },
+    { "id": "rm-fraction", "name": "분수와 소수", "cluster": "basics", "grade": "초등", "prerequisiteIds": ["rm-arith"], "conceptIds": ["rm-fraction"], "standards": [] },
+    { "id": "rm-integer", "name": "정수와 음수 계산", "cluster": "basics", "grade": "중1", "prerequisiteIds": ["rm-arith"], "conceptIds": ["rm-integer", "astra-algebra-l1-정수의 덧셈"], "standards": [] },
+    { "id": "rm-power", "name": "거듭제곱", "cluster": "basics", "grade": "중1", "prerequisiteIds": ["rm-arith"], "conceptIds": ["rm-power"], "standards": [] },
+
+    { "id": "rm-letters", "name": "문자를 사용한 식", "cluster": "expressions", "grade": "중1", "prerequisiteIds": ["rm-arith"], "conceptIds": ["rm-letters", "astra-algebra-l1-문자와 식"], "standards": [] },
+    { "id": "rm-expr-value", "name": "식의 값", "cluster": "expressions", "grade": "중1", "prerequisiteIds": ["rm-letters", "rm-integer"], "conceptIds": ["rm-expr-value"], "standards": [] },
+    { "id": "rm-linear-expr", "name": "일차식의 계산", "cluster": "expressions", "grade": "중1", "prerequisiteIds": ["rm-letters", "rm-integer"], "conceptIds": ["rm-linear-expr"], "standards": [] },
+
+    { "id": "rm-eq-property", "name": "등식의 성질", "cluster": "equations", "grade": "중1", "prerequisiteIds": ["rm-letters"], "conceptIds": ["rm-eq-property"], "standards": [] },
+    { "id": "rm-linear-eq", "name": "일차방정식 풀이", "cluster": "equations", "grade": "중1", "prerequisiteIds": ["rm-eq-property", "rm-linear-expr"], "conceptIds": ["rm-linear-eq", "astra-equations-l1-일차방정식"], "standards": [] },
+    { "id": "rm-linear-eq-app", "name": "일차방정식의 활용", "cluster": "equations", "grade": "중1", "prerequisiteIds": ["rm-linear-eq"], "conceptIds": ["rm-linear-eq-app"], "standards": [] },
+    { "id": "rm-ineq-property", "name": "부등식의 성질", "cluster": "equations", "grade": "중2", "prerequisiteIds": ["rm-eq-property", "rm-integer"], "conceptIds": ["rm-ineq-property"], "standards": [] },
+    { "id": "rm-linear-ineq", "name": "일차부등식", "cluster": "equations", "grade": "중2", "prerequisiteIds": ["rm-ineq-property", "rm-linear-expr"], "conceptIds": ["rm-linear-ineq"], "standards": [] },
+    { "id": "rm-system", "name": "연립일차방정식", "cluster": "equations", "grade": "중2", "prerequisiteIds": ["rm-linear-eq"], "conceptIds": ["rm-system", "astra-equations-l1-연립일차방정식"], "standards": [] },
+    { "id": "rm-system-app", "name": "연립방정식의 활용", "cluster": "equations", "grade": "중2", "prerequisiteIds": ["rm-system", "rm-linear-eq-app"], "conceptIds": ["rm-system-app"], "standards": [] },
+    { "id": "rm-quad-eq", "name": "이차방정식 (인수분해로 풀기)", "cluster": "equations", "grade": "중3", "prerequisiteIds": ["rm-factor", "rm-linear-eq"], "conceptIds": ["rm-quad-eq", "astra-equations-l2-이차방정식의 인수분해"], "standards": [] },
+    { "id": "rm-quad-formula", "name": "근의 공식", "cluster": "equations", "grade": "중3", "prerequisiteIds": ["rm-quad-eq", "rm-radical"], "conceptIds": ["rm-quad-formula"], "standards": [] },
+    { "id": "rm-discriminant", "name": "판별식", "cluster": "equations", "grade": "고1", "prerequisiteIds": ["rm-quad-formula"], "conceptIds": ["rm-discriminant", "astra-equations-l3-판별식"], "standards": [] },
+    { "id": "rm-vieta", "name": "근과 계수의 관계", "cluster": "equations", "grade": "고1", "prerequisiteIds": ["rm-quad-formula"], "conceptIds": ["rm-vieta", "astra-equations-l3-근과 계수의 관계"], "standards": [] },
+
+    { "id": "rm-coordinate", "name": "좌표평면", "cluster": "functions", "grade": "중1", "prerequisiteIds": ["rm-integer"], "conceptIds": ["rm-coordinate", "astra-functions-l1-그래프 읽기"], "standards": [] },
+    { "id": "rm-proportion", "name": "정비례와 반비례", "cluster": "functions", "grade": "중1", "prerequisiteIds": ["rm-coordinate", "rm-letters"], "conceptIds": ["rm-proportion"], "standards": [] },
+    { "id": "rm-linear-fn", "name": "일차함수와 그래프", "cluster": "functions", "grade": "중2", "prerequisiteIds": ["rm-proportion", "rm-linear-eq"], "conceptIds": ["rm-linear-fn", "astra-functions-l1-일차함수의 기울기"], "standards": [] },
+    { "id": "rm-quad-graph", "name": "이차함수의 그래프", "cluster": "functions", "grade": "중3", "prerequisiteIds": ["rm-linear-fn", "rm-mult-formula"], "conceptIds": ["rm-quad-graph", "astra-functions-l2-이차함수의 꼭짓점"], "standards": [] },
+    { "id": "rm-quad-fn-eq", "name": "이차함수와 이차방정식", "cluster": "functions", "grade": "고1", "prerequisiteIds": ["rm-quad-graph", "rm-quad-eq"], "conceptIds": ["rm-quad-fn-eq"], "standards": [] },
+
+    { "id": "rm-exponent", "name": "지수법칙", "cluster": "polynomials", "grade": "중2", "prerequisiteIds": ["rm-power"], "conceptIds": ["rm-exponent", "astra-algebra-l1-지수법칙"], "standards": [] },
+    { "id": "rm-sqrt", "name": "제곱근", "cluster": "polynomials", "grade": "중3", "prerequisiteIds": ["rm-power"], "conceptIds": ["rm-sqrt", "astra-equations-l2-제곱근"], "standards": [] },
+    { "id": "rm-mult-formula", "name": "곱셈 공식", "cluster": "polynomials", "grade": "중3", "prerequisiteIds": ["rm-linear-expr", "rm-exponent"], "conceptIds": ["rm-mult-formula"], "standards": [] },
+    { "id": "rm-radical", "name": "근호를 포함한 식의 계산", "cluster": "polynomials", "grade": "중3", "prerequisiteIds": ["rm-sqrt"], "conceptIds": ["rm-radical"], "standards": [] },
+    { "id": "rm-factor", "name": "인수분해", "cluster": "polynomials", "grade": "중3", "prerequisiteIds": ["rm-mult-formula"], "conceptIds": ["rm-factor", "astra-algebra-l2-인수분해"], "standards": [] }
+  ]
+}

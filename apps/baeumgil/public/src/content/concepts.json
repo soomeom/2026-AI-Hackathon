@@ -60,7 +60,7 @@
       "name": "다항식의 덧셈",
       "summary": "$A+B=(2+a)x^2+4x$이므로 $a=-2$, $b=4$. 따라서 $a+b=2$.",
       "prerequisiteIds": [
-        "astra-algebra-l1-지수법칙"
+        "astra-algebra-l1-정수의 덧셈"
       ]
     },
     {
@@ -140,7 +140,7 @@
       "name": "경우의 수",
       "summary": "조건을 만족하는 쌍은 $(1,2),(1,5),(2,4),(4,5)$로 $4$가지이다.",
       "prerequisiteIds": [
-        "astra-counting-l1-확률"
+        "astra-counting-l1-경우 나열"
       ]
     },
     {
@@ -148,7 +148,7 @@
       "name": "조합",
       "summary": "제외할 토핑 1개를 고르는 것과 같으므로 $\\binom{5}{4}=5$가지이다.",
       "prerequisiteIds": [
-        "astra-counting-l1-확률"
+        "astra-counting-l1-경우 나열"
       ]
     },
     {
@@ -233,9 +233,7 @@
       "id": "astra-equations-l2-제곱근",
       "name": "제곱근",
       "summary": "양변을 제곱하면 $a=2^2\\times5=20$.",
-      "prerequisiteIds": [
-        "astra-equations-l1-일차방정식"
-      ]
+      "prerequisiteIds": []
     },
     {
       "id": "astra-equations-l2-이차방정식의 인수분해",
@@ -266,7 +264,7 @@
       "name": "원의 접선",
       "summary": "$PA=PB$이므로 삼각형 $PAB$는 이등변삼각형이다. 밑각이 $60^\\circ$이므로 정삼각형이며 $AB=5$cm.",
       "prerequisiteIds": [
-        "astra-geometry-l1-삼각형의 닮음"
+        "astra-geometry-l1-이등변삼각형"
       ]
     },
     {

@@ -1,0 +1,14 @@
+node_modules/
+
+# API 키 등 비밀값 (PRD 10.1: 키 파일은 공유 저장소에 올리지 않는다)
+.env
+.env.*
+!.env.example
+
+*.log
+.DS_Store
+.idea/
+.vscode/
+
+# 개인 프롬프트 실험 파일 (npm run ai:lab). 팀 프롬프트는 public/src/ai/contracts.js
+apps/baeumgil/prompt-lab/
