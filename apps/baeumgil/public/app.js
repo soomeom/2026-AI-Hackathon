@@ -144,6 +144,7 @@ function render() {
   app.onchange = null;
   app.oninput = null;
   app.onkeydown = null;
+  app.onsubmit = null;
   app.classList.toggle('entry-main', !inWorkspace());
   app.classList.toggle('learner-main', inWorkspace() && ui.role === 'learner');
   if (!ui.role) {

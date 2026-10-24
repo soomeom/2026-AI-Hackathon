@@ -99,8 +99,8 @@ test('entry buttons select only supported roles and profile names are escaped', 
   state.mentors[0].name = '<img src=x onerror=bad()>';
   const roles = [];
   renderDemoEntry({ root, state, onEnter: role => roles.push(role), persistent: true });
-  assert.match(root.innerHTML, /멘토로 체험하기/);
-  assert.match(root.innerHTML, /멘티로 체험하기/);
+  assert.match(root.innerHTML, /멘토로 바로 들어가기/);
+  assert.match(root.innerHTML, /멘티로 바로 들어가기/);
   assert.match(root.innerHTML, /&lt;img/);
   assert.doesNotMatch(root.innerHTML, /<img src=x/);
   for (const role of ['mentor', 'learner', 'admin']) root.onclick({ target: { closest: () => ({ dataset: { enterRole: role } }) } });
@@ -181,4 +181,23 @@ test('choosing 60s or older recommends large text without storing the age band o
   press({ enterRole: 'learner' });
   assert.deepEqual(roles, ['learner']);
   assert.ok(!JSON.stringify(state).includes('senior'));
+});
+
+test('login screen enters only with a matching demo account and keeps the typed id on failure', () => {
+  const fields = { 'login-id': { value: '' }, 'login-password': { value: '' } };
+  const root = { innerHTML: '', querySelector: sel => fields[sel.slice(1)] ?? { focus() {} } };
+  const roles = [];
+  const press = dataset => root.onclick({ target: { closest: () => ({ dataset }) } });
+  renderDemoEntry({ root, state: createDemoState(), onEnter: r => roles.push(r), persistent: true });
+  assert.match(root.innerHTML, /id="login-form"/);
+  assert.match(root.innerHTML, /mentor01/); assert.match(root.innerHTML, /실제 서비스 비밀번호가 아니에요/);
+  press({ authAction: 'login' });
+  assert.match(root.innerHTML, /아이디와 비밀번호를 입력해 주세요/);
+  fields['login-id'].value = 'learner01'; fields['login-password'].value = 'wrong';
+  press({ authAction: 'login' });
+  assert.match(root.innerHTML, /아이디 또는 비밀번호가 맞지 않아요/);
+  assert.match(root.innerHTML, /value="learner01"/); assert.deepEqual(roles, []);
+  fields['login-password'].value = 'learner1234';
+  root.onsubmit({ preventDefault() {} });
+  assert.deepEqual(roles, ['learner']);
 });

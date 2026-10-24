@@ -280,14 +280,14 @@ function seeded() {
 test('real app starts at entry, role changes retain a submitted answer and existing confirmed logs', async t => {
   const initial = seeded();
   const h = await boot(t, { saved: initial });
-  assert.match(h.app.innerHTML, /멘토로 체험하기/);
+  assert.match(h.app.innerHTML, /멘토로 바로 들어가기/);
   enterMath(h, 'learner'); await tick();
   assert.match(h.app.innerHTML, /제출하기/);
   assert.doesNotMatch(h.app.innerHTML, /첫 수준 확인 시작/);
   click(h.app, { choice: 'c' }); click(h.app, { action: 'submit' });
   assert.equal(h.saved().attempts.length, 1);
   click(h.node('change-role'));
-  assert.match(h.app.innerHTML, /멘토로 체험하기/);
+  assert.match(h.app.innerHTML, /멘토로 바로 들어가기/);
   assert.equal(h.saved().paths[0].visible, false);
   enterMath(h, 'mentor');
   assert.match(h.app.innerHTML, /오늘 확인할 것/);
@@ -332,10 +332,10 @@ test('refresh restores a tab role, returning to entry removes it, and another ta
   const refreshed = await boot(t, { local, tab });
   assert.match(refreshed.app.innerHTML, /오늘 확인할 것/);
   const other = await boot(t, { local });
-  assert.match(other.app.innerHTML, /멘토로 체험하기/);
+  assert.match(other.app.innerHTML, /멘토로 바로 들어가기/);
   click(refreshed.node('change-role'));
   const exited = await boot(t, { local, tab });
-  assert.match(exited.app.innerHTML, /멘토로 체험하기/);
+  assert.match(exited.app.innerHTML, /멘토로 바로 들어가기/);
 });
 
 test('canceling a dirty form exit keeps the mentor screen; accepted exit preserves log draft', async t => {
@@ -348,7 +348,7 @@ test('canceling a dirty form exit keeps the mentor screen; accepted exit preserv
   assert.equal(prompts, 1);
   assert.match(h.app.innerHTML, /회기 목록/);
   allowExit = true; click(h.node('change-role'));
-  assert.match(h.app.innerHTML, /멘토로 체험하기/);
+  assert.match(h.app.innerHTML, /멘토로 바로 들어가기/);
   h.app.fields = [];
   enterMath(h, 'mentor'); click(h.app, { goto: 'sessions' });
   assert.match(h.app.innerHTML, /작성 중인 일지 초안/);
@@ -516,7 +516,7 @@ test('real app AI practice persists draft/answer, reaches mentor and ignores a l
   const other=recordFor(state,'roadmap-like-terms');
   click(fresh.app,{roadmapAction:'open',roadmapCard:other.cardId,roadmapQuestion:other.baseQuestionId});await tick();
   assert.match(fresh.app.innerHTML,/준비 중/);click(fresh.node('change-role'));resolve();await tick();await tick();
-  assert.equal(fresh.saved().generatedPractice.length,1);assert.match(fresh.app.innerHTML,/멘토로 체험하기/);
+  assert.equal(fresh.saved().generatedPractice.length,1);assert.match(fresh.app.innerHTML,/멘토로 바로 들어가기/);
 });
 
 test('question hints fall back safely, restore three levels, and mark roadmap answers as assisted',async t=>{
@@ -560,4 +560,16 @@ test('entry large text recommendation turns on the shared large text setting and
   assert.equal(h.local.getItem(STORAGE_KEY), before);
   const fresh = await boot(t, { local: h.local, tab: h.tab });
   assert.equal(fresh.node('html').classes.has('large-text'), true);
+});
+
+test('logging in with a demo account reaches the workspace, stores no password, and logout returns to login', async t => {
+  const h = await boot(t, { saved: seeded() });
+  h.node('login-id').value = 'mentor01'; h.node('login-password').value = 'mentor1234';
+  click(h.app, { authAction: 'login' });
+  assert.match(h.app.innerHTML, /어떤 과목을 함께 배울까요/);
+  click(h.app, { subjectId: 'math' });
+  assert.equal(h.app.onsubmit, null);
+  for (const v of [h.local.getItem(STORAGE_KEY), h.tab.getItem(DEMO_SESSION_KEY)]) assert.doesNotMatch(String(v), /mentor1234/);
+  click(h.node('change-role'));
+  assert.match(h.app.innerHTML, /id="login-form"/);
 });
