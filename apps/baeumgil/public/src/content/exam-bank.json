@@ -9,17 +9,19 @@
   "imageQuestions": 329,
   "routes": 360,
   "conceptTagging": {
-   "keyword": 330,
-   "number_position": 39,
-   "transcribed_text": 31
+   "keyword": 235,
+   "keyword_confirmed": 92,
+   "manual_review": 39,
+   "transcribed_text": 31,
+   "number_position": 3
   },
   "byUnit": {
    "h-poly": 9,
    "h-remainder": 16,
    "h-factoring": 9,
-   "h-discriminant": 6,
-   "h-quad-roots": 7,
-   "h-quad-func": 10,
+   "h-complex": 9,
+   "h-quad-roots": 9,
+   "h-quad-func": 9,
    "h-higher-eq": 13,
    "h-inequality": 9,
    "h-points": 9,
@@ -32,17 +34,16 @@
    "h-rational": 9,
    "h-counting": 8,
    "h-combination": 10,
-   "h-complex": 7,
+   "h-discriminant": 3,
    "m-prime": 9,
    "m-integer": 9,
-   "m-expr": 9,
-   "m-linear-eq": 9,
-   "m-coord": 9,
+   "m-expr": 10,
+   "m-linear-eq": 8,
    "m-plane-fig": 11,
    "m-stat": 16,
    "m-rep-decimal": 9,
-   "m-exponent": 11,
-   "m-system": 8,
+   "m-exponent": 12,
+   "m-system": 6,
    "m-linear-func": 7,
    "m-triangle": 8,
    "m-similarity": 9,
@@ -51,8 +52,9 @@
    "m-quad-eq": 7,
    "m-quad-func": 9,
    "m-trig": 9,
-   "m-circle": 7,
+   "m-circle": 9,
    "m-spread": 2,
+   "m-coord": 8,
    "m-inequality": 4
   }
  },
@@ -557,7 +559,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -611,7 +613,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -650,9 +652,9 @@
    "answer": "4",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-h-discriminant"
+    "ged-h-complex"
    ],
-   "examUnit": "h-discriminant",
+   "examUnit": "h-complex",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2022,
@@ -665,7 +667,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -881,7 +883,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -935,7 +937,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -989,7 +991,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1043,7 +1045,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1097,7 +1099,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1151,7 +1153,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1205,7 +1207,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1259,7 +1261,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1637,7 +1639,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1691,7 +1693,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1745,7 +1747,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -1961,7 +1963,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2015,7 +2017,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2069,7 +2071,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2123,7 +2125,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2177,7 +2179,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2231,7 +2233,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2285,7 +2287,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2339,7 +2341,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2717,7 +2719,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2771,7 +2773,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2825,7 +2827,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -2879,7 +2881,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -3041,7 +3043,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3095,7 +3097,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3149,7 +3151,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3203,7 +3205,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3257,7 +3259,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3311,7 +3313,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3365,7 +3367,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3419,7 +3421,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3797,7 +3799,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3851,7 +3853,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -3890,9 +3892,9 @@
    "answer": "2",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-h-discriminant"
+    "ged-h-complex"
    ],
-   "examUnit": "h-discriminant",
+   "examUnit": "h-complex",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2023,
@@ -3905,7 +3907,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -3959,7 +3961,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -4121,7 +4123,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4175,7 +4177,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4229,7 +4231,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4283,7 +4285,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4337,7 +4339,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4391,7 +4393,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4445,7 +4447,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4499,7 +4501,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4877,7 +4879,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4931,7 +4933,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -4985,7 +4987,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5039,7 +5041,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -5201,7 +5203,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5255,7 +5257,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5309,7 +5311,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5363,7 +5365,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5417,7 +5419,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5471,7 +5473,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5525,7 +5527,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -5579,7 +5581,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -6227,7 +6229,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -6281,7 +6283,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -6335,7 +6337,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -6389,7 +6391,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -6443,7 +6445,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -6497,7 +6499,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -7469,7 +7471,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -7523,7 +7525,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -7577,7 +7579,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -7616,9 +7618,9 @@
    "answer": "3",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-h-discriminant"
+    "ged-h-quad-roots"
    ],
-   "examUnit": "h-discriminant",
+   "examUnit": "h-quad-roots",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2025,
@@ -7631,7 +7633,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -8117,7 +8119,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8171,7 +8173,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8333,7 +8335,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -8549,7 +8551,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8603,7 +8605,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8657,7 +8659,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8711,7 +8713,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8750,9 +8752,9 @@
    "answer": "3",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-h-quad-func"
+    "ged-h-quad-roots"
    ],
-   "examUnit": "h-quad-func",
+   "examUnit": "h-quad-roots",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2026,
@@ -8765,7 +8767,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -8819,7 +8821,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8873,7 +8875,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8927,7 +8929,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -8981,7 +8983,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -9035,7 +9037,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -9089,7 +9091,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -9143,7 +9145,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -9197,7 +9199,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -9251,7 +9253,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -10655,7 +10657,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -10709,7 +10711,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -10802,9 +10804,9 @@
    "answer": "2",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-coord"
+    "ged-m-plane-fig"
    ],
-   "examUnit": "m-coord",
+   "examUnit": "m-plane-fig",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2022,
@@ -10817,7 +10819,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -11357,7 +11359,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -12167,7 +12169,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -12437,7 +12439,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -12491,7 +12493,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -12638,9 +12640,9 @@
    "answer": "4",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-plane-fig"
+    "ged-m-circle"
    ],
-   "examUnit": "m-plane-fig",
+   "examUnit": "m-circle",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2022,
@@ -12653,7 +12655,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -12707,7 +12709,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -12815,7 +12817,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -12869,7 +12871,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -13031,7 +13033,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -13247,7 +13249,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -13517,7 +13519,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -13787,7 +13789,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -13949,7 +13951,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -14597,7 +14599,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -14867,7 +14869,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -14975,7 +14977,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -15068,9 +15070,9 @@
    "answer": "2",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-linear-eq"
+    "ged-m-expr"
    ],
-   "examUnit": "m-linear-eq",
+   "examUnit": "m-expr",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2024,
@@ -15083,7 +15085,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -15191,7 +15193,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -15407,7 +15409,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -15569,7 +15571,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -15677,7 +15679,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -15878,9 +15880,9 @@
    "answer": "1",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-plane-fig"
+    "ged-m-circle"
    ],
-   "examUnit": "m-plane-fig",
+   "examUnit": "m-circle",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2024,
@@ -15893,7 +15895,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -15947,7 +15949,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -16055,7 +16057,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -16271,7 +16273,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -16472,9 +16474,9 @@
    "answer": "2",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-system"
+    "ged-m-exponent"
    ],
-   "examUnit": "m-system",
+   "examUnit": "m-exponent",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2024,
@@ -16487,7 +16489,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -16541,7 +16543,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -16595,7 +16597,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -16757,7 +16759,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -17027,7 +17029,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -17405,7 +17407,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -17783,7 +17785,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -17891,7 +17893,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -17945,7 +17947,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -18161,7 +18163,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -18269,7 +18271,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -18416,9 +18418,9 @@
    "answer": "4",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-coord"
+    "ged-m-plane-fig"
    ],
-   "examUnit": "m-coord",
+   "examUnit": "m-plane-fig",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2026,
@@ -18431,7 +18433,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -18686,9 +18688,9 @@
    "answer": "1",
    "solutionSteps": [],
    "conceptIds": [
-    "ged-m-system"
+    "ged-m-coord"
    ],
-   "examUnit": "m-system",
+   "examUnit": "m-coord",
    "reference": {
     "institution": "한국교육과정평가원",
     "year": 2026,
@@ -18701,7 +18703,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -18755,7 +18757,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -18863,7 +18865,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -18917,7 +18919,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -18971,7 +18973,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "number_position"
+    "conceptTagging": "manual_review"
    }
   },
   {
@@ -19241,7 +19243,7 @@
    "review": {
     "answerKey": "final",
     "imageVisuallyReviewed": false,
-    "conceptTagging": "keyword"
+    "conceptTagging": "keyword_confirmed"
    }
   },
   {
@@ -20348,7 +20350,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -20516,7 +20520,7 @@
     "ged-high-2022-2-math-q03",
     "ged-high-2022-1-math-q02"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q04",
@@ -20538,6 +20542,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -20570,53 +20575,61 @@
     "ged-high-2023-1-math-q04",
     "ged-high-2022-2-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q05",
    "kind": "exam_pool",
    "questionId": "ged-high-2022-1-math-q05",
-   "coreConceptId": "ged-h-discriminant",
-   "examUnit": "h-discriminant",
+   "coreConceptId": "ged-h-complex",
+   "examUnit": "h-complex",
    "prerequisiteUnits": [
-    "m-quad-eq",
-    "m-sqrt"
+    "m-sqrt",
+    "m-integer"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q16",
-    "ged-middle-2025-1-math-q15"
+    "ged-middle-2025-1-math-q15",
+    "ged-middle-2025-1-math-q02"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q02",
     "ged-middle-2026-1-math-q15",
-    "ged-middle-2026-1-math-q16",
+    "ged-middle-2025-2-math-q02",
     "ged-middle-2025-2-math-q15",
+    "ged-middle-2024-2-math-q02",
     "ged-middle-2024-2-math-q15",
-    "ged-middle-2024-2-math-q16",
+    "ged-middle-2024-1-math-q02",
     "ged-middle-2024-1-math-q15",
-    "ged-middle-2024-1-math-q16",
+    "ged-middle-2023-2-math-q02",
     "ged-middle-2023-2-math-q15",
-    "ged-middle-2023-2-math-q16",
+    "ged-middle-2023-1-math-q02",
     "ged-middle-2023-1-math-q15",
-    "ged-middle-2023-1-math-q16",
+    "ged-middle-2022-2-math-q02",
     "ged-middle-2022-2-math-q15",
-    "ged-middle-2022-1-math-q15",
-    "ged-middle-2022-1-math-q16"
+    "ged-middle-2022-1-math-q02",
+    "ged-middle-2022-1-math-q15"
    ],
    "similarQuestionIds": [
-    "ged-high-2025-1-math-q05",
-    "ged-high-2026-1-math-q06",
-    "ged-high-2025-2-math-q06",
-    "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05"
+    "ged-high-2026-1-math-q05",
+    "ged-high-2025-2-math-q05",
+    "ged-high-2025-1-math-q04",
+    "ged-high-2024-2-math-q04",
+    "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
+    "ged-high-2023-1-math-q05",
+    "ged-high-2022-2-math-q05"
    ],
    "transferQuestionIds": [
-    "ged-high-2025-1-math-q05",
-    "ged-high-2026-1-math-q06",
-    "ged-high-2025-2-math-q06",
-    "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05"
+    "ged-high-2026-1-math-q05",
+    "ged-high-2025-2-math-q05",
+    "ged-high-2025-1-math-q04",
+    "ged-high-2024-2-math-q04",
+    "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
+    "ged-high-2023-1-math-q05",
+    "ged-high-2022-2-math-q05"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2022-1-math-q06",
@@ -20650,6 +20663,8 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -20658,6 +20673,8 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -20698,7 +20715,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -20709,7 +20725,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -20735,11 +20750,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -20794,11 +20807,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -20836,7 +20847,7 @@
     "ged-high-2022-2-math-q09",
     "ged-high-2022-1-math-q08"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q10",
@@ -20883,7 +20894,7 @@
     "ged-high-2023-1-math-q10",
     "ged-high-2022-2-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q11",
@@ -20900,7 +20911,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -20914,7 +20925,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -20937,7 +20947,7 @@
     "ged-high-2023-1-math-q11",
     "ged-high-2022-2-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q12",
@@ -20954,7 +20964,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -20966,7 +20976,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -20989,7 +20998,7 @@
     "ged-high-2023-1-math-q12",
     "ged-high-2022-2-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q13",
@@ -21013,11 +21022,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -21041,7 +21052,7 @@
     "ged-high-2023-1-math-q13",
     "ged-high-2022-2-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q14",
@@ -21058,7 +21069,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -21070,7 +21081,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -21093,7 +21103,7 @@
     "ged-high-2023-1-math-q14",
     "ged-high-2022-2-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q15",
@@ -21151,7 +21161,7 @@
     "ged-high-2023-1-math-q15",
     "ged-high-2022-2-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q16",
@@ -21204,7 +21214,7 @@
     "ged-high-2023-1-math-q16",
     "ged-high-2022-2-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-1-math-q17",
@@ -21221,7 +21231,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -21233,7 +21243,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -21277,7 +21286,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -21289,7 +21298,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -21424,7 +21432,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -21592,7 +21602,7 @@
     "ged-high-2022-1-math-q02",
     "ged-high-2022-1-math-q03"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q04",
@@ -21614,6 +21624,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -21646,7 +21657,7 @@
     "ged-high-2023-1-math-q04",
     "ged-high-2022-1-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q05",
@@ -21686,7 +21697,9 @@
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
-    "ged-high-2023-1-math-q05"
+    "ged-high-2023-2-math-q05",
+    "ged-high-2023-1-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q05",
@@ -21694,9 +21707,11 @@
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
-    "ged-high-2023-1-math-q05"
+    "ged-high-2023-2-math-q05",
+    "ged-high-2023-1-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q06",
@@ -21730,6 +21745,8 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -21738,6 +21755,8 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -21778,7 +21797,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -21789,7 +21807,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -21815,11 +21832,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -21874,11 +21889,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -21916,7 +21929,7 @@
     "ged-high-2022-1-math-q08",
     "ged-high-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q10",
@@ -21963,7 +21976,7 @@
     "ged-high-2023-1-math-q10",
     "ged-high-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q11",
@@ -21980,7 +21993,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -21994,7 +22007,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -22017,7 +22029,7 @@
     "ged-high-2023-1-math-q11",
     "ged-high-2022-1-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q12",
@@ -22034,7 +22046,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -22046,7 +22058,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -22069,7 +22080,7 @@
     "ged-high-2023-1-math-q12",
     "ged-high-2022-1-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q13",
@@ -22093,11 +22104,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -22121,7 +22134,7 @@
     "ged-high-2023-1-math-q13",
     "ged-high-2022-1-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q14",
@@ -22138,7 +22151,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -22150,7 +22163,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -22173,7 +22185,7 @@
     "ged-high-2023-1-math-q14",
     "ged-high-2022-1-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q15",
@@ -22231,7 +22243,7 @@
     "ged-high-2023-1-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q16",
@@ -22284,7 +22296,7 @@
     "ged-high-2023-1-math-q16",
     "ged-high-2022-1-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2022-2-math-q17",
@@ -22301,7 +22313,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -22313,7 +22325,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -22357,7 +22368,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -22369,7 +22380,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -22504,7 +22514,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -22672,7 +22684,7 @@
     "ged-high-2022-1-math-q02",
     "ged-high-2022-1-math-q03"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q04",
@@ -22694,6 +22706,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -22726,7 +22739,7 @@
     "ged-high-2022-2-math-q04",
     "ged-high-2022-1-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q05",
@@ -22766,7 +22779,9 @@
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2023-2-math-q05",
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q05",
@@ -22774,9 +22789,11 @@
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2023-2-math-q05",
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q06",
@@ -22810,6 +22827,8 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -22818,13 +22837,15 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
     "ged-high-2022-2-math-q06",
     "ged-high-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2023-1-math-q07",
@@ -22858,7 +22879,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -22869,7 +22889,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -22895,11 +22914,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -22954,11 +22971,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -22996,7 +23011,7 @@
     "ged-high-2022-1-math-q08",
     "ged-high-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q10",
@@ -23043,7 +23058,7 @@
     "ged-high-2022-2-math-q10",
     "ged-high-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q11",
@@ -23060,7 +23075,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -23074,7 +23089,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -23097,7 +23111,7 @@
     "ged-high-2022-2-math-q11",
     "ged-high-2022-1-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q12",
@@ -23114,7 +23128,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -23126,7 +23140,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -23149,7 +23162,7 @@
     "ged-high-2022-2-math-q12",
     "ged-high-2022-1-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q13",
@@ -23173,11 +23186,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -23201,7 +23216,7 @@
     "ged-high-2022-2-math-q13",
     "ged-high-2022-1-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q14",
@@ -23218,7 +23233,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -23230,7 +23245,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -23253,7 +23267,7 @@
     "ged-high-2022-2-math-q14",
     "ged-high-2022-1-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q15",
@@ -23311,7 +23325,7 @@
     "ged-high-2022-2-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q16",
@@ -23364,7 +23378,7 @@
     "ged-high-2022-2-math-q16",
     "ged-high-2022-1-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-1-math-q17",
@@ -23381,7 +23395,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -23393,7 +23407,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -23437,7 +23450,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -23449,7 +23462,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -23584,7 +23596,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -23752,7 +23766,7 @@
     "ged-high-2022-1-math-q02",
     "ged-high-2022-1-math-q03"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q04",
@@ -23774,6 +23788,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -23806,53 +23821,61 @@
     "ged-high-2022-2-math-q04",
     "ged-high-2022-1-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q05",
    "kind": "exam_pool",
    "questionId": "ged-high-2023-2-math-q05",
-   "coreConceptId": "ged-h-discriminant",
-   "examUnit": "h-discriminant",
+   "coreConceptId": "ged-h-complex",
+   "examUnit": "h-complex",
    "prerequisiteUnits": [
-    "m-quad-eq",
-    "m-sqrt"
+    "m-sqrt",
+    "m-integer"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q16",
-    "ged-middle-2025-1-math-q15"
+    "ged-middle-2025-1-math-q15",
+    "ged-middle-2025-1-math-q02"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q02",
     "ged-middle-2026-1-math-q15",
-    "ged-middle-2026-1-math-q16",
+    "ged-middle-2025-2-math-q02",
     "ged-middle-2025-2-math-q15",
+    "ged-middle-2024-2-math-q02",
     "ged-middle-2024-2-math-q15",
-    "ged-middle-2024-2-math-q16",
+    "ged-middle-2024-1-math-q02",
     "ged-middle-2024-1-math-q15",
-    "ged-middle-2024-1-math-q16",
+    "ged-middle-2023-2-math-q02",
     "ged-middle-2023-2-math-q15",
-    "ged-middle-2023-2-math-q16",
+    "ged-middle-2023-1-math-q02",
     "ged-middle-2023-1-math-q15",
-    "ged-middle-2023-1-math-q16",
+    "ged-middle-2022-2-math-q02",
     "ged-middle-2022-2-math-q15",
-    "ged-middle-2022-1-math-q15",
-    "ged-middle-2022-1-math-q16"
+    "ged-middle-2022-1-math-q02",
+    "ged-middle-2022-1-math-q15"
    ],
    "similarQuestionIds": [
-    "ged-high-2025-1-math-q05",
-    "ged-high-2026-1-math-q06",
-    "ged-high-2025-2-math-q06",
-    "ged-high-2024-2-math-q05",
+    "ged-high-2026-1-math-q05",
+    "ged-high-2025-2-math-q05",
+    "ged-high-2025-1-math-q04",
+    "ged-high-2024-2-math-q04",
+    "ged-high-2024-1-math-q05",
+    "ged-high-2023-1-math-q05",
+    "ged-high-2022-2-math-q05",
     "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
-    "ged-high-2025-1-math-q05",
-    "ged-high-2026-1-math-q06",
-    "ged-high-2025-2-math-q06",
-    "ged-high-2024-2-math-q05",
+    "ged-high-2026-1-math-q05",
+    "ged-high-2025-2-math-q05",
+    "ged-high-2025-1-math-q04",
+    "ged-high-2024-2-math-q04",
+    "ged-high-2024-1-math-q05",
+    "ged-high-2023-1-math-q05",
+    "ged-high-2022-2-math-q05",
     "ged-high-2022-1-math-q05"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2023-2-math-q06",
@@ -23886,6 +23909,8 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-1-math-q06",
@@ -23894,13 +23919,15 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-1-math-q06",
     "ged-high-2022-2-math-q06",
     "ged-high-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2023-2-math-q07",
@@ -23934,7 +23961,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -23945,7 +23971,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -23971,11 +23996,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -24030,11 +24053,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -24072,7 +24093,7 @@
     "ged-high-2022-1-math-q08",
     "ged-high-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q10",
@@ -24119,7 +24140,7 @@
     "ged-high-2022-2-math-q10",
     "ged-high-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q11",
@@ -24136,7 +24157,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -24150,7 +24171,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -24173,7 +24193,7 @@
     "ged-high-2022-2-math-q11",
     "ged-high-2022-1-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q12",
@@ -24190,7 +24210,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -24202,7 +24222,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -24225,7 +24244,7 @@
     "ged-high-2022-2-math-q12",
     "ged-high-2022-1-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q13",
@@ -24249,11 +24268,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -24277,7 +24298,7 @@
     "ged-high-2022-2-math-q13",
     "ged-high-2022-1-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q14",
@@ -24294,7 +24315,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -24306,7 +24327,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -24329,7 +24349,7 @@
     "ged-high-2022-2-math-q14",
     "ged-high-2022-1-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q15",
@@ -24387,7 +24407,7 @@
     "ged-high-2022-2-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q16",
@@ -24440,7 +24460,7 @@
     "ged-high-2022-2-math-q16",
     "ged-high-2022-1-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2023-2-math-q17",
@@ -24457,7 +24477,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -24469,7 +24489,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -24513,7 +24532,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -24525,7 +24544,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -24660,7 +24678,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -24828,7 +24848,7 @@
     "ged-high-2022-1-math-q02",
     "ged-high-2022-1-math-q03"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q04",
@@ -24850,6 +24870,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -24882,7 +24903,7 @@
     "ged-high-2022-2-math-q04",
     "ged-high-2022-1-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q05",
@@ -24921,18 +24942,22 @@
     "ged-high-2025-2-math-q05",
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q05",
     "ged-high-2025-2-math-q05",
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q06",
@@ -24966,6 +24991,8 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2023-2-math-q06",
     "ged-high-2023-1-math-q06",
@@ -24974,13 +25001,15 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2023-2-math-q06",
     "ged-high-2023-1-math-q06",
     "ged-high-2022-2-math-q06",
     "ged-high-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2024-1-math-q07",
@@ -25014,7 +25043,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -25025,7 +25053,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -25051,11 +25078,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -25110,11 +25135,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -25152,7 +25175,7 @@
     "ged-high-2022-1-math-q08",
     "ged-high-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q10",
@@ -25199,7 +25222,7 @@
     "ged-high-2022-2-math-q10",
     "ged-high-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q11",
@@ -25216,7 +25239,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -25230,7 +25253,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -25253,7 +25275,7 @@
     "ged-high-2022-2-math-q11",
     "ged-high-2022-1-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q12",
@@ -25270,7 +25292,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -25282,7 +25304,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -25305,7 +25326,7 @@
     "ged-high-2022-2-math-q12",
     "ged-high-2022-1-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q13",
@@ -25329,11 +25350,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -25357,7 +25380,7 @@
     "ged-high-2022-2-math-q13",
     "ged-high-2022-1-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q14",
@@ -25374,7 +25397,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -25386,7 +25409,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -25409,7 +25431,7 @@
     "ged-high-2022-2-math-q14",
     "ged-high-2022-1-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q15",
@@ -25467,7 +25489,7 @@
     "ged-high-2022-2-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q16",
@@ -25520,7 +25542,7 @@
     "ged-high-2022-2-math-q16",
     "ged-high-2022-1-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-1-math-q17",
@@ -25537,7 +25559,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -25549,7 +25571,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -25593,7 +25614,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -25605,7 +25626,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -25740,7 +25760,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -25862,6 +25884,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -25933,16 +25956,20 @@
     "ged-high-2025-2-math-q05",
     "ged-high-2025-1-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q05",
     "ged-high-2025-2-math-q05",
     "ged-high-2025-1-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -25979,16 +26006,28 @@
    "similarQuestionIds": [
     "ged-high-2025-1-math-q05",
     "ged-high-2026-1-math-q06",
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
     "ged-high-2025-2-math-q06",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q05",
     "ged-high-2026-1-math-q06",
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
     "ged-high-2025-2-math-q06",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "conceptTagging": "keyword"
   },
@@ -26024,6 +26063,8 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
     "ged-high-2023-1-math-q06",
@@ -26032,6 +26073,8 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
     "ged-high-2023-1-math-q06",
@@ -26072,7 +26115,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-1-math-q07",
@@ -26083,7 +26125,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-1-math-q07",
@@ -26139,7 +26180,7 @@
     "ged-high-2022-2-math-q10",
     "ged-high-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-2-math-q09",
@@ -26156,7 +26197,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -26170,7 +26211,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -26193,7 +26233,7 @@
     "ged-high-2022-2-math-q11",
     "ged-high-2022-1-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-2-math-q10",
@@ -26210,7 +26250,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -26222,7 +26262,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -26245,7 +26284,7 @@
     "ged-high-2022-2-math-q12",
     "ged-high-2022-1-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-2-math-q11",
@@ -26269,11 +26308,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -26297,7 +26338,7 @@
     "ged-high-2022-2-math-q13",
     "ged-high-2022-1-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-2-math-q12",
@@ -26314,7 +26355,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -26326,7 +26367,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -26349,7 +26389,7 @@
     "ged-high-2022-2-math-q14",
     "ged-high-2022-1-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-2-math-q13",
@@ -26407,7 +26447,7 @@
     "ged-high-2022-2-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2024-2-math-q14",
@@ -26535,7 +26575,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -26547,7 +26587,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -26591,7 +26630,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -26603,7 +26642,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -26647,7 +26685,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -26659,7 +26697,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -26794,7 +26831,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -26916,6 +26955,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -26987,16 +27027,20 @@
     "ged-high-2025-2-math-q05",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q05",
     "ged-high-2025-2-math-q05",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -27032,17 +27076,29 @@
    ],
    "similarQuestionIds": [
     "ged-high-2026-1-math-q06",
-    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q06",
-    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "conceptTagging": "transcribed_text"
   },
@@ -27077,6 +27133,8 @@
     "ged-middle-2022-1-math-q16"
    ],
    "similarQuestionIds": [
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -27085,6 +27143,8 @@
     "ged-high-2022-1-math-q06"
    ],
    "transferQuestionIds": [
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q06",
     "ged-high-2024-1-math-q06",
     "ged-high-2023-2-math-q06",
@@ -27125,7 +27185,6 @@
     "ged-middle-2022-1-math-q17"
    ],
    "similarQuestionIds": [
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -27136,7 +27195,6 @@
     "ged-high-2022-1-math-q07"
    ],
    "transferQuestionIds": [
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
@@ -27163,11 +27221,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -27269,7 +27325,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -27283,7 +27339,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -27324,7 +27379,7 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -27336,7 +27391,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -27383,11 +27437,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -27428,7 +27484,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -27440,7 +27496,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -27592,7 +27647,7 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
@@ -27603,7 +27658,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -27647,7 +27701,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -27659,7 +27713,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -27703,7 +27756,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -27715,7 +27768,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -27854,7 +27906,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -28022,7 +28076,7 @@
     "ged-high-2022-1-math-q02",
     "ged-high-2022-1-math-q03"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2025-2-math-q04",
@@ -28044,6 +28098,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -28076,7 +28131,7 @@
     "ged-high-2022-2-math-q04",
     "ged-high-2022-1-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2025-2-math-q05",
@@ -28115,25 +28170,29 @@
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2026-1-math-q05",
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2025-2-math-q06",
    "kind": "exam_pool",
    "questionId": "ged-high-2025-2-math-q06",
-   "coreConceptId": "ged-h-discriminant",
-   "examUnit": "h-discriminant",
+   "coreConceptId": "ged-h-quad-roots",
+   "examUnit": "h-quad-roots",
    "prerequisiteUnits": [
     "m-quad-eq",
     "m-sqrt"
@@ -28159,20 +28218,26 @@
     "ged-middle-2022-1-math-q16"
    ],
    "similarQuestionIds": [
-    "ged-high-2025-1-math-q05",
-    "ged-high-2026-1-math-q06",
-    "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "transferQuestionIds": [
-    "ged-high-2025-1-math-q05",
-    "ged-high-2026-1-math-q06",
-    "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2025-2-math-q07",
@@ -28206,7 +28271,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2024-2-math-q07",
     "ged-high-2024-1-math-q07",
@@ -28217,7 +28281,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2026-1-math-q08",
     "ged-high-2024-2-math-q07",
     "ged-high-2024-1-math-q07",
@@ -28243,11 +28306,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -28349,7 +28410,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -28363,7 +28424,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -28403,7 +28463,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -28415,7 +28475,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -28462,11 +28521,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -28507,7 +28568,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -28519,7 +28580,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -28658,7 +28718,7 @@
     "ged-high-2022-2-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2025-2-math-q16",
@@ -28711,7 +28771,7 @@
     "ged-high-2022-2-math-q16",
     "ged-high-2022-1-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2025-2-math-q17",
@@ -28728,7 +28788,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -28740,7 +28800,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -28784,7 +28843,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -28796,7 +28855,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -28861,7 +28919,7 @@
     "ged-high-2022-2-math-q19",
     "ged-high-2022-1-math-q19"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2025-2-math-q20",
@@ -28931,7 +28989,9 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-2-math-q09",
@@ -29099,7 +29159,7 @@
     "ged-high-2022-1-math-q02",
     "ged-high-2022-1-math-q03"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q04",
@@ -29121,6 +29181,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2024-1-math-q16",
@@ -29153,7 +29214,7 @@
     "ged-high-2022-2-math-q04",
     "ged-high-2022-1-math-q04"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q05",
@@ -29192,18 +29253,22 @@
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-high-2025-2-math-q05",
     "ged-high-2025-1-math-q04",
     "ged-high-2024-2-math-q04",
     "ged-high-2024-1-math-q05",
+    "ged-high-2023-2-math-q05",
     "ged-high-2023-1-math-q05",
-    "ged-high-2022-2-math-q05"
+    "ged-high-2022-2-math-q05",
+    "ged-high-2022-1-math-q05"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q06",
@@ -29237,73 +29302,83 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q05",
-    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q05",
-    "ged-high-2025-2-math-q06",
     "ged-high-2024-2-math-q05",
-    "ged-high-2023-2-math-q05",
-    "ged-high-2022-1-math-q05"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2026-1-math-q07",
+    "ged-high-2025-2-math-q06",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q07",
    "kind": "exam_pool",
    "questionId": "ged-high-2026-1-math-q07",
-   "coreConceptId": "ged-h-quad-func",
-   "examUnit": "h-quad-func",
+   "coreConceptId": "ged-h-quad-roots",
+   "examUnit": "h-quad-roots",
    "prerequisiteUnits": [
-    "m-quad-func",
-    "m-linear-func"
+    "m-quad-eq",
+    "m-sqrt"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q17",
-    "ged-middle-2025-1-math-q11"
+    "ged-middle-2025-1-math-q16",
+    "ged-middle-2025-1-math-q15"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q17",
-    "ged-middle-2025-2-math-q11",
-    "ged-middle-2025-2-math-q17",
-    "ged-middle-2024-2-math-q17",
-    "ged-middle-2024-1-math-q11",
-    "ged-middle-2024-1-math-q17",
-    "ged-middle-2023-2-math-q11",
-    "ged-middle-2023-2-math-q17",
-    "ged-middle-2023-1-math-q11",
-    "ged-middle-2023-1-math-q17",
-    "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-2-math-q17",
-    "ged-middle-2022-1-math-q11",
-    "ged-middle-2022-1-math-q17"
+    "ged-middle-2026-1-math-q15",
+    "ged-middle-2026-1-math-q16",
+    "ged-middle-2025-2-math-q15",
+    "ged-middle-2024-2-math-q15",
+    "ged-middle-2024-2-math-q16",
+    "ged-middle-2024-1-math-q15",
+    "ged-middle-2024-1-math-q16",
+    "ged-middle-2023-2-math-q15",
+    "ged-middle-2023-2-math-q16",
+    "ged-middle-2023-1-math-q15",
+    "ged-middle-2023-1-math-q16",
+    "ged-middle-2022-2-math-q15",
+    "ged-middle-2022-1-math-q15",
+    "ged-middle-2022-1-math-q16"
    ],
    "similarQuestionIds": [
-    "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q08",
-    "ged-high-2025-2-math-q07",
-    "ged-high-2024-2-math-q07",
-    "ged-high-2024-1-math-q07",
-    "ged-high-2023-2-math-q07",
-    "ged-high-2023-1-math-q07",
-    "ged-high-2022-2-math-q07",
-    "ged-high-2022-1-math-q07"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2025-2-math-q06",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
    "transferQuestionIds": [
-    "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q08",
-    "ged-high-2025-2-math-q07",
-    "ged-high-2024-2-math-q07",
-    "ged-high-2024-1-math-q07",
-    "ged-high-2023-2-math-q07",
-    "ged-high-2023-1-math-q07",
-    "ged-high-2022-2-math-q07",
-    "ged-high-2022-1-math-q07"
+    "ged-high-2025-1-math-q06",
+    "ged-high-2025-2-math-q06",
+    "ged-high-2024-2-math-q06",
+    "ged-high-2024-1-math-q06",
+    "ged-high-2023-2-math-q06",
+    "ged-high-2023-1-math-q06",
+    "ged-high-2022-2-math-q06",
+    "ged-high-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-high-2026-1-math-q08",
@@ -29337,7 +29412,6 @@
    ],
    "similarQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
     "ged-high-2024-1-math-q07",
@@ -29348,7 +29422,6 @@
    ],
    "transferQuestionIds": [
     "ged-high-2025-1-math-q07",
-    "ged-high-2026-1-math-q07",
     "ged-high-2025-2-math-q07",
     "ged-high-2024-2-math-q07",
     "ged-high-2024-1-math-q07",
@@ -29357,7 +29430,7 @@
     "ged-high-2022-2-math-q07",
     "ged-high-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q09",
@@ -29374,11 +29447,9 @@
     "ged-middle-2025-1-math-q16"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2026-1-math-q16",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2024-2-math-q16",
     "ged-middle-2024-1-math-q16",
@@ -29416,7 +29487,7 @@
     "ged-high-2022-1-math-q08",
     "ged-high-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q10",
@@ -29463,7 +29534,7 @@
     "ged-high-2022-2-math-q10",
     "ged-high-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q11",
@@ -29480,7 +29551,7 @@
     "ged-middle-2025-1-math-q13"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q13",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q13",
@@ -29494,7 +29565,6 @@
     "ged-middle-2023-1-math-q13",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q13",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q13"
    ],
    "similarQuestionIds": [
@@ -29517,7 +29587,7 @@
     "ged-high-2022-2-math-q11",
     "ged-high-2022-1-math-q11"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q12",
@@ -29534,7 +29604,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -29546,7 +29616,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -29569,7 +29638,7 @@
     "ged-high-2022-2-math-q12",
     "ged-high-2022-1-math-q12"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q13",
@@ -29593,11 +29662,13 @@
     "ged-middle-2024-2-math-q13",
     "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q13",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q13",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q13",
     "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q13",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q13",
     "ged-middle-2022-1-math-q19"
    ],
@@ -29621,7 +29692,7 @@
     "ged-high-2022-2-math-q13",
     "ged-high-2022-1-math-q13"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q14",
@@ -29638,7 +29709,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -29650,7 +29721,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -29673,7 +29743,7 @@
     "ged-high-2022-2-math-q14",
     "ged-high-2022-1-math-q14"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q15",
@@ -29731,7 +29801,7 @@
     "ged-high-2022-2-math-q15",
     "ged-high-2022-1-math-q15"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q16",
@@ -29784,7 +29854,7 @@
     "ged-high-2022-2-math-q16",
     "ged-high-2022-1-math-q16"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-high-2026-1-math-q17",
@@ -29801,7 +29871,7 @@
     "ged-middle-2025-1-math-q05"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -29813,7 +29883,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -29857,7 +29926,7 @@
     "ged-middle-2025-1-math-q11"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2025-2-math-q11",
     "ged-middle-2024-2-math-q05",
@@ -29869,7 +29938,6 @@
     "ged-middle-2023-1-math-q11",
     "ged-middle-2022-2-math-q05",
     "ged-middle-2022-2-math-q11",
-    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q11"
    ],
    "similarQuestionIds": [
@@ -30058,7 +30126,7 @@
     "ged-middle-2023-1-math-q02",
     "ged-middle-2022-2-math-q02"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2022-1-math-q03",
@@ -30088,6 +30156,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03"
@@ -30098,11 +30167,12 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2022-1-math-q04",
@@ -30121,6 +30191,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -30131,7 +30202,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04"
@@ -30141,7 +30211,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04"
@@ -30152,8 +30221,8 @@
    "id": "route-ged-middle-2022-1-math-q05",
    "kind": "exam_pool",
    "questionId": "ged-middle-2022-1-math-q05",
-   "coreConceptId": "ged-m-coord",
-   "examUnit": "m-coord",
+   "coreConceptId": "ged-m-plane-fig",
+   "examUnit": "m-plane-fig",
    "prerequisiteUnits": [
     "m-integer"
    ],
@@ -30171,26 +30240,30 @@
     "ged-middle-2022-1-math-q02"
    ],
    "similarQuestionIds": [
-    "ged-middle-2025-1-math-q05",
+    "ged-middle-2025-1-math-q06",
     "ged-middle-2026-1-math-q05",
-    "ged-middle-2025-2-math-q05",
-    "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q05",
-    "ged-middle-2023-2-math-q05",
-    "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05"
+    "ged-middle-2026-1-math-q06",
+    "ged-middle-2025-2-math-q06",
+    "ged-middle-2024-2-math-q06",
+    "ged-middle-2024-1-math-q06",
+    "ged-middle-2023-2-math-q06",
+    "ged-middle-2023-1-math-q06",
+    "ged-middle-2022-2-math-q06",
+    "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q05",
+    "ged-middle-2025-1-math-q06",
     "ged-middle-2026-1-math-q05",
-    "ged-middle-2025-2-math-q05",
-    "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q05",
-    "ged-middle-2023-2-math-q05",
-    "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05"
+    "ged-middle-2026-1-math-q06",
+    "ged-middle-2025-2-math-q06",
+    "ged-middle-2024-2-math-q06",
+    "ged-middle-2024-1-math-q06",
+    "ged-middle-2023-2-math-q06",
+    "ged-middle-2023-1-math-q06",
+    "ged-middle-2022-2-math-q06",
+    "ged-middle-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2022-1-math-q06",
@@ -30216,27 +30289,27 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19"
+    "ged-middle-2022-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19"
+    "ged-middle-2022-1-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -30369,6 +30442,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -30380,6 +30454,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -30392,6 +30467,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -30416,7 +30492,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -30424,19 +30499,15 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10"
    ],
@@ -30458,12 +30529,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -30471,8 +30541,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q11",
@@ -30503,17 +30572,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -30645,6 +30714,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -30677,7 +30747,7 @@
     "ged-middle-2023-1-math-q15",
     "ged-middle-2022-2-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2022-1-math-q16",
@@ -30701,7 +30771,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -30843,16 +30913,20 @@
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
-    "ged-middle-2023-1-math-q19"
+    "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q19",
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
-    "ged-middle-2023-1-math-q19"
+    "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19"
    ],
    "conceptTagging": "keyword"
   },
@@ -31027,6 +31101,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-1-math-q03"
@@ -31037,6 +31112,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-1-math-q03"
@@ -31060,6 +31136,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -31070,7 +31147,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-1-math-q04"
@@ -31080,7 +31156,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-1-math-q04"
@@ -31111,23 +31186,21 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
-    "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2023-1-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
-    "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2023-1-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -31155,26 +31228,26 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "conceptTagging": "keyword"
@@ -31308,6 +31381,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -31319,6 +31393,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -31331,6 +31406,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -31355,7 +31431,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -31371,7 +31446,7 @@
     "ged-middle-2024-1-math-q10",
     "ged-middle-2023-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2022-2-math-q11",
@@ -31389,12 +31464,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -31402,8 +31476,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q11",
@@ -31434,17 +31507,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -31576,6 +31649,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -31608,7 +31682,7 @@
     "ged-middle-2023-1-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2022-2-math-q16",
@@ -31627,6 +31701,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -31638,6 +31713,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -31650,13 +31726,14 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
     "ged-middle-2022-2-math-q09",
     "ged-middle-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2022-2-math-q17",
@@ -31748,49 +31825,44 @@
    "id": "route-ged-middle-2022-2-math-q19",
    "kind": "exam_pool",
    "questionId": "ged-middle-2022-2-math-q19",
-   "coreConceptId": "ged-m-plane-fig",
-   "examUnit": "m-plane-fig",
+   "coreConceptId": "ged-m-circle",
+   "examUnit": "m-circle",
    "prerequisiteUnits": [
-    "m-integer"
+    "m-triangle"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q02",
-    "ged-middle-2026-1-math-q02"
+    "ged-middle-2025-1-math-q12",
+    "ged-middle-2026-1-math-q12"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2025-2-math-q02",
-    "ged-middle-2024-2-math-q02",
-    "ged-middle-2024-1-math-q02",
-    "ged-middle-2023-2-math-q02",
-    "ged-middle-2023-1-math-q02",
-    "ged-middle-2022-2-math-q02",
-    "ged-middle-2022-1-math-q02"
+    "ged-middle-2025-2-math-q12",
+    "ged-middle-2024-1-math-q12",
+    "ged-middle-2023-2-math-q12",
+    "ged-middle-2023-1-math-q12",
+    "ged-middle-2022-2-math-q12",
+    "ged-middle-2022-1-math-q12"
    ],
    "similarQuestionIds": [
-    "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06",
-    "ged-middle-2025-2-math-q06",
-    "ged-middle-2024-2-math-q06",
-    "ged-middle-2024-1-math-q06",
+    "ged-middle-2025-1-math-q19",
+    "ged-middle-2026-1-math-q19",
+    "ged-middle-2025-2-math-q19",
+    "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q19",
-    "ged-middle-2023-2-math-q06",
-    "ged-middle-2023-1-math-q06",
-    "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-1-math-q06"
+    "ged-middle-2023-2-math-q19",
+    "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06",
-    "ged-middle-2025-2-math-q06",
-    "ged-middle-2024-2-math-q06",
-    "ged-middle-2024-1-math-q06",
+    "ged-middle-2025-1-math-q19",
+    "ged-middle-2026-1-math-q19",
+    "ged-middle-2025-2-math-q19",
+    "ged-middle-2024-2-math-q19",
     "ged-middle-2024-1-math-q19",
-    "ged-middle-2023-2-math-q06",
-    "ged-middle-2023-1-math-q06",
-    "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-1-math-q06"
+    "ged-middle-2023-2-math-q19",
+    "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-1-math-q19"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2022-2-math-q20",
@@ -31848,7 +31920,7 @@
     "ged-middle-2022-2-math-q07",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2023-1-math-q01",
@@ -31926,7 +31998,7 @@
     "ged-middle-2022-2-math-q02",
     "ged-middle-2022-1-math-q02"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2023-1-math-q03",
@@ -31956,6 +32028,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2022-2-math-q03",
     "ged-middle-2022-1-math-q03"
@@ -31966,11 +32039,12 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2022-2-math-q03",
     "ged-middle-2022-1-math-q03"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2023-1-math-q04",
@@ -31989,6 +32063,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -31999,7 +32074,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-1-math-q04"
@@ -32009,7 +32083,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-1-math-q04"
@@ -32040,23 +32113,21 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -32084,29 +32155,29 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2023-1-math-q07",
@@ -32237,6 +32308,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -32248,6 +32320,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2022-2-math-q09",
@@ -32260,6 +32333,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2022-2-math-q09",
@@ -32284,7 +32358,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -32300,7 +32373,7 @@
     "ged-middle-2024-1-math-q10",
     "ged-middle-2022-2-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2023-1-math-q11",
@@ -32318,12 +32391,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -32331,8 +32403,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q11",
@@ -32363,17 +32434,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -32505,6 +32576,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -32537,7 +32609,7 @@
     "ged-middle-2022-2-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2023-1-math-q16",
@@ -32561,7 +32633,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -32703,7 +32775,9 @@
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
@@ -32711,7 +32785,9 @@
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "conceptTagging": "keyword"
@@ -32772,7 +32848,7 @@
     "ged-middle-2022-2-math-q20",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2023-2-math-q01",
@@ -32880,6 +32956,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
     "ged-middle-2022-1-math-q03"
@@ -32890,11 +32967,12 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
     "ged-middle-2022-1-math-q03"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2023-2-math-q04",
@@ -32913,6 +32991,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -32923,7 +33002,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-1-math-q04"
@@ -32933,7 +33011,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-1-math-q04"
@@ -32964,23 +33041,21 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -33008,26 +33083,26 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "conceptTagging": "keyword"
@@ -33161,6 +33236,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -33172,6 +33248,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-1-math-q09",
     "ged-middle-2022-2-math-q09",
@@ -33184,6 +33261,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-1-math-q09",
     "ged-middle-2022-2-math-q09",
@@ -33208,7 +33286,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -33216,19 +33293,15 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2022-1-math-q10"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2022-1-math-q10"
    ],
@@ -33250,12 +33323,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -33263,8 +33335,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q11",
@@ -33295,17 +33366,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -33437,6 +33508,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -33469,7 +33541,7 @@
     "ged-middle-2022-2-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2023-2-math-q16",
@@ -33493,7 +33565,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -33635,7 +33707,9 @@
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
@@ -33643,7 +33717,9 @@
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "conceptTagging": "keyword"
@@ -33704,7 +33780,7 @@
     "ged-middle-2022-2-math-q20",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2024-1-math-q01",
@@ -33782,7 +33858,7 @@
     "ged-middle-2022-2-math-q02",
     "ged-middle-2022-1-math-q02"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-1-math-q03",
@@ -33811,6 +33887,7 @@
     "ged-middle-2026-1-math-q03",
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -33821,6 +33898,7 @@
     "ged-middle-2026-1-math-q03",
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -33832,16 +33910,27 @@
    "id": "route-ged-middle-2024-1-math-q04",
    "kind": "exam_pool",
    "questionId": "ged-middle-2024-1-math-q04",
-   "coreConceptId": "ged-m-linear-eq",
-   "examUnit": "m-linear-eq",
+   "coreConceptId": "ged-m-expr",
+   "examUnit": "m-expr",
    "prerequisiteUnits": [
-    "m-expr"
+    "m-integer"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q03",
-    "ged-middle-2026-1-math-q03"
+    "ged-middle-2025-1-math-q02",
+    "ged-middle-2026-1-math-q02"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2025-2-math-q02",
+    "ged-middle-2024-2-math-q02",
+    "ged-middle-2024-1-math-q02",
+    "ged-middle-2023-2-math-q02",
+    "ged-middle-2023-1-math-q02",
+    "ged-middle-2022-2-math-q02",
+    "ged-middle-2022-1-math-q02"
+   ],
+   "similarQuestionIds": [
+    "ged-middle-2025-1-math-q03",
+    "ged-middle-2026-1-math-q03",
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
@@ -33850,27 +33939,18 @@
     "ged-middle-2022-2-math-q03",
     "ged-middle-2022-1-math-q03"
    ],
-   "similarQuestionIds": [
-    "ged-middle-2025-1-math-q04",
-    "ged-middle-2026-1-math-q04",
-    "ged-middle-2025-2-math-q04",
-    "ged-middle-2024-2-math-q04",
-    "ged-middle-2023-2-math-q04",
-    "ged-middle-2023-1-math-q04",
-    "ged-middle-2022-2-math-q04",
-    "ged-middle-2022-1-math-q04"
-   ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q04",
-    "ged-middle-2026-1-math-q04",
-    "ged-middle-2025-2-math-q04",
-    "ged-middle-2024-2-math-q04",
-    "ged-middle-2023-2-math-q04",
-    "ged-middle-2023-1-math-q04",
-    "ged-middle-2022-2-math-q04",
-    "ged-middle-2022-1-math-q04"
+    "ged-middle-2025-1-math-q03",
+    "ged-middle-2026-1-math-q03",
+    "ged-middle-2025-2-math-q03",
+    "ged-middle-2024-2-math-q03",
+    "ged-middle-2024-1-math-q03",
+    "ged-middle-2023-2-math-q03",
+    "ged-middle-2023-1-math-q03",
+    "ged-middle-2022-2-math-q03",
+    "ged-middle-2022-1-math-q03"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-1-math-q05",
@@ -33896,23 +33976,21 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -33940,29 +34018,29 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-1-math-q07",
@@ -34093,6 +34171,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -34104,6 +34183,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
     "ged-middle-2022-2-math-q09",
@@ -34116,6 +34196,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
     "ged-middle-2022-2-math-q09",
@@ -34140,7 +34221,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -34156,7 +34236,7 @@
     "ged-middle-2023-1-math-q10",
     "ged-middle-2022-2-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2024-1-math-q11",
@@ -34174,12 +34254,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -34187,8 +34266,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q11",
@@ -34219,17 +34297,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -34293,7 +34371,7 @@
     "ged-middle-2022-2-math-q13",
     "ged-middle-2022-1-math-q13"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-1-math-q14",
@@ -34361,6 +34439,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -34393,7 +34472,7 @@
     "ged-middle-2022-2-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-1-math-q16",
@@ -34417,7 +34496,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -34537,49 +34616,44 @@
    "id": "route-ged-middle-2024-1-math-q19",
    "kind": "exam_pool",
    "questionId": "ged-middle-2024-1-math-q19",
-   "coreConceptId": "ged-m-plane-fig",
-   "examUnit": "m-plane-fig",
+   "coreConceptId": "ged-m-circle",
+   "examUnit": "m-circle",
    "prerequisiteUnits": [
-    "m-integer"
+    "m-triangle"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q02",
-    "ged-middle-2026-1-math-q02"
+    "ged-middle-2025-1-math-q12",
+    "ged-middle-2026-1-math-q12"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2025-2-math-q02",
-    "ged-middle-2024-2-math-q02",
-    "ged-middle-2024-1-math-q02",
-    "ged-middle-2023-2-math-q02",
-    "ged-middle-2023-1-math-q02",
-    "ged-middle-2022-2-math-q02",
-    "ged-middle-2022-1-math-q02"
+    "ged-middle-2025-2-math-q12",
+    "ged-middle-2024-1-math-q12",
+    "ged-middle-2023-2-math-q12",
+    "ged-middle-2023-1-math-q12",
+    "ged-middle-2022-2-math-q12",
+    "ged-middle-2022-1-math-q12"
    ],
    "similarQuestionIds": [
-    "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06",
-    "ged-middle-2025-2-math-q06",
-    "ged-middle-2024-2-math-q06",
-    "ged-middle-2024-1-math-q06",
-    "ged-middle-2023-2-math-q06",
-    "ged-middle-2023-1-math-q06",
-    "ged-middle-2022-2-math-q06",
+    "ged-middle-2025-1-math-q19",
+    "ged-middle-2026-1-math-q19",
+    "ged-middle-2025-2-math-q19",
+    "ged-middle-2024-2-math-q19",
+    "ged-middle-2023-2-math-q19",
+    "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q19",
-    "ged-middle-2022-1-math-q06"
+    "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06",
-    "ged-middle-2025-2-math-q06",
-    "ged-middle-2024-2-math-q06",
-    "ged-middle-2024-1-math-q06",
-    "ged-middle-2023-2-math-q06",
-    "ged-middle-2023-1-math-q06",
-    "ged-middle-2022-2-math-q06",
+    "ged-middle-2025-1-math-q19",
+    "ged-middle-2026-1-math-q19",
+    "ged-middle-2025-2-math-q19",
+    "ged-middle-2024-2-math-q19",
+    "ged-middle-2023-2-math-q19",
+    "ged-middle-2023-1-math-q19",
     "ged-middle-2022-2-math-q19",
-    "ged-middle-2022-1-math-q06"
+    "ged-middle-2022-1-math-q19"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-1-math-q20",
@@ -34637,7 +34711,7 @@
     "ged-middle-2022-2-math-q20",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2024-2-math-q01",
@@ -34715,7 +34789,7 @@
     "ged-middle-2022-2-math-q02",
     "ged-middle-2022-1-math-q02"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-2-math-q03",
@@ -34744,6 +34818,7 @@
     "ged-middle-2026-1-math-q03",
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -34754,6 +34829,7 @@
     "ged-middle-2026-1-math-q03",
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -34778,6 +34854,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -34787,7 +34864,6 @@
     "ged-middle-2025-1-math-q04",
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -34797,7 +34873,6 @@
     "ged-middle-2025-1-math-q04",
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -34829,23 +34904,21 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -34873,29 +34946,29 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-2-math-q07",
@@ -35026,6 +35099,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -35036,6 +35110,7 @@
     "ged-middle-2026-1-math-q09",
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -35048,6 +35123,7 @@
     "ged-middle-2026-1-math-q09",
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -35061,43 +35137,52 @@
    "id": "route-ged-middle-2024-2-math-q10",
    "kind": "exam_pool",
    "questionId": "ged-middle-2024-2-math-q10",
-   "coreConceptId": "ged-m-system",
-   "examUnit": "m-system",
+   "coreConceptId": "ged-m-exponent",
+   "examUnit": "m-exponent",
    "prerequisiteUnits": [
-    "m-linear-eq"
+    "m-expr"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q04",
-    "ged-middle-2026-1-math-q04"
+    "ged-middle-2025-1-math-q03",
+    "ged-middle-2026-1-math-q03"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2025-2-math-q04",
-    "ged-middle-2024-2-math-q04",
+    "ged-middle-2025-2-math-q03",
+    "ged-middle-2024-2-math-q03",
+    "ged-middle-2024-1-math-q03",
     "ged-middle-2024-1-math-q04",
-    "ged-middle-2023-2-math-q04",
-    "ged-middle-2023-1-math-q04",
-    "ged-middle-2022-2-math-q04",
-    "ged-middle-2022-1-math-q04"
+    "ged-middle-2023-2-math-q03",
+    "ged-middle-2023-1-math-q03",
+    "ged-middle-2022-2-math-q03",
+    "ged-middle-2022-1-math-q03"
    ],
    "similarQuestionIds": [
-    "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
-    "ged-middle-2026-1-math-q11",
-    "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q12",
-    "ged-middle-2023-2-math-q10",
-    "ged-middle-2022-1-math-q10"
+    "ged-middle-2025-1-math-q09",
+    "ged-middle-2026-1-math-q09",
+    "ged-middle-2025-2-math-q09",
+    "ged-middle-2025-2-math-q16",
+    "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-1-math-q09",
+    "ged-middle-2023-2-math-q09",
+    "ged-middle-2023-1-math-q09",
+    "ged-middle-2022-2-math-q09",
+    "ged-middle-2022-2-math-q16",
+    "ged-middle-2022-1-math-q09"
    ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
-    "ged-middle-2026-1-math-q11",
-    "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q12",
-    "ged-middle-2023-2-math-q10",
-    "ged-middle-2022-1-math-q10"
+    "ged-middle-2025-1-math-q09",
+    "ged-middle-2026-1-math-q09",
+    "ged-middle-2025-2-math-q09",
+    "ged-middle-2025-2-math-q16",
+    "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-1-math-q09",
+    "ged-middle-2023-2-math-q09",
+    "ged-middle-2023-1-math-q09",
+    "ged-middle-2022-2-math-q09",
+    "ged-middle-2022-2-math-q16",
+    "ged-middle-2022-1-math-q09"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-2-math-q11",
@@ -35115,7 +35200,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -35131,7 +35215,7 @@
     "ged-middle-2023-1-math-q10",
     "ged-middle-2022-2-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2024-2-math-q12",
@@ -35149,7 +35233,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -35157,23 +35240,19 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2024-2-math-q13",
@@ -35284,6 +35363,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -35316,7 +35396,7 @@
     "ged-middle-2022-2-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2024-2-math-q16",
@@ -35340,7 +35420,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -35481,16 +35561,20 @@
     "ged-middle-2025-1-math-q19",
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q19",
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "conceptTagging": "keyword"
@@ -35551,7 +35635,7 @@
     "ged-middle-2022-2-math-q20",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2025-1-math-q01",
@@ -35658,6 +35742,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -35668,6 +35753,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -35692,6 +35778,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -35701,7 +35788,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -35711,7 +35797,6 @@
     "ged-middle-2026-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -35742,24 +35827,22 @@
     "ged-middle-2022-1-math-q02"
    ],
    "similarQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "conceptTagging": "transcribed_text"
   },
@@ -35786,27 +35869,27 @@
     "ged-middle-2022-1-math-q02"
    ],
    "similarQuestionIds": [
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "conceptTagging": "transcribed_text"
@@ -35940,6 +36023,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -35950,6 +36034,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -35962,6 +36047,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -35987,26 +36073,21 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
    ],
    "transferQuestionIds": [
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
@@ -36029,12 +36110,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -36042,8 +36122,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-2-math-q11",
@@ -36074,17 +36153,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -36217,6 +36296,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -36273,7 +36353,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -36415,16 +36495,20 @@
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
     "ged-middle-2026-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "conceptTagging": "transcribed_text"
@@ -36599,6 +36683,7 @@
     "ged-middle-2026-1-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -36609,6 +36694,7 @@
     "ged-middle-2026-1-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -36633,6 +36719,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -36642,7 +36729,6 @@
     "ged-middle-2025-1-math-q04",
     "ged-middle-2026-1-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -36652,7 +36738,6 @@
     "ged-middle-2025-1-math-q04",
     "ged-middle-2026-1-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -36684,23 +36769,21 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q05",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2024-2-math-q05",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q05",
     "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-2-math-q05"
    ],
    "conceptTagging": "keyword"
   },
@@ -36728,29 +36811,29 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2026-1-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2025-2-math-q07",
@@ -36881,6 +36964,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -36891,6 +36975,7 @@
     "ged-middle-2026-1-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -36903,6 +36988,7 @@
     "ged-middle-2026-1-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -36928,7 +37014,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -36936,18 +37021,14 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2026-1-math-q11",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
@@ -36970,12 +37051,11 @@
    ],
    "foundationQuestionIds": [
     "ged-middle-2026-1-math-q04",
-    "ged-middle-2026-1-math-q05",
+    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2025-2-math-q05",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2024-1-math-q05",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q05",
@@ -36983,8 +37063,7 @@
     "ged-middle-2023-1-math-q05",
     "ged-middle-2022-2-math-q04",
     "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q04",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2022-1-math-q04"
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q11",
@@ -37015,17 +37094,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -37089,7 +37168,7 @@
     "ged-middle-2022-2-math-q13",
     "ged-middle-2022-1-math-q13"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2025-2-math-q14",
@@ -37157,6 +37236,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -37189,7 +37269,7 @@
     "ged-middle-2022-2-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2025-2-math-q16",
@@ -37208,6 +37288,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -37218,6 +37299,7 @@
     "ged-middle-2026-1-math-q09",
     "ged-middle-2025-2-math-q09",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -37230,6 +37312,7 @@
     "ged-middle-2026-1-math-q09",
     "ged-middle-2025-2-math-q09",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -37237,7 +37320,7 @@
     "ged-middle-2022-2-math-q16",
     "ged-middle-2022-1-math-q09"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2025-2-math-q17",
@@ -37350,16 +37433,20 @@
     "ged-middle-2025-1-math-q19",
     "ged-middle-2026-1-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q19",
     "ged-middle-2026-1-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "conceptTagging": "keyword"
@@ -37420,7 +37507,7 @@
     "ged-middle-2022-2-math-q20",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2026-1-math-q01",
@@ -37498,7 +37585,7 @@
     "ged-middle-2022-2-math-q02",
     "ged-middle-2022-1-math-q02"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2026-1-math-q03",
@@ -37527,6 +37614,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -37537,6 +37625,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -37561,6 +37650,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -37570,7 +37660,6 @@
     "ged-middle-2025-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -37580,7 +37669,6 @@
     "ged-middle-2025-1-math-q04",
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -37592,8 +37680,8 @@
    "id": "route-ged-middle-2026-1-math-q05",
    "kind": "exam_pool",
    "questionId": "ged-middle-2026-1-math-q05",
-   "coreConceptId": "ged-m-coord",
-   "examUnit": "m-coord",
+   "coreConceptId": "ged-m-plane-fig",
+   "examUnit": "m-plane-fig",
    "prerequisiteUnits": [
     "m-integer"
    ],
@@ -37611,26 +37699,30 @@
     "ged-middle-2022-1-math-q02"
    ],
    "similarQuestionIds": [
-    "ged-middle-2025-1-math-q05",
-    "ged-middle-2025-2-math-q05",
-    "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q05",
-    "ged-middle-2023-2-math-q05",
-    "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q06",
+    "ged-middle-2025-2-math-q06",
+    "ged-middle-2024-2-math-q06",
+    "ged-middle-2024-1-math-q06",
+    "ged-middle-2023-2-math-q06",
+    "ged-middle-2023-1-math-q06",
+    "ged-middle-2022-2-math-q06",
+    "ged-middle-2022-1-math-q05",
+    "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q05",
-    "ged-middle-2025-2-math-q05",
-    "ged-middle-2024-2-math-q05",
-    "ged-middle-2024-1-math-q05",
-    "ged-middle-2023-2-math-q05",
-    "ged-middle-2023-1-math-q05",
-    "ged-middle-2022-2-math-q05",
-    "ged-middle-2022-1-math-q05"
+    "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q06",
+    "ged-middle-2025-2-math-q06",
+    "ged-middle-2024-2-math-q06",
+    "ged-middle-2024-1-math-q06",
+    "ged-middle-2023-2-math-q06",
+    "ged-middle-2023-1-math-q06",
+    "ged-middle-2022-2-math-q06",
+    "ged-middle-2022-1-math-q05",
+    "ged-middle-2022-1-math-q06"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2026-1-math-q06",
@@ -37656,26 +37748,26 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q06",
+    "ged-middle-2026-1-math-q05",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "conceptTagging": "keyword"
@@ -37809,6 +37901,7 @@
     "ged-middle-2025-2-math-q03",
     "ged-middle-2024-2-math-q03",
     "ged-middle-2024-1-math-q03",
+    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q03",
     "ged-middle-2023-1-math-q03",
     "ged-middle-2022-2-math-q03",
@@ -37819,6 +37912,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -37831,6 +37925,7 @@
     "ged-middle-2025-2-math-q09",
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q09",
     "ged-middle-2023-1-math-q09",
@@ -37844,43 +37939,43 @@
    "id": "route-ged-middle-2026-1-math-q10",
    "kind": "exam_pool",
    "questionId": "ged-middle-2026-1-math-q10",
-   "coreConceptId": "ged-m-system",
-   "examUnit": "m-system",
+   "coreConceptId": "ged-m-coord",
+   "examUnit": "m-coord",
    "prerequisiteUnits": [
-    "m-linear-eq"
+    "m-integer"
    ],
    "conceptCheckQuestionIds": [
-    "ged-middle-2025-1-math-q04",
-    "ged-middle-2026-1-math-q04"
+    "ged-middle-2025-1-math-q02",
+    "ged-middle-2026-1-math-q02"
    ],
    "foundationQuestionIds": [
-    "ged-middle-2025-2-math-q04",
-    "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
-    "ged-middle-2023-2-math-q04",
-    "ged-middle-2023-1-math-q04",
-    "ged-middle-2022-2-math-q04",
-    "ged-middle-2022-1-math-q04"
+    "ged-middle-2025-2-math-q02",
+    "ged-middle-2024-2-math-q02",
+    "ged-middle-2024-1-math-q02",
+    "ged-middle-2023-2-math-q02",
+    "ged-middle-2023-1-math-q02",
+    "ged-middle-2022-2-math-q02",
+    "ged-middle-2022-1-math-q02"
    ],
    "similarQuestionIds": [
-    "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q11",
-    "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
-    "ged-middle-2024-2-math-q12",
-    "ged-middle-2023-2-math-q10",
-    "ged-middle-2022-1-math-q10"
+    "ged-middle-2025-1-math-q05",
+    "ged-middle-2025-2-math-q05",
+    "ged-middle-2024-2-math-q05",
+    "ged-middle-2024-1-math-q05",
+    "ged-middle-2023-2-math-q05",
+    "ged-middle-2023-1-math-q05",
+    "ged-middle-2022-2-math-q05"
    ],
    "transferQuestionIds": [
-    "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q11",
-    "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
-    "ged-middle-2024-2-math-q12",
-    "ged-middle-2023-2-math-q10",
-    "ged-middle-2022-1-math-q10"
+    "ged-middle-2025-1-math-q05",
+    "ged-middle-2025-2-math-q05",
+    "ged-middle-2024-2-math-q05",
+    "ged-middle-2024-1-math-q05",
+    "ged-middle-2023-2-math-q05",
+    "ged-middle-2023-1-math-q05",
+    "ged-middle-2022-2-math-q05"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2026-1-math-q11",
@@ -37898,7 +37993,6 @@
    "foundationQuestionIds": [
     "ged-middle-2025-2-math-q04",
     "ged-middle-2024-2-math-q04",
-    "ged-middle-2024-1-math-q04",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-1-math-q04",
     "ged-middle-2022-2-math-q04",
@@ -37906,23 +38000,19 @@
    ],
    "similarQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q10",
-    "ged-middle-2026-1-math-q10",
     "ged-middle-2025-2-math-q10",
-    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-2-math-q12",
     "ged-middle-2023-2-math-q10",
     "ged-middle-2022-1-math-q10"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   },
   {
    "id": "route-ged-middle-2026-1-math-q12",
@@ -37935,17 +38025,17 @@
    ],
    "conceptCheckQuestionIds": [
     "ged-middle-2025-1-math-q06",
-    "ged-middle-2026-1-math-q06"
+    "ged-middle-2026-1-math-q05"
    ],
    "foundationQuestionIds": [
+    "ged-middle-2026-1-math-q06",
     "ged-middle-2025-2-math-q06",
     "ged-middle-2024-2-math-q06",
     "ged-middle-2024-1-math-q06",
-    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q06",
     "ged-middle-2023-1-math-q06",
     "ged-middle-2022-2-math-q06",
-    "ged-middle-2022-2-math-q19",
+    "ged-middle-2022-1-math-q05",
     "ged-middle-2022-1-math-q06"
    ],
    "similarQuestionIds": [
@@ -38009,7 +38099,7 @@
     "ged-middle-2022-2-math-q13",
     "ged-middle-2022-1-math-q13"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2026-1-math-q14",
@@ -38053,7 +38143,7 @@
     "ged-middle-2022-2-math-q14",
     "ged-middle-2022-1-math-q14"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2026-1-math-q15",
@@ -38077,6 +38167,7 @@
     "ged-middle-2025-1-math-q08",
     "ged-middle-2024-2-math-q08",
     "ged-middle-2024-2-math-q09",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q08",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q08",
@@ -38109,7 +38200,7 @@
     "ged-middle-2022-2-math-q15",
     "ged-middle-2022-1-math-q15"
    ],
-   "conceptTagging": "number_position"
+   "conceptTagging": "manual_review"
   },
   {
    "id": "route-ged-middle-2026-1-math-q16",
@@ -38133,7 +38224,7 @@
     "ged-middle-2025-2-math-q16",
     "ged-middle-2024-2-math-q04",
     "ged-middle-2024-2-math-q09",
-    "ged-middle-2024-1-math-q04",
+    "ged-middle-2024-2-math-q10",
     "ged-middle-2024-1-math-q09",
     "ged-middle-2023-2-math-q04",
     "ged-middle-2023-2-math-q09",
@@ -38274,16 +38365,20 @@
     "ged-middle-2025-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "transferQuestionIds": [
     "ged-middle-2025-1-math-q19",
     "ged-middle-2025-2-math-q19",
     "ged-middle-2024-2-math-q19",
+    "ged-middle-2024-1-math-q19",
     "ged-middle-2023-2-math-q19",
     "ged-middle-2023-1-math-q19",
+    "ged-middle-2022-2-math-q19",
     "ged-middle-2022-1-math-q19"
    ],
    "conceptTagging": "keyword"
@@ -38344,7 +38439,7 @@
     "ged-middle-2022-2-math-q20",
     "ged-middle-2022-1-math-q07"
    ],
-   "conceptTagging": "keyword"
+   "conceptTagging": "keyword_confirmed"
   }
  ],
  "reviews": [

@@ -12,6 +12,11 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const root = new URL('../', import.meta.url);
 const read = (path) => JSON.parse(readFileSync(new URL(path, root), 'utf8'));
 const drafts = read('data/exam-sources/question-drafts.json').questions;
+// 이미지를 직접 보고 확인한 단원 (자동 분류보다 우선)
+const overrideFile = read('data/exam-sources/concept-overrides.json');
+const overrides = overrideFile.units;
+const confirmed = new Set(overrideFile.confirmed ?? []);
+for (const [id, o] of Object.entries(overrides)) if (!o.unit) throw new Error(`concept-overrides: ${id} 의 unit 이 없음`);
 const transcribed = new Map(read('public/src/content/questions.json').questions.filter((q) => q.kind === 'official').map((q) => [q.id, q]));
 
 // ---------- 단원(개념) 정의 ----------
@@ -53,12 +58,12 @@ const MIDDLE = [
   ['m-expr', '문자와 식', /문자|식으로|일차식|대입/, ['m-integer']],
   ['m-prime', '소인수분해와 수', /소인수분해|소수|최대공약수|최소공배수|약수|배수/, []],
   ['m-trig', '삼각비', /sin|cos|tan|삼각비/, ['m-similarity']],
-  ['m-circle', '원의 성질', /접선|원주각|현의 수직|외접|내접/, ['m-triangle']],
+  ['m-circle', '원의 성질', /접선|원주각|현의 수직|두 현|수선의 발|외접|내접/, ['m-triangle']],
   ['m-similarity', '닮음과 피타고라스 정리', /닮음|닮은|평행한 직선|피타고라스|직각삼각형/, ['m-triangle']],
   ['m-triangle', '삼각형과 사각형의 성질', /이등변|사각형|평행사변형|마름모|직사각형|외심|내심|삼각형/, ['m-plane-fig']],
   ['m-spread', '산포도와 상관관계', /표준편차|분산|산포|상관관계|산점도/, ['m-stat']],
   ['m-stat', '자료의 정리와 해석', /도수|히스토그램|줄기|평균|중앙값|최빈값|대푯값|조사한/, ['m-integer']],
-  ['m-plane-fig', '평면·입체 도형', /부채꼴|원\s*O|중심각|다각형|작도|맞꼭지각|평행선|입체|겉넓이|부피|기둥|다면체|내각|외각|각의 크기|원뿔|구의/, ['m-integer']],
+  ['m-plane-fig', '평면·입체 도형', /평행한 두 직선|부채꼴|원\s*O|중심각|다각형|작도|맞꼭지각|평행선|입체|겉넓이|부피|기둥|다면체|내각|외각|각의 크기|원뿔|구의/, ['m-integer']],
   ['m-sqrt', '제곱근과 실수', /제곱근|무리수|근호|실수/, ['m-rep-decimal', 'm-exponent']],
   ['m-exponent', '지수법칙과 식의 계산', /간단히|단항식|다항식|지수|전개|곱셈 공식/, ['m-expr']],
   ['m-coord', '좌표평면과 그래프', /좌표|그래프|정비례|반비례/, ['m-integer']],
@@ -66,6 +71,9 @@ const MIDDLE = [
 ];
 const MIDDLE_BY_NUMBER = [null, 'm-prime', 'm-integer', 'm-expr', 'm-linear-eq', 'm-coord', 'm-plane-fig', 'm-stat', 'm-rep-decimal', 'm-exponent', 'm-system',
   'm-linear-func', 'm-triangle', 'm-similarity', 'm-probability', 'm-sqrt', 'm-quad-eq', 'm-quad-func', 'm-trig', 'm-circle', 'm-spread'];
+
+// 기출 수가 적은 단원의 유사·새 문제를 채울 가장 가까운 단원
+const RELATED = { 'h-discriminant': ['h-quad-roots'], 'h-quad-roots': ['h-discriminant'], 'm-spread': ['m-stat'] };
 
 const UNITS = new Map([...HIGH, ...MIDDLE].map(([id, name, rule, pre]) => [id, { id, name, rule, pre }]));
 const conceptId = (unit) => `ged-${unit}`;
@@ -90,7 +98,10 @@ const items = drafts.map((d) => {
   const [, level, year, session, num] = d.id.match(META);
   const t = transcribed.get(d.id);
   const text = t ? `${t.prompt} ${t.curriculum?.unit ?? ''}` : d.rawText.replace(/^\s*\d+\.\s*/, '');
-  const { unit, basis } = classify(text, level, Number(num));
+  const manual = overrides[d.id];
+  const auto = classify(text, level, Number(num));
+  const { unit, basis } = manual ? { unit: manual.unit, basis: 'manual_review' }
+    : confirmed.has(d.id) ? { unit: auto.unit, basis: 'keyword_confirmed' } : auto;
   return { d, t, level, year: Number(year), session: Number(session), number: Number(num), unit, basis: t ? 'transcribed_text' : basis };
 });
 
@@ -154,9 +165,9 @@ for (const it of usableItems) {
   for (const x of [...prePool, ...same]) if (checks.length < 2 && !checks.includes(x.d.id)) checks.push(x.d.id);
   const foundation = idsOf(prePool).filter((id) => !checks.includes(id));
   let sameIds = idsOf(same).filter((id) => !checks.includes(id));
-  // 같은 단원 기출이 적으면(예: 산포도) 같은 학교급의 선수 단원 기출로 채운다
+  // 같은 단원 기출이 적으면(예: 산포도, 판별식) 가장 가까운 단원 기출로 채운다
   if (sameIds.length < 3) {
-    const near = preUnits.flatMap((u) => byUnit.get(u) ?? []).filter((x) => x.level === it.level && x !== it).sort(order);
+    const near = (RELATED[it.unit] ?? []).flatMap((u) => byUnit.get(u) ?? []).filter((x) => x.level === it.level && x !== it).sort(order);
     sameIds = [...sameIds, ...idsOf(near).filter((id) => !checks.includes(id) && !sameIds.includes(id))];
   }
   const ok = checks.length >= 1 && foundation.length >= 3 && sameIds.length >= 3;
