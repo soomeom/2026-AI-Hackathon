@@ -1,0 +1,86 @@
+{
+  "checkedAt": "2026-10-24T12:41:04.026Z",
+  "synthetic": true,
+  "rows": [
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 4140,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5013,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 2108,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5008,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_invalid_output",
+      "elapsedMs": 2361,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 1982,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 3434,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 1609,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 2564,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 1867,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    }
+  ]
+}

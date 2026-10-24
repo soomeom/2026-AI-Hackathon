@@ -1,7 +1,8 @@
 import { validInitialRecords } from '../learning/initial-assessment.js';
+import { validAIState } from '../learning/ai-practice.js';
 
 export const SCHEMA_VERSION = 1;
-const OPTIONAL_COLLECTIONS = ['initialAssessments', 'startingPoints'];
+const OPTIONAL_COLLECTIONS = ['initialAssessments', 'startingPoints', 'generatedPractice'];
 const COLLECTIONS = ['learners', 'mentors', 'assignments', 'paths', 'attempts', 'exposures', 'evidence', 'sessions', 'logs', 'aiArtifacts', 'events', 'processedCommandIds', ...OPTIONAL_COLLECTIONS];
 const IDENTIFIED = COLLECTIONS.filter(name => !['events', 'processedCommandIds'].includes(name));
 const plainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -37,6 +38,13 @@ export function validateState(value) {
     }
   }
   if (!validInitialRecords(value)) errors.push('invalid_initial_records');
+  if (!validAIState(value)) errors.push('invalid_ai_practice');
+  // 선택적 공유 안내만 추가 검증한다. 필드가 없는 이전 저장본은 그대로 유효하다.
+  if (value.guardianMessages !== undefined && (!Array.isArray(value.guardianMessages) || !value.guardianMessages.every(m =>
+    plainObject(m) && Array.isArray(value.learners) && value.learners.some(l=>l?.id===m.learnerId)
+    && Array.isArray(value.mentors) && value.mentors.some(p=>p?.id===m.mentorId)
+    && typeof m.text==='string' && Boolean(m.text.trim()) && m.text.length<=500
+    && typeof m.sharedAt==='string' && !Number.isNaN(Date.parse(m.sharedAt))))) errors.push('invalid_guardian_messages');
   return { ok: errors.length === 0, errors };
 }
 

@@ -17,6 +17,8 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
   let state = initialState;
   let seq = 0;
   const subscribers = new Set(onChange ? [onChange] : []);
+  // LAN의 HTTP 접속에서는 randomUUID가 없으므로 기록 ID는 대체 생성도 지원한다.
+  const newId = () => globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${++seq}`;
 
   const publish = (next, events) => {
     state = { ...next, revision: (next.revision ?? 0) + 1 };
@@ -25,7 +27,7 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
 
   function dispatch(command) {
     // 저장본을 다시 불러와도 이전 명령 ID 와 겹치지 않도록 무작위 ID 를 쓴다 (겹치면 엔진이 중복으로 무시)
-    const full = { id: `cmd-${globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${++seq}`}`, at: now(), ...command };
+    const full = { id: `cmd-${newId()}`, at: now(), ...command };
     const { state: next, events } = applyLearningCommand(state, full, { catalog, rng });
     // 거부·중복이면 엔진이 원래 state 를 그대로 돌려준다
     if (next !== state) publish(next, events);
@@ -68,7 +70,7 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     assignQuestion,
     update,
     replaceState,
-    startInitialAssessment: () => update(s => initial.startInitialAssessment(s, { learnerId: s.learnerId, id: `initial-${globalThis.crypto.randomUUID()}`, at: now() }, { catalog })),
+    startInitialAssessment: () => update(s => initial.startInitialAssessment(s, { learnerId: s.learnerId, id: `initial-${newId()}`, at: now() }, { catalog })),
     presentInitialQuestion: input => update(s => initial.presentInitialQuestion(s, { ...input, at: now() }, { catalog })),
     submitInitialAnswer: input => update(s => initial.submitInitialAnswer(s, { ...input, at: now() }, { catalog })),
     pauseInitialAssessment: input => update(s => initial.pauseInitialAssessment(s, { ...input, at: now() })),

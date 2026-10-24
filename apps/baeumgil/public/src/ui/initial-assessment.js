@@ -96,7 +96,8 @@ export function renderInitialAssessment(props) {
       } else if (button.dataset.initialAction === 'next-practice') {
         const card = nextDiagnosticCard(current);
         if (!card) return;
-        props.update(s => openInitialRoadmap(s, { assessmentId: current.assessmentId, cardId: card.id, questionId: card.questionIds[0], at: now() }, { catalog }));
+        if(props.practice)props.practice.open({assessmentId:current.assessmentId,cardId:card.id,baseQuestionId:card.questionIds[0]});
+        else props.update(s => openInitialRoadmap(s, { assessmentId: current.assessmentId, cardId: card.id, questionId: card.questionIds[0], at: now() }, { catalog }));
       } else if (button.dataset.initialChoice) {
         ui.initialChoices ??= {};
         if (current?.currentQuestionId !== button.dataset.initialQuestion) return;
@@ -188,6 +189,11 @@ export function handleInitialAssessmentAction(button, props) {
 }
 
 function handleInitialRoadmapAction(button,props){
+  if(props.practice&&button.dataset.roadmapAction==='open'){
+    const summary=initialAssessmentSummary(props.getState(),props.getState().learnerId,{catalog:props.catalog});
+    props.practice.open({assessmentId:summary.assessmentId,cardId:button.dataset.roadmapCard,baseQuestionId:button.dataset.roadmapQuestion}).catch(()=>{props.ui.roadmapError='현재 연습을 다시 열어 주세요.';props.rerender();});
+    return true;
+  }
   return handleRoadmapAction(button,{
     ui:props.ui,root:props.root,rerender:props.rerender,
     getSummary:()=>initialAssessmentSummary(props.getState(),props.getState().learnerId,{catalog:props.catalog}),

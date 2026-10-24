@@ -13,6 +13,8 @@ import { renderJourney, renderOutcomeFlow, statFlowSteps, resultMiniBar } from '
 import { initialAssessmentPanel, handleInitialAssessmentAction } from './initial-assessment.js';
 import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 import { renderRoadmapPage } from './roadmap-page.js';
+import { renderMentorAIPractice } from './ai-practice.js';
+import { renderGuardianMessage } from './guardian-message.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unknown: '확인 불가' };
@@ -51,7 +53,9 @@ export function renderMentor(props) {
           ${summary.evidence.length ? `<div class="ev-grid">${summary.evidence.map((e) => evidenceView(e, summary, catalog, ui)).join('')}</div>` : '<p class="muted">아직 응답이 없어요.</p>'}
           ${summary.reviewFlags.length ? `<h4>검토할 점</h4><ul>${[...new Set(summary.reviewFlags.map((f) => FLAG_TEXT[f.code] ?? f.code))].map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
         </section>
-      </div>`}`;
+      </div>`}
+      ${tab==='home'?renderGuardianMessage(state,ui):''}
+      ${['home','learning','planning'].includes(tab)?renderMentorAIPractice(state,catalog):''}`;
   ui.flash = null;
 
   root.onchange = event => {
@@ -62,11 +66,18 @@ export function renderMentor(props) {
   };
   root.oninput = event => {
     if (event.target.id === 'initial-reason') ui.initialReason = event.target.value;
+    if (event.target.id === 'guardian-message') ui.guardianMessageDraft = event.target.value;
   };
 
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
+    if(b.dataset.action==='share-guardian-message'){
+      const text=(root.querySelector('#guardian-message')?.value??'').trim();
+      if(!text||text.length>500){root.querySelector('#guardian-message-status').textContent='1~500자로 안내를 적어 주세요.';return;}
+      ui.guardianMessageDraft=text;ui.flash='보호자 학습 소식에 안내를 공유했어요.';
+      props.update(s=>({...s,guardianMessages:[...(s.guardianMessages??[]),{learnerId:s.learnerId,mentorId:s.mentorId,text,sharedAt:new Date().toISOString()}]}));return;
+    }
     if (handleInitialAssessmentAction(b, props)) return;
     if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); root.focus?.(); return; }
     if (b.dataset.goto) {
@@ -173,7 +184,7 @@ function lessonPanel(state, catalog, summary, ui) {
     <p class="muted">학생의 풀이 근거를 바탕으로 우선 확인할 개념, 오개념 후보, 설명 방법, 확인 질문을 제안해요. 제안은 멘토가 검토해 채택해요.</p>
     <div class="row"><button class="primary" data-ai="request" ${availability.ok && summary.timeline.length && slot?.status !== 'loading' ? '' : 'disabled'}>
       ${out ? '다시 제안 받기' : 'AI 수업 제안 받기'}</button>
-      ${summary.timeline.length ? '' : '<span class="muted small">학생 응답이 생기면 요청할 수 있어요.</span>'}</div>
+      ${summary.timeline.length ? '' : '<span class="muted small">지정한 기출의 학습 응답이 생기면 요청할 수 있어요. AI 추가 연습은 아래 기록에서 별도로 확인해요.</span>'}</div>
     ${statusHtml(slot, state)}
     ${out ? `<div class="ai-result">
       <h4>우선 확인할 개념</h4>

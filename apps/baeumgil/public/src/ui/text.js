@@ -120,11 +120,11 @@ export function questionBodyHtml(item, { promptId } = {}) {
   const idAttr = promptId ? ` id="${promptId}"` : '';
   if (item.format === 'image' && item.image) {
     return `<figure class="exam-image"${idAttr}><img src="${esc(item.image)}" alt="${esc(sourceLabel(item))} 원본 문항 (발문·그림·선택지 포함)" loading="lazy">
-      <figcaption class="muted small">원본 문항 이미지 · 선택지 번호(①~④)로 답해요</figcaption></figure>`;
+      <figcaption class="muted small">원본 문항 이미지 · 선택지 번호(①~④)로 답해요</figcaption><button class="ghost small" data-image-zoom data-image-src="${esc(item.image)}">문항 이미지 크게 보기</button></figure>`;
   }
   return `<p class="prompt"${idAttr}>${mathHtml(item.prompt)}</p>
-    ${item.figure?.src ? `<img class="figure" src="${esc(item.figure.src)}" alt="${esc(item.figure.alt ?? '문항 그림')}">` : ''}
-    ${item.sourceImage ? `<details class="source"><summary>원본 문항 이미지 보기</summary><img src="${esc(item.sourceImage)}" alt="원본 문항"></details>` : ''}`;
+    ${item.figure?.src ? `<img class="figure" src="${esc(item.figure.src)}" alt="${esc(item.figure.alt ?? '문항 그림')}"><button class="ghost small" data-image-zoom data-image-src="${esc(item.figure.src)}">문항 그림 크게 보기</button>` : ''}
+    ${item.sourceImage ? `<details class="source"><summary>원본 문항 이미지 보기</summary><img src="${esc(item.sourceImage)}" alt="원본 문항"><button class="ghost small" data-image-zoom data-image-src="${esc(item.sourceImage)}">원본 이미지 크게 보기</button></details>` : ''}`;
 }
 
 // 목록용 짧은 이름 (기출은 회차·번호·단원, 자체 제작은 문제 글)

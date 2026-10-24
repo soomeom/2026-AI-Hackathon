@@ -163,13 +163,14 @@ test('roadmap card practice survives refresh, role and subject changes without r
 });
 
 // DOM 경계만 대체하고 app.js와 실제 저장·학습·화면 코드를 실행한다.
-async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), confirm = () => true, catalog = makeCatalog() } = {}) {
+async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), confirm = () => true, catalog = makeCatalog(), practiceRequest = null } = {}) {
   const nodes = new Map();
   let focused = null;
   const node = id => {
     if (!nodes.has(id)) nodes.set(id, {
       id, innerHTML: '', textContent: '', hidden: false, value: '', listeners: {}, fields: [],
-      classList: { toggle() {} }, setAttribute() {}, focus() { focused = id; },
+      classes: new Set(), attrs: {},
+      classList: { toggle(name,value) { const n=nodes.get(id);const on=value??!n.classes.has(name);if(on)n.classes.add(name);else n.classes.delete(name); }, contains(name){return nodes.get(id).classes.has(name);} }, setAttribute(name,value) {this.attrs[name]=value;}, focus() { focused = id; },
       addEventListener(event, handler) { (this.listeners[event] ??= []).push(handler); },
       querySelectorAll() { return this.fields; }, querySelector(selector) { return node(selector.slice(1)); },
     });
@@ -177,10 +178,10 @@ async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), 
   };
   if (saved) local.setItem(STORAGE_KEY, JSON.stringify(saved));
   const original = { document: globalThis.document, window: globalThis.window, fetch: globalThis.fetch };
-  globalThis.document = { hidden: false, getElementById: node, querySelector: () => node('legacy-roles'), querySelectorAll: () => [], addEventListener() {} };
+  globalThis.document = { hidden: false, documentElement:node('html'), getElementById: node, querySelector: () => node('legacy-roles'), querySelectorAll: () => [], addEventListener() {} };
   globalThis.window = { localStorage: local, sessionStorage: tab, confirm, addEventListener() {}, location: { reload() {} } };
-  globalThis.fetch = async url => ({ ok: true, json: async () => url === '/api/health'
-    ? { ai: { configured: false } }
+  globalThis.fetch = async (url,options) => ({ ok: true, json: async () => url === '/api/practice' ? practiceRequest(JSON.parse(options.body)) : url === '/api/health'
+    ? { ai: { configured: Boolean(practiceRequest) } }
     : url.includes('exam-bank') ? {} : catalog });
   t.after(() => { Object.assign(globalThis, original); });
   await import(`../public/app.js?demo-entry-test=${++bootId}`);
@@ -217,6 +218,32 @@ test('real app starts at entry, role changes retain a submitted answer and exist
   assert.equal(h.saved().attempts.length, 1);
 });
 
+test('guardian entry and refresh are read only, preserve answers/logs, and show only explicitly shared mentor text',async t=>{
+ const initial=seeded();const h=await boot(t,{saved:initial});
+ enterMath(h,'mentor');h.node('guardian-message').value='이번 주에는 부호 계산을 함께 확인해 주세요.';
+ click(h.app,{action:'share-guardian-message'});
+ assert.equal(h.saved().guardianMessages.at(-1).text,'이번 주에는 부호 계산을 함께 확인해 주세요.');
+ click(h.node('change-role'));enterMath(h,'guardian');
+ assert.match(h.app.innerHTML,/최근 7일/);assert.match(h.app.innerHTML,/부호 계산/);
+ assert.doesNotMatch(h.app.innerHTML,/기존 확정 일지|기존 회기|data-action="submit"|data-ai=/);
+ assert.equal(h.node('reset').hidden,true);assert.equal(h.node('mentor-navigation').hidden,true);
+ assert.equal(h.node('guardian-navigation').hidden,false);assert.match(h.node('current-profile').textContent,/보호자/);
+ const before=h.local.getItem(STORAGE_KEY);click(h.node('reset'));click(h.app,{action:'submit'});
+ const fresh=await boot(t,{local:h.local,tab:h.tab});assert.match(fresh.app.innerHTML,/학습 소식/);
+ assert.equal(fresh.local.getItem(STORAGE_KEY),before);assert.deepEqual(fresh.saved().logs,initial.logs);
+ click(fresh.node('change-role'));enterMath(fresh,'learner');await tick();assert.match(fresh.app.innerHTML,/제출하기/);
+});
+
+test('large text never rerenders a dirty form or mutates learning records and survives role changes and reload',async t=>{
+ const h=await boot(t,{saved:seeded()});enterMath(h,'mentor');click(h.app,{goto:'sessions'});
+ h.app.fields=[{tagName:'TEXTAREA',value:'입력 중',defaultValue:''}];const fields=h.app.fields,html=h.app.innerHTML,before=h.local.getItem(STORAGE_KEY);
+ click(h.node('large-text'));assert.equal(h.node('html').classes.has('large-text'),true);
+ assert.equal(h.node('large-text').attrs['aria-pressed'],'true');assert.equal(h.app.innerHTML,html);assert.equal(h.app.fields,fields);assert.equal(h.local.getItem(STORAGE_KEY),before);
+ h.app.fields=[];click(h.node('change-role'));enterMath(h,'guardian');assert.equal(h.node('html').classes.has('large-text'),true);
+ const fresh=await boot(t,{local:h.local,tab:h.tab});assert.equal(fresh.node('html').classes.has('large-text'),true);
+ click(fresh.node('large-text'));assert.equal(fresh.node('html').classes.has('large-text'),false);
+});
+
 test('refresh restores a tab role, returning to entry removes it, and another tab starts at entry', async t => {
   const local = memoryStorage(), tab = memoryStorage();
   const first = await boot(t, { local, tab });
@@ -247,7 +274,7 @@ test('canceling a dirty form exit keeps the mentor screen; accepted exit preserv
   assert.equal(h.saved().logs[0].content, '기존 확정 일지');
 });
 
-test('learner solving time excludes time on entry and mentor screens', async t => {
+test('learner solving time excludes time on entry, mentor and guardian screens', async t => {
   const initial = seeded();
   const start = Date.parse('2026-10-24T10:00:00Z');
   t.mock.timers.enable({ apis: ['Date'], now: start });
@@ -258,6 +285,8 @@ test('learner solving time excludes time on entry and mentor screens', async t =
   t.mock.timers.tick(60000);
   enterMath(h, 'mentor');
   t.mock.timers.tick(60000);
+  click(h.node('change-role')); enterMath(h, 'guardian');
+  t.mock.timers.tick(120000);
   click(h.node('change-role')); enterMath(h, 'learner'); await tick();
   t.mock.timers.tick(5000);
   click(h.app, { choice: 'c' }); click(h.app, { action: 'submit' });
@@ -380,4 +409,31 @@ test('left navigation appears only in the workspace, moves between mentor pages 
   click(h.node('learner-roadmap')); assert.match(h.app.innerHTML, /학습 로드맵/);
   click(h.node('sidenav-toggle'));
   assert.equal(h.local.getItem('baeumgil.navCollapsed'), '0');
+});
+
+
+test('real app AI practice persists draft/answer, reaches mentor and ignores a late response after role change',async t=>{
+  const {catalog,sample}=await import('./practice-fixtures.js');
+  const {setupAI,recordFor}=await import('./practice-state-fixtures.js');
+  const {validateLinearPractice}=await import('../public/src/learning/linear-practice.js');
+  const state=setupAI().getState(),r=recordFor(state),original=structuredClone(state.initialAssessments);
+  let calls=0;
+  const practiceRequest=async input=>{calls++;return {status:'ok',requestId:input.requestId,inputRevision:input.inputRevision,assessmentId:input.assessmentId,cardId:input.cardId,...validateLinearPractice(sample(input.conceptId)),model:'test'};};
+  const h=await boot(t,{catalog,saved:state,practiceRequest});enterMath(h,'learner');
+  click(h.app,{roadmapAction:'open',roadmapCard:r.cardId,roadmapQuestion:r.baseQuestionId});await tick();
+  assert.match(h.app.innerHTML,/정답 검증 완료/);assert.equal(calls,1);
+  const id=h.saved().activeGeneratedPracticeId;
+  click(h.app,{aiPractice:'choice',practiceId:id,choiceId:'option-2'});
+  const fresh=await boot(t,{catalog,local:h.local,tab:h.tab,practiceRequest});
+  assert.match(fresh.app.innerHTML,/정답 검증 완료/);assert.equal(fresh.saved().generatedPractice[0].draftChoiceId,'option-2');assert.equal(calls,1);
+  click(fresh.app,{aiPractice:'submit',practiceId:id});assert.equal(fresh.saved().generatedPractice[0].attempts[0].result,'incorrect');
+  click(fresh.node('change-role'));enterMath(fresh,'mentor');assert.match(fresh.app.innerHTML,/AI 추가 연습/);assert.match(fresh.app.innerHTML,/다음 수업/);
+  assert.deepEqual(fresh.saved().initialAssessments,original);
+  click(fresh.node('change-role'));enterMath(fresh,'learner');
+  let resolve;
+  globalThis.fetch=async(url,options)=>({ok:true,json:()=>new Promise(done=>{resolve=()=>done(practiceRequest(JSON.parse(options.body)));})});
+  const other=recordFor(state,'roadmap-like-terms');
+  click(fresh.app,{roadmapAction:'open',roadmapCard:other.cardId,roadmapQuestion:other.baseQuestionId});await tick();
+  assert.match(fresh.app.innerHTML,/준비 중/);click(fresh.node('change-role'));resolve();await tick();await tick();
+  assert.equal(fresh.saved().generatedPractice.length,1);assert.match(fresh.app.innerHTML,/멘토로 체험하기/);
 });

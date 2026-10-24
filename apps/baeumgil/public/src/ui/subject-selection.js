@@ -14,7 +14,7 @@ export function renderSubjectSelection({ root, state, role, onSelect }) {
       <h2>${esc(subject.name)}</h2>
       <p>${subject.enabled ? '나에게 맞는 문제부터<br>차근차근 배움을 이어가요.' : '아직 학습할 수 없어요.'}</p>
       ${subject.enabled ? `<p class="muted small">${hasRecords ? '기존 학습 기록을 이어갈 수 있어요.' : '첫 수준 확인으로 시작점을 찾아요.'}</p>
-        <button class="primary large" data-subject-id="${subject.id}">${role === 'mentor' ? '수학 지도 시작' : '수학 학습 시작'} ${ICON.arrow}</button>` : ''}
+        <button class="primary large" data-subject-id="${subject.id}">${role === 'mentor' ? '수학 지도 시작' : role === 'guardian' ? '수학 학습 소식 보기' : '수학 학습 시작'} ${ICON.arrow}</button>` : ''}
     </article>`).join('')}</div>
     <p class="entry-footnote">과목 선택 화면으로 돌아와도 학습 기록은 그대로 유지돼요.</p>
   </section>`;

@@ -43,6 +43,7 @@ export function renderDemoEntry({ root, state, onEnter, persistent }) {
         <button class="large" data-enter-role="learner">멘티로 체험하기 ${ICON.arrow}</button>
         <p class="entry-next">${learnerNext}</p>
       </article>
+      <article class="entry-card entry-guardian"><span class="entry-icon" aria-hidden="true">${ICON.book}</span><h2>함께 응원하는 보호자</h2><p>최근 참여와 확인된 변화를 보고<br>다음 배움을 응원해요.</p><div class="entry-profile"><span class="entry-avatar" aria-hidden="true">G</span><span><b>${esc(learner?.name??'하늘(가명)')}의 보호자</b><small>보호자 시연 화면</small></span></div><button class="large" data-enter-role="guardian">보호자로 체험하기 ${ICON.arrow}</button><p class="entry-next">학습 참여 · 개념별 변화 · 다음 배움길</p></article>
     </div>
     <div class="entry-footnote"><p>역할을 바꿔도 기존 학습 기록은 그대로 이어져요.</p>
       <p class="muted small">가상 계정을 사용하는 시연입니다. 기록은 이 브라우저에 저장됩니다.</p>
@@ -52,6 +53,6 @@ export function renderDemoEntry({ root, state, onEnter, persistent }) {
   root.onclick = event => {
     const button = event.target.closest('button[data-enter-role]');
     const role = button?.dataset.enterRole;
-    if (role === 'mentor' || role === 'learner') onEnter(role);
+    if (['mentor','learner','guardian'].includes(role)) onEnter(role);
   };
 }

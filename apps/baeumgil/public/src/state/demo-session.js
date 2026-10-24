@@ -1,7 +1,7 @@
 // 시연용 화면 입장 상태만 관리한다. 학습 기록 저장소나 실제 인증과는 별개다.
 import { isSubjectEnabled } from '../content/subjects.js';
 export const DEMO_SESSION_KEY = 'baeumgil:demo-session:v1';
-const validRole = role => role === 'mentor' || role === 'learner';
+const validRole = role => ['mentor','learner','guardian'].includes(role);
 
 export function createDemoSession(storage) {
   let role = null;
@@ -53,6 +53,7 @@ export function createDemoSession(storage) {
 export function prepareDemoRole(ui, state, role) {
   if (!validRole(role)) throw new Error('invalid_demo_role');
   Object.assign(ui, { role, flash: null, confirmReset: false, initialAssessmentOpen: false });
+  if(role==='guardian')return;
   if (role === 'mentor') {
     ui.mentorTab = 'home';
     return;
