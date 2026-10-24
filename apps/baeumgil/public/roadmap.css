@@ -208,6 +208,16 @@ span.map-chapter-step{display:block}
   .rm-canvas::after{content:"← 옆으로 밀어 전체를 볼 수 있어요";display:block;padding:6px 12px;font-size:0.75rem;color:#6b7f74}
 }
 @media(prefers-reduced-motion:reduce){.rm-node,.rm-edge{transition:none}}
+
+/* 전체 보기: grid 자식의 실제 높이를 제한해 마지막 영역까지 내부 스크롤한다. */
+html.map-modal-open,html.map-modal-open body{overflow:hidden}
+.map-overview-panel{grid-template-rows:minmax(0,1fr)}
+.map-overview-chapters,.map-overview-courses{min-height:0;overscroll-behavior:contain}
+.map-overview-head{position:sticky;top:-20px;background:var(--surface);z-index:2;padding:.6rem 0}
+.mentor-question-preview{margin-top:1rem;border:1px solid var(--line);border-radius:.7rem;padding:.8rem;overflow-wrap:anywhere}
+.mentor-question-preview>summary{cursor:pointer;color:var(--primary-ink);font-weight:600}
+.mentor-question-preview .prompt{font-size:1.1rem}.mentor-question-preview img{max-width:100%}
+@media(max-width:740px){.map-overview-panel{grid-template-rows:auto minmax(0,1fr)}.map-overview-courses{max-height:11rem}.map-overview-head{top:-16px}}
 /* 이수 도장: 진단 통과와 별도로 묶음의 모든 문항 정답을 확인한다. */
 .rm-seal circle{fill:#fff7f4;stroke:#b43d32;stroke-width:2}.rm-seal circle+circle{fill:none;stroke-width:1;stroke-dasharray:2 2}
 .rm-seal text{fill:#a6332a;font-size:13px;font-weight:800;letter-spacing:1px}.rm-seal .rm-seal-small{font-size:9px;letter-spacing:2px}

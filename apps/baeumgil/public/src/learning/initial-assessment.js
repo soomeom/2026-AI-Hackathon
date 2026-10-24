@@ -6,6 +6,7 @@ import { applyLearningCommand } from './engine.js';
 import { startDiagnostic, submitDiagnostic, diagnosticReport, LEVELS } from './diagnostic.js';
 import { listAssignableQuestions } from '../content/catalog.js';
 import { buildRoadmap, diagnosticLog, roadmapCards, submitRoadmapPractice, validRoadmapPractice } from './roadmap.js';
+import {hintsFor} from './hints.js';
 
 const VERSION = 2; // 1: 고정 7문항(이전), 2: 적응형 6영역
 const fail = code => { const error = new Error(code); error.code = code; throw error; };
@@ -161,7 +162,7 @@ export function openInitialRoadmap(state, { assessmentId, cardId = null, questio
   const exposure={id:exposureId,learnerId:record.learnerId,pathId:null,itemId:q.id,sourceQuestionId:q.id,stage:'roadmap_practice',fingerprint,
     noveltyAtPresentation:classifyNovelty(state,record.learnerId,fingerprint),presentedAt:at};
   const exposures=(state.exposures??[]).some(e=>e.id===exposureId)?state.exposures:[...(state.exposures??[]),exposure];
-  const roadmapPractice={...practice,cardId,questionId,roundId:`${assessmentId}:practice:${practice.attempts.length}`,answerId:null};
+  const roadmapPractice={...practice,cardId,questionId,roundId:`${assessmentId}:practice:${q.id}:${practice.attempts.length}`,answerId:null};
   return replace(state,{...record,roadmapPractice},{exposures},{type:'roadmapOpened',assessmentId,questionId});
 }
 
@@ -170,7 +171,8 @@ export function answerInitialRoadmap(state, { assessmentId, roundId, choiceId=nu
   if(record.status!=='completed')fail('initial_not_completed');
   const practice=record.roadmapPractice;
   if(!practice?.cardId||!roundId||roundId!==practice.roundId)fail('roadmap_not_presented');
-  const next=submitRoadmapPractice(practice,{id:roundId,cardId:practice.cardId,questionId:practice.questionId,choiceId,abstained,answeredAt:at},record.diagnostic,bankOf(catalog),configOf(catalog));
+  const helpUsed=hintsFor(state,{kind:'roadmap',assessmentId,roundId}).length>0;
+  const next=submitRoadmapPractice(practice,{id:roundId,cardId:practice.cardId,questionId:practice.questionId,choiceId,abstained,helpUsed,answeredAt:at},record.diagnostic,bankOf(catalog),configOf(catalog));
   if(next===practice)return state;
   return replace(state,{...record,roadmapPractice:{...next,answerId:roundId}},{},{type:'roadmapAnswered',assessmentId,questionId:practice.questionId});
 }

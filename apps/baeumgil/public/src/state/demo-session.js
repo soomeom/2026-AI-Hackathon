@@ -1,7 +1,10 @@
 // 시연용 화면 입장 상태만 관리한다. 학습 기록 저장소나 실제 인증과는 별개다.
 import { isSubjectEnabled } from '../content/subjects.js';
+import { learnerPaths } from '../learning/assignments.js';
 export const DEMO_SESSION_KEY = 'baeumgil:demo-session:v1';
 const validRole = role => ['mentor','learner','guardian'].includes(role);
+// 보호자는 과목을 고르지 않고 학생이 배우는 과목(지금은 수학) 소식을 바로 본다.
+const fixedSubject = role => role === 'guardian' ? 'math' : null;
 
 export function createDemoSession(storage) {
   let role = null;
@@ -13,7 +16,7 @@ export function createDemoSession(storage) {
     const saved = JSON.parse(raw ?? 'null');
     if (saved?.version === 1 && validRole(saved.role)) {
       role = saved.role;
-      subjectId = isSubjectEnabled(saved.subjectId) ? saved.subjectId : null;
+      subjectId = isSubjectEnabled(saved.subjectId) ? saved.subjectId : fixedSubject(role);
     }
   } catch { /* 손상된 입장 정보는 사용하지 않는다. 학습 기록은 건드리지 않는다. */ }
 
@@ -28,7 +31,7 @@ export function createDemoSession(storage) {
     enter(nextRole) {
       if (!validRole(nextRole)) throw new Error('invalid_demo_role');
       role = nextRole;
-      subjectId = null;
+      subjectId = fixedSubject(role);
       save();
     },
     selectSubject(nextSubjectId) {
@@ -37,7 +40,7 @@ export function createDemoSession(storage) {
       save();
     },
     clearSubject() {
-      subjectId = null;
+      subjectId = fixedSubject(role);
       if (role) save();
     },
     leave() {
@@ -58,7 +61,7 @@ export function prepareDemoRole(ui, state, role) {
     ui.mentorTab = 'home';
     return;
   }
-  const paths = (state.paths ?? []).filter(path => path.learnerId === state.learnerId);
+  const paths = learnerPaths(state);
   ui.learnerTab = 'learning';
   const path = paths.find(path => path.status === 'active' || path.status === 'paused') ?? paths.at(-1);
   ui.learnerPathId = path?.id ?? null;

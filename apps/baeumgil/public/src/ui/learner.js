@@ -3,6 +3,8 @@
 // renderLearner({ root, state, catalog, dispatch, ui, rerender })
 
 import { renderPathResult } from './learning-overview.js';
+import { learnerPaths } from '../learning/assignments.js';
+import {renderWeeklyGoal} from './weekly-goal.js';
 import { renderInitialAssessment, initialLearningNote } from './initial-assessment.js';
 import { esc, FLOW, STAGE_LABEL, REASON_TEXT, SKIPPABLE, ORIGIN_LABEL, ICON, mathHtml, choiceHtml, sourceLabel, questionBodyHtml, questionLabelHtml } from './text.js';
 
@@ -26,7 +28,7 @@ const questionOf = (catalog, id) => catalog.questions.find((q) => q.id === id);
 const conceptName = (catalog, id) => catalog.concepts.find((c) => c.id === id)?.name ?? id;
 
 export function activeLearnerPath(state, ui) {
-  const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
+  const paths = learnerPaths(state);
   return paths.find((p) => p.id === ui.learnerPathId) ?? paths.find((p) => p.status === 'active' || p.status === 'paused') ?? paths.at(-1);
 }
 
@@ -35,7 +37,7 @@ export function renderLearner(props) {
   const { root, state, catalog, dispatch, ui, rerender } = props;
 
   const learner = state.learners?.find((l) => l.id === state.learnerId);
-  const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
+  const paths = learnerPaths(state);
   const path = activeLearnerPath(state, ui);
   const terminal = path && ['completed', 'needs_mentor'].includes(path.stage);
 
@@ -43,6 +45,7 @@ export function renderLearner(props) {
   if (!path) {
     root.innerHTML = `${html}<div class="card empty">${ICON.book}<p><b>멘토가 지정한 문제가 아직 없어요.</b></p>
       <p class="muted">멘토 화면에서 문제를 지정하면 여기에 나타나요.</p></div>`;
+    root.innerHTML+=renderWeeklyGoal(state,catalog);
     root.onclick = null;
     return;
   }
@@ -56,6 +59,7 @@ export function renderLearner(props) {
 
   html += terminal ? `${renderPathResult(path, paths)}<button class="ghost" data-action="initial-open">첫 수준 확인 결과 보기</button>` : progress(path) + body(path, catalog, ui);
   root.innerHTML = html;
+  if(terminal)root.innerHTML+=renderWeeklyGoal(state,catalog);
 
   root.onclick = (ev) => {
     const b = ev.target.closest('button');

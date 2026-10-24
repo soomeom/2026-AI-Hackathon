@@ -1,4 +1,17 @@
 /* Summary and result screens only; solving controls keep their existing styles. */
+.weekly-goal {max-width:1040px;margin:20px auto;background:#fff;}
+.weekly-goal-heading {display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+.weekly-goal-heading h3 {margin:4px 0;font-size:1.125rem;}
+.weekly-goal-heading .meta {margin:0;font-size:.8125rem;}
+.weekly-goal-meters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:16px 0;}
+.weekly-goal-progress>div {display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.weekly-goal-status {margin:0 0 12px;}
+.weekly-goal-status .pill {white-space:normal;}
+.weekly-goal progress {display:block;width:100%;height:10px;accent-color:var(--primary-ink,#0f766e);}
+.weekly-goal-message {margin:16px 0 0;padding:16px;border-left:3px solid #0f766e;background:#eff8f6;overflow-wrap:anywhere;}
+.weekly-goal-message p {margin:8px 0 0;white-space:pre-wrap;}
+.weekly-goal-compose summary {cursor:pointer;min-height:44px;align-content:center;}
+@media(max-width:600px){.weekly-goal-meters{grid-template-columns:1fr;gap:16px;}}
 .mentor-overview,.overview-result {width:100%;max-width:1040px;margin:0 auto 24px;}
 .overview-heading {margin:24px 0;}
 .overview-heading h2 {font-size:1.75rem;letter-spacing:-.7px;margin:6px 0 10px;line-height:1.35;}

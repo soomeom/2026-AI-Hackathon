@@ -78,7 +78,7 @@ export const roadmapCards = roadmap => [...roadmap.domains.flatMap(d => d.steps.
 export function validRoadmapPractice(p, { diagnostic, bank, config } = {}) {
   try {
     if(!p||!Array.isArray(p.attempts)||new Set(p.attempts.map(a=>a.id)).size!==p.attempts.length)return false;
-    if(!p.attempts.every(a=>typeof a.id==='string'&&typeof a.cardId==='string'&&typeof a.questionId==='string'&&Array.isArray(a.conceptTags)&&a.conceptTags.every(c=>typeof c==='string')&&typeof a.answeredAt==='string'&&!Number.isNaN(Date.parse(a.answeredAt))&&['correct','incorrect','abstained'].includes(a.result)&&a.correct===(a.result==='correct')&&a.evidence==='review_practice'))return false;
+    if(!p.attempts.every(a=>typeof a.id==='string'&&typeof a.cardId==='string'&&typeof a.questionId==='string'&&Array.isArray(a.conceptTags)&&a.conceptTags.every(c=>typeof c==='string')&&typeof a.answeredAt==='string'&&!Number.isNaN(Date.parse(a.answeredAt))&&['correct','incorrect','abstained'].includes(a.result)&&a.correct===(a.result==='correct')&&(a.helpUsed===undefined||typeof a.helpUsed==='boolean')&&a.evidence==='review_practice'))return false;
     if(p.cardId&&(typeof p.cardId!=='string'||typeof p.questionId!=='string'||typeof p.roundId!=='string'))return false;
     if(p.answerId&&!p.attempts.some(a=>a.id===p.answerId&&a.cardId===p.cardId&&a.questionId===p.questionId))return false;
     if(p.presentedQuestionIds&&!Array.isArray(p.presentedQuestionIds))return false;
@@ -111,6 +111,6 @@ export function submitRoadmapPractice(practice, input, diagnostic, bank, config)
   const result = gradeAnswer(q, input);
   const attempt = { id: input.id, cardId: card.id, questionId: q.id, domain: card.domain, conceptTags: q.conceptIds,
     stage: DIAGNOSTIC_STAGES[card.level], result, correct: result === 'correct', choiceId: input.choiceId ?? null,
-    abstained: Boolean(input.abstained), answeredAt: input.answeredAt, evidence: 'review_practice' };
+    abstained: Boolean(input.abstained), helpUsed:Boolean(input.helpUsed), answeredAt: input.answeredAt, evidence: 'review_practice' };
   return { ...practice, attempts: [...practice.attempts, attempt] };
 }

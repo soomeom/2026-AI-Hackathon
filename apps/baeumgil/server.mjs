@@ -10,6 +10,7 @@ import { validateAIOutput } from './public/src/ai/contracts.js';
 import { createModelProvider, withDeadline, AIProviderError } from './server/ai-provider.mjs';
 import { createPracticeProvider, validatePracticeInput } from './server/practice-provider.mjs';
 import { validateLinearPractice } from './public/src/learning/linear-practice.js';
+import {canonicalizeHintInput} from './public/src/learning/hints.js';
 
 const DEFAULT_PUBLIC = fileURLToPath(new URL('./public/', import.meta.url));
 const MIME = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8', '.css': 'text/css; charset=utf-8', '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.woff': 'font/woff', '.ttf': 'font/ttf' };
@@ -104,14 +105,17 @@ export function createAppServer({ publicDir = DEFAULT_PUBLIC, catalog = readCata
         return json(res, 200, { state, catalog, assignableQuestions, source: 'demo', storage: 'browser-local' });
       }
       if (pathname === '/api/ai' && req.method === 'POST') {
-        const input = await readJSON(req);
+        let input = await readJSON(req);
         if (!validateAIInput(input).ok) return fail(res, 'invalid_ai_input', 400);
+        if(input.kind==='hint'){
+          try{input=canonicalizeHintInput(input,catalog);}catch{return fail(res,'invalid_ai_input',400,input.requestId);}
+        }
         if (provider.configured !== true) return fail(res, 'ai_not_configured', 503, input.requestId);
         const controller = new AbortController();
         const disconnect = () => { if (!res.writableEnded) controller.abort(); };
         res.once('close', disconnect);
         try {
-          const output = await withDeadline(signal => provider.generate(input, { signal }), { signal: controller.signal, timeoutMs: aiTimeoutMs });
+          const output = await withDeadline(signal => provider.generate(input, { signal }), { signal: controller.signal, timeoutMs: input.kind==='hint'?Math.min(5000,aiTimeoutMs):aiTimeoutMs });
           const validation = validateAIOutput(input, output);
           if (!validation.ok) throw new AIProviderError('ai_invalid_output');
           return json(res, 200, { status: 'ok', output: validation.value, requestId: input.requestId ?? null, inputRevision: input.inputRevision ?? null, source: 'live' });

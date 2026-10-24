@@ -11,15 +11,18 @@ export function createDisplayPreferences(storage) {
 
 export function installDisplayControls({document,storage}) {
  const prefs=createDisplayPreferences(storage),button=document.getElementById('large-text');
+ const status=document.getElementById('display-status');
  const apply=()=>{
   document.documentElement.classList.toggle('large-text',prefs.largeText);
   button.setAttribute('aria-pressed',String(prefs.largeText));
   button.textContent=prefs.largeText?'큰글씨 켜짐':'큰글씨';
  };
  apply();
- button.addEventListener('click',()=>{
-  prefs.setLargeText(!prefs.largeText);apply();
-  document.getElementById('display-status').textContent=`${prefs.largeText?'큰글씨로 바꿨어요.':'기본 글씨로 바꿨어요.'}${prefs.persistent?'':' 이 환경에서는 설정이 저장되지 않아요.'}`;
- });
- return prefs;
+ const set=value=>{
+  prefs.setLargeText(value);apply();
+  status.textContent=`${prefs.largeText?'큰글씨로 바꿨어요.':'기본 글씨로 바꿨어요.'}${prefs.persistent?'':' 이 환경에서는 설정이 저장되지 않아요.'}`;
+ };
+ button.addEventListener('click',()=>set(!prefs.largeText));
+ // 첫 화면의 큰글씨 추천도 같은 설정을 바꾼다
+ return {get largeText(){return prefs.largeText;},get persistent(){return prefs.persistent;},setLargeText:set};
 }

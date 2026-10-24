@@ -69,3 +69,16 @@ test('subject screen exposes one action, explains unavailable subjects and rejec
     assert.deepEqual(selected,['math']);
   }
 });
+
+test('guardians skip subject selection: entering, restoring and returning keep the learner subject', () => {
+  const storage = memory();
+  const s = createDemoSession(storage);
+  s.enter('guardian');
+  assert.equal(s.subjectId, 'math');
+  s.clearSubject();
+  assert.equal(s.subjectId, 'math');
+  storage.setItem(DEMO_SESSION_KEY, JSON.stringify({ version:1, role:'guardian', subjectId:null }));
+  assert.equal(createDemoSession(storage).subjectId, 'math');
+  s.enter('learner');
+  assert.equal(s.subjectId, null);
+});

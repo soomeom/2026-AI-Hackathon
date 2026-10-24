@@ -3,9 +3,10 @@
 // - buildAIPrompt / buildGeminiRequest: 메모·문항 본문을 데이터 블록으로 격리한 프롬프트
 // - validateAIOutput: 허용 ID 밖 참조, 필수 필드 누락, 금지 표현이 있으면 채택 차단
 import { buildLearnerSummary, JUDGEMENTAL_TERMS } from '../mentoring/summary.js';
+import {validHintOutput} from '../learning/hints.js';
 
 export const AI_CONTRACT_VERSION = 1;
-export const AI_KINDS = Object.freeze(['lesson_plan', 'log_narrative']);
+export const AI_KINDS = Object.freeze(['lesson_plan', 'log_narrative','hint']);
 export const LEARNER_ALIAS = '학습자 A';
 
 // 메모에 관찰 근거가 없을 때 쓰면 안 되는 정서·태도 표현
@@ -25,6 +26,7 @@ const list = (item, min, max) => ({ type: 'array', item, min, max });
 const object = (fields) => ({ type: 'object', fields });
 
 export const OUTPUT_SCHEMAS = Object.freeze({
+  hint:object({kind:{type:'kind'},hintId:TEXT}),
   lesson_plan: object({
     kind: { type: 'kind' },
     priorities: list(object({
@@ -117,6 +119,7 @@ export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note,
 /* ---------- 프롬프트 ---------- */
 
 const TASKS = {
+  hint:'facts.candidates 안에서 현재 문제를 풀도록 돕는 질문 하나의 id를 골라 hintId로 반환한다. 정답·수식·설명·자유 문장을 생성하지 않는다. hintStep에 맞는 후보 하나만 선택한다.',
   lesson_plan: '멘토가 다음 대면 수업을 준비할 수 있도록 우선 확인할 개념(priorities: 근거, 확인할 오개념 후보, 설명 방법, 불확실한 부분 포함), 멘토가 학습자에게 던질 확인 질문(mentorQuestions), 수업 흐름(plan)을 제안한다.',
   log_narrative: '센터 제출용 멘토링 활동일지의 활동 내용 문장(sentences)을 작성한다. 각 문장은 사실에 근거해야 한다.',
 };
@@ -146,7 +149,7 @@ const isolate = (value) => JSON.stringify(value, null, 2)
   .replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
 
 export function buildAIPrompt(input) {
-  const { constraints, contractVersion, requestId, inputRevision, ...data } = input;
+  const { constraints, contractVersion, requestId, inputRevision, hintSource, ...data } = input;
   return {
     systemInstruction: systemInstruction(input),
     userText: `아래 데이터를 바탕으로 과제를 수행하라.\n<data>\n${isolate(data)}\n</data>`,
@@ -181,6 +184,7 @@ export function validateAIOutput(input, output) {
   if (value.kind !== input.kind) {
     return { ok: false, errors: [{ code: 'kindMismatch', path: 'kind', message: `${input.kind} 이어야 함` }] };
   }
+  if(input.kind==='hint')return validHintOutput(input,value)?{ok:true,value}:{ok:false,errors:[{code:'invalidHint',path:'hintId',message:'검토한 질문 ID만 허용'}]};
 
   const errors = [];
   const add = (code, path, message) => errors.push({ code, path, message });

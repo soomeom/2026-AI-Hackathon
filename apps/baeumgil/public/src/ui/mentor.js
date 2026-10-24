@@ -15,6 +15,8 @@ import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 import { renderRoadmapPage } from './roadmap-page.js';
 import { renderMentorAIPractice } from './ai-practice.js';
 import { renderGuardianMessage } from './guardian-message.js';
+import { renderAssignedQuestions } from './assigned-questions.js';
+import {shareGoalMessage} from '../learning/weekly-goal.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unknown: '확인 불가' };
@@ -33,10 +35,11 @@ export function renderMentor(props) {
 
   root.innerHTML = `${mentorTabs(tab === 'assessment' ? 'learning' : tab, learner)}
     ${ui.flash ? `<div class="msg" role="status">${esc(ui.flash)}</div>` : ''}
-    ${tab === 'home' ? renderMentorHome(state, catalog, summary, paths) : tab === 'assessment' ? `<div class="page-head"><h2 tabindex="-1" id="overview-title">진단 상세</h2><button class="ghost" data-goto="home">← 멘토 홈</button></div>${initialAssessmentPanel(state, catalog, ui, {mode:'report'})}` : tab === 'planning' ? `
+    ${tab === 'home' ? renderMentorHome(state, catalog, summary, paths,ui) : tab === 'assessment' ? `<div class="page-head"><h2 tabindex="-1" id="overview-title">진단 상세</h2><button class="ghost" data-goto="home">← 멘토 홈</button></div>${initialAssessmentPanel(state, catalog, ui, {mode:'report'})}` : tab === 'planning' ? `
       <div class="page-head"><h2 tabindex="-1" id="overview-title">수업 준비</h2><p class="muted">진단을 참고해 시작점을 정하고, 다음 문제를 지정해요.</p></div>
       ${initialAssessmentPanel(state, catalog, ui, {mode:'plan'})}
       <section class="card"><h3>${ICON.book} 추가 문제 지정</h3>${assignPicker(catalog, ui)}<button class="primary" data-action="assign">학생에게 지정</button></section>
+      ${renderAssignedQuestions(state,catalog,ui)}
       ${lessonPanel(state, catalog, summary, ui)}` : `
       <section class="card">
         <h3>단계별 결과 <span class="muted small">모름은 정답률에서 제외</span></h3>
@@ -65,6 +68,7 @@ export function renderMentor(props) {
     } else if (event.target.id === 'initial-question') ui.initialQuestionId = event.target.value;
   };
   root.oninput = event => {
+    if(event.target.id==='weekly-goal-message')ui.weeklyGoalDraft=event.target.value;
     if (event.target.id === 'initial-reason') ui.initialReason = event.target.value;
     if (event.target.id === 'guardian-message') ui.guardianMessageDraft = event.target.value;
   };
@@ -72,6 +76,27 @@ export function renderMentor(props) {
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
+    if(b.dataset.action==='share-goal-message'){
+      try{props.update(s=>shareGoalMessage(s,{text:root.querySelector('#weekly-goal-message')?.value??ui.weeklyGoalDraft??'',at:new Date().toISOString()},{catalog,role:ui.role}));ui.weeklyGoalError=null;ui.flash='멘티에게 응원을 전했어요.';}
+      catch{ui.weeklyGoalError='응원을 저장하지 못했어요. 멘토 화면에서 1~200자로 적어 주세요.';}
+      rerender();return;
+    }
+    if(b.dataset.assignmentAction){
+      const action=b.dataset.assignmentAction;
+      if(action==='keep'){ui.confirmCancelAssignment=null;rerender();return;}
+      const assignment=(props.getState().assignments??[]).find(a=>a.id===b.dataset.assignmentId&&a.learnerId===state.learnerId);
+      if(!assignment)return;
+      if(action==='reassign'&&assignment.status==='canceled'){
+        ui.confirmCancelAssignment=null;assignQuestion({questionId:assignment.questionId});return;
+      }
+      if(action==='cancel'&&assignment.status!=='canceled'){
+        const current=props.getState(),paths=current.paths.filter(p=>p.assignmentId===assignment.id);
+        const started=current.attempts.some(a=>paths.some(p=>p.id===a.pathId));
+        if(started&&b.dataset.confirmed!=='yes'){ui.confirmCancelAssignment=assignment.id;rerender();return;}
+        ui.confirmCancelAssignment=null;props.cancelAssignment({assignmentId:assignment.id});return;
+      }
+      return;
+    }
     if(b.dataset.action==='share-guardian-message'){
       const text=(root.querySelector('#guardian-message')?.value??'').trim();
       if(!text||text.length>500){root.querySelector('#guardian-message-status').textContent='1~500자로 안내를 적어 주세요.';return;}

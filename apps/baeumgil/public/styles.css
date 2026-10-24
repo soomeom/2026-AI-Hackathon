@@ -349,3 +349,16 @@ main.entry-main { max-width: 980px; padding-top: 48px; }
   .session-controls { gap: var(--space-1); }
   .subject-grid { grid-template-columns: 1fr; }
 }
+
+/* 팀 사용성 피드백: 선택할 수 있는 동작은 평소에도 버튼으로 구분한다. */
+button.secondary{background:var(--surface);border:1px solid var(--line-strong);color:var(--primary-ink);font-weight:600;min-height:44px}
+button.secondary:hover:not(:disabled){background:var(--primary-soft);border-color:var(--primary)}
+.entry-learner>button{background:var(--accent);border-color:var(--accent);color:white}
+.entry-learner>button:hover:not(:disabled){background:#92400e;border-color:#92400e}
+.entry-guardian{border-top-color:var(--primary)}.entry-guardian>button{background:var(--primary);border-color:var(--primary);color:white}
+.assigned-list{display:grid;gap:.7rem}.assigned-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:.8rem;padding:.9rem 0;border-top:1px solid var(--line)}
+.assigned-row>div:first-child{min-width:0;flex:1 1 14rem;overflow-wrap:anywhere}.assigned-confirm{flex:1 0 100%}
+
+.hint-panel{margin:1rem 0;padding:1rem;border:1px solid #c9ded9;border-radius:.8rem;background:#f3faf8}
+.hint-panel h4{margin-top:0}.hint-panel ol{list-style:none;padding:0;display:grid;gap:.7rem}.hint-panel li{border-top:1px solid var(--line);padding-top:.7rem}
+.hint-panel li p{margin-top:.5rem}.hint-panel .pill{white-space:normal}.hint-panel button{max-width:100%;white-space:normal}

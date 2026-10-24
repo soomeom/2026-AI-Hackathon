@@ -17,6 +17,8 @@ import { renderAIPractice } from './src/ui/ai-practice.js';
 import { renderGuardian } from './src/ui/guardian.js';
 import { installDisplayControls } from './src/state/display-preferences.js';
 import { installImageViewer } from './src/ui/image-viewer.js';
+import { isCanceledPath } from './src/learning/assignments.js';
+import {createHintController} from './src/ai/hint-client.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
 
@@ -47,7 +49,7 @@ function getStorage() {
   try { return window.localStorage; } catch { return null; }
 }
 const storage = getStorage();
-installDisplayControls({document,storage});
+const display=installDisplayControls({document,storage});
 installImageViewer(document);
 const demoSession = createDemoSession((() => { try { return window.sessionStorage; } catch { return null; } })());
 
@@ -70,6 +72,7 @@ const persist = { savedRevision: 0, status: storage ? 'idle' : 'unavailable', bl
 let store;
 let catalog;
 let practice;
+let hints;
 
 function showSaveStatus() {
   const text = {
@@ -127,11 +130,12 @@ function renderNavigation() {
 }
 
 function render() {
+  document.documentElement.classList.toggle('map-modal-open',false);
   const state = store.getState();
   renderNavigation();
   document.getElementById('session-controls').hidden = !ui.role;
   document.getElementById('reset').hidden = !inWorkspace() || ui.role==='guardian';
-  document.getElementById('change-subject').hidden = !inWorkspace();
+  document.getElementById('change-subject').hidden = !inWorkspace() || ui.role==='guardian';
   document.getElementById('reset').textContent = ui.confirmReset ? '정말 초기화할까요? 한 번 더 누르기' : '시연 초기화';
   const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
   document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'}${ui.role==='guardian'?'의 보호자':''} · ${{mentor:'멘토',learner:'멘티',guardian:'보호자'}[ui.role]}${inWorkspace() ? ' · 수학' : ''}` : '';
@@ -143,7 +147,7 @@ function render() {
   app.classList.toggle('entry-main', !inWorkspace());
   app.classList.toggle('learner-main', inWorkspace() && ui.role === 'learner');
   if (!ui.role) {
-    renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent });
+    renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent, display });
     return;
   }
   if (!inWorkspace()) {
@@ -152,13 +156,13 @@ function render() {
   }
   const props = {
     root: app, state, catalog, ui, rerender: render,
-    dispatch: store.dispatch, assignQuestion: store.assignQuestion, update: store.update, getState: store.getState,
+    dispatch: store.dispatch, assignQuestion: store.assignQuestion, cancelAssignment:store.cancelAssignment, update: store.update, getState: store.getState,
     startInitialAssessment: store.startInitialAssessment, presentInitialQuestion: store.presentInitialQuestion,
     submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
-    syncVisibility, practice,
+    syncVisibility, practice,hints,
   };
   if(ui.role==='guardian'){renderGuardian({root:app,state,catalog});return;}
-  if (renderAIPractice(props)) return;
+  if (ui.role==='learner'&&renderAIPractice(props)) return;
   if (ui.role === 'learner' && ui.learnerTab === 'roadmap') renderRoadmapPage(props);
   else if (ui.role === 'learner') renderLearner(props);
   else renderMentor(props);
@@ -169,7 +173,7 @@ function syncVisibility() {
   const state = store.getState();
   const visiblePath = inWorkspace() && !ui.practiceLoading && !state.activeGeneratedPracticeId && ui.role === 'learner' && ui.learnerTab !== 'roadmap' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
   for (const p of state.paths ?? []) {
-    if (!p.routeId || p.status !== 'active') continue;
+    if (!p.routeId || p.status !== 'active' || isCanceledPath(state,p)) continue;
     const visible = p.id === visiblePath?.id;
     if (p.visible !== visible) store.dispatch({ type: 'SET_VISIBILITY', pathId: p.id, visible });
   }
@@ -182,7 +186,8 @@ function focusScreen() {
 
 function setRole(role) {
   demoSession.enter(role);
-  Object.assign(ui, { role, subjectId: null, confirmReset: false, flash: null });
+  Object.assign(ui, { role, subjectId: demoSession.subjectId, confirmReset: false, flash: null });
+  if (inWorkspace()) prepareDemoRole(ui, store.getState(), role);
   syncVisibility();
   render();
   focusScreen();
@@ -203,6 +208,7 @@ function leaveWorkspace({ changeRole = false } = {}) {
   if (ui.role === 'mentor' && hasUnsavedSessionForm(app)
     && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
   cancelPendingDemoAI(ui);
+  hints?.cancel();
   practice?.cancel({close:true});
   if (changeRole) demoSession.leave();
   else demoSession.clearSubject();
@@ -222,6 +228,7 @@ function resetDemo() {
     if (!result.ok) { ui.confirmReset = false; persist.status = 'failed'; showSaveStatus(); render(); return; }
   }
   cancelPendingDemoAI(ui);
+  hints?.cancel();
   practice?.cancel({close:true});
   Object.assign(ui, freshUi(), { flash: '시연 기록을 초기화했어요.' });
   Object.assign(persist, { savedRevision: 0, blocked: false, status: storage ? 'idle' : 'unavailable' });
@@ -266,6 +273,7 @@ async function start() {
 
   store = createStore({ initialState: initial, catalog });
   practice = createPracticeController({getState:store.getState,update:store.update,catalog,ui,rerender:()=>{syncVisibility();render();},canWrite:()=>!persist.blocked});
+  hints=createHintController({getState:store.getState,update:store.update,catalog,ui,rerender:render,canWrite:()=>!persist.blocked});
   if (inWorkspace()) prepareDemoRole(ui, initial, ui.role);
   store.subscribe((state) => { save(state); syncVisibility(); render(); });
   showSaveStatus();
@@ -275,14 +283,14 @@ async function start() {
   document.getElementById('reset').addEventListener('click', resetDemo);
   for (const tab of ['learning','roadmap']) document.getElementById(`learner-${tab}`).addEventListener('click',()=>{
     if (!inWorkspace() || ui.role!=='learner') return;
-    practice.cancel({close:true});
+    hints.cancel();practice.cancel({close:true});
     ui.learnerTab=tab; ui.navOpen=false; ui.mapOverviewOpen=false; syncVisibility(); render(); focusScreen();
   });
   for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).addEventListener('click', () => {
     if (!inWorkspace() || ui.role !== 'mentor') return;
     if (ui.mentorTab === 'sessions' && tab !== 'sessions' && hasUnsavedSessionForm(app)
       && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
-    practice.cancel({close:true});
+    hints.cancel();practice.cancel({close:true});
     ui.mentorTab = tab; ui.navOpen = false; ui.mapOverviewOpen = false; render(); focusScreen();
   });
   const narrow = () => window.matchMedia?.('(max-width: 900px)').matches ?? false;
@@ -305,7 +313,7 @@ async function start() {
   window.addEventListener('storage', (ev) => {
     if (ev.key !== STORAGE_KEY || persist.blocked) return;
     persist.blocked = true;
-    practice.cancel();
+    hints.cancel();practice.cancel();
     persist.status = 'conflict';
     showSaveStatus();
   });
