@@ -152,3 +152,16 @@ test('초기 API → 전체 보충 학습·매번 저장/복원 → 회기·일�
   assert.equal(ledger.totalMinutes, 30);
   assert.equal(ledger.sessionCount, 1);
 });
+
+test('다른 사이트의 링크로 화면을 열 수 있고, API 는 여전히 다른 사이트 요청을 거부한다', async t => {
+  const url = await start(t, { provider: { configured: false } });
+  const page = await fetch(`${url}/`, { headers: { 'sec-fetch-site': 'cross-site', 'sec-fetch-mode': 'navigate' } });
+  assert.equal(page.status, 200);
+  assert.match(page.headers.get('content-type'), /text\/html/);
+  assert.equal((await fetch(`${url}/api/health`, { headers: { 'sec-fetch-site': 'cross-site' } })).status, 403);
+  assert.equal((await post(url, aiInput(), { 'sec-fetch-site': 'cross-site' })).status, 403);
+  // 로컬 주소가 아닌 Host 는 화면도 거부 (DNS 재바인딩 방지)
+  const { request } = await import('node:http');
+  const status = await new Promise((resolve, reject) => request(`${url}/`, { headers: { host: 'evil.example' } }, res => { res.resume(); resolve(res.statusCode); }).on('error', reject).end());
+  assert.equal(status, 403);
+});

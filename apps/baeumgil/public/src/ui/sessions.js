@@ -41,8 +41,7 @@ export function renderSessions(props) {
   const month = ui.ledgerMonth ?? todaySeoul().slice(0, 7);
 
   root.innerHTML = `
-    <div class="page-head"><h2>회기·활동일지</h2></div>
-    ${mentorTabs('sessions')}
+    ${mentorTabs('sessions', state.learners?.find((l) => l.id === state.learnerId))}
     <div class="grid">
       <section class="card">
         <h3>${selected && ui.editSession ? '회기 정보 수정' : '새 회기 기록'}</h3>

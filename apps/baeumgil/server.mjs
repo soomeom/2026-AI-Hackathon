@@ -41,11 +41,14 @@ async function readJSON(req) {
   try { return JSON.parse(Buffer.concat(chunks).toString('utf8')); }
   catch { throw new AIProviderError('invalid_json', 400); }
 }
-function requestAllowed(req) {
+// 모든 요청: 로컬 Host 만 허용 (DNS 재바인딩 방지).
+// API 요청만 다른 사이트 출처를 거부한다. 화면(정적 파일)은 다른 사이트의 링크로 열 수 있어야 한다.
+function requestAllowed(req, { api }) {
   const host = req.headers.host ?? '';
   let local;
   try { local = new URL(`http://${host}`); } catch { return false; }
   if (!['127.0.0.1', 'localhost', '[::1]'].includes(local.hostname)) return false;
+  if (!api) return true;
   if (req.headers['sec-fetch-site'] === 'cross-site') return false;
   if (!req.headers.origin) return true;
   return req.headers.origin === local.origin;
@@ -68,8 +71,8 @@ async function staticFile(req, res, publicDir, pathname) {
 /** 로컬 시연 서버. 저장 원본은 브라우저이며 실제 DB·인증 API를 가장하지 않는다. */
 export function createAppServer({ publicDir = DEFAULT_PUBLIC, catalog = readCatalog(), provider = createModelProvider(), aiTimeoutMs = 15000 } = {}) {
   return createServer(async (req, res) => {
-    if (!requestAllowed(req)) return fail(res, 'forbidden_origin', 403);
     const pathname = new URL(req.url, 'http://localhost').pathname;
+    if (!requestAllowed(req, { api: pathname.startsWith('/api/') })) return fail(res, 'forbidden_origin', 403);
     try {
       if (pathname === '/api/health' && req.method === 'GET') return json(res, 200, { status: 'ok', storage: 'browser-local', authentication: 'demo-role-switch', ai: { configured: provider.configured === true, provider: 'gemini', model: provider.model ?? null } });
       if (pathname === '/api/bootstrap' && req.method === 'GET') {

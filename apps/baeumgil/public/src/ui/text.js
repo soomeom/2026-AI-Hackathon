@@ -67,10 +67,36 @@ export function stepsBar(path) {
   }).join('')}</ol>`;
 }
 
-export const mentorTabs = (active) => `<nav class="tabs" aria-label="멘토 메뉴">
-  <button data-tab="learning" aria-selected="${active === 'learning'}">학습 근거·수업 준비</button>
-  <button data-tab="sessions" aria-selected="${active === 'sessions'}">회기·활동일지·월별 대장</button>
-</nav>`;
+// 멘토 화면 상단: 학생 정보 + 메뉴 (칸아카데미 교실 화면처럼 학생 → 할 일 → 상세 순서)
+export const mentorTabs = (active, learner) => `<div class="card flat student-bar">
+  <div class="avatar" aria-hidden="true">${esc((learner?.name ?? '학')[0])}</div>
+  <div class="who"><b>${esc(learner?.name ?? '학습자')}</b><span class="muted small">고졸 검정고시 수학${learner?.isDemo ? ' · 시연용 가명 학생' : ''}</span></div>
+  <nav class="tabs" aria-label="멘토 메뉴">
+    <button data-tab="home" aria-selected="${active === 'home'}">오늘 할 일</button>
+    <button data-tab="learning" aria-selected="${active === 'learning'}">학습 근거·수업 준비</button>
+    <button data-tab="sessions" aria-selected="${active === 'sessions'}">회기·일지·월별 대장</button>
+  </nav>
+</div>`;
 
 // 한국 시간 기준 오늘 날짜 (YYYY-MM-DD)
 export const todaySeoul = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());
+
+// 아이콘 (Lucide 계열 선 아이콘, 장식용이므로 aria-hidden)
+const svg = (d) => `<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+export const ICON = {
+  check: svg('<path d="M20 6 9 17l-5-5"/>'),
+  x: svg('<path d="M18 6 6 18M6 6l12 12"/>'),
+  help: svg('<circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/>'),
+  bulb: svg('<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>'),
+  book: svg('<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5V21h16"/>'),
+  hand: svg('<path d="M18 11V6a2 2 0 0 0-4 0v5M14 10V4a2 2 0 0 0-4 0v6M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 16 0v-3a2 2 0 0 0-4 0"/>'),
+  pause: svg('<rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/>'),
+  play: svg('<path d="m6 3 14 9-14 9z"/>'),
+  arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  skip: svg('<path d="m5 4 10 8-10 8zM19 5v14"/>'),
+  flag: svg('<path d="M4 22V4a1 1 0 0 1 1-1h11l-2 4 2 4H5"/>'),
+  doc: svg('<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/>'),
+  target: svg('<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>'),
+  trophy: svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/>'),
+  spark: svg('<path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M5.6 18.4l2.8-2.8M15.6 8.4l2.8-2.8"/>'),
+};

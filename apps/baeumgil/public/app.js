@@ -41,7 +41,7 @@ const writeRole = (role) => { try { storage?.setItem(ROLE_KEY, role); } catch { 
 
 const freshUi = () => ({
   selected: {}, help: {}, openEvidence: {}, ai: {}, logDraft: {}, reviewed: {},
-  learnerPathId: null, mentorPathId: null, mentorTab: 'learning', sessionId: null, editSession: false,
+  learnerPathId: null, mentorPathId: null, mentorTab: 'home', sessionId: null, editSession: false,
   confirmSkip: null, confirmReset: false, flash: null, overrideError: null, sessionError: null, logError: null,
   ledgerMonth: null, copyFallback: null,
 });
@@ -86,6 +86,7 @@ function render() {
     root: app, state: store.getState(), catalog, ui, rerender: render,
     dispatch: store.dispatch, assignQuestion: store.assignQuestion, update: store.update, getState: store.getState,
   };
+  app.classList.toggle('learner-main', ui.role === 'learner');
   if (ui.role === 'learner') renderLearner(props);
   else renderMentor(props);
 }
