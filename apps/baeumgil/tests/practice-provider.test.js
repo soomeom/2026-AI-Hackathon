@@ -20,7 +20,27 @@ test('generation prompt supplies a complete bounded example with exact variable 
  const provider=createPracticeProvider({catalog,transport:{configured:true,generate:async body=>{prompt=body.contents[0].parts[0].text;config=body.generationConfig;return {text:JSON.stringify(sample('roadmap-like-terms'))};}}});
  await provider.generate(inputFor('roadmap-like-terms'));
  assert.match(prompt,/Complete valid example/);assert.match(prompt,/variable nodes have ONLY/);
+ assert.match(prompt,/minified JSON/);
  assert.equal(config.responseSchema.properties.options.minItems,4);
+});
+function followsSchema(value,schema){
+ if(schema.type==='OBJECT')return value&&typeof value==='object'&&!Array.isArray(value)&&schema.required.every(k=>Object.hasOwn(value,k))&&Object.entries(value).every(([k,v])=>schema.properties[k]&&followsSchema(v,schema.properties[k]));
+ if(schema.type==='ARRAY')return Array.isArray(value)&&value.length>=schema.minItems&&value.length<=schema.maxItems&&value.every(v=>followsSchema(v,schema.items));
+ if(schema.type==='INTEGER')return Number.isSafeInteger(value)&&value>=schema.minimum&&value<=schema.maximum;
+ if(schema.type==='STRING')return typeof value==='string'&&(!schema.enum||schema.enum.includes(value));
+ return false;
+}
+test('every supplied example follows its own output schema and independent math checks',async()=>{
+ const {validateLinearPractice}=await import('../public/src/learning/linear-practice.js');
+ for(const conceptId of ['roadmap-like-terms','roadmap-linear-sum']){
+  let body;
+  const p=createPracticeProvider({catalog,transport:{configured:true,generate:async b=>{body=b;return {text:JSON.stringify(sample(conceptId))};}}});
+  await p.generate(inputFor(conceptId));
+  const match=body.contents[0].parts[0].text.match(/Complete valid example[^:\n]*:\s*(\{.*\})/);
+  assert.ok(match,'one complete JSON example is present');const example=JSON.parse(match[1]);
+  assert.equal(followsSchema(example,body.generationConfig.responseSchema),true,`${conceptId} example contradicts schema`);
+  assert.equal(validateLinearPractice(example,{conceptId}).ok,true,`${conceptId} example has wrong algebra`);
+ }
 });
 test('practice HTTP echoes identity, blocks origins, enforces deadline and releases slots',async t=>{
  let pending=false;

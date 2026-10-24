@@ -1,0 +1,86 @@
+{
+  "checkedAt": "2026-10-24T13:03:14.851Z",
+  "synthetic": true,
+  "rows": [
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5053,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5009,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5015,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5017,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-like-terms",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5016,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5018,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 1159,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "failed",
+      "code": "ai_timeout",
+      "elapsedMs": 5008,
+      "model": null,
+      "validatorVersion": null
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 3345,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    },
+    {
+      "conceptId": "roadmap-linear-sum",
+      "status": "ok",
+      "code": null,
+      "elapsedMs": 1551,
+      "model": "gemini-3.1-flash-lite",
+      "validatorVersion": 1
+    }
+  ]
+}
