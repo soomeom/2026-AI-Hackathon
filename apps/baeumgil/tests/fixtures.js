@@ -41,6 +41,54 @@ export function makeState(overrides = {}) {
   };
 }
 
+// 엔진이 저장하는 풀이 기록(attempt)과 같은 형태
+let attemptSeq = 0;
+export function makeAttempt(overrides = {}) {
+  attemptSeq += 1;
+  return {
+    id: `attempt-${attemptSeq}`,
+    submissionId: `sub-${attemptSeq}`,
+    learnerId: IDS.learnerId,
+    pathId: IDS.pathId,
+    itemId: `item-${attemptSeq}`,
+    sourceQuestionId: 'q-eq-1',
+    stage: 'original_attempt',
+    round: null,
+    choiceId: 'c',
+    abstained: false,
+    result: 'correct',
+    helpUsed: false,
+    noveltyAtPresentation: 'first_seen',
+    submittedAt: null,
+    activeMs: null,
+    ...overrides,
+  };
+}
+
+// 시작된 경로(엔진 START_PATH 이후 형태)를 가진 상태
+export function stateWithAttempts(attempts, pathOverrides = {}) {
+  return makeState({
+    paths: [{
+      id: IDS.pathId, assignmentId: IDS.assignmentId, learnerId: IDS.learnerId, mentorId: IDS.mentorId,
+      questionId: 'q-eq-1', routeId: 'route-eq-1', originalAttemptId: IDS.originalAttemptId,
+      stage: 'completed', status: 'completed', items: [], pastItems: [], stageHistory: [],
+      skippedStageIds: [], needsReview: false, overrides: [], helpUsage: [], mentorRequests: [],
+      transferStatus: 'measured', transferResult: null, retryResult: null,
+      ...pathOverrides,
+    }],
+    attempts,
+  });
+}
+
+// 원 기출 오답 → 재도전 정답 → 새 적용 정답이지만, 새 적용 문항을 이미 본 적이 있는 상태
+export function stateWithSeenTransfer() {
+  return stateWithAttempts([
+    makeAttempt({ id: IDS.originalAttemptId, stage: 'original_attempt', choiceId: 'b', result: 'incorrect' }),
+    makeAttempt({ stage: 'original_retry', result: 'correct' }),
+    makeAttempt({ stage: 'transfer_check', sourceQuestionId: 'q-eq-spare-1', choiceId: 'd', result: 'correct', noveltyAtPresentation: 'already_seen' }),
+  ], { transferResult: 'correct', retryResult: 'correct' });
+}
+
 export function command(type, payload = {}) {
   return { type, learnerId: IDS.learnerId, pathId: IDS.pathId, ...payload };
 }
