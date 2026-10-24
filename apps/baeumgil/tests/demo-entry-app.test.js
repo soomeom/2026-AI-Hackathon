@@ -99,9 +99,13 @@ test('dedicated roadmap menus explore without writes and share practice across r
   assert.match(h.app.innerHTML,/맞혔어요/);
   click(h.app,{roadmapAction:'close'});
   assert.match(h.app.innerHTML,/개념 관계 지도/);
-  click(h.app,{mapAction:'view',mapValue:'cards'});
-  assert.match(h.app.innerHTML,/1\/2문항 연습/);
-  assert.equal(h.focused(),'roadmap-title');
+  assert.match(h.app.innerHTML,/class="relation-map"/,'멘토는 관계 지도가 기본');
+  assert.match(h.app.innerHTML,/보충 연습 문제 <small>1\/2/);
+  assert.doesNotMatch(h.app.innerHTML,/단계별 카드/);
+  click(h.app,{mapAction:'zoom',mapValue:'on'});
+  assert.match(h.app.innerHTML,/data-map-value="on" aria-pressed="true"/);
+  click(h.app,{mapAction:'view',mapValue:'map'});
+  assert.doesNotMatch(h.app.innerHTML,/class="relation-map"/);
   const restored=await boot(t,{catalog,local:h.local,tab:h.tab});
   click(restored.app,{tab:'roadmap'});
   assert.match(restored.app.innerHTML,/개념 관계 지도/);
@@ -155,7 +159,7 @@ test('roadmap card practice survives refresh, role and subject changes without r
   assert.deepEqual(restored.saved().initialAssessments[0].diagnostic,diagnostic);
   assert.equal(restored.saved().initialAssessments[0].roadmapPractice.attempts.length,1);
   click(restored.app,{roadmapAction:'close'});
-  click(restored.app,{mapAction:'view',mapValue:'cards'});assert.match(restored.app.innerHTML,/1\/2문항 연습/);
+  click(restored.app,{mapAction:'view',mapValue:'relation'});assert.match(restored.app.innerHTML,/보충 연습 문제 <small>1\/2/);
 });
 
 // DOM 경계만 대체하고 app.js와 실제 저장·학습·화면 코드를 실행한다.
@@ -352,4 +356,28 @@ test('subject exit cancel keeps session input and accepted exit retains the log 
   h.app.fields = []; click(h.app,{subjectId:'math'}); click(h.app,{goto:'sessions'});
   assert.match(h.app.innerHTML,/과목 이동 전 일지 초안/);
   assert.equal(h.saved().logs[0].content,'기존 확정 일지');
+});
+
+test('left navigation appears only in the workspace, moves between mentor pages and remembers the collapsed state', async t => {
+  let allow = false;
+  const h = await boot(t, { saved: seeded(), confirm: () => allow });
+  assert.equal(h.node('sidenav').hidden, true);
+  enterMath(h, 'mentor');
+  assert.equal(h.node('sidenav').hidden, false);
+  assert.equal(h.node('mentor-navigation').hidden, false);
+  assert.equal(h.node('learner-navigation').hidden, true);
+  click(h.node('mentor-nav-roadmap')); assert.match(h.app.innerHTML, /student-bar-page">로드맵/);
+  click(h.node('mentor-nav-sessions')); assert.match(h.app.innerHTML, /회기 목록/);
+  h.app.fields = [{ tagName: 'TEXTAREA', value: '저장 전 메모', defaultValue: '' }];
+  click(h.node('mentor-nav-planning')); assert.match(h.app.innerHTML, /회기 목록/, '저장 안 한 입력이 있으면 확인 후에만 이동');
+  allow = true; click(h.node('mentor-nav-planning')); assert.doesNotMatch(h.app.innerHTML, /회기 목록/);
+  h.app.fields = [];
+  click(h.node('sidenav-toggle'));
+  assert.equal(h.local.getItem('baeumgil.navCollapsed'), '1');
+  click(h.node('change-role')); enterMath(h, 'learner');
+  assert.equal(h.node('learner-navigation').hidden, false);
+  assert.equal(h.node('mentor-navigation').hidden, true);
+  click(h.node('learner-roadmap')); assert.match(h.app.innerHTML, /학습 로드맵/);
+  click(h.node('sidenav-toggle'));
+  assert.equal(h.local.getItem('baeumgil.navCollapsed'), '0');
 });

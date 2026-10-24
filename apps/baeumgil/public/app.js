@@ -52,7 +52,10 @@ const freshUi = () => ({
   initialChoices: {}, initialAssessmentOpen: false, initialAssessmentDismissed: false, initialError: null,
   initialAssessmentFor: null, initialConceptId: null, initialQuestionId: null, initialReason: '', initialPlanError: null,
 });
-const ui = { ...freshUi(), role: demoSession.role, subjectId: demoSession.subjectId, health: null };
+// 메뉴 접힘은 보는 사람 편의라서 이 브라우저에만 기억한다 (실패해도 화면은 동작)
+const NAV_KEY = 'baeumgil.navCollapsed';
+const readNavCollapsed = () => { try { return storage?.getItem(NAV_KEY) === '1'; } catch { return false; } };
+const ui = { ...freshUi(), role: demoSession.role, subjectId: demoSession.subjectId, health: null, navCollapsed: false, navOpen: false };
 const inWorkspace = () => Boolean(ui.role && isSubjectEnabled(ui.subjectId));
 
 const persist = { savedRevision: 0, status: storage ? 'idle' : 'unavailable', blocked: false };
@@ -87,11 +90,36 @@ function save(state) {
   showSaveStatus();
 }
 
-function render() {
-  const state = store.getState();
-  document.getElementById('learner-navigation').hidden = !inWorkspace() || ui.role !== 'learner';
+const MENTOR_NAV = ['home', 'roadmap', 'learning', 'planning', 'sessions'];
+
+function renderNavigation() {
+  const hasNav = inWorkspace();
+  const shell = document.getElementById('shell');
+  shell.classList.toggle('has-nav', hasNav);
+  shell.classList.toggle('collapsed', ui.navCollapsed);
+  shell.classList.toggle('drawer-open', hasNav && ui.navOpen);
+  document.getElementById('sidenav').hidden = !hasNav;
+  document.getElementById('sidenav-scrim').hidden = !hasNav || !ui.navOpen;
+  const menu = document.getElementById('nav-menu');
+  menu.hidden = !hasNav;
+  menu.setAttribute('aria-expanded', String(hasNav && ui.navOpen));
+  const toggle = document.getElementById('sidenav-toggle');
+  const label = ui.navOpen ? '메뉴 닫기' : ui.navCollapsed ? '메뉴 펼치기' : '메뉴 접기';
+  toggle.setAttribute('aria-expanded', String(ui.navOpen || !ui.navCollapsed));
+  toggle.setAttribute('aria-label', label);
+  toggle.setAttribute('title', label);
+  document.getElementById('learner-navigation').hidden = !hasNav || ui.role !== 'learner';
+  document.getElementById('mentor-navigation').hidden = !hasNav || ui.role !== 'mentor';
   document.getElementById('learner-learning').setAttribute('aria-current',ui.learnerTab==='roadmap'?'false':'page');
   document.getElementById('learner-roadmap').setAttribute('aria-current',ui.learnerTab==='roadmap'?'page':'false');
+  // 진단 상세(assessment)는 학습 기록 아래 화면이다
+  const mentorActive = ui.mentorTab === 'assessment' ? 'learning' : ui.mentorTab;
+  for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).setAttribute('aria-current', mentorActive === tab ? 'page' : 'false');
+}
+
+function render() {
+  const state = store.getState();
+  renderNavigation();
   document.getElementById('session-controls').hidden = !ui.role;
   document.getElementById('reset').hidden = !inWorkspace();
   document.getElementById('change-subject').hidden = !inWorkspace();
@@ -102,6 +130,7 @@ function render() {
   app.onclick = null;
   app.onchange = null;
   app.oninput = null;
+  app.onkeydown = null;
   app.classList.toggle('entry-main', !inWorkspace());
   app.classList.toggle('learner-main', inWorkspace() && ui.role === 'learner');
   if (!ui.role) {
@@ -210,6 +239,7 @@ async function start() {
     return;
   }
   ui.health = health;
+  ui.navCollapsed = readNavCollapsed();
 
   let initial = createDemoState();
   if (storage) {
@@ -231,7 +261,28 @@ async function start() {
   document.getElementById('reset').addEventListener('click', resetDemo);
   for (const tab of ['learning','roadmap']) document.getElementById(`learner-${tab}`).addEventListener('click',()=>{
     if (!inWorkspace() || ui.role!=='learner') return;
-    ui.learnerTab=tab; syncVisibility(); render(); focusScreen();
+    ui.learnerTab=tab; ui.navOpen=false; ui.mapOverviewOpen=false; syncVisibility(); render(); focusScreen();
+  });
+  for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).addEventListener('click', () => {
+    if (!inWorkspace() || ui.role !== 'mentor') return;
+    if (ui.mentorTab === 'sessions' && tab !== 'sessions' && hasUnsavedSessionForm(app)
+      && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+    ui.mentorTab = tab; ui.navOpen = false; ui.mapOverviewOpen = false; render(); focusScreen();
+  });
+  const narrow = () => window.matchMedia?.('(max-width: 900px)').matches ?? false;
+  document.getElementById('sidenav-toggle').addEventListener('click', () => {
+    if (narrow() || ui.navOpen) { ui.navOpen = false; renderNavigation(); document.getElementById('nav-menu').focus?.(); return; }
+    ui.navCollapsed = !ui.navCollapsed;
+    try { storage?.setItem(NAV_KEY, ui.navCollapsed ? '1' : '0'); } catch { /* 기억 못 해도 동작 */ }
+    renderNavigation();
+  });
+  document.getElementById('nav-menu').addEventListener('click', () => {
+    ui.navOpen = !ui.navOpen; renderNavigation();
+    if (ui.navOpen) document.getElementById('sidenav-toggle').focus?.();
+  });
+  document.getElementById('sidenav-scrim').addEventListener('click', () => { ui.navOpen = false; renderNavigation(); });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.key === 'Escape' && ui.navOpen) { ui.navOpen = false; renderNavigation(); document.getElementById('nav-menu').focus?.(); }
   });
   document.addEventListener('visibilitychange', syncVisibility);
   // 다른 탭이 같은 기록을 바꾸면 이 탭의 쓰기를 멈춘다 (덮어쓰기 방지)

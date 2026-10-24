@@ -9,6 +9,7 @@ import {
 import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } from './ai-panel.js';
 import { renderSessions } from './sessions.js';
 import { renderMentorHome } from './learning-overview.js';
+import { renderJourney, renderOutcomeFlow, statFlowSteps, resultMiniBar } from './visuals.js';
 import { initialAssessmentPanel, handleInitialAssessmentAction } from './initial-assessment.js';
 import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 import { renderRoadmapPage } from './roadmap-page.js';
@@ -44,10 +45,10 @@ export function renderMentor(props) {
         ${paths.length ? pathList(paths, selectedPath, catalog) : '<p class="muted">아직 지정한 문제가 없어요. ‘수업 준비’에서 문제를 지정해요.</p>'}
         ${selectedPath ? pathDetail(selectedPath, catalog, state, ui) : ''}
       </section>
-      <div class="grid">
+      <div>
         <section class="card">
           <h3>개념별 근거 <span class="muted small">직접 확인 · 추정 · 확인 필요</span></h3>
-          ${summary.evidence.length ? summary.evidence.map((e) => evidenceView(e, summary, catalog, ui)).join('') : '<p class="muted">아직 응답이 없어요.</p>'}
+          ${summary.evidence.length ? `<div class="ev-grid">${summary.evidence.map((e) => evidenceView(e, summary, catalog, ui)).join('')}</div>` : '<p class="muted">아직 응답이 없어요.</p>'}
           ${summary.reviewFlags.length ? `<h4>검토할 점</h4><ul>${[...new Set(summary.reviewFlags.map((f) => FLAG_TEXT[f.code] ?? f.code))].map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
         </section>
       </div>`}`;
@@ -131,14 +132,8 @@ function assignPicker(catalog, ui) {
 }
 
 function statTiles(summary) {
-  const tile = (label, s, sub) => `<div class="stat"><div class="label">${label}</div>
-    <div class="value">${s.rate === null ? '—' : `${Math.round(s.rate * 100)}%`}</div>
-    <div class="sub">${s.attempted ? `${s.correct}/${s.attempted} 정답` : '기록 없음'}${s.abstained ? ` · 모름 ${s.abstained}` : ''}${sub ? ` · ${sub}` : ''}</div></div>`;
-  return `<div class="stat-tiles">
-    ${tile('최초 풀이', summary.originalStats)}
-    ${tile('기출 재도전', summary.retryStats, '이미 본 문제')}
-    ${tile('새 문제 혼자 적용', summary.transferStats, summary.unmeasuredCount ? `제외 ${summary.unmeasuredCount}` : '')}
-  </div>
+  // 표본이 작아 백분율 대신 개수로 보여 준다
+  return `${renderOutcomeFlow(statFlowSteps(summary))}
   <p class="muted small" style="margin-top:8px">재도전 정답은 숙달로 보지 않아요. 새 문제는 처음 보고 도움 없이 푼 것만 세요.</p>`;
 }
 
@@ -204,6 +199,7 @@ function pathDetail(path, catalog, state, ui) {
   const attempts = (state.attempts ?? []).filter((a) => a.pathId === path.id);
   return `<div class="detail">
     ${stepsBar(path)}
+    ${renderJourney(attempts)}
     <h4>풀이 기록 <span class="muted small">단계 순서대로 · 풀이 시간은 화면이 보일 때만 잰 참고값</span></h4>
     <div class="attempt-list">${attempts.map((a) => attemptRow(a, path, catalog)).join('') || '<p class="muted">아직 응답이 없어요.</p>'}</div>
     ${path.mentorRequests?.length ? `<p>학생 도움 요청: ${path.mentorRequests.map((r) => STAGE_LABEL[r.stage] ?? r.stage).join(', ')} 단계</p>` : ''}
@@ -236,6 +232,7 @@ function evidenceView(e, summary, catalog, ui) {
   return `<div class="ev">
     <div><span class="badge ${e.status}">${EVIDENCE_LABEL[e.status]}</span><b>${esc(e.conceptName)}</b></div>
     <div>${esc(e.observation)}</div>
+    ${resultMiniBar(rows)}
     <div class="q">확인 질문: ${esc(e.mentorQuestion)}</div>
     ${e.attemptIds.length ? `<button class="ghost small" data-evidence="${esc(e.id)}" aria-expanded="${Boolean(open)}">근거 응답 ${e.attemptIds.length}개 ${open ? '닫기' : '보기'}</button>` : ''}
     ${open ? `<ul class="evidence-rows">${rows.map((t) => `<li>${STAGE_LABEL[t.stage] ?? t.stage} · ${questionLabelHtml(questionOf(catalog, t.questionId), catalog) || '연습 문제'} · ${resultBadge(t.result)}${t.helpUsed ? ' · 도움 사용' : ''}</li>`).join('')}</ul>` : ''}

@@ -10,9 +10,11 @@
   <script defer src="./vendor/katex/katex.min.js"></script>
   <link rel="stylesheet" href="roadmap.css">
   <link rel="stylesheet" href="overview.css">
+  <link rel="stylesheet" href="sidenav.css">
 </head>
 <body>
   <header class="topbar">
+    <button id="nav-menu" class="nav-menu ghost small" aria-controls="sidenav" aria-expanded="false" aria-label="메뉴 열기" hidden><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     <div class="brand">
       <svg class="logo" viewBox="0 0 32 32" aria-hidden="true">
         <rect width="32" height="32" rx="9" fill="#0d9488"/>
@@ -29,10 +31,27 @@
     <button id="reset" class="ghost small" hidden>시연 초기화</button>
   </header>
   <p class="demo-note" role="note">가상 계정을 사용하는 시연이에요. 실제 로그인 기능은 아니에요. <span id="save-note"></span> <span id="entry-session-note" hidden>입장 상태를 저장할 수 없어 새로고침하면 역할과 과목을 다시 선택해야 할 수 있어요.</span></p>
-  <nav id="learner-navigation" class="learner-navigation tabs" aria-label="멘티 메뉴" hidden>
-    <button id="learner-learning">나의 학습</button><button id="learner-roadmap">로드맵</button>
-  </nav>
-  <main id="app" tabindex="-1"><p class="muted">불러오는 중…</p></main>
+  <div id="shell" class="shell">
+    <aside id="sidenav" class="sidenav" aria-label="주 메뉴" hidden>
+      <div class="sidenav-head"><span class="sidenav-title">메뉴</span><button id="sidenav-toggle" class="sidenav-toggle" aria-controls="sidenav" aria-expanded="true" aria-label="메뉴 접기" title="메뉴 접기"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 10l-2 2 2 2"/></svg></button></div>
+      <nav id="learner-navigation" class="sidenav-nav" aria-label="멘티 메뉴" hidden>
+        <p class="sidenav-group">학습</p>
+        <button id="learner-learning" class="sidenav-item" title="나의 학습" ><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5V21h16"/></svg><span class="sidenav-label">나의 학습</span></button>
+        <button id="learner-roadmap" class="sidenav-item" title="로드맵" ><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></svg><span class="sidenav-label">로드맵</span></button>
+      </nav>
+      <nav id="mentor-navigation" class="sidenav-nav" aria-label="멘토 메뉴" hidden>
+        <p class="sidenav-group">학생</p>
+        <button id="mentor-nav-home" class="sidenav-item" title="멘토 홈" data-nav-tab="home"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span class="sidenav-label">멘토 홈</span></button>
+        <button id="mentor-nav-roadmap" class="sidenav-item" title="로드맵" data-nav-tab="roadmap"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8.5 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.5"/></svg><span class="sidenav-label">로드맵</span></button>
+        <button id="mentor-nav-learning" class="sidenav-item" title="학습 기록" data-nav-tab="learning"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span class="sidenav-label">학습 기록</span></button>
+        <p class="sidenav-group">수업</p>
+        <button id="mentor-nav-planning" class="sidenav-item" title="수업 준비" data-nav-tab="planning"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V2.5h6V4M9 11h6M9 15h4"/></svg><span class="sidenav-label">수업 준비</span></button>
+        <button id="mentor-nav-sessions" class="sidenav-item" title="회기·일지" data-nav-tab="sessions"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span class="sidenav-label">회기·일지</span></button>
+      </nav>
+    </aside>
+    <div id="sidenav-scrim" class="sidenav-scrim" hidden></div>
+    <main id="app" tabindex="-1"><p class="muted">불러오는 중…</p></main>
+  </div>
   <script type="module" src="./app.js"></script>
 </body>
 </html>

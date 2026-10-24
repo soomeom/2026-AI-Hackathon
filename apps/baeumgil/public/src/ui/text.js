@@ -71,13 +71,7 @@ export function stepsBar(path) {
 export const mentorTabs = (active, learner) => `<div class="card flat student-bar">
   <div class="avatar" aria-hidden="true">${esc((learner?.name ?? '학')[0])}</div>
   <div class="who"><b>${esc(learner?.name ?? '학습자')}</b><span class="muted small">고졸 검정고시 수학${learner?.isDemo ? ' · 시연용 가명 학생' : ''}</span></div>
-  <nav class="tabs" aria-label="멘토 메뉴">
-    <button data-tab="home" aria-selected="${active === 'home'}">멘토 홈</button>
-    <button data-tab="roadmap" aria-selected="${active === 'roadmap'}">로드맵</button>
-    <button data-tab="learning" aria-selected="${active === 'learning'}">학습 기록</button>
-    <button data-tab="planning" aria-selected="${active === 'planning'}">수업 준비</button>
-    <button data-tab="sessions" aria-selected="${active === 'sessions'}">회기·일지</button>
-  </nav>
+  <span class="pill student-bar-page">${({ home: '멘토 홈', roadmap: '로드맵', learning: '학습 기록', planning: '수업 준비', sessions: '회기·일지' })[active] ?? ''}</span>
 </div>`;
 
 // 한국 시간 기준 오늘 날짜 (YYYY-MM-DD)

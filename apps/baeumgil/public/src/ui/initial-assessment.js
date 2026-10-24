@@ -7,6 +7,8 @@ import { esc, ICON, questionBodyHtml, choiceHtml, sourceLabel } from './text.js'
 import { renderRoadmap, handleRoadmapAction } from './roadmap.js';
 import { DIAGNOSTIC_STAGE_NAMES } from '../learning/roadmap.js';
 import { renderDiagnosticOverview, nextDiagnosticCard } from './learning-overview.js';
+import { levelLadder, ladderCells, ladderLegend, renderDomainSteps } from './visuals.js';
+import { domainProgress, renderDomainBars } from './mentor-diagrams.js';
 
 const RESULT = { correct: '정답', incorrect: '추가 확인', abstained: '모름' };
 const EVIDENCE_PILL = { demonstrated: 'ok', insufficient: 'warn', not_demonstrated: 'bad' };
@@ -22,11 +24,13 @@ export function isInitialAssessmentVisible(state, ui) {
 }
 
 function domainTable(summary, { forMentor }) {
+  const ladder = new Map(levelLadder(summary).map(r => [r.id, r]));
   const rows = summary.report.domains.map(d => `<tr><th scope="row">${esc(d.name)}</th>
+    <td>${ladderCells(ladder.get(d.id))}</td>
     <td><span class="pill ${d.attempted ? EVIDENCE_PILL[d.evidence] : 'neutral'}">${esc(d.label)}</span>${d.provisional && d.attempted ? ' <span class="muted small">(확인 중단)</span>' : ''}</td>
     ${forMentor ? `<td>${d.correct}/${d.attempted} <span class="muted small">혼자 ${d.independentCorrect}</span></td><td>${d.weak.length ? esc(d.weak.join(', ')) : '<span class="muted">—</span>'}</td>` : ''}</tr>`).join('');
-  return `<div class="scroll-x"><table class="table initial-results"><caption class="sr-only">영역별 첫 수준 확인 결과</caption>
-    <thead><tr><th scope="col">영역</th><th scope="col">확인 수준</th>${forMentor ? '<th scope="col">응답</th><th scope="col">다시 볼 개념</th>' : ''}</tr></thead>
+  return `${ladderLegend()}<div class="scroll-x"><table class="table initial-results"><caption class="sr-only">영역별 첫 수준 확인 결과</caption>
+    <thead><tr><th scope="col">영역</th><th scope="col">기초·선수·고졸</th><th scope="col">확인 수준</th>${forMentor ? '<th scope="col">응답</th><th scope="col">다시 볼 개념</th>' : ''}</tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 }
 
@@ -54,7 +58,7 @@ export function renderInitialAssessment(props) {
     const domainName = summary.report.domains[summary.domainIndex]?.name ?? '';
     html = `<section class="card question-card"><div class="chips"><span class="pill primary">첫 수준 확인</span><span class="pill neutral">${esc(domainName)}</span>
         <span class="muted small">영역 ${Math.min(summary.domainIndex + 1, summary.domainCount)}/${summary.domainCount} · ${summary.counts.total + 1}번째 문제 · 최대 ${summary.maxQuestions}문제</span></div>
-      <progress class="initial-progress" value="${summary.domainIndex}" max="${summary.domainCount}" aria-label="확인한 영역 수"></progress>
+      ${renderDomainSteps(summary.report.domains, summary.domainIndex)}
       ${summary.counts.total ? `<p class="muted small">${esc(summary.transition)}</p>` : ''}
       ${q.reference ? `<p class="source-line">${ICON.doc} ${esc(sourceLabel(q))}</p>` : '<p class="meta">기초 개념 확인 문항 (자체 제작)</p>'}
       ${questionBodyHtml(q, { promptId: 'initial-prompt' })}
@@ -138,7 +142,7 @@ export function initialAssessmentPanel(state, catalog, ui, { mode = 'full' } = {
   return `<section class="card initial-mentor"><h3>${ICON.target} 첫 수준 확인 결과 ${summary.stopReason === 'user_paused' ? '<span class="pill warn">학생이 중간에 멈춤</span>' : ''}</h3>
     <p class="meta">현재 추정 수준 티어</p><p><b class="initial-tier">${esc(report.tier)}</b></p>
     <p>응답 ${summary.counts.total}문제 · 정답 ${summary.counts.correct} (혼자 처음 풀어 맞힘 ${summary.counts.independentCorrect}) · 추가 확인 ${summary.counts.incorrect} · 모름 ${summary.counts.abstained}</p>
-    ${mode === 'plan' ? '<button class="ghost" data-goto="assessment">영역별 결과·응답 기록 확인</button>' : `${domainTable(summary, { forMentor: true })}
+    ${mode === 'plan' ? `${renderDomainBars(domainProgress(summary, catalog))}<button class="ghost" data-goto="assessment">영역별 결과·응답 기록 확인</button>` : `${domainTable(summary, { forMentor: true })}
     <p class="muted small">${esc(report.rule)} ${esc(report.disclaimer)}</p>
     <details><summary>응답별 기록 보기</summary><ul class="initial-attempts">${attempts}</ul></details>
     <div class="row"><button class="ghost small" data-initial-action="export">${ICON.doc} 결과 JSON 저장</button><button class="ghost small" data-goto="roadmap">맞춤형 학습 로드맵 보기</button></div>`}
