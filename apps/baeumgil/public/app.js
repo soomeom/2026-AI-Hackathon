@@ -5,8 +5,9 @@ import { loadState, saveState, resetState, STORAGE_KEY } from './src/state/persi
 import { renderLearner, activeLearnerPath } from './src/ui/learner.js';
 import { renderMentor } from './src/ui/mentor.js';
 import { esc } from './src/ui/text.js';
+import { mergeCatalogParts } from './src/content/catalog.js';
 
-const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review'];
+const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
 const ROLE_KEY = 'baeumgil:ui:role';
 
 const app = document.getElementById('app');
@@ -18,7 +19,7 @@ async function loadCatalog() {
     if (!res.ok) throw new Error(`${name}.json 을 불러오지 못했어요 (${res.status})`);
     return res.json();
   }));
-  return Object.assign({}, ...parts);
+  return mergeCatalogParts(parts);
 }
 
 async function loadHealth() {
