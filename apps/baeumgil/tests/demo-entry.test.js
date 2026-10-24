@@ -274,3 +274,22 @@ test('changing the signup role after typing a password explains why it was clear
   assert.match(h.root.innerHTML, /id="signup-guardian-agree"/);
   h.press({ authAction: 'login-view' });
 });
+
+test('signup role click and age change return focus to the control, and a role error is tied to the role group', () => {
+  const display = { largeText: false, setLargeText() {} };
+  const h = signupHarness(display);
+  h.press({ signupRole: 'mentor' });
+  assert.equal(h.focused(), 'data-signup-role="mentor"]');
+  h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'teen' } });
+  assert.equal(h.focused(), 'signup-age');
+  h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'senior' } });
+  assert.match(h.root.innerHTML, /큰 글씨로 볼까요/);
+  assert.equal(h.focused(), 'large-text-accept', 'dialog keeps focus');
+  h.press({ displayChoice: 'dismiss' });
+  h.press({ authAction: 'login-view' });
+  h.press({ authAction: 'signup' });
+  h.press({ authAction: 'signup-submit' });
+  assert.match(h.root.innerHTML, /role="group"[^>]*aria-invalid="true" aria-describedby="signup-role-error"/);
+  assert.match(h.root.innerHTML, /id="signup-role-error"/);
+  h.press({ authAction: 'login-view' });
+});

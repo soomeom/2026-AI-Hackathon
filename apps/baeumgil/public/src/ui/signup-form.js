@@ -52,7 +52,7 @@ export function renderSignupForm(values = {}, errors = {}, { passwordNotice = ''
       <h2 id="signup-title">배움길 회원가입</h2>
       <p class="muted small">이름은 가명으로 적어도 괜찮아요.</p>
       <form id="signup-form" novalidate>
-        <div class="auth-field" role="group" aria-labelledby="signup-role-label">
+        <div class="auth-field" role="group" aria-labelledby="signup-role-label"${errors.role ? ' aria-invalid="true" aria-describedby="signup-role-error"' : ''}>
           <span id="signup-role-label" class="field-label">역할</span>
           <div class="signup-roles">${roleButtons}</div>
           ${errorText('signup-role', errors, 'role')}

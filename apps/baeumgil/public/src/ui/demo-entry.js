@@ -128,6 +128,8 @@ export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
     entryView.signupErrors = {};
     entryView.passwordNotice = hadPassword ? `${what}를 바꿔서 비밀번호를 다시 입력해 주세요.` : '';
   };
+  // 다시 그리면 포커스가 사라지므로 방금 조작한 칸으로 돌려 놓는다. 추천 창이 열려 있으면 창이 포커스를 가진다.
+  const refocus = selector => { if (!(entryView.recommend && display && !display.largeText)) root.querySelector?.(selector)?.focus?.(); };
   const attemptSignup = () => {
     const form = readSignupForm(root, entryView.signupValues.role);
     const result = validateSignup(form);
@@ -153,6 +155,7 @@ export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
     entryView.signupValues.ageBand = target.value;
     if (display && target.value === 'senior' && !display.largeText) entryView.recommend = true;
     redraw();
+    refocus('#signup-age');
   };
   root.onclick = event => {
     const button = event.target.closest('button[data-enter-role], button[data-age-band], button[data-signup-role], button[data-display-choice], button[data-auth-action]');
@@ -186,6 +189,7 @@ export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
       keepSignupValues('역할');
       entryView.signupValues.role = signupRole;
       redraw();
+      refocus(`[data-signup-role="${signupRole}"]`);
       return;
     }
     if (!['mentor','learner','guardian'].includes(role)) return;
