@@ -76,8 +76,8 @@ let hints;
 
 function showSaveStatus() {
   const text = {
-    idle: '이 브라우저에 자동 저장돼요.',
-    saved: '이 브라우저에 저장됨.',
+    idle: '',
+    saved: '',
     failed: '⚠ 이 브라우저에 저장하지 못했어요. 화면의 내용은 유지돼요.',
     conflict: '⚠ 다른 탭에서 기록이 바뀌었어요. 덮어쓰지 않도록 저장을 멈췄어요. 새로고침해 최신 기록을 여세요.',
     unavailable: '⚠ 이 브라우저는 저장을 쓸 수 없어 새로고침하면 처음부터 시작해요.',

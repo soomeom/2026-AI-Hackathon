@@ -362,3 +362,6 @@ button.secondary:hover:not(:disabled){background:var(--primary-soft);border-colo
 .hint-panel{margin:1rem 0;padding:1rem;border:1px solid #c9ded9;border-radius:.8rem;background:#f3faf8}
 .hint-panel h4{margin-top:0}.hint-panel ol{list-style:none;padding:0;display:grid;gap:.7rem}.hint-panel li{border-top:1px solid var(--line);padding-top:.7rem}
 .hint-panel li p{margin-top:.5rem}.hint-panel .pill{white-space:normal}.hint-panel button{max-width:100%;white-space:normal}
+
+/* Normal demo/storage notices are removed; retain actionable save errors. */
+.demo-note:has(#save-note:empty):has(#entry-session-note[hidden]){display:none}
