@@ -17,6 +17,7 @@ export function renderRoadmap(roadmap, practice, bank, ui = {}) {
     const blocked=cards.filter(c=>card.dependsOn.includes(c.id)&&!c.practiceComplete);
     const nextIndex=card.questionIds.indexOf(q.id)+1;
     return `<section class="roadmap-study" aria-labelledby="roadmap-title">
+      ${ui.practiceFallback?.cardId===card.id?'<p class="msg" role="status">준비된 연습 문제로 이어갈게요. 기존 등록 문제로 같은 개념을 연습할 수 있어요.</p>':''}
       <button class="ghost" data-roadmap-action="close">← 전체 로드맵</button>
       <p class="pill primary">Step ${card.step} · ${card.practiceCorrect}/${card.practiceTotal}문항 연습 완료</p>
       <h3 id="roadmap-title" tabindex="-1">${esc(card.title)}</h3>

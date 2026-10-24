@@ -1,7 +1,8 @@
 import { validInitialRecords } from '../learning/initial-assessment.js';
+import { validAIState } from '../learning/ai-practice.js';
 
 export const SCHEMA_VERSION = 1;
-const OPTIONAL_COLLECTIONS = ['initialAssessments', 'startingPoints'];
+const OPTIONAL_COLLECTIONS = ['initialAssessments', 'startingPoints', 'generatedPractice'];
 const COLLECTIONS = ['learners', 'mentors', 'assignments', 'paths', 'attempts', 'exposures', 'evidence', 'sessions', 'logs', 'aiArtifacts', 'events', 'processedCommandIds', ...OPTIONAL_COLLECTIONS];
 const IDENTIFIED = COLLECTIONS.filter(name => !['events', 'processedCommandIds'].includes(name));
 const plainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
@@ -37,6 +38,7 @@ export function validateState(value) {
     }
   }
   if (!validInitialRecords(value)) errors.push('invalid_initial_records');
+  if (!validAIState(value)) errors.push('invalid_ai_practice');
   return { ok: errors.length === 0, errors };
 }
 

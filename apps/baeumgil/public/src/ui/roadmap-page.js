@@ -6,11 +6,13 @@ import { renderRoadmap } from './roadmap.js';
 import { renderRelationMap, animateRelationMap } from './relation-map.js';
 import { handleInitialAssessmentAction } from './initial-assessment.js';
 import { esc, mentorTabs } from './text.js';
+import { aiPracticeSummary } from '../learning/ai-practice.js';
 
 export function renderRoadmapPage(props) {
   const { root, state, catalog, ui, rerender } = props;
   const mentor = ui.role === 'mentor';
   const summary = initialAssessmentSummary(state, state.learnerId, { catalog });
+  const aiPractice = aiPracticeSummary(state,{assessmentId:summary?.assessmentId});
   const map = buildConceptMap(summary?.roadmap, catalog.questions, catalog.diagnostic);
   const canPractice = summary?.status === 'completed';
   const cards = summary?.roadmap ? roadmapCards(summary.roadmap) : [];
@@ -27,6 +29,7 @@ export function renderRoadmapPage(props) {
       ${!canPractice&&mentor?`<div class="msg">${summary?'진단 진행 중 · 지금까지의 응답만 표시해요.':'아직 첫 수준 확인 전이에요. 개념의 연결부터 살펴볼 수 있어요.'} 멘티가 진단을 마치거나 중간 결과를 넘기면 보충 학습을 함께 볼 수 있어요.</div>`:''}
       <div class="map-summary"><div><span>현재 추정 수준 티어</span><strong>${esc(summary?.report?.tier??'진단 후 확인')}</strong></div><div><span>다음 학습</span><strong>${esc(next?.title??(canPractice?'기록된 보완 과제 없음':'진단으로 시작점 찾기'))}</strong></div><div><span>도움 없이 확인한 개념</span><strong>${growthCount(map)}개 <small class="muted">/ ${map.nodes.length} · 고졸 ${map.nodes.filter(n=>n.status==='mastered').length}개</small></strong></div></div>
       <p class="muted small">각 단계는 학년이 아닌 선수 관계를 뜻해요. 연습 완료는 최초 진단 판정을 바꾸지 않아요.</p>
+      ${aiPractice.records.length?`<p class="msg small">AI 추가 연습 ${aiPractice.attempted}회 · 정답 ${aiPractice.correct}회. 아래 등록 문제의 연습 완료 수와 별도로 기록해요.</p>`:''}
       ${summary?.roadmap?.legacy?'<p class="msg">이전 진단 기록은 보존하고, 연결선은 현재 개념 자료를 기준으로 보여요.</p>':''}
       ${practicing ? renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui) : view==='relation' ? renderRelationMap(map,ui,{cards,canPractice,entries:summary?.entries??[],practice:summary?.practice,questions:catalog.questions,cta:assessmentCta}) : renderConceptMap(map,ui,{cards,canPractice,entries:summary?.entries??[],practice:summary?.practice,questions:catalog.questions,mentor,cta:assessmentCta})}
     </section>`;

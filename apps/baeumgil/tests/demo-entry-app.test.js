@@ -163,7 +163,7 @@ test('roadmap card practice survives refresh, role and subject changes without r
 });
 
 // DOM 경계만 대체하고 app.js와 실제 저장·학습·화면 코드를 실행한다.
-async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), confirm = () => true, catalog = makeCatalog() } = {}) {
+async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), confirm = () => true, catalog = makeCatalog(), practiceRequest = null } = {}) {
   const nodes = new Map();
   let focused = null;
   const node = id => {
@@ -179,8 +179,8 @@ async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), 
   const original = { document: globalThis.document, window: globalThis.window, fetch: globalThis.fetch };
   globalThis.document = { hidden: false, getElementById: node, querySelector: () => node('legacy-roles'), querySelectorAll: () => [], addEventListener() {} };
   globalThis.window = { localStorage: local, sessionStorage: tab, confirm, addEventListener() {}, location: { reload() {} } };
-  globalThis.fetch = async url => ({ ok: true, json: async () => url === '/api/health'
-    ? { ai: { configured: false } }
+  globalThis.fetch = async (url,options) => ({ ok: true, json: async () => url === '/api/practice' ? practiceRequest(JSON.parse(options.body)) : url === '/api/health'
+    ? { ai: { configured: Boolean(practiceRequest) } }
     : url.includes('exam-bank') ? {} : catalog });
   t.after(() => { Object.assign(globalThis, original); });
   await import(`../public/app.js?demo-entry-test=${++bootId}`);
@@ -380,4 +380,31 @@ test('left navigation appears only in the workspace, moves between mentor pages 
   click(h.node('learner-roadmap')); assert.match(h.app.innerHTML, /학습 로드맵/);
   click(h.node('sidenav-toggle'));
   assert.equal(h.local.getItem('baeumgil.navCollapsed'), '0');
+});
+
+
+test('real app AI practice persists draft/answer, reaches mentor and ignores a late response after role change',async t=>{
+  const {catalog,sample}=await import('./practice-fixtures.js');
+  const {setupAI,recordFor}=await import('./practice-state-fixtures.js');
+  const {validateLinearPractice}=await import('../public/src/learning/linear-practice.js');
+  const state=setupAI().getState(),r=recordFor(state),original=structuredClone(state.initialAssessments);
+  let calls=0;
+  const practiceRequest=async input=>{calls++;return {status:'ok',requestId:input.requestId,inputRevision:input.inputRevision,assessmentId:input.assessmentId,cardId:input.cardId,...validateLinearPractice(sample(input.conceptId)),model:'test'};};
+  const h=await boot(t,{catalog,saved:state,practiceRequest});enterMath(h,'learner');
+  click(h.app,{roadmapAction:'open',roadmapCard:r.cardId,roadmapQuestion:r.baseQuestionId});await tick();
+  assert.match(h.app.innerHTML,/정답 검증 완료/);assert.equal(calls,1);
+  const id=h.saved().activeGeneratedPracticeId;
+  click(h.app,{aiPractice:'choice',practiceId:id,choiceId:'option-2'});
+  const fresh=await boot(t,{catalog,local:h.local,tab:h.tab,practiceRequest});
+  assert.match(fresh.app.innerHTML,/정답 검증 완료/);assert.equal(fresh.saved().generatedPractice[0].draftChoiceId,'option-2');assert.equal(calls,1);
+  click(fresh.app,{aiPractice:'submit',practiceId:id});assert.equal(fresh.saved().generatedPractice[0].attempts[0].result,'incorrect');
+  click(fresh.node('change-role'));enterMath(fresh,'mentor');assert.match(fresh.app.innerHTML,/AI 추가 연습/);assert.match(fresh.app.innerHTML,/다음 수업/);
+  assert.deepEqual(fresh.saved().initialAssessments,original);
+  click(fresh.node('change-role'));enterMath(fresh,'learner');
+  let resolve;
+  globalThis.fetch=async(url,options)=>({ok:true,json:()=>new Promise(done=>{resolve=()=>done(practiceRequest(JSON.parse(options.body)));})});
+  const other=recordFor(state,'roadmap-like-terms');
+  click(fresh.app,{roadmapAction:'open',roadmapCard:other.cardId,roadmapQuestion:other.baseQuestionId});await tick();
+  assert.match(fresh.app.innerHTML,/준비 중/);click(fresh.node('change-role'));resolve();await tick();await tick();
+  assert.equal(fresh.saved().generatedPractice.length,1);assert.match(fresh.app.innerHTML,/멘토로 체험하기/);
 });

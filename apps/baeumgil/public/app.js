@@ -12,6 +12,8 @@ import { renderDemoEntry, hasUnsavedSessionForm } from './src/ui/demo-entry.js';
 import { renderSubjectSelection } from './src/ui/subject-selection.js';
 import { isSubjectEnabled } from './src/content/subjects.js';
 import { renderRoadmapPage } from './src/ui/roadmap-page.js';
+import { createPracticeController } from './src/ai/practice-client.js';
+import { renderAIPractice } from './src/ui/ai-practice.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
 
@@ -62,6 +64,7 @@ const persist = { savedRevision: 0, status: storage ? 'idle' : 'unavailable', bl
 
 let store;
 let catalog;
+let practice;
 
 function showSaveStatus() {
   const text = {
@@ -146,8 +149,9 @@ function render() {
     dispatch: store.dispatch, assignQuestion: store.assignQuestion, update: store.update, getState: store.getState,
     startInitialAssessment: store.startInitialAssessment, presentInitialQuestion: store.presentInitialQuestion,
     submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
-    syncVisibility,
+    syncVisibility, practice,
   };
+  if (renderAIPractice(props)) return;
   if (ui.role === 'learner' && ui.learnerTab === 'roadmap') renderRoadmapPage(props);
   else if (ui.role === 'learner') renderLearner(props);
   else renderMentor(props);
@@ -156,7 +160,7 @@ function render() {
 // 멘티 화면이 보이지 않을 때(탭 숨김·멘토 화면 전환)는 풀이 시간을 멈춘다
 function syncVisibility() {
   const state = store.getState();
-  const visiblePath = inWorkspace() && ui.role === 'learner' && ui.learnerTab !== 'roadmap' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
+  const visiblePath = inWorkspace() && !ui.practiceLoading && !state.activeGeneratedPracticeId && ui.role === 'learner' && ui.learnerTab !== 'roadmap' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
   for (const p of state.paths ?? []) {
     if (!p.routeId || p.status !== 'active') continue;
     const visible = p.id === visiblePath?.id;
@@ -192,6 +196,7 @@ function leaveWorkspace({ changeRole = false } = {}) {
   if (ui.role === 'mentor' && hasUnsavedSessionForm(app)
     && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
   cancelPendingDemoAI(ui);
+  practice?.cancel({close:true});
   if (changeRole) demoSession.leave();
   else demoSession.clearSubject();
   ui.role = demoSession.role;
@@ -210,6 +215,7 @@ function resetDemo() {
     if (!result.ok) { ui.confirmReset = false; persist.status = 'failed'; showSaveStatus(); render(); return; }
   }
   cancelPendingDemoAI(ui);
+  practice?.cancel({close:true});
   Object.assign(ui, freshUi(), { flash: '시연 기록을 초기화했어요.' });
   Object.assign(persist, { savedRevision: 0, blocked: false, status: storage ? 'idle' : 'unavailable' });
   store.replaceState(createDemoState());
@@ -252,6 +258,7 @@ async function start() {
   }
 
   store = createStore({ initialState: initial, catalog });
+  practice = createPracticeController({getState:store.getState,update:store.update,catalog,ui,rerender:()=>{syncVisibility();render();},canWrite:()=>!persist.blocked});
   if (inWorkspace()) prepareDemoRole(ui, initial, ui.role);
   store.subscribe((state) => { save(state); syncVisibility(); render(); });
   showSaveStatus();
@@ -261,12 +268,14 @@ async function start() {
   document.getElementById('reset').addEventListener('click', resetDemo);
   for (const tab of ['learning','roadmap']) document.getElementById(`learner-${tab}`).addEventListener('click',()=>{
     if (!inWorkspace() || ui.role!=='learner') return;
+    practice.cancel({close:true});
     ui.learnerTab=tab; ui.navOpen=false; ui.mapOverviewOpen=false; syncVisibility(); render(); focusScreen();
   });
   for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).addEventListener('click', () => {
     if (!inWorkspace() || ui.role !== 'mentor') return;
     if (ui.mentorTab === 'sessions' && tab !== 'sessions' && hasUnsavedSessionForm(app)
       && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+    practice.cancel({close:true});
     ui.mentorTab = tab; ui.navOpen = false; ui.mapOverviewOpen = false; render(); focusScreen();
   });
   const narrow = () => window.matchMedia?.('(max-width: 900px)').matches ?? false;
@@ -289,6 +298,7 @@ async function start() {
   window.addEventListener('storage', (ev) => {
     if (ev.key !== STORAGE_KEY || persist.blocked) return;
     persist.blocked = true;
+    practice.cancel();
     persist.status = 'conflict';
     showSaveStatus();
   });

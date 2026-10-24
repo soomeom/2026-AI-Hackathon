@@ -39,6 +39,32 @@ const finish = (props) => {
 };
 const click = (props, dataset) => props.root.onclick({ target: { closest: () => ({ disabled: false, dataset }) } });
 
+for (const [environment, crypto] of [['HTTP 환경의 crypto', {}], ['crypto가 없는 환경', undefined]]) {
+  test(`${environment}에서도 시작 버튼으로 진단하고 기록을 복원할 수 있다`, t => {
+    const descriptor = Object.getOwnPropertyDescriptor(globalThis, 'crypto');
+    Object.defineProperty(globalThis, 'crypto', { configurable: true, value: crypto });
+    t.after(() => Object.defineProperty(globalThis, 'crypto', descriptor));
+    const props = setup();
+    props.assignQuestion({ questionId: 'q-eq-1' });
+    const previousPaths = structuredClone(props.getState().paths);
+    renderInitialAssessment(props);
+    click(props, { initialAction: 'start' });
+    assert.equal(props.ui.initialError, null);
+    assert.equal(props.getState().initialAssessments[0]?.status, 'active');
+    renderInitialAssessment(props); renderInitialAssessment(props);
+    const first = current(props);
+    click(props, { initialAction: 'unknown', initialQuestion: first });
+    assert.equal(props.ui.initialError, null);
+    const saved = JSON.parse(JSON.stringify(props.getState()));
+    const restored = setup({ initialState: saved });
+    restored.startInitialAssessment();
+    assert.equal(restored.getState().initialAssessments.length, 1);
+    assert.equal(restored.getState().initialAssessments[0].diagnostic.attempts[0].result, 'abstained');
+    assert.equal(current(restored), catalog.questions.find(q => q.id === first).fallback_question_id);
+    assert.deepEqual(restored.getState().paths, previousPaths);
+  });
+}
+
 test('처음 멘티 화면에 6개 영역 안내·모름·시간 제한 없음을 보여 주고 기존 학습은 계속할 수 있다', () => {
   const props = setup();
   renderLearner(props);

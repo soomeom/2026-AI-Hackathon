@@ -1,4 +1,5 @@
 import { validateState } from '../domain/contracts.js';
+import { restoreAIState } from '../learning/ai-practice.js';
 
 export const STORAGE_KEY = 'baeumgil:mvp:v1';
 
@@ -10,6 +11,7 @@ export function loadState(storage) {
   let state;
   try { state = JSON.parse(raw); }
   catch { return { status: 'recovery_required', state: null, raw, reason: 'invalid_json' }; }
+  state = restoreAIState(state);
   const validation = validateState(state);
   if (!validation.ok) return { status: 'recovery_required', state: null, raw, reason: validation.errors.includes('unsupported_schema') ? 'unsupported_schema' : 'invalid_state' };
   return { status: 'ready', state, raw: null, reason: null };

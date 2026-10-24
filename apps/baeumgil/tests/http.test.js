@@ -4,6 +4,7 @@ import { mkdtemp, mkdir, writeFile, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import { createAppServer } from '../server.mjs';
+import { request } from 'node:http';
 import { aiInput, aiOutput } from './backend-ai-fixtures.js';
 import { applyLearningCommand } from '../public/src/learning/engine.js';
 import { normalizeChoiceValue } from '../public/src/learning/exposure.js';
@@ -166,4 +167,24 @@ test('다른 사이트의 링크로 화면을 열 수 있고, API 는 여전히 
   const { request } = await import('node:http');
   const status = await new Promise((resolve, reject) => request(`${url}/`, { headers: { host: 'evil.example' } }, res => { res.resume(); resolve(res.statusCode); }).on('error', reject).end());
   assert.equal(status, 403);
+});
+
+// fetch 는 Host 헤더를 실제 주소로 덮어쓸 수 있어, Host 를 정확히 지정하려면 node:http 로 요청한다
+const raw = (url, { method = 'GET', headers = {}, body } = {}) => new Promise((resolve, reject) => {
+  const { hostname, port, pathname } = new URL(url);
+  const req = request({ hostname, port, path: pathname, method, headers }, res => { res.resume(); res.on('end', () => resolve(res.statusCode)); });
+  req.on('error', reject); req.end(body);
+});
+
+test('같은 와이파이 모드: 지정한 이 PC의 IP Host만 추가로 받고, 다른 Host는 여전히 거부한다', async t => {
+  const url = await start(t, { provider: { configured: false }, extraHosts: ['192.168.0.42'] });
+  const port = new URL(url).port, lan = `192.168.0.42:${port}`;
+  assert.equal(await raw(`${url}/api/health`, { headers: { host: lan } }), 200);
+  assert.equal(await raw(`${url}/`, { headers: { host: lan } }), 200, '화면도 열린다');
+  const ai = await raw(`${url}/api/ai`, { method: 'POST', headers: { host: lan, origin: `http://${lan}`, 'content-type': 'application/json' }, body: '{}' });
+  assert.notEqual(ai, 403, '같은 출처의 API 요청은 막지 않는다');
+  assert.equal(await raw(`${url}/api/ai`, { method: 'POST', headers: { host: lan, origin: 'http://evil.example', 'content-type': 'application/json' }, body: '{}' }), 403, '다른 출처의 API 요청은 막는다');
+  assert.equal(await raw(`${url}/api/health`, { headers: { host: `evil.example:${port}` } }), 403);
+  const plain = await start(t, { provider: { configured: false } });
+  assert.equal(await raw(`${plain}/api/health`, { headers: { host: `192.168.0.42:${new URL(plain).port}` } }), 403, '기본 모드에서는 네트워크 IP Host를 받지 않는다');
 });
