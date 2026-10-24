@@ -135,7 +135,7 @@ function render() {
   renderNavigation();
   document.getElementById('session-controls').hidden = !ui.role;
   document.getElementById('reset').hidden = !inWorkspace() || ui.role==='guardian';
-  document.getElementById('change-subject').hidden = !inWorkspace();
+  document.getElementById('change-subject').hidden = !inWorkspace() || ui.role==='guardian';
   document.getElementById('reset').textContent = ui.confirmReset ? '정말 초기화할까요? 한 번 더 누르기' : '시연 초기화';
   const person = ui.role === 'mentor' ? state.mentors?.find(p => p.id === state.mentorId) : state.learners?.find(p => p.id === state.learnerId);
   document.getElementById('current-profile').textContent = ui.role ? `${person?.name ?? '시연 계정'}${ui.role==='guardian'?'의 보호자':''} · ${{mentor:'멘토',learner:'멘티',guardian:'보호자'}[ui.role]}${inWorkspace() ? ' · 수학' : ''}` : '';
@@ -186,7 +186,8 @@ function focusScreen() {
 
 function setRole(role) {
   demoSession.enter(role);
-  Object.assign(ui, { role, subjectId: null, confirmReset: false, flash: null });
+  Object.assign(ui, { role, subjectId: demoSession.subjectId, confirmReset: false, flash: null });
+  if (inWorkspace()) prepareDemoRole(ui, store.getState(), role);
   syncVisibility();
   render();
   focusScreen();

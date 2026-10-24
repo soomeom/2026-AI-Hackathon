@@ -23,6 +23,8 @@ const click = (node, dataset = {}) => {
 const tick = () => new Promise(resolve => setImmediate(resolve));
 const enterMath = (h, role) => {
   click(h.app, { enterRole: role });
+  // 보호자는 과목 선택 없이 바로 학습 소식으로 들어간다
+  if (role === 'guardian') { assert.doesNotMatch(h.app.innerHTML, /어떤 과목을 함께 배울까요/); assert.equal(h.node('change-subject').hidden, true); return; }
   assert.match(h.app.innerHTML, /어떤 과목을 함께 배울까요/);
   click(h.app, { subjectId: 'math' });
 };
