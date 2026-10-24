@@ -5,6 +5,7 @@ import { loadState, saveState, resetState, STORAGE_KEY } from './src/state/persi
 import { renderLearner, activeLearnerPath } from './src/ui/learner.js';
 import { renderMentor } from './src/ui/mentor.js';
 import { esc } from './src/ui/text.js';
+import { isInitialAssessmentVisible } from './src/ui/initial-assessment.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review'];
 const ROLE_KEY = 'baeumgil:ui:role';
@@ -44,6 +45,8 @@ const freshUi = () => ({
   learnerPathId: null, mentorPathId: null, mentorTab: 'home', sessionId: null, editSession: false,
   confirmSkip: null, confirmReset: false, flash: null, overrideError: null, sessionError: null, logError: null,
   ledgerMonth: null, copyFallback: null,
+  initialChoices: {}, initialAssessmentOpen: false, initialAssessmentDismissed: false, initialError: null,
+  initialAssessmentFor: null, initialConceptId: null, initialQuestionId: null, initialReason: '', initialPlanError: null,
 });
 const ui = { ...freshUi(), role: readRole() === 'learner' ? 'learner' : 'mentor', health: null };
 
@@ -85,7 +88,12 @@ function render() {
   const props = {
     root: app, state: store.getState(), catalog, ui, rerender: render,
     dispatch: store.dispatch, assignQuestion: store.assignQuestion, update: store.update, getState: store.getState,
+    startInitialAssessment: store.startInitialAssessment, presentInitialQuestion: store.presentInitialQuestion,
+    submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
+    syncVisibility,
   };
+  app.onchange = null;
+  app.oninput = null;
   app.classList.toggle('learner-main', ui.role === 'learner');
   if (ui.role === 'learner') renderLearner(props);
   else renderMentor(props);
@@ -94,7 +102,7 @@ function render() {
 // 멘티 화면이 보이지 않을 때(탭 숨김·멘토 화면 전환)는 풀이 시간을 멈춘다
 function syncVisibility() {
   const state = store.getState();
-  const visiblePath = ui.role === 'learner' && !document.hidden ? activeLearnerPath(state, ui) : null;
+  const visiblePath = ui.role === 'learner' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
   for (const p of state.paths ?? []) {
     if (!p.routeId || p.status !== 'active') continue;
     const visible = p.id === visiblePath?.id;

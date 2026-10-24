@@ -3,6 +3,7 @@
 // 저장(localStorage 등)은 여기서 하지 않는다. subscribe 로 persistence 어댑터를 연결한다.
 import { applyLearningCommand } from '../learning/engine.js';
 import { createInitialState } from '../domain/contracts.js';
+import * as initial from '../learning/initial-assessment.js';
 
 // 시연용 가명 데이터. 형식은 공통 계약(createInitialState)을 따른다.
 export function createDemoState() {
@@ -67,6 +68,13 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     assignQuestion,
     update,
     replaceState,
+    startInitialAssessment: () => update(s => initial.startInitialAssessment(s, { learnerId: s.learnerId, id: `initial-${globalThis.crypto.randomUUID()}`, at: now() })),
+    presentInitialQuestion: input => update(s => initial.presentInitialQuestion(s, { ...input, at: now() })),
+    submitInitialAnswer: input => update(s => initial.submitInitialAnswer(s, { ...input, at: now() })),
+    planInitialLesson(input) {
+      update(s => initial.planInitialLesson(s, { learnerId: s.learnerId, mentorId: s.mentorId, ...input, at: now() }, { catalog, rng }));
+      return state.startingPoints.find(p => p.assessmentId === input.assessmentId).pathId;
+    },
     subscribe(fn) {
       subscribers.add(fn);
       return () => subscribers.delete(fn);

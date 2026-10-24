@@ -9,6 +9,7 @@ import {
 import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } from './ai-panel.js';
 import { renderSessions } from './sessions.js';
 import { buildLogFacts } from '../mentoring/logs.js';
+import { initialAssessmentPanel, handleInitialAssessmentAction } from './initial-assessment.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unknown: '확인 불가' };
@@ -26,7 +27,7 @@ export function renderMentor(props) {
 
   root.innerHTML = `${mentorTabs(tab, learner)}
     ${ui.flash ? `<div class="msg" role="status">${esc(ui.flash)}</div>` : ''}
-    ${tab === 'home' ? homeView(state, catalog, summary, paths) : `
+    ${tab === 'home' ? homeView(state, catalog, summary, paths, ui) : `
       <section class="card">
         <h3>단계별 결과 <span class="muted small">모름은 정답률에서 제외</span></h3>
         ${statTiles(summary)}
@@ -46,9 +47,20 @@ export function renderMentor(props) {
       </div>`}`;
   ui.flash = null;
 
+  root.onchange = event => {
+    if (event.target.id === 'initial-concept') {
+      Object.assign(ui, { initialConceptId: event.target.value, initialQuestionId: null, initialPlanError: null });
+      rerender();
+    } else if (event.target.id === 'initial-question') ui.initialQuestionId = event.target.value;
+  };
+  root.oninput = event => {
+    if (event.target.id === 'initial-reason') ui.initialReason = event.target.value;
+  };
+
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
+    if (handleInitialAssessmentAction(b, props)) return;
     if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); return; }
     if (b.dataset.goto) {
       ui.mentorTab = b.dataset.goto;
@@ -90,7 +102,7 @@ export function renderMentor(props) {
 }
 
 // 오늘 할 일: 멘토가 먼저 봐야 할 것을 개수와 함께 위에 놓는다 (칸아카데미 교실 화면의 정보 우선순위 참고)
-function homeView(state, catalog, summary, paths) {
+function homeView(state, catalog, summary, paths, ui) {
   const needsMentor = paths.filter((p) => p.status === 'needs_mentor');
   const helpPaths = paths.filter((p) => p.mentorRequests?.length);
   const concepts = summary.evidence.filter((e) => e.status !== 'observed' || e.counts.incorrect > 0);
@@ -106,6 +118,7 @@ function homeView(state, catalog, summary, paths) {
     ${count ? `<ul>${items.slice(0, 3).join('')}</ul>${action}` : `<span class="muted small">${empty}</span>`}
   </article>`;
   return `
+    ${initialAssessmentPanel(state, catalog, ui)}
     <section aria-labelledby="todo-h"><h3 id="todo-h">오늘 확인할 것</h3>
       <div class="todo-grid">
         ${todo({ icon: ICON.flag, title: '멘토 확인 필요', count: needsMentor.length, items: needsMentor.map((p) => `<li>${promptOf(p)}</li>`),

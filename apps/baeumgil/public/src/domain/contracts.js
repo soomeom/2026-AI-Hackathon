@@ -1,5 +1,8 @@
+import { validInitialRecords } from '../learning/initial-assessment.js';
+
 export const SCHEMA_VERSION = 1;
-const COLLECTIONS = ['learners', 'mentors', 'assignments', 'paths', 'attempts', 'exposures', 'evidence', 'sessions', 'logs', 'aiArtifacts', 'events', 'processedCommandIds'];
+const OPTIONAL_COLLECTIONS = ['initialAssessments', 'startingPoints'];
+const COLLECTIONS = ['learners', 'mentors', 'assignments', 'paths', 'attempts', 'exposures', 'evidence', 'sessions', 'logs', 'aiArtifacts', 'events', 'processedCommandIds', ...OPTIONAL_COLLECTIONS];
 const IDENTIFIED = COLLECTIONS.filter(name => !['events', 'processedCommandIds'].includes(name));
 const plainObject = value => value !== null && typeof value === 'object' && !Array.isArray(value);
 
@@ -23,6 +26,7 @@ export function validateState(value) {
   if (!['complete', 'unknown'].includes(value.historyIntegrity)) errors.push('invalid_history_integrity');
   if (!['mentor', 'mentee'].includes(value.activeRole)) errors.push('invalid_role');
   for (const name of COLLECTIONS) {
+    if (value[name] === undefined && OPTIONAL_COLLECTIONS.includes(name)) continue;
     if (!Array.isArray(value[name])) { errors.push(`${name}_must_be_array`); continue; }
     if (!IDENTIFIED.includes(name)) continue;
     const ids = new Set();
@@ -32,6 +36,7 @@ export function validateState(value) {
       else ids.add(entry.id);
     }
   }
+  if (!validInitialRecords(value)) errors.push('invalid_initial_records');
   return { ok: errors.length === 0, errors };
 }
 

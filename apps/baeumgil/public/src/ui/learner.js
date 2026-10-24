@@ -2,6 +2,7 @@
 // 채점·다음 단계 계산은 하지 않고 엔진 결과만 보여 준다.
 // renderLearner({ root, state, catalog, dispatch, ui, rerender })
 import { esc, FLOW, STAGE_LABEL, REASON_TEXT, SKIPPABLE, ORIGIN_LABEL, RESULT, ICON } from './text.js';
+import { renderInitialAssessment, initialLearningNote } from './initial-assessment.js';
 
 const LEARN_STAGES = FLOW.filter((s) => s !== 'completed');
 const KEYS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -27,13 +28,15 @@ export function activeLearnerPath(state, ui) {
   return paths.find((p) => p.id === ui.learnerPathId) ?? paths.find((p) => p.status === 'active' || p.status === 'paused') ?? paths.at(-1);
 }
 
-export function renderLearner({ root, state, catalog, dispatch, ui, rerender }) {
+export function renderLearner(props) {
+  if (renderInitialAssessment(props)) return;
+  const { root, state, catalog, dispatch, ui, rerender } = props;
 
   const learner = state.learners?.find((l) => l.id === state.learnerId);
   const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
   const path = activeLearnerPath(state, ui);
 
-  let html = `<div class="page-head"><h2>${esc(learner?.name ?? '학습자')}님의 배움길</h2></div>`;
+  let html = `<div class="page-head"><h2>${esc(learner?.name ?? '학습자')}님의 배움길</h2></div>${initialLearningNote(state, catalog)}`;
   if (!path) {
     root.innerHTML = `${html}<div class="card empty">${ICON.book}<p><b>멘토가 지정한 문제가 아직 없어요.</b></p>
       <p class="muted">멘토 화면에서 문제를 지정하면 여기에 나타나요.</p></div>`;
@@ -55,6 +58,7 @@ export function renderLearner({ root, state, catalog, dispatch, ui, rerender }) 
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
+    if (b.dataset.action === 'initial-open') { ui.initialAssessmentOpen = true; props.syncVisibility?.(); rerender(); return; }
     const item = path.items.find((i) => !i.answered);
     const send = (cmd) => dispatch({ pathId: path.id, ...cmd });
     if (b.dataset.path) { ui.learnerPathId = b.dataset.path; ui.feedback = null; rerender(); return; }
