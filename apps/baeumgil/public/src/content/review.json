@@ -1,0 +1,12 @@
+{
+  "reviews": [
+    { "questionId": "q-eq-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-rat-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-cc-distribute-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-cc-transpose-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-cc-intadd-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-cc-reciprocal-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-eq-spare-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } },
+    { "questionId": "q-rat-spare-1", "reviewers": ["다은", "수영"], "reviewedOn": "2026-10-24", "checks": { "answerVerified": true, "singleCorrectAnswer": true, "authoredNotCopied": true } }
+  ]
+}
