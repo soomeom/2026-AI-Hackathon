@@ -573,3 +573,26 @@ test('logging in with a demo account reaches the workspace, stores no password, 
   click(h.node('change-role'));
   assert.match(h.app.innerHTML, /id="login-form"/);
 });
+
+test('signup submission stores nothing in either storage', async t => {
+  const h = await boot(t, { saved: seeded() });
+  const before = h.local.getItem(STORAGE_KEY);
+  click(h.app, { authAction: 'signup' });
+  assert.match(h.app.innerHTML, /id="signup-form"/);
+  click(h.app, { signupRole: 'learner' });
+  h.node('signup-name').value = '새싹이'; h.node('signup-age').value = 'teen'; h.node('signup-region').value = '강릉시';
+  h.node('signup-login-id').value = 'saessak01';
+  h.node('signup-password').value = 'abc12345'; h.node('signup-password-confirm').value = 'abc12345';
+  h.node('signup-agree').checked = true;
+  click(h.app, { authAction: 'signup-submit' });
+  assert.match(h.app.innerHTML, /실제 계정은 만들어지지 않았어요/);
+  for (const storage of [h.local, h.tab]) {
+    for (const key of [STORAGE_KEY, DEMO_SESSION_KEY]) {
+      const value = String(storage.getItem(key));
+      assert.doesNotMatch(value, /abc12345|새싹이|saessak01/);
+    }
+  }
+  assert.equal(h.local.getItem(STORAGE_KEY), before);
+  click(h.app, { authAction: 'login-view' });
+  assert.match(h.app.innerHTML, /id="login-form"/);
+});
