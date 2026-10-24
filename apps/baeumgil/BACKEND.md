@@ -11,6 +11,8 @@ cp .env.example .env      # GEMINI_API_KEY 입력
 npm start                 # http://localhost:3000
 npm test                  # 팀 전체 테스트 (node --test, 설치할 패키지 없음)
 npm run ai:check          # 실제 Gemini 1회 호출 확인
+npm run ai:prompt         # Gemini에 보낼 프롬프트만 출력 (키 불필요, 호출 안 함)
+npm run ai:check -- --kind=log_narrative --note="관찰 메모"   # 일지 문장, 메모 포함
 ```
 
 - Node.js 20.12 이상. 외부 패키지를 쓰지 않는다.
@@ -199,6 +201,7 @@ const response = await fetch('/api/ai', {
 |---|---|
 | 다은·수영 | 앱 기록 모양(위 절)을 `tests/fixtures.js`의 `makeState`와 같은 것으로 확정해도 되는지 |
 | 다은·수영 | Gemini 3 문서는 `temperature`를 기본값 1.0으로 두라고 권장한다(낮추면 반복·품질 저하 가능). `buildGeminiRequest`의 `temperature: 0.2`를 뺄지 |
+| 다은·수영 | 관찰 메모가 있는 `log_narrative`는 실측 2회 중 1회 `sentences[n].evidenceIds` 빈 배열로 검증 실패했다(메모 내용 문장에 붙일 근거 ID가 없음). 메모용 참조 ID를 허용 목록에 넣거나, `toGeminiSchema`의 `refs`에 `minItems`를 넣는 방안 검토 |
 | 다은·수영·PM | 기본 모델은 `gemini-3.5-flash-lite`. 2026-10-24 실측으로 수업 제안 1회가 약 4초에 검증까지 통과했다. `gemini-3.8-flash`는 60초 이상 걸려 15초 제한을 넘는다 |
 | 예서 | 저장 호출 순서(직렬 `await`, 반환 state 사용)와 오류 문구를 그대로 쓸지 |
 | PM | 무료 등급 Gemini 키 발급 담당, 시연 PC에서 `npm run ai:check` 확인 |

@@ -11,6 +11,7 @@
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",
     "test": "node --test",
-    "ai:check": "node server/ai/check.mjs"
+    "ai:check": "node server/ai/check.mjs",
+    "ai:prompt": "node server/ai/check.mjs --prompt-only"
   }
 }
