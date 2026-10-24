@@ -30,6 +30,32 @@ const enterMath = (h, role) => {
 };
 let bootId = 0;
 
+test('clicking the current sessions sidebar never replaces an unsaved form',async t=>{
+ const h=await boot(t,{saved:seeded()});enterMath(h,'mentor');click(h.node('mentor-nav-sessions'));
+ let html=h.app.innerHTML,writes=0;Object.defineProperty(h.app,'innerHTML',{get:()=>html,set:value=>{writes++;html=value;},configurable:true});
+ h.app.fields=[{tagName:'TEXTAREA',value:'저장 전 회기 메모',defaultValue:''}];
+ const before=h.local.getItem(STORAGE_KEY);click(h.node('mentor-nav-sessions'));
+ assert.equal(writes,0);assert.equal(h.app.fields[0].value,'저장 전 회기 메모');assert.equal(h.local.getItem(STORAGE_KEY),before);
+});
+
+test('unchanged visible log can be reconfirmed after session edits without losing old versions',async t=>{
+ const original=seeded(),updated=saveSession(original,{...original.sessions[0],actualMinutes:55});
+ const h=await boot(t,{saved:updated});enterMath(h,'mentor');click(h.node('mentor-nav-sessions'));
+ assert.match(h.app.innerHTML,/기존 확정 일지/);h.app.oninput({target:{id:'log-reviewed',checked:true}});click(h.app,{action:'confirm-log'});
+ assert.equal(h.saved().logs.length,2);assert.deepEqual(h.saved().logs[0],original.logs[0]);assert.equal(h.saved().logs[1].content,'기존 확정 일지');assert.equal(h.saved().logs[1].sessionSnapshot.actualMinutes,55);
+ h.app.oninput({target:{id:'log-content',value:''}});h.app.oninput({target:{id:'log-reviewed',checked:true}});click(h.app,{action:'confirm-log'});
+ assert.match(h.app.innerHTML,/일지 내용을 적어 주세요/);assert.equal(h.saved().logs.length,2);
+});
+
+test('empty or malformed ledger month leaves the current month and form usable',async t=>{
+ const h=await boot(t,{saved:seeded()});enterMath(h,'mentor');click(h.node('mentor-nav-sessions'));
+ const before=h.app.innerHTML,stored=h.local.getItem(STORAGE_KEY);
+ for(const value of ['', '2026-13','bad']){
+  assert.doesNotThrow(()=>h.app.onchange({target:{id:'ledger-month',value}}));assert.equal(h.app.innerHTML,before);
+ }
+ h.app.onchange({target:{id:'ledger-month',value:'2026-10'}});assert.match(h.app.innerHTML,/기존 확정 일지/);assert.equal(h.local.getItem(STORAGE_KEY),stored);
+});
+
 test('weekly shared goal appears on mentor home without changing existing records',async t=>{
  const original=seeded(),h=await boot(t,{saved:original});enterMath(h,'mentor');
  assert.match(h.app.innerHTML,/이번 주 함께 목표/);

@@ -288,6 +288,7 @@ async function start() {
   });
   for (const tab of MENTOR_NAV) document.getElementById(`mentor-nav-${tab}`).addEventListener('click', () => {
     if (!inWorkspace() || ui.role !== 'mentor') return;
+    if (ui.mentorTab === tab) { ui.navOpen = false; renderNavigation(); return; }
     if (ui.mentorTab === 'sessions' && tab !== 'sessions' && hasUnsavedSessionForm(app)
       && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
     hints.cancel();practice.cancel({close:true});

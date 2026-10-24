@@ -60,9 +60,16 @@ export function submitInitialAnswer(state, { assessmentId, questionId, choiceId 
   }
   if (currentInitialQuestionId(record) !== questionId) fail('initial_question_order');
   if (!record.presentedQuestionIds.includes(questionId)) fail('initial_not_presented');
+  // 이 진단에서 단순히 표시한 문항은 제외한다. 중단/재개나 역할 전환 사이에
+  // 다른 학습에서 같은 내용을 본 경우는 제출 시점의 노출 이력으로 판별한다.
+  const outside = { ...state, exposures: (state.exposures ?? []).filter(e =>
+    !(e.stage === 'initial_assessment' && e.id === `initial:${record.id}:${e.sourceQuestionId}`)) };
+  const observed = { ...record.diagnostic, seenBefore: [...new Set([
+    ...record.diagnostic.seenBefore, ...seenDiagnosticIds(outside, record.learnerId, catalog),
+  ])] };
   let diagnostic;
   try {
-    diagnostic = submitDiagnostic(record.diagnostic, { id: `${assessmentId}:${questionId}`, questionId, choiceId, abstained, helpUsed }, bankOf(catalog), configOf(catalog));
+    diagnostic = submitDiagnostic(observed, { id: `${assessmentId}:${questionId}`, questionId, choiceId, abstained, helpUsed }, bankOf(catalog), configOf(catalog));
   } catch { fail('invalid_initial_answer'); }
   diagnostic.attempts.at(-1).answeredAt = at;
   const complete = diagnostic.status === 'completed';

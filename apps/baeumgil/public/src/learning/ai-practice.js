@@ -44,7 +44,15 @@ export function restoreAIState(state) {
  const active=state.activeGeneratedPracticeId;
  const validActive=active==null||records.some(r=>r.id===active&&r.learnerId===state.learnerId);
  if(!validActive)recovery.push({field:'activeGeneratedPracticeId',raw:active});
- return {...state,generatedPractice:records,activeGeneratedPracticeId:validActive?active??null:null,generatedPracticeRecovery:recovery};
+ // 격리된 문제에 연결된 힌트도 원문을 보존한다. 관계없는 손상은 기존 검증에 맡긴다.
+ const removedIds=new Set((Array.isArray(state.generatedPractice)?state.generatedPractice:[])
+  .filter(r=>r&&typeof r.id==='string'&&!ids.has(r.id)).map(r=>r.id));
+ const hints=Array.isArray(state.hintUsage)?state.hintUsage.filter(h=>{
+  if(h?.target?.kind!=='generated'||!removedIds.has(h.target.practiceId))return true;
+  recovery.push({field:'hintUsage',raw:h});return false;
+ }):state.hintUsage;
+ return {...state,generatedPractice:records,activeGeneratedPracticeId:validActive?active??null:null,
+  ...(state.hintUsage===undefined?{}:{hintUsage:hints}),generatedPracticeRecovery:recovery};
 }
 export function acceptAIPractice(state,{record},{catalog}) {
  practiceCard(state,record,{catalog});

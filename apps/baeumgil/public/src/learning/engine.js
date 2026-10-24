@@ -110,7 +110,8 @@ function enterStage(state, path, stage, ctx, reason) {
   if (TERMINAL.includes(path.status)) path.status = 'active';
 
   const route = routeOf(ctx.catalog, path);
-  const prefix = `${path.id}:${stage}`;
+  // 단계 진입 이력은 이전 저장본에도 있다. 기존 항목 ID를 바꾸지 않고 재진입만 구분한다.
+  const prefix = `${path.id}:${stage}:entry${path.stageHistory.length}`;
   const fromCatalog = (id, n) => instanceFromQuestion(questionOf(ctx.catalog, id), { id: `${prefix}:${n}`, stage });
 
   switch (stage) {

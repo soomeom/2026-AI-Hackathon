@@ -18,6 +18,9 @@ const LOG_ERRORS = {
 };
 const errorText = (err) => (err instanceof LogError ? LOG_ERRORS[err.code] ?? `처리하지 못했어요 (${err.code})` : String(err.message ?? err));
 const pctText = (s) => (s.attempted ? `${s.correct}/${s.attempted} 정답` : '기록 없음');
+const validMonth = month => typeof month === 'string' && /^\d{4}-(0[1-9]|1[0-2])$/.test(month);
+const logDraft = (state, ui, sessionId) => ui.logDraft[sessionId]
+  ?? (state.logs ?? []).filter(l => l.sessionId === sessionId).sort((a, b) => b.revision - a.revision)[0]?.content ?? '';
 
 // 일지 글(일반 텍스트)용 문항 이름: 기출은 회차·번호, 자체 제작은 문제 글
 const questionPrompt = (catalog, id) => {
@@ -45,7 +48,7 @@ export function renderSessions(props) {
   const sessions = (state.sessions ?? []).filter((s) => s.learnerId === state.learnerId).sort((a, b) => b.localDate.localeCompare(a.localDate) || b.id.localeCompare(a.id));
   const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
   const selected = sessions.find((s) => s.id === ui.sessionId) ?? sessions[0];
-  const month = ui.ledgerMonth ?? todaySeoul().slice(0, 7);
+  const month = validMonth(ui.ledgerMonth) ? ui.ledgerMonth : todaySeoul().slice(0, 7);
 
   root.innerHTML = `
     ${mentorTabs('sessions', state.learners?.find((l) => l.id === state.learnerId))}
@@ -74,7 +77,10 @@ export function renderSessions(props) {
     if (ev.target.id === 'log-reviewed' && selected) ui.reviewed[selected.id] = ev.target.checked;
   };
   root.onchange = (ev) => {
-    if (ev.target.id === 'ledger-month') { ui.ledgerMonth = ev.target.value; rerender(); }
+    if (ev.target.id === 'ledger-month') {
+      if (!validMonth(ev.target.value)) { ev.target.value = month; return; }
+      ui.ledgerMonth = ev.target.value; rerender();
+    }
   };
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
@@ -169,7 +175,7 @@ function logEditor(session, props) {
   const facts = buildLogFacts(state, session.id, { catalog });
   const L = facts.learning;
   const latest = (state.logs ?? []).filter((l) => l.sessionId === session.id).sort((a, b) => b.revision - a.revision)[0];
-  const draft = ui.logDraft[session.id] ?? latest?.content ?? '';
+  const draft = logDraft(state, ui, session.id);
   const key = `log:${session.id}`;
   const slot = ui.ai[key];
   const availability = aiAvailability(ui);
@@ -212,7 +218,7 @@ function logEditor(session, props) {
 function confirmFromEditor(props, session) {
   const { ui, rerender } = props;
   try {
-    props.update((s) => confirmLog(s, { sessionId: session.id, content: ui.logDraft[session.id] ?? '', reviewed: ui.reviewed[session.id] === true }),
+    props.update((s) => confirmLog(s, { sessionId: session.id, content: logDraft(s, ui, session.id), reviewed: ui.reviewed[session.id] === true }),
       { type: 'logConfirmed', sessionId: session.id });
     ui.logError = null;
     ui.reviewed[session.id] = false;
