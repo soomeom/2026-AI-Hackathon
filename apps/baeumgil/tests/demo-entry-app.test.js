@@ -37,6 +37,28 @@ test('weekly shared goal appears on mentor home without changing existing record
  assert.deepEqual(h.saved().sessions,original.sessions);
 });
 
+test('mentor can encourage before goal completion and learner sees it after role change and reload',async t=>{
+ const state=setupAI().getState(),h=await boot(t,{saved:state,catalog:goalCatalog});enterMath(h,'mentor');
+ assert.doesNotMatch(h.app.innerHTML,/✓ 함께 목표 완료/);
+ assert.match(h.app.innerHTML,/data-action="share-goal-message"/);
+ h.node('weekly-goal-message').value='   ';click(h.app,{action:'share-goal-message'});
+ assert.match(h.app.innerHTML,/role="alert"/);
+ assert.match(h.app.innerHTML,/<details[^>]*class="weekly-goal-compose"[^>]*\bopen\b/);
+ assert.doesNotMatch(h.app.innerHTML,/목표를 완료한 뒤/);
+ assert.deepEqual(h.saved(),state);
+ h.node('weekly-goal-message').value='어려운 개념은 함께 다시 살펴봐요.';
+ click(h.app,{action:'share-goal-message'});
+ assert.equal(h.saved().weeklyGoalMessages.length,1);
+ click(h.node('change-role'));enterMath(h,'learner');
+ assert.match(h.app.innerHTML,/어려운 개념은 함께 다시 살펴봐요/);
+ const reloaded=await boot(t,{local:h.local,tab:h.tab,catalog:goalCatalog});
+ assert.match(reloaded.app.innerHTML,/어려운 개념은 함께 다시 살펴봐요/);
+ const {weeklyGoalMessages,revision,...after}=reloaded.saved();
+ const {revision:oldRevision,...before}=state;
+ assert.deepEqual(after,before);
+ assert.equal(weeklyGoalMessages.length,1);
+});
+
 test('mentor encouragement reaches learner results after role change and reload even with an old role field',async t=>{
  let state=setupAI().getState();const at=new Date().toISOString(),localDate=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
  for(const [i,concept] of ['roadmap-like-terms','roadmap-linear-sum'].entries()){

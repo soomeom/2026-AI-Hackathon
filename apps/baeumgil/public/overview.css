@@ -5,6 +5,8 @@
 .weekly-goal-heading .meta {margin:0;font-size:.8125rem;}
 .weekly-goal-meters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin:16px 0;}
 .weekly-goal-progress>div {display:flex;justify-content:space-between;gap:10px;margin-bottom:8px;}
+.weekly-goal-status {margin:0 0 12px;}
+.weekly-goal-status .pill {white-space:normal;}
 .weekly-goal progress {display:block;width:100%;height:10px;accent-color:var(--primary-ink,#0f766e);}
 .weekly-goal-message {margin:16px 0 0;padding:16px;border-left:3px solid #0f766e;background:#eff8f6;overflow-wrap:anywhere;}
 .weekly-goal-message p {margin:8px 0 0;white-space:pre-wrap;}

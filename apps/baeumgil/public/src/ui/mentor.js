@@ -78,7 +78,7 @@ export function renderMentor(props) {
     if (!b || b.disabled) return;
     if(b.dataset.action==='share-goal-message'){
       try{props.update(s=>shareGoalMessage(s,{text:root.querySelector('#weekly-goal-message')?.value??ui.weeklyGoalDraft??'',at:new Date().toISOString()},{catalog,role:ui.role}));ui.weeklyGoalError=null;ui.flash='멘티에게 응원을 전했어요.';}
-      catch{ui.weeklyGoalError='목표를 완료한 뒤, 1~200자로 응원을 적어 주세요.';}
+      catch{ui.weeklyGoalError='응원을 저장하지 못했어요. 멘토 화면에서 1~200자로 적어 주세요.';}
       rerender();return;
     }
     if(b.dataset.assignmentAction){
