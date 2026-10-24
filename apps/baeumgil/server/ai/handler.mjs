@@ -62,9 +62,16 @@ export function parseAiRequest(body) {
 /**
  * @param {object} options
  * @param {{ name: string, model: string, generate: Function } | null} options.provider 키가 없으면 null
+ * @param {(input: object) => object} [options.buildRequest] Gemini 본문 생성. 실험 도구(ai:lab)만 바꾸고 서버는 팀 기본값을 쓴다
  * @returns {(body: unknown, context?: { signal?: AbortSignal }) => Promise<{ status: number, payload: object }>}
  */
-export function createAiHandler({ provider, timeoutMs = AI_TIMEOUT_MS, now = () => new Date(), log = () => {} }) {
+export function createAiHandler({
+  provider,
+  buildRequest = buildGeminiRequest,
+  timeoutMs = AI_TIMEOUT_MS,
+  now = () => new Date(),
+  log = () => {},
+}) {
   return async function handleAiRequest(body, { signal: clientSignal } = {}) {
     const parsed = parseAiRequest(body);
     if (!parsed.ok) {
@@ -85,7 +92,7 @@ export function createAiHandler({ provider, timeoutMs = AI_TIMEOUT_MS, now = () 
     let detail;
     try {
       // 시스템 지시는 kind와 메모 유무로만 정해지므로 화면이 프롬프트를 바꿀 수 없다
-      const result = await provider.generate({ request: buildGeminiRequest(input), signal });
+      const result = await provider.generate({ request: buildRequest(input), signal });
 
       // 허용 ID 밖 참조, 필수 필드 누락, 단정적·정서 표현이 있으면 채택하지 않는다 (AC-09)
       const verdict = validateAIOutput(input, result.text);

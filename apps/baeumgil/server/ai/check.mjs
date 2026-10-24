@@ -4,13 +4,16 @@
 //   npm run ai:check                                   수업 제안 1회 호출
 //   npm run ai:check -- --kind=log_narrative --note="메모"   일지 문장, 관찰 메모 포함
 //   npm run ai:prompt                                  Gemini에 보낼 프롬프트만 출력 (호출 안 함, 키 불필요)
+//   npm run ai:lab -- --kind=lesson_plan               prompt-lab/<kind>.txt의 규칙으로 바꿔 호출 (팀 파일은 안 바뀜)
 //   --show-prompt                                      호출 전에 프롬프트도 출력
 
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 import { parseArgs } from 'node:util';
 
-import { AI_KINDS, buildAIInput, buildAIPrompt } from '../../public/src/ai/contracts.js';
+import { AI_KINDS, buildAIInput, buildAIPrompt, buildGeminiRequest } from '../../public/src/ai/contracts.js';
 import { makeAttempt, makeCatalog, stateWithAttempts } from '../../tests/fixtures.js';
-import { loadConfig } from '../config.mjs';
+import { APP_ROOT, loadConfig } from '../config.mjs';
 import { createAiHandler } from './handler.mjs';
 
 const { values: options } = parseArgs({
@@ -19,6 +22,7 @@ const { values: options } = parseArgs({
     note: { type: 'string', default: '' },
     'show-prompt': { type: 'boolean', default: false },
     'prompt-only': { type: 'boolean', default: false },
+    lab: { type: 'boolean', default: false },
   },
 });
 if (!AI_KINDS.includes(options.kind)) {
@@ -34,10 +38,30 @@ const state = stateWithAttempts([
 ]);
 const input = buildAIInput(state, { learnerId: 'learner-1', kind: options.kind, catalog: makeCatalog(), note: options.note });
 
+// 실험용 규칙: 학생 기록 데이터와 응답 형식·검증은 팀 것 그대로 두고 시스템 지시만 파일 내용으로 바꾼다
+let buildRequest = buildGeminiRequest;
+if (options.lab) {
+  const labFile = path.join(APP_ROOT, 'prompt-lab', `${options.kind}.txt`);
+  if (!existsSync(labFile)) {
+    mkdirSync(path.dirname(labFile), { recursive: true });
+    writeFileSync(labFile, `${buildAIPrompt(input).systemInstruction}\n`, 'utf8');
+    console.log(`실험용 프롬프트 파일을 만들었어요: ${labFile}`);
+    console.log('지금 팀 프롬프트 규칙이 들어 있어요. 고쳐서 저장한 뒤 다시 실행하세요.');
+    process.exit(0);
+  }
+  const labSystem = readFileSync(labFile, 'utf8').trim();
+  if (labSystem === '') {
+    console.error(`${labFile}이 비어 있어요.`);
+    process.exit(1);
+  }
+  console.log(`실험용 프롬프트 사용 중: ${labFile}`);
+  buildRequest = (aiInput) => ({ ...buildGeminiRequest(aiInput), systemInstruction: { parts: [{ text: labSystem }] } });
+}
+
 if (options['show-prompt'] || options['prompt-only']) {
   const prompt = buildAIPrompt(input);
   console.log('===== 시스템 지시 (규칙) =====');
-  console.log(prompt.systemInstruction);
+  console.log(buildRequest(input).systemInstruction.parts[0].text);
   console.log('\n===== 사용자 입력 (학생 기록 데이터) =====');
   console.log(prompt.userText);
   console.log('\n===== 응답 형식 (JSON 스키마) =====');
@@ -55,11 +79,15 @@ if (!config.provider) {
 }
 
 // 실패하면 [ai] 줄의 detail에 원인(HTTP 상태, Gemini 오류 이유)이 나온다
-const handler = createAiHandler({ provider: config.provider, log: (entry) => console.log('[ai]', JSON.stringify(entry)) });
+const handler = createAiHandler({
+  provider: config.provider,
+  buildRequest,
+  log: (entry) => console.log('[ai]', JSON.stringify(entry)),
+});
 const startedAt = Date.now();
 const { status, payload } = await handler({ requestId: 'ai-check', inputVersion: 'fixtures', input });
 
-console.log(`종류: ${options.kind}, 메모: ${options.note ? '있음' : '없음'}, 모델: ${config.aiStatus.model}`);
+console.log(`종류: ${options.kind}, 메모: ${options.note ? '있음' : '없음'}, 프롬프트: ${options.lab ? '실험용' : '팀 기본'}, 모델: ${config.aiStatus.model}`);
 console.log(`HTTP ${status}, ${Date.now() - startedAt}ms`);
 console.log(JSON.stringify(payload, null, 2));
 process.exit(payload.ok ? 0 : 1);

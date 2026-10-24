@@ -96,6 +96,21 @@ test('팀 AI 계약의 Gemini 본문을 보내고, 검증을 통과한 출력만
   });
 });
 
+test('실험 도구가 Gemini 본문 생성을 바꾸면 그 본문을 보내고, 검증은 그대로 한다', async () => {
+  let sent;
+  const handler = createAiHandler({
+    provider: fakeProvider(async ({ request }) => {
+      sent = request;
+      return { text: JSON.stringify(validLessonPlan), model: 'm' };
+    }),
+    buildRequest: (input) => ({ ...buildGeminiRequest(input), systemInstruction: { parts: [{ text: '실험 규칙' }] } }),
+  });
+  const { status } = await handler(body());
+  assert.equal(status, 200);
+  assert.equal(sent.systemInstruction.parts[0].text, '실험 규칙');
+  assert.ok(sent.generationConfig.responseSchema);
+});
+
 test('JSON이 아닌 출력은 채택하지 않는다', async () => {
   const { status, payload } = await createAiHandler({ provider: replying('그냥 문장') })(body());
   assert.equal(status, 502);

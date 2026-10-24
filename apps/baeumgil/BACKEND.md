@@ -13,7 +13,10 @@ npm test                  # 팀 전체 테스트 (node --test, 설치할 패키�
 npm run ai:check          # 실제 Gemini 1회 호출 확인
 npm run ai:prompt         # Gemini에 보낼 프롬프트만 출력 (키 불필요, 호출 안 함)
 npm run ai:check -- --kind=log_narrative --note="관찰 메모"   # 일지 문장, 메모 포함
+npm run ai:lab -- --kind=lesson_plan    # prompt-lab/<종류>.txt의 규칙으로 실험 (처음엔 파일만 만듦, Git 제외)
 ```
+
+`ai:lab`은 시스템 지시(규칙)만 바꾸고, 학생 기록 데이터·응답 형식·출력 검증은 팀 것을 그대로 쓴다. 서버(`/api/ai`)는 항상 팀 프롬프트(`ai/contracts.js`)를 쓴다.
 
 - Node.js 20.12 이상. 외부 패키지를 쓰지 않는다.
 - 서버는 기본으로 `127.0.0.1`에만 열린다. 본선에서 다른 기기가 접속하려면 `HOST=0.0.0.0`으로 실행한다.

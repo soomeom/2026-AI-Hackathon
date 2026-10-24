@@ -9,3 +9,6 @@ node_modules/
 .DS_Store
 .idea/
 .vscode/
+
+# 개인 프롬프트 실험 파일 (npm run ai:lab). 팀 프롬프트는 public/src/ai/contracts.js
+apps/baeumgil/prompt-lab/
