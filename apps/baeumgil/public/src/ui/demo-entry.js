@@ -1,6 +1,9 @@
-import { esc, ICON } from './text.js';
+import { esc } from './text.js';
 import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 import { learnerPaths } from '../learning/assignments.js';
+import { authenticate, DEMO_ACCOUNTS } from '../auth/accounts.js';
+import { validateSignup } from '../auth/signup.js';
+import { renderSignupForm, renderSignupDone, readSignupForm, SIGNUP_FOCUS, SIGNUP_VISUAL_ORDER } from './signup-form.js';
 
 // 회기 입력 폼은 아직 저장소에 반영되지 않았으므로 나가기 전에 확인한다.
 // 활동일지 내용은 기존 ui.logDraft에 보관되며 이 검사 대상이 아니다.
@@ -14,7 +17,9 @@ export function hasUnsavedSessionForm(root) {
 
 // 연령대는 추천에만 쓰고 저장하지 않는다. 화면을 다시 그려도 이번 방문 동안만 유지된다.
 const AGE_BANDS = [['teen', '10대'], ['adult', '20~50대'], ['senior', '60대 이상']];
-const entryView = { ageBand: null, recommend: false, notice: '' };
+const entryView = { ageBand: null, recommend: false, notice: '', view: 'login', loginId: '', loginError: '', signupValues: {}, signupErrors: {}, passwordNotice: '' };
+const LOGIN_ERRORS = { empty: '아이디와 비밀번호를 입력해 주세요.', mismatch: '아이디 또는 비밀번호가 맞지 않아요.' };
+const QUICK = { mentor: '멘토로 바로 들어가기', learner: '멘티로 바로 들어가기', guardian: '보호자로 바로 들어가기' };
 
 function ageSection(display) {
   if (!display) return '';
@@ -41,52 +46,120 @@ function recommendDialog(display) {
     </div>`;
 }
 
-export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
-  const mentor = state.mentors?.find(person => person.id === state.mentorId);
+function loginCard() {
+  return `<section class="auth-card" aria-labelledby="login-title">
+      <h2 id="login-title">로그인</h2>
+      <form id="login-form" novalidate>
+        <label class="auth-field" for="login-id">아이디
+          <input id="login-id" name="loginId" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" value="${esc(entryView.loginId)}"></label>
+        <label class="auth-field" for="login-password">비밀번호
+          <input id="login-password" name="password" type="password" autocomplete="current-password"></label>
+        <button type="submit" class="primary large" data-auth-action="login">로그인</button>
+        <p id="login-error" class="auth-error" role="alert">${esc(entryView.loginError)}</p>
+      </form>
+      <p class="auth-switch">처음이신가요? <button type="button" class="ghost" data-auth-action="signup">회원가입</button></p>
+    </section>`;
+}
+
+function demoAccounts(state) {
   const learner = state.learners?.find(person => person.id === state.learnerId);
+  const mentor = state.mentors?.find(person => person.id === state.mentorId);
+  const names = { mentor: mentor?.name ?? '김멘토(가명)', learner: learner?.name ?? '하늘(가명)', guardian: `${learner?.name ?? '하늘(가명)'}의 보호자` };
   const paths = learnerPaths(state);
   const assessment = initialAssessmentSummary(state, state.learnerId);
   const learnerNext = paths.length ? '지정된 문제와 학습 기록을 이어서 볼 수 있어요.'
     : assessment?.status === 'completed' ? '첫 수준 확인 결과를 보고 멘토의 문제 지정을 기다려요.'
       : assessment ? '진행하던 첫 수준 확인을 이어서 할 수 있어요.' : '영역별 첫 수준 확인으로 배움의 시작점을 찾아요.';
+  const rows = DEMO_ACCOUNTS.map(account => `<li class="demo-account">
+        <span class="demo-account-role">${esc(account.label)} <small class="muted">${esc(names[account.role])}</small></span>
+        <span class="demo-account-cred">${account.role === 'learner' ? `<small class="muted">${learnerNext}</small>` : ''}</span>
+        <button type="button" class="secondary small" data-enter-role="${account.role}">${QUICK[account.role] ?? '바로 들어가기'}</button>
+      </li>`).join('');
+  return `<section class="demo-accounts" aria-labelledby="demo-accounts-title">
+      <h2 id="demo-accounts-title">시연 계정</h2>
+      <p class="muted small">심사·체험용 시연 계정이에요. 버튼을 누르면 바로 들어가요.</p>
+      <ul class="demo-account-list">${rows}</ul>
+    </section>`;
+}
 
+export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
+  const login = entryView.view === 'login';
   root.innerHTML = `<section class="demo-entry" aria-labelledby="entry-title">
     <div class="entry-intro">
-      <span class="pill primary">배움길 체험</span>
+      <span class="pill primary">배움길</span>
       <h1 id="entry-title">배움은 함께,<br>시작은 나에게 맞게.</h1>
-      <p>학생의 배움을 잇고, 멘토의 준비를 돕는 배움길.<br>어떤 역할로 함께할까요?</p>
+      <p>${login ? '로그인하고 오늘의 배움을 이어가요.' : '가입 화면을 둘러보세요. 프로토타입이라 실제로 등록되지는 않아요.'}</p>
     </div>
-    ${ageSection(display)}
-    <div class="entry-roles">
-      <article class="entry-card entry-mentor">
-        <span class="entry-icon" aria-hidden="true">${ICON.target}</span>
-        <h2>배움을 이끄는 멘토</h2>
-        <p>학생의 학습을 확인하고<br>다음 수업을 준비해요.</p>
-        <div class="entry-profile"><span class="entry-avatar" aria-hidden="true">M</span><span><b>${esc(mentor?.name ?? '김멘토(가명)')}</b><small>멘토 시연 계정</small></span></div>
-        <button class="primary large" data-enter-role="mentor">멘토로 체험하기 ${ICON.arrow}</button>
-        <p class="entry-next">학습 현황 · AI 수업 준비 · 활동일지</p>
-      </article>
-      <article class="entry-card entry-learner">
-        <span class="entry-icon" aria-hidden="true">${ICON.book}</span>
-        <h2>한 걸음씩 배우는 멘티</h2>
-        <p>나에게 맞는 문제를 풀고<br>배움을 이어가요.</p>
-        <div class="entry-profile"><span class="entry-avatar" aria-hidden="true">L</span><span><b>${esc(learner?.name ?? '하늘(가명)')}</b><small>멘티 시연 계정</small></span></div>
-        <button class="large" data-enter-role="learner">멘티로 체험하기 ${ICON.arrow}</button>
-        <p class="entry-next">${learnerNext}</p>
-      </article>
-      <article class="entry-card entry-guardian"><span class="entry-icon" aria-hidden="true">${ICON.book}</span><h2>함께 응원하는 보호자</h2><p>최근 참여와 확인된 변화를 보고<br>다음 배움을 응원해요.</p><div class="entry-profile"><span class="entry-avatar" aria-hidden="true">G</span><span><b>${esc(learner?.name??'하늘(가명)')}의 보호자</b><small>보호자 시연 화면</small></span></div><button class="large" data-enter-role="guardian">보호자로 체험하기 ${ICON.arrow}</button><p class="entry-next">학습 참여 · 개념별 변화 · 다음 배움길</p></article>
-    </div>
-    <div class="entry-footnote"><p>역할을 바꿔도 기존 학습 기록은 그대로 이어져요.</p>
-      ${persistent ? '' : '<p class="warn-text small" role="status">이 환경에서는 입장한 역할을 저장할 수 없어 새로고침하면 다시 선택해야 할 수 있어요.</p>'}
+    ${login ? loginCard() : entryView.view === 'signup-done' ? renderSignupDone() : renderSignupForm(entryView.signupValues, entryView.signupErrors, { passwordNotice: entryView.passwordNotice })}
+    ${login ? ageSection(display) : ''}
+    ${login ? demoAccounts(state) : ''}
+    <div class="entry-footnote">
+      ${persistent ? '' : '<p class="warn-text small" role="status">이 환경에서는 로그인 상태를 저장할 수 없어 새로고침하면 다시 로그인해야 할 수 있어요.</p>'}
     </div>
   </section>${recommendDialog(display)}`;
   const redraw = () => {
     renderDemoEntry({ root, state, onEnter, persistent, display });
     if (entryView.recommend && !display.largeText) root.querySelector?.('#large-text-accept')?.focus?.();
   };
+  const attemptLogin = () => {
+    const loginId = root.querySelector?.('#login-id')?.value ?? '';
+    const password = root.querySelector?.('#login-password')?.value ?? '';
+    const result = authenticate(loginId, password);
+    if (!result.ok) {
+      entryView.loginId = loginId;
+      entryView.loginError = LOGIN_ERRORS[result.reason] ?? LOGIN_ERRORS.mismatch;
+      redraw();
+      root.querySelector?.('#login-password')?.focus?.();
+      return;
+    }
+    entryView.loginId = '';
+    entryView.loginError = '';
+    entryView.notice = '';
+    onEnter(result.role);
+  };
+  const resetSignup = () => { entryView.signupValues = {}; entryView.signupErrors = {}; entryView.passwordNotice = ''; };
+  // 다시 그리면 비밀번호 칸이 비워지므로, 입력해 둔 값이 있었다면 이유를 알려 준다.
+  const keepSignupValues = what => {
+    const form = readSignupForm(root, entryView.signupValues.role);
+    const hadPassword = Boolean(form.password || form.passwordConfirm);
+    delete form.password; delete form.passwordConfirm;
+    entryView.signupValues = form;
+    entryView.signupErrors = {};
+    entryView.passwordNotice = hadPassword ? `${what}를 바꿔서 비밀번호를 다시 입력해 주세요.` : '';
+  };
+  // 다시 그리면 포커스가 사라지므로 방금 조작한 칸으로 돌려 놓는다. 추천 창이 열려 있으면 창이 포커스를 가진다.
+  const refocus = selector => { if (!(entryView.recommend && display && !display.largeText)) root.querySelector?.(selector)?.focus?.(); };
+  const attemptSignup = () => {
+    const form = readSignupForm(root, entryView.signupValues.role);
+    const result = validateSignup(form);
+    entryView.passwordNotice = '';
+    if (result.ok) { resetSignup(); entryView.view = 'signup-done'; redraw(); return; }
+    delete form.password; delete form.passwordConfirm;
+    entryView.signupValues = form;
+    entryView.signupErrors = result.errors;
+    redraw();
+    const first = SIGNUP_VISUAL_ORDER.find(key => result.errors[key]);
+    root.querySelector?.(SIGNUP_FOCUS[first])?.focus?.();
+  };
+  root.onsubmit = event => {
+    event?.preventDefault?.();
+    if (entryView.recommend) return;
+    if (entryView.view === 'signup') attemptSignup();
+    else if (entryView.view === 'login') attemptLogin();
+  };
+  root.onchange = event => {
+    const target = event?.target;
+    if (entryView.recommend || entryView.view !== 'signup' || !target) return;
+    if (target.dataset?.signupAge === undefined && target.id !== 'signup-age') return;
+    keepSignupValues('연령대');
+    entryView.signupValues.ageBand = target.value;
+    if (display && target.value === 'senior' && !display.largeText) entryView.recommend = true;
+    redraw();
+    refocus('#signup-age');
+  };
   root.onclick = event => {
-    const button = event.target.closest('button[data-enter-role], button[data-age-band], button[data-display-choice]');
-    const { enterRole: role, ageBand, displayChoice } = button?.dataset ?? {};
+    const button = event.target.closest('button[data-enter-role], button[data-age-band], button[data-signup-role], button[data-display-choice], button[data-auth-action]');
+    const { enterRole: role, ageBand, displayChoice, authAction, signupRole } = button?.dataset ?? {};
     if (display && displayChoice) {
       entryView.recommend = false;
       if (displayChoice === 'accept') display.setLargeText(true);
@@ -102,8 +175,27 @@ export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
       return;
     }
     if (entryView.recommend) return;
+    if (authAction === 'login') { event.preventDefault?.(); attemptLogin(); return; }
+    if (authAction === 'signup' || authAction === 'login-view') {
+      entryView.view = authAction === 'signup' ? 'signup' : 'login';
+      entryView.loginError = '';
+      resetSignup();
+      redraw();
+      return;
+    }
+    if (authAction === 'signup-submit') { event.preventDefault?.(); if (entryView.view === 'signup') attemptSignup(); return; }
+    if (signupRole) {
+      if (entryView.view !== 'signup') return;
+      keepSignupValues('역할');
+      entryView.signupValues.role = signupRole;
+      redraw();
+      refocus(`[data-signup-role="${signupRole}"]`);
+      return;
+    }
     if (!['mentor','learner','guardian'].includes(role)) return;
     entryView.notice = '';
+    entryView.loginId = '';
+    entryView.loginError = '';
     onEnter(role);
   };
   root.onkeydown = event => {

@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="guardian.css">
   <link rel="stylesheet" href="meeko-theme.css">
   <link rel="stylesheet" href="accessibility.css">
+  <link rel="stylesheet" href="auth.css">
 </head>
 <body>
   <header class="topbar">
@@ -28,11 +29,11 @@
     <div id="session-controls" class="session-controls" hidden>
       <span id="current-profile" class="current-profile"></span>
       <button id="change-subject" class="ghost small" hidden>과목 선택</button>
-      <button id="change-role" class="ghost small">역할 바꾸기</button>
+      <button id="change-role" class="ghost small">로그아웃</button>
     </div>
     <button id="reset" class="ghost small" hidden>시연 초기화</button>
   </header>
-  <p class="demo-note" role="note"><span id="save-note"></span> <span id="entry-session-note" hidden>입장 상태를 저장할 수 없어 새로고침하면 역할과 과목을 다시 선택해야 할 수 있어요.</span></p>
+  <p id="demo-note" class="demo-note" role="note" hidden><span id="save-note"></span> <span id="entry-session-note" hidden>로그인 상태를 저장할 수 없어 새로고침하면 다시 로그인해야 할 수 있어요.</span></p>
   <div id="shell" class="shell">
     <aside id="sidenav" class="sidenav" aria-label="주 메뉴" hidden>
       <div class="sidenav-head"><span class="sidenav-title">메뉴</span><button id="sidenav-toggle" class="sidenav-toggle" aria-controls="sidenav" aria-expanded="true" aria-label="메뉴 접기" title="메뉴 접기"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16M15 10l-2 2 2 2"/></svg></button></div>

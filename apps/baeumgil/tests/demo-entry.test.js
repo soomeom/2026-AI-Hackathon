@@ -99,8 +99,8 @@ test('entry buttons select only supported roles and profile names are escaped', 
   state.mentors[0].name = '<img src=x onerror=bad()>';
   const roles = [];
   renderDemoEntry({ root, state, onEnter: role => roles.push(role), persistent: true });
-  assert.match(root.innerHTML, /멘토로 체험하기/);
-  assert.match(root.innerHTML, /멘티로 체험하기/);
+  assert.match(root.innerHTML, /멘토로 바로 들어가기/);
+  assert.match(root.innerHTML, /멘티로 바로 들어가기/);
   assert.match(root.innerHTML, /&lt;img/);
   assert.doesNotMatch(root.innerHTML, /<img src=x/);
   for (const role of ['mentor', 'learner', 'admin']) root.onclick({ target: { closest: () => ({ dataset: { enterRole: role } }) } });
@@ -181,4 +181,125 @@ test('choosing 60s or older recommends large text without storing the age band o
   press({ enterRole: 'learner' });
   assert.deepEqual(roles, ['learner']);
   assert.ok(!JSON.stringify(state).includes('senior'));
+});
+
+test('login screen enters only with a matching demo account and keeps the typed id on failure', () => {
+  const fields = { 'login-id': { value: '' }, 'login-password': { value: '' } };
+  const root = { innerHTML: '', querySelector: sel => fields[sel.slice(1)] ?? { focus() {} } };
+  const roles = [];
+  const press = dataset => root.onclick({ target: { closest: () => ({ dataset }) } });
+  renderDemoEntry({ root, state: createDemoState(), onEnter: r => roles.push(r), persistent: true });
+  assert.match(root.innerHTML, /id="login-form"/);
+  for (const shown of [/mentor01/, /mentor1234/, /learner1234/, /parent1234/, /역할을 바꿔도/]) assert.doesNotMatch(root.innerHTML, shown);
+  assert.match(root.innerHTML, /멘토로 바로 들어가기/);
+  press({ authAction: 'login' });
+  assert.match(root.innerHTML, /아이디와 비밀번호를 입력해 주세요/);
+  fields['login-id'].value = 'learner01'; fields['login-password'].value = 'wrong';
+  press({ authAction: 'login' });
+  assert.match(root.innerHTML, /아이디 또는 비밀번호가 맞지 않아요/);
+  assert.match(root.innerHTML, /value="learner01"/); assert.deepEqual(roles, []);
+  fields['login-password'].value = 'learner1234';
+  root.onsubmit({ preventDefault() {} });
+  assert.deepEqual(roles, ['learner']);
+});
+
+function signupHarness(display) {
+  const fields = {};
+  let focused = null;
+  const get = id => (fields[id] ??= { value: '', checked: false, focus() { focused = id; } });
+  const root = { innerHTML: '', querySelector: sel => get(sel.slice(1)) };
+  const entered = [];
+  const press = dataset => root.onclick({ target: { closest: () => ({ dataset }) }, preventDefault() {} });
+  renderDemoEntry({ root, state: createDemoState(), onEnter: r => entered.push(r), persistent: true, display });
+  press({ authAction: 'signup' });
+  return { fields, get, root, entered, press, focused: () => focused };
+}
+
+test('signup validation errors keep entered values except passwords and focus the first invalid field', () => {
+  const h = signupHarness();
+  assert.match(h.root.innerHTML, /id="signup-form"/);
+  h.get('signup-name').value = '하늘이'; h.get('signup-password').value = 'abc12345';
+  h.press({ authAction: 'signup-submit' });
+  assert.match(h.root.innerHTML, /아이디는 영문 소문자와 숫자 4~16자예요\./);
+  assert.match(h.root.innerHTML, /aria-invalid="true"/);
+  assert.match(h.root.innerHTML, /id="signup-name"[^>]*value="하늘이"/);
+  assert.doesNotMatch(h.root.innerHTML, /id="signup-password"[^>]*value=/);
+  assert.doesNotMatch(h.root.innerHTML, /abc12345/);
+  assert.equal(h.focused(), 'data-signup-role]', 'role is the first field in visual order');
+  assert.doesNotMatch(h.root.innerHTML, /class="field-error" role="alert"/);
+  h.press({ signupRole: 'learner' });
+  h.get('signup-password').value = 'abc12345';
+  h.press({ authAction: 'signup-submit' });
+  assert.equal(h.focused(), 'signup-age', 'age is above login id in visual order');
+  h.press({ authAction: 'login-view' });
+});
+
+test('a valid signup only shows the prototype notice and enters nothing', () => {
+  const h = signupHarness();
+  h.press({ signupRole: 'learner' });
+  assert.match(h.root.innerHTML, /data-signup-role="learner" aria-pressed="true"/);
+  Object.assign(h.get('signup-name'), { value: '하늘이' });
+  h.get('signup-age').value = 'teen'; h.get('signup-region').value = '춘천시';
+  h.get('signup-login-id').value = 'newkid01';
+  h.get('signup-password').value = 'abc12345'; h.get('signup-password-confirm').value = 'abc12345';
+  h.get('signup-agree').checked = true;
+  h.root.onsubmit({ preventDefault() {} });
+  assert.match(h.root.innerHTML, /실제 계정은 만들어지지 않았어요/);
+  assert.deepEqual(h.entered, []);
+  h.press({ authAction: 'login-view' });
+  assert.match(h.root.innerHTML, /id="login-form"/);
+  h.press({ authAction: 'signup' });
+  assert.doesNotMatch(h.root.innerHTML, /하늘이/);
+  h.press({ authAction: 'login-view' });
+});
+
+test('choosing 60 or older in signup opens the large text recommendation', () => {
+  const display = { largeText: false, setLargeText() {} };
+  const h = signupHarness(display);
+  h.get('signup-name').value = '하늘이';
+  h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'senior' } });
+  assert.match(h.root.innerHTML, /큰 글씨로 볼까요/);
+  assert.match(h.root.innerHTML, /id="signup-age"[^>]*>[^]*<option value="senior" selected>/);
+  const before = h.root.innerHTML;
+  h.press({ authAction: 'signup-submit' });
+  h.press({ signupRole: 'mentor' });
+  assert.equal(h.root.innerHTML, before);
+  h.press({ displayChoice: 'dismiss' });
+  assert.doesNotMatch(h.root.innerHTML, /role="dialog"/);
+  h.press({ authAction: 'login-view' });
+});
+
+test('changing the signup role after typing a password explains why it was cleared; minor consent only for a learner under 14', () => {
+  const h = signupHarness();
+  h.get('signup-password').value = 'abc12345';
+  h.press({ signupRole: 'guardian' });
+  assert.match(h.root.innerHTML, /비밀번호를 다시 입력해 주세요/);
+  assert.match(h.root.innerHTML, /aria-required="true"/);
+  h.get('signup-age').value = 'under14';
+  h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'under14' } });
+  assert.doesNotMatch(h.root.innerHTML, /signup-guardian-agree/, 'a guardian never needs minor consent');
+  h.press({ signupRole: 'learner' });
+  assert.match(h.root.innerHTML, /id="signup-guardian-agree"/);
+  h.press({ signupRole: 'mentor' });
+  assert.doesNotMatch(h.root.innerHTML, /signup-guardian-agree/);
+  h.press({ authAction: 'login-view' });
+});
+
+test('signup role click and age change return focus to the control, and a role error is tied to the role group', () => {
+  const display = { largeText: false, setLargeText() {} };
+  const h = signupHarness(display);
+  h.press({ signupRole: 'mentor' });
+  assert.equal(h.focused(), 'data-signup-role="mentor"]');
+  h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'teen' } });
+  assert.equal(h.focused(), 'signup-age');
+  h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'senior' } });
+  assert.match(h.root.innerHTML, /큰 글씨로 볼까요/);
+  assert.equal(h.focused(), 'large-text-accept', 'dialog keeps focus');
+  h.press({ displayChoice: 'dismiss' });
+  h.press({ authAction: 'login-view' });
+  h.press({ authAction: 'signup' });
+  h.press({ authAction: 'signup-submit' });
+  assert.match(h.root.innerHTML, /role="group"[^>]*aria-invalid="true" aria-describedby="signup-role-error"/);
+  assert.match(h.root.innerHTML, /id="signup-role-error"/);
+  h.press({ authAction: 'login-view' });
 });
