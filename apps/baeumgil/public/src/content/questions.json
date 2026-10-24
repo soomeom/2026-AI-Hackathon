@@ -1,0 +1,156 @@
+{
+  "questions": [
+    {
+      "id": "q-eq-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "original",
+      "reference": {
+        "questionType": "고졸 검정고시 수학 · 괄호가 있는 일차방정식",
+        "authored": true,
+        "note": "검정고시 출제 유형을 참고해 팀이 자체 제작한 문항이며 실제 기출 원문이 아니다."
+      },
+      "prompt": "방정식 2(x - 3) = -x + 9 의 해는?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "1", "misconceptionConceptId": "c-eq-transpose" },
+        { "id": "b", "value": "4", "misconceptionConceptId": "c-distribute-sign" },
+        { "id": "c", "value": "5" },
+        { "id": "d", "value": "15", "misconceptionConceptId": "c-eq-transpose" }
+      ],
+      "answer": "5",
+      "solutionSteps": ["2x - 6 = -x + 9", "2x + x = 9 + 6", "3x = 15", "x = 5"],
+      "conceptIds": ["c-eq-solve"]
+    },
+    {
+      "id": "q-rat-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "original",
+      "reference": {
+        "questionType": "고졸 검정고시 수학 · 부호가 있는 유리수의 혼합 계산",
+        "authored": true,
+        "note": "검정고시 출제 유형을 참고해 팀이 자체 제작한 문항이며 실제 기출 원문이 아니다."
+      },
+      "prompt": "(-3/4) ÷ (3/2) - (-1/2) 의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "-1", "misconceptionConceptId": "c-int-addsub" },
+        { "id": "b", "value": "-5/8", "misconceptionConceptId": "c-frac-reciprocal" },
+        { "id": "c", "value": "0" },
+        { "id": "d", "value": "1", "misconceptionConceptId": "c-int-mul" }
+      ],
+      "answer": "0",
+      "solutionSteps": ["(-3/4) × (2/3) - (-1/2)", "-1/2 - (-1/2)", "-1/2 + 1/2", "0"],
+      "conceptIds": ["c-rat-calc"]
+    },
+    {
+      "id": "q-cc-distribute-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "concept_check",
+      "reference": { "questionType": "개념 확인 · 분배법칙과 부호", "authored": true },
+      "prompt": "-3(x - 2) 를 바르게 전개한 것은?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "-3x - 6" },
+        { "id": "b", "value": "-3x + 6" },
+        { "id": "c", "value": "-3x - 2" },
+        { "id": "d", "value": "3x + 6" }
+      ],
+      "answer": "-3x + 6",
+      "solutionSteps": ["(-3) × x = -3x", "(-3) × (-2) = +6", "-3x + 6"],
+      "conceptIds": ["c-distribute-sign"]
+    },
+    {
+      "id": "q-cc-transpose-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "concept_check",
+      "reference": { "questionType": "개념 확인 · 등식의 성질과 이항", "authored": true },
+      "prompt": "x - 4 = 10 일 때, x 의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "6" },
+        { "id": "b", "value": "14" },
+        { "id": "c", "value": "-6" },
+        { "id": "d", "value": "-14" }
+      ],
+      "answer": "14",
+      "solutionSteps": ["양변에 4를 더한다", "x = 10 + 4", "x = 14"],
+      "conceptIds": ["c-eq-transpose"]
+    },
+    {
+      "id": "q-cc-intadd-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "concept_check",
+      "reference": { "questionType": "개념 확인 · 정수의 덧셈과 뺄셈", "authored": true },
+      "prompt": "(-5) - (-3) 의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "-8" },
+        { "id": "b", "value": "-2" },
+        { "id": "c", "value": "2" },
+        { "id": "d", "value": "8" }
+      ],
+      "answer": "-2",
+      "solutionSteps": ["(-5) - (-3) = (-5) + 3", "-2"],
+      "conceptIds": ["c-int-addsub"]
+    },
+    {
+      "id": "q-cc-reciprocal-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "concept_check",
+      "reference": { "questionType": "개념 확인 · 분수의 나눗셈과 역수", "authored": true },
+      "prompt": "(-2/5) ÷ (4/5) 의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "-1/2" },
+        { "id": "b", "value": "-8/25" },
+        { "id": "c", "value": "1/2" },
+        { "id": "d", "value": "-2" }
+      ],
+      "answer": "-1/2",
+      "solutionSteps": ["(-2/5) × (5/4)", "-10/20", "-1/2"],
+      "conceptIds": ["c-frac-reciprocal"]
+    },
+    {
+      "id": "q-eq-spare-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "transfer_spare",
+      "reference": { "questionType": "새 적용 예비 문항 · 괄호가 있는 일차방정식", "authored": true },
+      "prompt": "방정식 4(x - 2) = 2x + 6 의 해는?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "-1" },
+        { "id": "b", "value": "1" },
+        { "id": "c", "value": "3" },
+        { "id": "d", "value": "7" }
+      ],
+      "answer": "7",
+      "solutionSteps": ["4x - 8 = 2x + 6", "4x - 2x = 6 + 8", "2x = 14", "x = 7"],
+      "conceptIds": ["c-eq-solve"]
+    },
+    {
+      "id": "q-rat-spare-1",
+      "kind": "authored",
+      "contentStatus": "approved",
+      "role": "transfer_spare",
+      "reference": { "questionType": "새 적용 예비 문항 · 부호가 있는 유리수의 혼합 계산", "authored": true },
+      "prompt": "(-2/3) × (-9/4) + (-2) 의 값은?",
+      "answerFormat": "choice",
+      "choices": [
+        { "id": "a", "value": "-7/2" },
+        { "id": "b", "value": "-1/2" },
+        { "id": "c", "value": "1/2" },
+        { "id": "d", "value": "7/2" }
+      ],
+      "answer": "-1/2",
+      "solutionSteps": ["(-2/3) × (-9/4) = 3/2", "3/2 + (-2)", "-1/2"],
+      "conceptIds": ["c-rat-calc"]
+    }
+  ]
+}

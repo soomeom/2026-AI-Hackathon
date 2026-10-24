@@ -1,0 +1,34 @@
+{
+  "routes": [
+    {
+      "id": "route-eq-1",
+      "questionId": "q-eq-1",
+      "coreConceptId": "c-eq-solve",
+      "prerequisiteConceptIds": ["c-distribute-sign", "c-eq-transpose", "c-int-addsub", "c-int-mul"],
+      "conceptCheckQuestionIds": ["q-cc-distribute-1", "q-cc-transpose-1"],
+      "foundationTemplateId": "tpl-eq-foundation",
+      "similarTemplateId": "tpl-eq-similar",
+      "transferTemplateId": "tpl-eq-transfer",
+      "spareQuestionId": "q-eq-spare-1"
+    },
+    {
+      "id": "route-rat-1",
+      "questionId": "q-rat-1",
+      "coreConceptId": "c-rat-calc",
+      "prerequisiteConceptIds": ["c-int-addsub", "c-int-mul", "c-frac-reciprocal"],
+      "conceptCheckQuestionIds": ["q-cc-intadd-1", "q-cc-reciprocal-1"],
+      "foundationTemplateId": "tpl-rat-foundation",
+      "similarTemplateId": "tpl-rat-similar",
+      "transferTemplateId": "tpl-rat-transfer",
+      "spareQuestionId": "q-rat-spare-1"
+    }
+  ],
+  "templates": [
+    { "id": "tpl-eq-foundation", "stage": "foundation_practice", "itemCount": 3, "conceptIds": ["c-distribute-sign", "c-eq-transpose"] },
+    { "id": "tpl-eq-similar", "stage": "similar_practice", "itemCount": 2, "conceptIds": ["c-eq-solve"] },
+    { "id": "tpl-eq-transfer", "stage": "transfer_check", "itemCount": 1, "conceptIds": ["c-eq-solve"] },
+    { "id": "tpl-rat-foundation", "stage": "foundation_practice", "itemCount": 3, "conceptIds": ["c-int-addsub", "c-frac-reciprocal"] },
+    { "id": "tpl-rat-similar", "stage": "similar_practice", "itemCount": 2, "conceptIds": ["c-rat-calc"] },
+    { "id": "tpl-rat-transfer", "stage": "transfer_check", "itemCount": 1, "conceptIds": ["c-rat-calc"] }
+  ]
+}
