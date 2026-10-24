@@ -60,7 +60,7 @@ export function handleRoadmapAction(button, { ui, getSummary, open, answer, rere
   }catch{ui.roadmapError='연습을 처리하지 못했어요. 현재 문항을 다시 열어 주세요.';}
   rerender();
   if(action!=='choice'){
-    const title=root.querySelector?.('#roadmap-title');
+    const title=root.querySelector?.('#roadmap-title')??root.querySelector?.('#map-heading');
     title?.focus?.({preventScroll:true});title?.scrollIntoView?.({block:'start',behavior:'instant'});
   }
   return true;

@@ -114,6 +114,8 @@ test('완료 후 멘티는 영역별 결과·멘토 대기를 보고 멘토 확�
   const props = setup(); const assessmentId = finish(props);
   assert.equal(renderInitialAssessment(props), true);
   assert.match(props.root.innerHTML, /멘토가 결과를 보고/);
+  assert.doesNotMatch(props.root.innerHTML, /initial-results/);
+  click(props, { initialAction: 'details' }); renderInitialAssessment(props);
   assert.match(props.root.innerHTML, /수와 다항식/);
   const { recommendation } = initialAssessmentSummary(props.state, 'learner-1', { catalog });
   const pathId = props.planInitialLesson({ assessmentId, conceptId: recommendation.conceptId, questionId: recommendation.questionIds[0] });
@@ -124,14 +126,21 @@ test('완료 후 멘티는 영역별 결과·멘토 대기를 보고 멘토 확�
   assert.equal(props.state.paths[0].id, pathId);
 });
 
-test('멘토 홈에 미시작·진행 중·완료(영역별 표·추천·확정) 보고서를 구분해서 표시한다', () => {
+test('멘토 홈은 상태를 요약하고 진단 상세와 수업 준비에서 보고서와 확정을 제공한다', () => {
   const props = setup(); renderMentor(props);
   assert.match(props.root.innerHTML, /첫 수준 확인/);
   assert.match(props.root.innerHTML, /아직/);
   props.startInitialAssessment(); props.state = props.getState();
   assert.match(initialAssessmentPanel(props.state, catalog, props.ui), /진행 중/);
   finish(props); renderMentor(props);
-  for (const text of [/영역/, /확인 수준/, /다시 볼 개념/, /추천:/, /시작 단원/, /첫 문제/, /멘토가 확정/, /결과 JSON 저장/, /초기 운영 규칙/]) {
+  assert.doesNotMatch(props.root.innerHTML, /initial-concept|assign-select/);
+  props.ui.mentorTab = 'assessment'; renderMentor(props);
+  for (const text of [/영역/, /확인 수준/, /다시 볼 개념/, /결과 JSON 저장/, /초기 운영 규칙/]) {
+    assert.match(props.root.innerHTML, text);
+  }
+  assert.doesNotMatch(props.root.innerHTML, /initial-concept/);
+  props.ui.mentorTab = 'planning'; renderMentor(props);
+  for (const text of [/추천:/, /시작 단원/, /첫 문제/, /멘토가 확정/, /AI 수업 제안/]) {
     assert.match(props.root.innerHTML, text);
   }
 });

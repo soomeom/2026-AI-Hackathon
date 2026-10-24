@@ -2,8 +2,9 @@
 // 채점·다음 단계 계산은 하지 않고 엔진 결과만 보여 준다.
 // renderLearner({ root, state, catalog, dispatch, ui, rerender })
 
+import { renderPathResult } from './learning-overview.js';
 import { renderInitialAssessment, initialLearningNote } from './initial-assessment.js';
-import { esc, FLOW, STAGE_LABEL, REASON_TEXT, SKIPPABLE, ORIGIN_LABEL, RESULT, ICON, mathHtml, choiceHtml, sourceLabel, questionBodyHtml, questionLabelHtml } from './text.js';
+import { esc, FLOW, STAGE_LABEL, REASON_TEXT, SKIPPABLE, ORIGIN_LABEL, ICON, mathHtml, choiceHtml, sourceLabel, questionBodyHtml, questionLabelHtml } from './text.js';
 
 const LEARN_STAGES = FLOW.filter((s) => s !== 'completed');
 const KEYS = ['A', 'B', 'C', 'D', 'E', 'F'];
@@ -36,8 +37,9 @@ export function renderLearner(props) {
   const learner = state.learners?.find((l) => l.id === state.learnerId);
   const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
   const path = activeLearnerPath(state, ui);
+  const terminal = path && ['completed', 'needs_mentor'].includes(path.stage);
 
-  let html = `<div class="page-head"><h2>${esc(learner?.name ?? '학습자')}님의 배움길</h2></div>${initialLearningNote(state, catalog)}`;
+  let html = terminal ? `<p class="meta">이번 학습 · ${questionLabelHtml(questionOf(catalog, path.questionId), catalog)}</p>` : `<div class="page-head"><h2>${esc(learner?.name ?? '학습자')}님의 배움길</h2></div>${initialLearningNote(state, catalog)}`;
   if (!path) {
     root.innerHTML = `${html}<div class="card empty">${ICON.book}<p><b>멘토가 지정한 문제가 아직 없어요.</b></p>
       <p class="muted">멘토 화면에서 문제를 지정하면 여기에 나타나요.</p></div>`;
@@ -52,17 +54,24 @@ export function renderLearner(props) {
       </button>`).join('')}</div>`;
   }
 
-  html += progress(path);
-  html += body(path, catalog, ui);
+  html += terminal ? `${renderPathResult(path, paths)}<button class="ghost" data-action="initial-open">첫 수준 확인 결과 보기</button>` : progress(path) + body(path, catalog, ui);
   root.innerHTML = html;
 
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
     if (b.dataset.action === 'initial-open') { ui.initialAssessmentOpen = true; props.syncVisibility?.(); rerender(); return; }
+    if (b.dataset.resultPath) {
+      if (!paths.some(p => p.id === b.dataset.resultPath && ['active','paused'].includes(p.status))) return;
+      ui.learnerPathId = b.dataset.resultPath; ui.feedback = null;
+      props.syncVisibility?.(); rerender(); root.querySelector?.('#q-prompt')?.focus?.(); return;
+    }
+    if (b.dataset.action === 'result-roadmap') {
+      ui.learnerTab = 'roadmap'; props.syncVisibility?.(); rerender(); root.querySelector?.('#map-heading')?.focus?.(); return;
+    }
     const item = path.items.find((i) => !i.answered);
     const send = (cmd) => dispatch({ pathId: path.id, ...cmd });
-    if (b.dataset.path) { ui.learnerPathId = b.dataset.path; ui.feedback = null; rerender(); return; }
+    if (b.dataset.path) { ui.learnerPathId = b.dataset.path; ui.feedback = null; props.syncVisibility?.(); rerender(); return; }
     if (b.dataset.choice) { ui.selected[item.id] = b.dataset.choice; rerender(); return; }
     switch (b.dataset.action) {
       case 'submit':
@@ -138,13 +147,6 @@ function body(path, catalog, ui) {
       <p class="muted">풀이 시간도 함께 멈춰 있어요. 준비되면 이어서 풀어요.</p>
       <div class="action-bar"><button class="primary large" data-action="resume">${ICON.play} 이어서 풀기</button></div></section>`;
   }
-  if (path.stage === 'needs_mentor') {
-    return `<section class="card question-card">${flash}<p class="feedback-title">${ICON.hand} 멘토와 함께 확인해요</p>
-      <p>지금까지 푼 기록은 저장되어 멘토에게 전달돼요. 다음 수업에서 같이 짚어 봐요.</p>
-      ${path.transferStatus === 'not_measured' ? '<p class="muted small">새 문제를 준비하지 못해 이번 확인은 멘토와 진행해요.</p>' : ''}</section>`;
-  }
-  if (path.stage === 'completed') return completedView(path);
-
   if (showingFeedback(path, ui)) return feedbackView(path, ui, flash, catalog);
 
   const item = path.items.find((i) => !i.answered);
@@ -217,21 +219,4 @@ function nextBox(path) {
     ${warn && r.mentorCheckSuggested ? '<p class="warn-text small">유사 문제가 어려웠어요. 멘토와 함께 확인하는 것도 좋아요.</p>' : ''}
     <button class="primary large" data-action="next">다음: ${STAGE_LABEL[r.nextStage]} ${ICON.arrow}</button>
   </div>`;
-}
-
-function completedView(path) {
-  const first = (path.pastItems ?? []).find((i) => i.stage === 'original_attempt');
-  const tile = (label, result, emptyText) => `<div class="tile"><span class="label">${label}</span>
-    <span class="value">${result ? `<span class="result ${result}">${RESULT[result].mark} ${RESULT[result].text}</span>` : `<span class="muted">${emptyText}</span>`}</span></div>`;
-  return `<section class="card question-card">
-    <div class="done-hero">${ICON.trophy}<h2>오늘의 배움길을 마쳤어요!</h2>
-      <p class="muted">처음 풀이와 다시 도전, 처음 보는 문제 결과를 함께 정리했어요.</p></div>
-    <div class="result-tiles">
-      ${tile('처음 풀이', first?.result, '—')}
-      ${tile('다시 도전', path.retryResult, '해당 없음')}
-      ${tile('처음 보는 문제', path.transferStatus === 'not_measured' ? null : path.transferResult, '미측정')}
-    </div>
-    ${path.skippedStageIds?.length ? `<p class="muted small">건너뛴 단계: ${path.skippedStageIds.map((s) => STAGE_LABEL[s]).join(', ')}</p>` : ''}
-    <p class="muted small">결과는 멘토가 다음 수업 준비에 함께 봐요.</p>
-  </section>`;
 }

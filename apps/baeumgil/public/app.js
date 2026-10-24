@@ -11,6 +11,7 @@ import { createDemoSession, prepareDemoRole, cancelPendingDemoAI } from './src/s
 import { renderDemoEntry, hasUnsavedSessionForm } from './src/ui/demo-entry.js';
 import { renderSubjectSelection } from './src/ui/subject-selection.js';
 import { isSubjectEnabled } from './src/content/subjects.js';
+import { renderRoadmapPage } from './src/ui/roadmap-page.js';
 
 const CONTENT_FILES = ['questions', 'concepts', 'routes', 'review', 'exam-bank'];
 
@@ -45,7 +46,7 @@ const demoSession = createDemoSession((() => { try { return window.sessionStorag
 
 const freshUi = () => ({
   selected: {}, help: {}, openEvidence: {}, ai: {}, logDraft: {}, reviewed: {},
-  learnerPathId: null, mentorPathId: null, mentorTab: 'home', sessionId: null, editSession: false,
+  learnerPathId: null, mentorPathId: null, mentorTab: 'home', learnerTab: 'learning', sessionId: null, editSession: false,
   confirmSkip: null, confirmReset: false, flash: null, overrideError: null, sessionError: null, logError: null,
   ledgerMonth: null, copyFallback: null,
   initialChoices: {}, initialAssessmentOpen: false, initialAssessmentDismissed: false, initialError: null,
@@ -88,6 +89,9 @@ function save(state) {
 
 function render() {
   const state = store.getState();
+  document.getElementById('learner-navigation').hidden = !inWorkspace() || ui.role !== 'learner';
+  document.getElementById('learner-learning').setAttribute('aria-current',ui.learnerTab==='roadmap'?'false':'page');
+  document.getElementById('learner-roadmap').setAttribute('aria-current',ui.learnerTab==='roadmap'?'page':'false');
   document.getElementById('session-controls').hidden = !ui.role;
   document.getElementById('reset').hidden = !inWorkspace();
   document.getElementById('change-subject').hidden = !inWorkspace();
@@ -115,14 +119,15 @@ function render() {
     submitInitialAnswer: store.submitInitialAnswer, planInitialLesson: store.planInitialLesson,
     syncVisibility,
   };
-  if (ui.role === 'learner') renderLearner(props);
+  if (ui.role === 'learner' && ui.learnerTab === 'roadmap') renderRoadmapPage(props);
+  else if (ui.role === 'learner') renderLearner(props);
   else renderMentor(props);
 }
 
 // 멘티 화면이 보이지 않을 때(탭 숨김·멘토 화면 전환)는 풀이 시간을 멈춘다
 function syncVisibility() {
   const state = store.getState();
-  const visiblePath = inWorkspace() && ui.role === 'learner' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
+  const visiblePath = inWorkspace() && ui.role === 'learner' && ui.learnerTab !== 'roadmap' && !document.hidden && !isInitialAssessmentVisible(state, ui) ? activeLearnerPath(state, ui) : null;
   for (const p of state.paths ?? []) {
     if (!p.routeId || p.status !== 'active') continue;
     const visible = p.id === visiblePath?.id;
@@ -224,6 +229,10 @@ async function start() {
   document.getElementById('change-role').addEventListener('click', () => leaveWorkspace({ changeRole: true }));
   document.getElementById('change-subject').addEventListener('click', () => leaveWorkspace());
   document.getElementById('reset').addEventListener('click', resetDemo);
+  for (const tab of ['learning','roadmap']) document.getElementById(`learner-${tab}`).addEventListener('click',()=>{
+    if (!inWorkspace() || ui.role!=='learner') return;
+    ui.learnerTab=tab; syncVisibility(); render(); focusScreen();
+  });
   document.addEventListener('visibilitychange', syncVisibility);
   // 다른 탭이 같은 기록을 바꾸면 이 탭의 쓰기를 멈춘다 (덮어쓰기 방지)
   window.addEventListener('storage', (ev) => {

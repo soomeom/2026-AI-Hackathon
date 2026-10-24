@@ -8,9 +8,10 @@ import {
 } from './text.js';
 import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } from './ai-panel.js';
 import { renderSessions } from './sessions.js';
-import { buildLogFacts } from '../mentoring/logs.js';
+import { renderMentorHome } from './learning-overview.js';
 import { initialAssessmentPanel, handleInitialAssessmentAction } from './initial-assessment.js';
 import { initialAssessmentSummary } from '../learning/initial-assessment.js';
+import { renderRoadmapPage } from './roadmap-page.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unknown: '확인 불가' };
@@ -18,24 +19,29 @@ const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unk
 const questionOf = (catalog, id) => catalog.questions.find((q) => q.id === id);
 
 export function renderMentor(props) {
+  if (props.ui.mentorTab === 'roadmap') return renderRoadmapPage(props);
   if (props.ui.mentorTab === 'sessions') return renderSessions(props);
   const { root, state, catalog, dispatch, assignQuestion, ui, rerender } = props;
   const learner = state.learners?.find((l) => l.id === state.learnerId);
   const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
   const summary = buildLearnerSummary(state, state.learnerId, { catalog });
   const selectedPath = paths.find((p) => p.id === ui.mentorPathId) ?? paths.at(-1);
-  const tab = ui.mentorTab === 'learning' ? 'learning' : 'home';
+  const tab = ['learning', 'planning', 'assessment'].includes(ui.mentorTab) ? ui.mentorTab : 'home';
 
-  root.innerHTML = `${mentorTabs(tab, learner)}
+  root.innerHTML = `${mentorTabs(tab === 'assessment' ? 'learning' : tab, learner)}
     ${ui.flash ? `<div class="msg" role="status">${esc(ui.flash)}</div>` : ''}
-    ${tab === 'home' ? homeView(state, catalog, summary, paths, ui) : `
+    ${tab === 'home' ? renderMentorHome(state, catalog, summary, paths) : tab === 'assessment' ? `<div class="page-head"><h2 tabindex="-1" id="overview-title">진단 상세</h2><button class="ghost" data-goto="home">← 멘토 홈</button></div>${initialAssessmentPanel(state, catalog, ui, {mode:'report'})}` : tab === 'planning' ? `
+      <div class="page-head"><h2 tabindex="-1" id="overview-title">수업 준비</h2><p class="muted">진단을 참고해 시작점을 정하고, 다음 문제를 지정해요.</p></div>
+      ${initialAssessmentPanel(state, catalog, ui, {mode:'plan'})}
+      <section class="card"><h3>${ICON.book} 추가 문제 지정</h3>${assignPicker(catalog, ui)}<button class="primary" data-action="assign">학생에게 지정</button></section>
+      ${lessonPanel(state, catalog, summary, ui)}` : `
       <section class="card">
         <h3>단계별 결과 <span class="muted small">모름은 정답률에서 제외</span></h3>
         ${statTiles(summary)}
       </section>
       <section class="card">
         <h3>학습 경로</h3>
-        ${paths.length ? pathList(paths, selectedPath, catalog) : '<p class="muted">아직 지정한 문제가 없어요. ‘오늘 할 일’에서 문제를 지정해요.</p>'}
+        ${paths.length ? pathList(paths, selectedPath, catalog) : '<p class="muted">아직 지정한 문제가 없어요. ‘수업 준비’에서 문제를 지정해요.</p>'}
         ${selectedPath ? pathDetail(selectedPath, catalog, state, ui) : ''}
       </section>
       <div class="grid">
@@ -44,7 +50,6 @@ export function renderMentor(props) {
           ${summary.evidence.length ? summary.evidence.map((e) => evidenceView(e, summary, catalog, ui)).join('') : '<p class="muted">아직 응답이 없어요.</p>'}
           ${summary.reviewFlags.length ? `<h4>검토할 점</h4><ul>${[...new Set(summary.reviewFlags.map((f) => FLAG_TEXT[f.code] ?? f.code))].map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
         </section>
-        ${lessonPanel(state, catalog, summary, ui)}
       </div>`}`;
   ui.flash = null;
 
@@ -62,12 +67,13 @@ export function renderMentor(props) {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
     if (handleInitialAssessmentAction(b, props)) return;
-    if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); return; }
+    if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); root.focus?.(); return; }
     if (b.dataset.goto) {
       ui.mentorTab = b.dataset.goto;
       if (b.dataset.path) ui.mentorPathId = b.dataset.path;
       if (b.dataset.session) { ui.sessionId = b.dataset.session; ui.editSession = false; }
       rerender();
+      root.focus?.();
       return;
     }
     if (b.dataset.ai) {
@@ -101,50 +107,6 @@ export function renderMentor(props) {
       rerender();
     }
   };
-}
-
-// 오늘 할 일: 멘토가 먼저 봐야 할 것을 개수와 함께 위에 놓는다 (칸아카데미 교실 화면의 정보 우선순위 참고)
-function homeView(state, catalog, summary, paths, ui) {
-  const needsMentor = paths.filter((p) => p.status === 'needs_mentor');
-  const helpPaths = paths.filter((p) => p.mentorRequests?.length);
-  const concepts = summary.evidence.filter((e) => e.status !== 'observed' || e.counts.incorrect > 0);
-  const sessions = (state.sessions ?? []).filter((s) => s.learnerId === state.learnerId);
-  const pendingLogs = sessions.filter((s) => {
-    const latest = (state.logs ?? []).filter((l) => l.sessionId === s.id).sort((a, b) => b.revision - a.revision)[0];
-    return !latest || latest.status !== 'confirmed' || buildLogFacts(state, s.id).requiresReview;
-  });
-  const promptOf = (p) => questionLabelHtml(questionOf(catalog, p.questionId), catalog);
-  const todo = ({ icon, title, count, items, action, empty }) => `<article class="todo${count ? ' attention' : ''}">
-    <span class="title">${icon} ${title}</span>
-    <span class="count">${count}</span>
-    ${count ? `<ul>${items.slice(0, 3).join('')}</ul>${action}` : `<span class="muted small">${empty}</span>`}
-  </article>`;
-  return `
-    ${initialAssessmentPanel(state, catalog, ui)}
-    <section aria-labelledby="todo-h"><h3 id="todo-h">오늘 확인할 것</h3>
-      <div class="todo-grid">
-        ${todo({ icon: ICON.flag, title: '멘토 확인 필요', count: needsMentor.length, items: needsMentor.map((p) => `<li>${promptOf(p)}</li>`),
-    action: `<button class="link" data-goto="learning" data-path="${esc(needsMentor[0]?.id ?? '')}">경로 열기 ${ICON.arrow}</button>`, empty: '막힌 학습이 없어요.' })}
-        ${todo({ icon: ICON.hand, title: '학생 도움 요청', count: helpPaths.reduce((n, p) => n + p.mentorRequests.length, 0), items: helpPaths.map((p) => `<li>${promptOf(p)} · ${STAGE_LABEL[p.mentorRequests.at(-1).stage] ?? ''}</li>`),
-    action: `<button class="link" data-goto="learning" data-path="${esc(helpPaths[0]?.id ?? '')}">요청 보기 ${ICON.arrow}</button>`, empty: '도움 요청이 없어요.' })}
-        ${todo({ icon: ICON.target, title: '확인할 개념', count: concepts.length, items: concepts.map((e) => `<li>${esc(e.conceptName)}</li>`),
-    action: `<button class="link" data-goto="learning">근거·AI 수업 제안 ${ICON.arrow}</button>`, empty: '아직 확인할 개념이 없어요.' })}
-        ${todo({ icon: ICON.doc, title: '확정 전 일지', count: pendingLogs.length, items: pendingLogs.map((s) => `<li>${esc(s.localDate)} 회기</li>`),
-    action: `<button class="link" data-goto="sessions" data-session="${esc(pendingLogs[0]?.id ?? '')}">일지 쓰기 ${ICON.arrow}</button>`, empty: '확정할 일지가 없어요.' })}
-      </div>
-    </section>
-    <div class="grid">
-      <section class="card">
-        <h3>${ICON.book} 문제 지정</h3>
-${assignPicker(catalog, ui)}
-        <div class="row"><button class="primary" data-action="assign">학생에게 지정</button></div>
-      </section>
-      <section class="card">
-        <h3>${ICON.spark} 학습 현황</h3>
-        ${statTiles(summary)}
-        ${paths.length ? `<h4>진행 중인 학습</h4>${pathList(paths.slice(-3).reverse(), null, catalog, 'learning')}` : ''}
-      </section>
-    </div>`;
 }
 
 // 문제 지정: 학교급으로 거르고 회차별로 묶는다 (기출 360문항 + 자체 제작)
@@ -213,7 +175,7 @@ function lessonPanel(state, catalog, summary, ui) {
   const out = slot?.status === 'ok' ? slot.output : null;
   return `<section class="card">
     <h3>AI 수업 제안 <span class="muted small">${esc(availability.text)}</span></h3>
-    <p class="muted">위 근거를 바탕으로 우선 확인할 개념, 오개념 후보, 설명 방법, 확인 질문을 제안해요. 제안은 멘토가 검토해 채택해요.</p>
+    <p class="muted">학생의 풀이 근거를 바탕으로 우선 확인할 개념, 오개념 후보, 설명 방법, 확인 질문을 제안해요. 제안은 멘토가 검토해 채택해요.</p>
     <div class="row"><button class="primary" data-ai="request" ${availability.ok && summary.timeline.length && slot?.status !== 'loading' ? '' : 'disabled'}>
       ${out ? '다시 제안 받기' : 'AI 수업 제안 받기'}</button>
       ${summary.timeline.length ? '' : '<span class="muted small">학생 응답이 생기면 요청할 수 있어요.</span>'}</div>

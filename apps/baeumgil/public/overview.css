@@ -1,0 +1,43 @@
+/* Summary and result screens only; solving controls keep their existing styles. */
+.mentor-overview,.overview-result {width:100%;max-width:1040px;margin:0 auto 24px;}
+.overview-heading {margin:24px 0;}
+.overview-heading h2 {font-size:28px;letter-spacing:-.7px;margin:6px 0 10px;line-height:1.35;}
+.overview-heading p {margin:6px 0;color:var(--muted,#526574);}
+.overview-metrics {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;border:1px solid #dce5e8;border-radius:14px;overflow:hidden;background:#dce5e8;margin-bottom:20px;}
+.overview-metrics>div {background:#fff;padding:19px 24px;display:flex;flex-direction:column;gap:6px;}
+.overview-metrics span,.overview-metrics small {color:#526574;font-size:13px;}
+.overview-metrics strong {font-size:24px;line-height:1.4;color:#183b43;}
+.overview-next {display:flex;align-items:center;justify-content:space-between;gap:28px;background:#eef8f6;border:1px solid #bdded6;border-radius:14px;padding:26px;margin:20px 0;}
+.overview-next>div {min-width:0;}
+.overview-eyebrow {color:#206451;font-size:13px;font-weight:700;}
+.overview-next h3 {margin:9px 0;font-size:22px;line-height:1.4;letter-spacing:-.3px;}
+.overview-next p {margin:0;color:#405b59;font-size:14px;line-height:1.7;max-width:640px;}
+.overview-next>button {flex-shrink:0;min-height:48px;}
+.overview-task-list {border:1px solid #dce5e8;border-radius:14px;overflow:hidden;background:white;}
+.overview-task {display:flex;width:100%;align-items:center;gap:18px;min-height:82px;border:0;border-bottom:1px solid #e6edef;border-radius:0;background:white;padding:17px 24px;text-align:left;}
+.overview-task:last-child {border-bottom:0;}
+.overview-task>span:first-child {flex:1;display:flex;flex-direction:column;gap:6px;min-width:0;}
+.overview-task strong {font-size:15px;color:#243e47;}
+.overview-task small {font-size:13px;color:#526574;font-weight:400;}
+.overview-task>b {background:#eef3f5;color:#405761;min-width:28px;text-align:center;padding:4px;border-radius:7px;}
+.overview-task:hover {background:#f5faf9;}
+.overview-links {display:flex;flex-wrap:wrap;gap:10px;margin:18px 0;}
+.overview-links button {min-height:44px;}
+.overview-secondary {max-width:1040px;margin:12px auto 24px;}
+.overview-details {border-top:1px solid #dce5e8;padding-top:16px;margin-top:24px;}
+.overview-details summary {cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600;}
+.overview-details summary::before {content:'＋';margin-right:10px;}
+.overview-details[open] summary::before {content:'−';}
+.overview-result button:focus-visible,.mentor-overview button:focus-visible {outline:3px solid #257a68;outline-offset:3px;}
+.student-bar nav.tabs {flex-wrap:wrap;}
+@media(max-width:700px) {
+  .overview-heading {margin:18px 0;}
+  .overview-heading h2 {font-size:24px;}
+  .overview-next {flex-direction:column;align-items:stretch;padding:20px;gap:18px;}
+  .overview-next h3 {font-size:20px;}
+  .overview-metrics>div {padding:14px 10px;}
+  .overview-metrics strong {font-size:20px;}
+  .overview-metrics small {font-size:11px;}
+  .overview-task {padding:16px;}
+  .overview-links {flex-direction:column;align-items:stretch;}
+}

@@ -4,6 +4,7 @@ import { saveSession, buildLogFacts, confirmLog, buildMonthlyLedger, createSessi
 import { buildAIInput } from '../ai/contracts.js';
 import { esc, STAGE_LABEL, mentorTabs, todaySeoul } from './text.js';
 import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } from './ai-panel.js';
+import { hasUnsavedSessionForm } from './demo-entry.js';
 
 const ATTENDANCE = { attended: '출석', absent: '결석', canceled: '취소', not_recorded: '미기록' };
 const LOG_ERRORS = {
@@ -78,7 +79,11 @@ export function renderSessions(props) {
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
-    if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); return; }
+    if (b.dataset.tab) {
+      if (b.dataset.tab==='sessions') return;
+      if (hasUnsavedSessionForm(root) && !window.confirm('저장하지 않은 회기 입력이 있어요. 화면을 나가면 이 입력은 사라져요. 계속할까요?\n작성 중인 일지 초안과 저장된 학습 기록은 유지돼요.')) return;
+      ui.mentorTab = b.dataset.tab; rerender(); return;
+    }
     if (b.dataset.session) { ui.sessionId = b.dataset.session; ui.editSession = false; ui.sessionError = null; rerender(); return; }
     const ctx = { ui, rerender, getState: props.getState, update: props.update };
     const key = selected ? `log:${selected.id}` : null;

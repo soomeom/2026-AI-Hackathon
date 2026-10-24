@@ -58,6 +58,7 @@ export function prepareDemoRole(ui, state, role) {
     return;
   }
   const paths = (state.paths ?? []).filter(path => path.learnerId === state.learnerId);
+  ui.learnerTab = 'learning';
   const path = paths.find(path => path.status === 'active' || path.status === 'paused') ?? paths.at(-1);
   ui.learnerPathId = path?.id ?? null;
   ui.initialAssessmentDismissed = Boolean(path);

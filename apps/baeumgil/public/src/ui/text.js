@@ -72,9 +72,11 @@ export const mentorTabs = (active, learner) => `<div class="card flat student-ba
   <div class="avatar" aria-hidden="true">${esc((learner?.name ?? '학')[0])}</div>
   <div class="who"><b>${esc(learner?.name ?? '학습자')}</b><span class="muted small">고졸 검정고시 수학${learner?.isDemo ? ' · 시연용 가명 학생' : ''}</span></div>
   <nav class="tabs" aria-label="멘토 메뉴">
-    <button data-tab="home" aria-selected="${active === 'home'}">오늘 할 일</button>
-    <button data-tab="learning" aria-selected="${active === 'learning'}">학습 근거·수업 준비</button>
-    <button data-tab="sessions" aria-selected="${active === 'sessions'}">회기·일지·월별 대장</button>
+    <button data-tab="home" aria-selected="${active === 'home'}">멘토 홈</button>
+    <button data-tab="roadmap" aria-selected="${active === 'roadmap'}">로드맵</button>
+    <button data-tab="learning" aria-selected="${active === 'learning'}">학습 기록</button>
+    <button data-tab="planning" aria-selected="${active === 'planning'}">수업 준비</button>
+    <button data-tab="sessions" aria-selected="${active === 'sessions'}">회기·일지</button>
   </nav>
 </div>`;
 
