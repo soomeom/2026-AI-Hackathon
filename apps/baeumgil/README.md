@@ -1,0 +1,37 @@
+# 배움길 MVP 실행
+
+지훈 담당 구현: 공통 데이터, 브라우저 저장, 실제 회기·일지·월별 대장, 로컬 HTTP 서버와 Gemini 호출 어댑터.
+
+## 실행
+
+Node.js 24 이상에서 이 디렉터리를 열고 실행한다. 외부 npm 패키지 설치는 필요 없다.
+
+```powershell
+cd C:\dev\gangwon\2026-AI-Hackathon\apps\baeumgil
+npm run dev
+```
+
+- 상태 확인: `http://127.0.0.1:4173/api/health`
+- 초기 데이터: `http://127.0.0.1:4173/api/bootstrap`
+- 화면: `public/index.html`을 FE 담당자가 연결하면 같은 주소의 `/`에서 제공한다. 현재 서버 자체는 화면을 만들지 않는다.
+
+## AI 설정
+
+`.env.example`을 같은 폴더의 `.env`로 복사하고 `GEMINI_API_KEY`, `GEMINI_MODEL`을 채운 뒤 서버를 다시 시작한다. 모델 ID는 계정에서 사용 가능한 값을 접두어 `models/` 없이 입력한다. `GOOGLE_API_KEY` 환경변수도 대체 키로 지원한다. 키는 서버 환경에만 둔다.
+
+설정이 없으면 AI API는 503을 반환한다. `configured: true`는 설정 유무이며 실제 계정 권한·호출 성공 보증이 아니다. 무료 사용 가능 여부와 한도는 계정에서 확인한다. 이 구현의 테스트는 공급자 응답을 주입해 검증하며, 실계정 AI 호출은 별도 확인이 필요하다.
+
+## 검증
+
+```powershell
+npm test
+npm run check:content
+```
+
+HTTP 테스트는 자기 컴퓨터의 임시 포트에 접속한다. 실행 환경에서 로컬 접속이 차단되면 `EACCES`가 날 수 있다. 학습 콘텐츠는 현재 고졸 대비 중1 기초의 자체 제작 시연 문항이며, 공식 기출 확보와 구분한다.
+
+## 팀 연결
+
+[백엔드 인수인계](docs/backend-handoff.md)에 FE 연결 예시, 저장 규칙, AI 요청·응답, 회기·일지 사용법을 정리했다. [구현 기록](docs/backend-progress.md)에 범위 결정과 검증 결과를 남겼다.
+
+MVP 데이터는 브라우저 `localStorage`에 저장한다. 역할 선택은 시연용이며 실제 인증, 서버 DB, 여러 기기 동기화는 이 범위에 포함하지 않는다.
