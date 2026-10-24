@@ -82,6 +82,7 @@ export function createAiHandler({ provider, timeoutMs = AI_TIMEOUT_MS, now = () 
     const timeoutSignal = AbortSignal.timeout(timeoutMs);
     const signal = clientSignal ? AbortSignal.any([timeoutSignal, clientSignal]) : timeoutSignal;
     let outcome = 'ok';
+    let detail;
     try {
       // 시스템 지시는 kind와 메모 유무로만 정해지므로 화면이 프롬프트를 바꿀 수 없다
       const result = await provider.generate({ request: buildGeminiRequest(input), signal });
@@ -108,10 +109,12 @@ export function createAiHandler({ provider, timeoutMs = AI_TIMEOUT_MS, now = () 
     } catch (error) {
       const code = classifyError(error, { timeoutSignal, clientSignal });
       outcome = code;
+      // 원인 문구(HTTP 상태, Gemini 오류 이유)는 서버 로그에만 남기고 화면에는 보내지 않는다
+      detail = typeof error?.message === 'string' ? error.message.slice(0, 300) : undefined;
       return failure(echo, fail(code).error);
     } finally {
       // 입력에는 학생 기록이 들어 있으므로 내용은 남기지 않는다
-      log({ requestId, kind: input.kind, outcome, ms: Date.now() - startedAt });
+      log({ requestId, kind: input.kind, outcome, ms: Date.now() - startedAt, ...(detail ? { detail } : {}) });
     }
   };
 }

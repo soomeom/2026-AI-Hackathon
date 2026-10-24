@@ -146,3 +146,16 @@ test('기록에는 입력 내용을 남기지 않는다', async () => {
   assert.equal(entries.length, 1);
   assert.deepEqual(Object.keys(entries[0]).sort(), ['kind', 'ms', 'outcome', 'requestId']);
 });
+
+test('공급자 오류의 원인은 서버 기록에만 남기고 화면 응답에는 넣지 않는다', async () => {
+  const entries = [];
+  const handler = createAiHandler({
+    provider: fakeProvider(async () => {
+      throw new ProviderError(ERROR_CODES.AI_PROVIDER_ERROR, 'Gemini HTTP 404: models/gemini-x is not found', { status: 404 });
+    }),
+    log: (entry) => entries.push(entry),
+  });
+  const { payload } = await handler(body());
+  assert.equal(entries[0].detail, 'Gemini HTTP 404: models/gemini-x is not found');
+  assert.doesNotMatch(JSON.stringify(payload), /gemini-x/);
+});

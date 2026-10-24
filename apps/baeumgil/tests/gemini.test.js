@@ -47,6 +47,12 @@ test('그 밖의 HTTP 오류와 빈 응답은 공급자 오류로 분류한다',
   const failing = createGeminiProvider({ apiKey: 'k', fetchImpl: async () => jsonResponse(500, {}) });
   await assert.rejects(failing.generate({ request }), { code: ERROR_CODES.AI_PROVIDER_ERROR });
 
+  const notFound = createGeminiProvider({
+    apiKey: 'k',
+    fetchImpl: async () => jsonResponse(404, { error: { message: 'models/gemini-x is not found' } }),
+  });
+  await assert.rejects(notFound.generate({ request }), { message: 'Gemini HTTP 404: models/gemini-x is not found' });
+
   const blocked = createGeminiProvider({
     apiKey: 'k',
     fetchImpl: async () => jsonResponse(200, { promptFeedback: { blockReason: 'SAFETY' } }),

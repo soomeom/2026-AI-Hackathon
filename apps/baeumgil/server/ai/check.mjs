@@ -21,7 +21,8 @@ const state = stateWithAttempts([
 ]);
 const input = buildAIInput(state, { learnerId: 'learner-1', kind: 'lesson_plan', catalog: makeCatalog() });
 
-const handler = createAiHandler({ provider: config.provider });
+// 실패하면 [ai] 줄의 detail에 원인(HTTP 상태, Gemini 오류 이유)이 나온다
+const handler = createAiHandler({ provider: config.provider, log: (entry) => console.log('[ai]', JSON.stringify(entry)) });
 const startedAt = Date.now();
 const { status, payload } = await handler({ requestId: 'ai-check', inputVersion: 'fixtures', input });
 
