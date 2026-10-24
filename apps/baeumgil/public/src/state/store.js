@@ -1,24 +1,12 @@
 // 화면용 상태 저장소. 학습 상태는 학습 엔진(applyLearningCommand)만 통해 바꾼다.
-// createStore({ initialState, catalog, rng, now, onChange }) -> { getState, dispatch, subscribe, assignQuestion, replaceState }
+// createStore({ initialState, catalog, rng, now, onChange }) -> { getState, dispatch, subscribe, assignQuestion, update, replaceState }
 // 저장(localStorage 등)은 여기서 하지 않는다. subscribe 로 persistence 어댑터를 연결한다.
 import { applyLearningCommand } from '../learning/engine.js';
+import { createInitialState } from '../domain/contracts.js';
 
-export const DEMO_IDS = Object.freeze({ learnerId: 'learner-1', mentorId: 'mentor-1' });
-
-// 시연용 가명 데이터. 실제 학생 정보를 넣지 않는다.
+// 시연용 가명 데이터. 형식은 공통 계약(createInitialState)을 따른다.
 export function createDemoState() {
-  return {
-    schemaVersion: 1,
-    revision: 0,
-    learnerId: DEMO_IDS.learnerId,
-    mentorId: DEMO_IDS.mentorId,
-    learners: [{ id: DEMO_IDS.learnerId, alias: '하늘', note: '가명 · 고졸 검정고시 수학 준비' }],
-    mentors: [{ id: DEMO_IDS.mentorId, alias: '김멘토' }],
-    assignments: [],
-    paths: [],
-    attempts: [],
-    exposures: [],
-  };
+  return createInitialState();
 }
 
 const nextIndex = (list, prefix) =>
@@ -35,7 +23,8 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
   };
 
   function dispatch(command) {
-    const full = { id: `cmd-${Date.now().toString(36)}-${++seq}`, at: now(), ...command };
+    // 저장본을 다시 불러와도 이전 명령 ID 와 겹치지 않도록 무작위 ID 를 쓴다 (겹치면 엔진이 중복으로 무시)
+    const full = { id: `cmd-${globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}-${Math.random().toString(36).slice(2)}-${++seq}`}`, at: now(), ...command };
     const { state: next, events } = applyLearningCommand(state, full, { catalog, rng });
     // 거부·중복이면 엔진이 원래 state 를 그대로 돌려준다
     if (next !== state) publish(next, events);
@@ -53,6 +42,20 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     return pathId;
   }
 
+  // 회기·일지·AI 기록처럼 엔진 밖의 변경. fn 은 새 state 를 돌려준다 (같은 객체면 변경 없음).
+  // logs.js 함수는 revision 을 이미 올려서 돌려주므로 그대로 쓰고, 아니면 여기서 올린다.
+  function update(fn, event = { type: 'stateUpdated' }) {
+    const next = fn(state);
+    if (next === state) return state;
+    if ((next.revision ?? 0) > (state.revision ?? 0)) {
+      state = next;
+      for (const sub of subscribers) sub(state, [event]);
+    } else {
+      publish({ ...next, revision: state.revision ?? 0 }, [event]);
+    }
+    return state;
+  }
+
   function replaceState(next) {
     state = next;
     for (const fn of subscribers) fn(state, [{ type: 'stateReplaced' }]);
@@ -62,6 +65,7 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     getState: () => state,
     dispatch,
     assignQuestion,
+    update,
     replaceState,
     subscribe(fn) {
       subscribers.add(fn);

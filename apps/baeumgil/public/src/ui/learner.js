@@ -14,7 +14,7 @@ export function renderLearner({ root, state, catalog, dispatch, ui, rerender }) 
   const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
   const path = activeLearnerPath(state, ui);
 
-  let html = `<div class="page-head"><h2>${esc(learner?.alias ?? '학습자')}님의 배움길</h2></div>`;
+  let html = `<div class="page-head"><h2>${esc(learner?.name ?? '학습자')}님의 배움길</h2></div>`;
   if (!path) {
     root.innerHTML = `${html}<div class="card empty">멘토가 지정한 문제가 아직 없어요.<br><span class="muted">멘토 화면에서 문제를 지정하면 여기에 나타나요.</span></div>`;
     return;

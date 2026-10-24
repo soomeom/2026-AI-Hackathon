@@ -66,9 +66,19 @@ function learningSnapshot(state, sessionId) {
   const snapshot = createSessionSnapshot(state, sessionId);
   return { historyIntegrity: snapshot.historyIntegrity ?? 'unknown', paths: snapshot.paths, attempts: snapshot.attempts, exposures: snapshot.exposures };
 }
+// 확정 당시 근거였던 기록이 그대로인지 본다. 이후에 새로 생긴 풀이·노출이나 경로의 현재 단계 변화는
+// 지난 회기 일지를 무효로 만들지 않는다 (학생은 회기 뒤에도 계속 학습한다).
+function sameRecords(saved = [], current = []) {
+  const byId = new Map(current.map(record => [record.id, record]));
+  return saved.every(record => JSON.stringify(byId.get(record.id)) === JSON.stringify(record));
+}
 function sourceMatches(state, session, log) {
-  return log.sessionVersion === session.version && log.learningSnapshot !== undefined
-    && JSON.stringify(log.learningSnapshot) === JSON.stringify(learningSnapshot(state, session.id));
+  if (log.sessionVersion !== session.version || log.learningSnapshot === undefined) return false;
+  const saved = log.learningSnapshot;
+  const current = learningSnapshot(state, session.id);
+  return saved.historyIntegrity === current.historyIntegrity
+    && sameRecords(saved.attempts, current.attempts)
+    && sameRecords(saved.exposures, current.exposures);
 }
 
 export function buildLogFacts(state, sessionId, { catalog } = {}) {

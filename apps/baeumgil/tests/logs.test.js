@@ -135,3 +135,16 @@ test('일지 확정 이전 회기 변경도 수정 전후의 사실을 이력으
   assert.equal(event.current.note, '추가 연습 진행');
   assert.equal(first.sessions[0].actualMinutes, 30);
 });
+
+test('확정 후 학생이 같은 경로를 계속 학습해도 확정 일지는 대장에서 빠지지 않는다', () => {
+  let state = createInitialState(stateWithAttempts([makeAttempt({ id: 'a-1', result: 'incorrect' })]));
+  state = saveSession(state, session({ pathIds: ['path-1'] }));
+  state = confirmLog(state, confirmation());
+  const later = structuredClone(state);
+  // 다음 주에 같은 경로에서 새 문제를 풀고 단계가 바뀜
+  later.attempts.push(makeAttempt({ id: 'a-2', result: 'correct', submittedAt: '2026-11-08T05:00:00Z' }));
+  later.exposures.push({ id: 'exposure-9', learnerId: 'learner-1', pathId: 'path-1', fingerprint: 'x' });
+  later.paths[0].stage = 'similar_practice';
+  assert.equal(buildLogFacts(later, 'session-1').requiresReview, false);
+  assert.equal(buildMonthlyLedger(later, '2026-11').totalMinutes, 30);
+});

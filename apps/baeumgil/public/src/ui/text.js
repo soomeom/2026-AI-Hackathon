@@ -66,3 +66,11 @@ export function stepsBar(path) {
     return `<li class="step ${cls}${skipped ? ' skipped' : ''}"${s === path.stage ? ' aria-current="step"' : ''}>${STAGE_LABEL[s]}${skipped ? ' (건너뜀)' : ''}</li>`;
   }).join('')}</ol>`;
 }
+
+export const mentorTabs = (active) => `<nav class="tabs" aria-label="멘토 메뉴">
+  <button data-tab="learning" aria-selected="${active === 'learning'}">학습 근거·수업 준비</button>
+  <button data-tab="sessions" aria-selected="${active === 'sessions'}">회기·활동일지·월별 대장</button>
+</nav>`;
+
+// 한국 시간 기준 오늘 날짜 (YYYY-MM-DD)
+export const todaySeoul = () => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(new Date());

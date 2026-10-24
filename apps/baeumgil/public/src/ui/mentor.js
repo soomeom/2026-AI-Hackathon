@@ -1,10 +1,13 @@
-// 멘토 화면: 문항 지정, 학습 경로 현황, 근거 요약, 단계 조정. 수치는 모두 summary 모듈 결과를 그대로 쓴다.
-// renderMentor({ root, state, catalog, dispatch, assignQuestion, ui, rerender })
+// 멘토 화면: 문항 지정, 학습 경로 현황, 근거 요약, 단계 조정, AI 수업 제안. 수치는 모두 summary 모듈 결과를 그대로 쓴다.
+// renderMentor({ root, state, catalog, dispatch, assignQuestion, update, getState, ui, rerender })
 import { buildLearnerSummary } from '../mentoring/summary.js';
 import { listAssignableQuestions } from '../content/catalog.js';
+import { buildAIInput } from '../ai/contracts.js';
 import {
-  esc, STAGE_LABEL, EVIDENCE_LABEL, FLAG_TEXT, resultBadge, formatSeconds, stepsBar,
+  esc, STAGE_LABEL, EVIDENCE_LABEL, FLAG_TEXT, resultBadge, formatSeconds, stepsBar, mentorTabs,
 } from './text.js';
+import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } from './ai-panel.js';
+import { renderSessions } from './sessions.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const STATUS_TEXT = { active: '진행 중', paused: '멈춤', completed: '완료', needs_mentor: '멘토 확인 필요' };
@@ -13,7 +16,9 @@ const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unk
 const questionOf = (catalog, id) => catalog.questions.find((q) => q.id === id);
 const pct = (s) => (s.rate === null ? '—' : `${Math.round(s.rate * 100)}% <span class="muted">(${s.correct}/${s.attempted})</span>`);
 
-export function renderMentor({ root, state, catalog, dispatch, assignQuestion, ui, rerender }) {
+export function renderMentor(props) {
+  if (props.ui.mentorTab === 'sessions') return renderSessions(props);
+  const { root, state, catalog, dispatch, assignQuestion, ui, rerender } = props;
   const learner = state.learners?.find((l) => l.id === state.learnerId);
   const paths = (state.paths ?? []).filter((p) => p.learnerId === state.learnerId);
   const summary = buildLearnerSummary(state, state.learnerId, { catalog });
@@ -21,7 +26,8 @@ export function renderMentor({ root, state, catalog, dispatch, assignQuestion, u
   const selectedPath = paths.find((p) => p.id === ui.mentorPathId) ?? paths.at(-1);
 
   root.innerHTML = `
-    <div class="page-head"><h2>${esc(learner?.alias ?? '학습자')} <span class="muted">${esc(learner?.note ?? '')}</span></h2></div>
+    <div class="page-head"><h2>${esc(learner?.name ?? '학습자')} <span class="muted">${esc(learner?.isDemo ? '· 시연용 가명 학생' : '')}</span></h2></div>
+    ${mentorTabs('learning')}
     <div class="grid">
       <section class="card">
         <h3>문제 지정</h3>
@@ -72,16 +78,24 @@ export function renderMentor({ root, state, catalog, dispatch, assignQuestion, u
       ${summary.reviewFlags.length ? `<h4>검토할 점</h4><ul>${[...new Set(summary.reviewFlags.map((f) => FLAG_TEXT[f.code] ?? f.code))].map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
     </section>
 
-    <section class="card">
-      <h3>AI 수업 제안</h3>
-      <p class="muted">위 근거를 바탕으로 우선 확인할 개념, 오개념 후보, 설명 방법, 확인 질문을 제안해요. 제안은 멘토가 검토해 채택해요.</p>
-      <div class="row"><button disabled title="서버 /api/ai 연결 후 사용">AI 수업 제안 받기 (서버 연결 예정)</button></div>
-    </section>`;
+    ${lessonPanel(state, catalog, summary, ui)}`;
   ui.flash = null;
 
   root.onclick = (ev) => {
     const b = ev.target.closest('button');
     if (!b || b.disabled) return;
+    if (b.dataset.tab) { ui.mentorTab = b.dataset.tab; rerender(); return; }
+    if (b.dataset.ai) {
+      const ctx = { ui, rerender, getState: props.getState, update: props.update };
+      if (b.dataset.ai === 'request') {
+        runAI({
+          key: 'lesson', kind: 'lesson_plan', ctx,
+          buildInput: (s, requestId) => buildAIInput(s, { learnerId: s.learnerId, kind: 'lesson_plan', catalog, requestId }),
+        });
+      } else if (b.dataset.ai === 'cancel') cancelAI('lesson', ui);
+      else decideAI(b.dataset.artifact, b.dataset.ai === 'adopt' ? 'adopted' : 'rejected', ctx);
+      return;
+    }
     if (b.dataset.path) { ui.mentorPathId = b.dataset.path; rerender(); return; }
     if (b.dataset.evidence) { ui.openEvidence[b.dataset.evidence] = !ui.openEvidence[b.dataset.evidence]; rerender(); return; }
     if (b.dataset.action === 'assign') {
@@ -101,6 +115,40 @@ export function renderMentor({ root, state, catalog, dispatch, assignQuestion, u
       rerender();
     }
   };
+}
+
+function lessonPanel(state, catalog, summary, ui) {
+  const availability = aiAvailability(ui);
+  const slot = ui.ai.lesson;
+  const conceptName = (id) => catalog.concepts.find((c) => c.id === id)?.name ?? id;
+  const evidenceName = (id) => summary.evidence.find((e) => e.id === id)?.conceptName ?? id;
+  const promptOf = (id) => catalog.questions.find((q) => q.id === id)?.prompt ?? '연습 문제';
+  const out = slot?.status === 'ok' ? slot.output : null;
+  return `<section class="card">
+    <h3>AI 수업 제안 <span class="muted small">${esc(availability.text)}</span></h3>
+    <p class="muted">위 근거를 바탕으로 우선 확인할 개념, 오개념 후보, 설명 방법, 확인 질문을 제안해요. 제안은 멘토가 검토해 채택해요.</p>
+    <div class="row"><button class="primary" data-ai="request" ${availability.ok && summary.timeline.length && slot?.status !== 'loading' ? '' : 'disabled'}>
+      ${out ? '다시 제안 받기' : 'AI 수업 제안 받기'}</button>
+      ${summary.timeline.length ? '' : '<span class="muted small">학생 응답이 생기면 요청할 수 있어요.</span>'}</div>
+    ${statusHtml(slot, state)}
+    ${out ? `<div class="ai-result">
+      <h4>우선 확인할 개념</h4>
+      ${out.priorities.map((p) => `<div class="ai-item">
+        <b>${esc(conceptName(p.conceptId))}</b> <span class="muted small">근거: ${p.evidenceIds.map((id) => esc(evidenceName(id))).join(', ')}</span>
+        <dl>
+          <dt>이유</dt><dd>${esc(p.reason)}</dd>
+          <dt>확인할 오개념 후보</dt><dd>${esc(p.misconceptionCandidate)}</dd>
+          <dt>설명 방법</dt><dd>${esc(p.explanationMethod)}</dd>
+          <dt>불확실한 부분</dt><dd>${esc(p.uncertainty)}</dd>
+        </dl></div>`).join('')}
+      <h4>학생에게 던질 확인 질문</h4>
+      <ul>${out.mentorQuestions.map((q) => `<li>${esc(q.text)}</li>`).join('')}</ul>
+      <h4>수업 흐름</h4>
+      <ol>${out.plan.map((p) => `<li>${esc(p.minutes)}분 · ${esc(p.activity)}${p.questionIds.length ? ` <span class="muted small">(${p.questionIds.map((id) => esc(promptOf(id))).join(', ')})</span>` : ''}</li>`).join('')}</ol>
+      <p class="muted small">실제 AI 응답이에요. 근거 ID 가 학생 기록과 맞는지 확인한 결과만 보여 줘요.</p>
+      ${decisionHtml(state, slot.artifactId)}
+    </div>` : ''}
+  </section>`;
 }
 
 function pathDetail(path, catalog, state, ui) {

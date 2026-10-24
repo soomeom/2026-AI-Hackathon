@@ -92,3 +92,35 @@ test('replaceState 로 저장본을 불러오면 그대로 이어서 진행한�
   const itemId = pathOf(other, pathId).items[0].id;
   assert.equal(other.dispatch({ type: 'PRESENT_QUESTION', pathId, itemId })[0].type, 'questionPresented');
 });
+
+test('화면 상태는 공통 계약을 통과하고 변경마다 저장할 수 있다', async () => {
+  const { validateState } = await import('../public/src/domain/contracts.js');
+  const { saveState, loadState } = await import('../public/src/state/persistence.js');
+  const data = new Map();
+  const storage = { getItem: (k) => data.get(k) ?? null, setItem: (k, v) => data.set(k, v), removeItem: (k) => data.delete(k) };
+  const store = createStore({ initialState: createDemoState(), catalog, rng: () => 0.25 });
+  assert.deepEqual(validateState(store.getState()).errors, []);
+  let saved = 0;
+  store.subscribe((state) => {
+    const result = saveState(storage, state, saved);
+    assert.equal(result.ok, true, result.reason);
+    saved = state.revision;
+  });
+  const pathId = store.assignQuestion({ questionId: 'q-rat-1' });
+  store.dispatch({ type: 'PRESENT_QUESTION', pathId, itemId: pathOf(store, pathId).items[0].id });
+  const loaded = loadState(storage);
+  assert.equal(loaded.status, 'ready');
+  assert.equal(loaded.state.revision, store.getState().revision);
+  assert.equal(loaded.state.exposures.length, 1);
+});
+
+test('update 는 엔진 밖 변경(회기 저장 등)을 반영하고 revision 을 한 번만 올린다', async () => {
+  const { saveSession } = await import('../public/src/mentoring/logs.js');
+  const { store, pathId } = setup();
+  const before = store.getState().revision;
+  store.update((s) => saveSession(s, { id: 'session-1', learnerId: 'learner-1', mentorId: 'mentor-1', localDate: '2026-10-24', attendance: 'attended', actualMinutes: 40, pathIds: [pathId], note: '' }));
+  assert.equal(store.getState().revision, before + 1);
+  assert.equal(store.getState().sessions.length, 1);
+  store.update((s) => ({ ...s, aiArtifacts: [{ id: 'ai-1' }] }));
+  assert.equal(store.getState().revision, before + 2);
+});

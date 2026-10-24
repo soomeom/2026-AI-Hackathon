@@ -110,3 +110,26 @@ input { flex: 1; min-width: 200px; }
   .prompt { font-size: 19px; }
   .brand .muted { display: none; }
 }
+
+/* 멘토 탭·폼·AI 결과·일지 */
+nav.tabs { margin-top: -4px; }
+nav.tabs button { font-size: 14px; }
+textarea { font: inherit; width: 100%; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px; resize: vertical; }
+textarea:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+.form { display: grid; gap: 12px; }
+fieldset.field { border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; margin: 0; }
+.check { display: flex; gap: 8px; align-items: flex-start; font-size: 14px; margin-top: 8px; }
+.check input { min-height: auto; margin-top: 4px; }
+label.inline { font-size: 13px; font-weight: 400; margin-left: 8px; }
+label.inline input { min-height: 32px; padding: 4px 6px; }
+.pre { white-space: pre-line; }
+.ai-result { margin-top: 12px; border-top: 1px solid var(--line); }
+.ai-item { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.ai-item dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 12px; margin: 6px 0 0; font-size: 14px; }
+.ai-item dt { color: var(--muted); }
+.ai-item dd { margin: 0; }
+.ai-sentences { padding-left: 20px; }
+.warn-text { color: var(--warn); font-weight: 600; }
+.raw { font-family: Consolas, monospace; font-size: 12px; }
+h3 button.small { margin-left: 8px; min-height: 30px; padding: 2px 8px; }
+@media (max-width: 760px) { .ai-item dl { grid-template-columns: 1fr; } }
