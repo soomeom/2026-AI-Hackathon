@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>배움길</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">배움길 <span class="muted">학생의 배움을 잇고, 멘토의 부담을 덜다</span></div>
+    <nav class="roles" aria-label="역할 전환">
+      <button data-role="mentor" aria-pressed="false">멘토</button>
+      <button data-role="learner" aria-pressed="false">멘티</button>
+    </nav>
+    <button id="reset" class="ghost">시연 초기화</button>
+  </header>
+  <p class="demo-note" role="note">시연용 화면이에요. 가명 데이터를 쓰고, 역할 전환은 보안 기능이 아니에요. <span id="save-note"></span></p>
+  <main id="app" tabindex="-1"><p class="muted">불러오는 중…</p></main>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
