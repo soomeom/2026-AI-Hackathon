@@ -2,6 +2,8 @@ import { esc } from './text.js';
 import { SIGNUP_ROLES, GANGWON_REGIONS, SIGNUP_AGE_BANDS } from '../auth/signup.js';
 
 // validateSignup 오류 키 -> 포커스할 칸. 역할은 입력 칸이 아니라 첫 선택 버튼으로 보낸다.
+// 화면에 보이는 위에서 아래 순서. 실패 후 첫 오류 칸 포커스에 쓴다.
+export const SIGNUP_VISUAL_ORDER = ['role', 'name', 'ageBand', 'region', 'loginId', 'password', 'passwordConfirm', 'linkCode', 'agree', 'guardianAgree'];
 export const SIGNUP_FOCUS = {
   name: '#signup-name', loginId: '#signup-login-id', password: '#signup-password', passwordConfirm: '#signup-password-confirm',
   role: '[data-signup-role]', region: '#signup-region', ageBand: '#signup-age', linkCode: '#signup-link-code',
@@ -11,7 +13,7 @@ export const SIGNUP_FOCUS = {
 const errorAttrs = (id, errors, key) => errors[key] ? ` aria-invalid="true" aria-describedby="${id}-error"` : '';
 const errorText = (id, errors, key, extra = '') => {
   const text = errors[key] || extra;
-  return text ? `<p id="${id}-error" class="field-error" role="alert">${esc(text)}</p>` : '';
+  return text ? `<p id="${id}-error" class="field-error">${esc(text)}</p>` : '';
 };
 const options = (list, value, placeholder) => `<option value="">${placeholder}</option>` + list.map(item => {
   const [id, label] = Array.isArray(item) ? item : [item, item];
@@ -65,7 +67,7 @@ export function renderSignupForm(values = {}, errors = {}, { passwordNotice = ''
         ${textField('signup-password-confirm', '비밀번호 확인', 'passwordConfirm', values, errors, { type: 'password', autocomplete: 'new-password' })}
         ${textField('signup-link-code', '연결 코드 (보호자는 필수)', 'linkCode', values, errors, { hint: '멘토·학생·보호자를 서로 연결하는 코드예요. 센터나 멘토에게 받아요. 프로토타입에서는 실제로 연결되지 않아요.', required: values.role === 'guardian' })}
         ${checkField('signup-agree', '개인정보 수집·이용 동의 (필수)', 'agree', values, errors)}
-        ${values.ageBand === 'under14' ? checkField('signup-guardian-agree', '보호자 동의 (14세 미만 필수)', 'guardianAgree', values, errors) : ''}
+        ${values.role === 'learner' && values.ageBand === 'under14' ? checkField('signup-guardian-agree', '보호자 동의 (14세 미만 필수)', 'guardianAgree', values, errors) : ''}
         <button type="submit" class="primary large" data-auth-action="signup-submit">가입하기</button>
       </form>
       <button type="button" class="secondary" data-auth-action="login-view">로그인으로 돌아가기</button>

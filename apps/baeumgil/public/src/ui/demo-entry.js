@@ -3,7 +3,7 @@ import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 import { learnerPaths } from '../learning/assignments.js';
 import { authenticate, DEMO_ACCOUNTS } from '../auth/accounts.js';
 import { validateSignup } from '../auth/signup.js';
-import { renderSignupForm, renderSignupDone, readSignupForm, SIGNUP_FOCUS } from './signup-form.js';
+import { renderSignupForm, renderSignupDone, readSignupForm, SIGNUP_FOCUS, SIGNUP_VISUAL_ORDER } from './signup-form.js';
 
 // 회기 입력 폼은 아직 저장소에 반영되지 않았으므로 나가기 전에 확인한다.
 // 활동일지 내용은 기존 ui.logDraft에 보관되며 이 검사 대상이 아니다.
@@ -89,7 +89,7 @@ export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
     <div class="entry-intro">
       <span class="pill primary">배움길</span>
       <h1 id="entry-title">배움은 함께,<br>시작은 나에게 맞게.</h1>
-      <p>로그인하고 오늘의 배움을 이어가요.</p>
+      <p>${login ? '로그인하고 오늘의 배움을 이어가요.' : '가입 화면을 둘러보세요. 프로토타입이라 실제로 등록되지는 않아요.'}</p>
     </div>
     ${login ? loginCard() : entryView.view === 'signup-done' ? renderSignupDone() : renderSignupForm(entryView.signupValues, entryView.signupErrors, { passwordNotice: entryView.passwordNotice })}
     ${login ? ageSection(display) : ''}
@@ -139,7 +139,8 @@ export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
     entryView.signupValues = form;
     entryView.signupErrors = result.errors;
     redraw();
-    root.querySelector?.(SIGNUP_FOCUS[Object.keys(result.errors)[0]])?.focus?.();
+    const first = SIGNUP_VISUAL_ORDER.find(key => result.errors[key]);
+    root.querySelector?.(SIGNUP_FOCUS[first])?.focus?.();
   };
   root.onsubmit = event => {
     event?.preventDefault?.();

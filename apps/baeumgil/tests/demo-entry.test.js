@@ -224,7 +224,12 @@ test('signup validation errors keep entered values except passwords and focus th
   assert.match(h.root.innerHTML, /id="signup-name"[^>]*value="하늘이"/);
   assert.doesNotMatch(h.root.innerHTML, /id="signup-password"[^>]*value=/);
   assert.doesNotMatch(h.root.innerHTML, /abc12345/);
-  assert.equal(h.focused(), 'signup-login-id');
+  assert.equal(h.focused(), 'data-signup-role]', 'role is the first field in visual order');
+  assert.doesNotMatch(h.root.innerHTML, /class="field-error" role="alert"/);
+  h.press({ signupRole: 'learner' });
+  h.get('signup-password').value = 'abc12345';
+  h.press({ authAction: 'signup-submit' });
+  assert.equal(h.focused(), 'signup-age', 'age is above login id in visual order');
   h.press({ authAction: 'login-view' });
 });
 
@@ -263,15 +268,19 @@ test('choosing 60 or older in signup opens the large text recommendation', () =>
   h.press({ authAction: 'login-view' });
 });
 
-test('changing the signup role after typing a password explains why it was cleared and under14 shows the guardian consent', () => {
+test('changing the signup role after typing a password explains why it was cleared; minor consent only for a learner under 14', () => {
   const h = signupHarness();
   h.get('signup-password').value = 'abc12345';
   h.press({ signupRole: 'guardian' });
   assert.match(h.root.innerHTML, /비밀번호를 다시 입력해 주세요/);
   assert.match(h.root.innerHTML, /aria-required="true"/);
-  assert.doesNotMatch(h.root.innerHTML, /signup-guardian-agree/);
+  h.get('signup-age').value = 'under14';
   h.root.onchange({ target: { dataset: { signupAge: '' }, value: 'under14' } });
+  assert.doesNotMatch(h.root.innerHTML, /signup-guardian-agree/, 'a guardian never needs minor consent');
+  h.press({ signupRole: 'learner' });
   assert.match(h.root.innerHTML, /id="signup-guardian-agree"/);
+  h.press({ signupRole: 'mentor' });
+  assert.doesNotMatch(h.root.innerHTML, /signup-guardian-agree/);
   h.press({ authAction: 'login-view' });
 });
 

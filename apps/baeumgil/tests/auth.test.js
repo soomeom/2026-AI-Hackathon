@@ -26,5 +26,7 @@ test('signup validation accepts a complete form and reports each rule with its e
   assert.equal(validateSignup({ ...valid, role:'guardian', linkCode:' bg-a1b2 ' }).ok, true);
   assert.equal(validateSignup({ ...valid, ageBand:'under14' }).errors.guardianAgree, '14세 미만은 보호자 동의가 필요해요.');
   assert.equal(validateSignup({ ...valid, ageBand:'under14', guardianAgree:true }).ok, true);
+  assert.equal(validateSignup({ ...valid, role:'guardian', ageBand:'under14', linkCode:'BG-1234' }).ok, true);
+  assert.equal(validateSignup({ ...valid, role:'mentor', ageBand:'under14' }).errors.guardianAgree, undefined);
   assert.equal(validateSignup({ ...valid, password:'12345678', passwordConfirm:'12345678' }).errors.password, '비밀번호는 영문과 숫자를 섞어 8~32자로 만들어 주세요.');
 });

@@ -31,7 +31,7 @@ export function validateSignup(form = {}) {
   else if (!linkCode && form.role === 'guardian') errors.linkCode = '자녀의 연결 코드를 입력해 주세요.';
 
   if (form.agree !== true) errors.agree = '개인정보 수집·이용에 동의해 주세요.';
-  if (form.ageBand === 'under14' && form.guardianAgree !== true) errors.guardianAgree = '14세 미만은 보호자 동의가 필요해요.';
+  if (form.role === 'learner' && form.ageBand === 'under14' && form.guardianAgree !== true) errors.guardianAgree = '14세 미만은 보호자 동의가 필요해요.';
 
   return { ok: Object.keys(errors).length === 0, errors };
 }
