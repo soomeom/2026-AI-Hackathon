@@ -1,4 +1,5 @@
-import { esc, mathHtml } from './text.js';
+import { esc, mathHtml,questionBodyHtml,choiceHtml } from './text.js';
+import { normalizeChoiceValue } from '../learning/exposure.js';
 
 export const MAP_STATUS = { unmeasured: '미확인', needs_learning: '보완 필요', needs_recheck: '혼자 다시 확인', mastered: '진단 통과', confirmed: '선수 개념 확인' };
 // 색만으로 구분하지 않도록 모양도 함께 쓴다
@@ -48,18 +49,18 @@ export function lessonRows(selected, { cards, entries, practice, questions }) {
   const diagnostic = entries.filter(e => selected.evidenceQuestionIds.includes(e.questionId))
     .map(e => ({ questionId: e.questionId, label: questionText(byId.get(e.questionId)) || e.core || e.questionId,
       html: questionHtml(byId.get(e.questionId), e.core || e.questionId), result: e.result === 'correct' && !e.independent ? 'helped' : e.result }));
-  const latest = new Map((practice?.attempts ?? []).filter(a => a.cardId === card?.id).map(a => [a.questionId, a.result]));
+  const latest = new Map((practice?.attempts ?? []).filter(a => a.cardId === card?.id).map(a => [a.questionId, a.result==='correct'&&a.helpUsed?'helped':a.result]));
   const review = (card?.questionIds ?? []).map(id => ({ questionId: id, label: questionText(byId.get(id)) || id, html: questionHtml(byId.get(id), id), result: latest.get(id) ?? 'todo' }));
   return { card, diagnostic, review };
 }
 
 function detailHtml(map, selected, ctx) {
-  const { canPractice } = ctx;
+  const { canPractice,mentor=false } = ctx;
   const { card, diagnostic, review } = lessonRows(selected, ctx);
-  const done = review.filter(r => r.result === 'correct').length;
+  const done = review.filter(r => ['correct','helped'].includes(r.result)).length;
   const pct = review.length ? Math.round(done / review.length * 100) : 0;
-  const nextReview = review.find(r => r.result !== 'correct') ?? review[0];
-  const openAttr = id => canPractice && card ? `data-roadmap-action="open" data-roadmap-card="${esc(card.id)}" data-roadmap-question="${esc(id)}"` : '';
+  const nextReview = review.find(r => !['correct','helped'].includes(r.result)) ?? review[0];
+  const openAttr = id => mentor ? `data-map-action="preview" data-map-node="${esc(selected.id)}" data-map-question="${esc(id)}"` : canPractice && card ? `data-roadmap-action="open" data-roadmap-card="${esc(card.id)}" data-roadmap-question="${esc(id)}"` : '';
   const neighbours = (direction, label) => {
     const ids = map.edges.filter(e => e[direction === 'before' ? 'to' : 'from'] === selected.id).map(e => e[direction === 'before' ? 'from' : 'to']);
     return ids.length ? `<p class="lesson-links"><span>${label}</span>${ids.map(id => `<button class="ghost small" data-map-action="select" data-map-node="${esc(id)}">${esc(map.nodes.find(n => n.id === id).title)}</button>`).join('')}</p>` : '';
@@ -77,7 +78,11 @@ function detailHtml(map, selected, ctx) {
         ${review.length ? `<ul>${review.map(r => resultRow(r.result, r.html, openAttr(r.questionId))).join('')}</ul>` : '<p class="muted small">이 개념에 연결된 보충 문제가 아직 없어요.</p>'}
       </div>
       ${neighbours('before', '먼저 볼 개념')}${neighbours('after', '다음 개념')}
-      ${canPractice && card && nextReview ? `<button class="primary map-practice" ${openAttr(nextReview.questionId)}>${done && done === review.length ? '해설과 보충 문제 다시 풀기 →' : '해설과 보충 문제 풀기 →'}</button>` : '<p class="muted small">첫 수준 확인을 마치거나 중간 결과를 넘기면, 확인한 개념의 보충 학습이 연결돼요.</p>'}
+      ${mentor?`<p class="muted small">멘토용 미리보기예요. 열어 봐도 학생의 응답이나 노출 기록을 만들지 않아요.</p><button class="secondary map-practice" data-map-action="preview" data-map-node="${esc(selected.id)}">문제·정답·해설 보기 →</button>${review.map(r=>{
+        const q=ctx.questions.find(q=>q.id===r.questionId);if(!q)return '';
+        const answer=q.choices?.find(c=>normalizeChoiceValue(c.value)===normalizeChoiceValue(q.answer));
+        return `<details class="mentor-question-preview" ${ctx.previewNode===selected.id&&(!ctx.previewQuestion||ctx.previewQuestion===q.id)?'open':''}><summary>${esc(questionText(q))} · 문제·정답·해설</summary>${questionBodyHtml(q)}<ul>${q.choices.map(c=>`<li>${choiceHtml(c)}</li>`).join('')}</ul><p><b>정답:</b> ${answer?choiceHtml(answer):mathHtml(String(q.answer??'해설 확인'))}</p><h4>해설</h4>${(q.solutionSteps??[]).map(s=>`<p>${mathHtml(s)}</p>`).join('')}<p class="muted small">학생 기록: ${RESULT[r.result]?.[1]??'미제출'}</p></details>`;
+      }).join('')}`:canPractice && card && nextReview ? `<button class="primary map-practice" ${openAttr(nextReview.questionId)}>${done && done === review.length ? '해설과 보충 문제 다시 풀기 →' : '해설과 보충 문제 풀기 →'}</button>` : '<p class="muted small">첫 수준 확인을 마치거나 중간 결과를 넘기면, 확인한 개념의 보충 학습이 연결돼요.</p>'}
     </aside>`;
 }
 
@@ -139,7 +144,7 @@ export function renderConceptMap(map, ui, { cards, canPractice, entries = [], pr
   const shown = mentor || selected.domain === focusDomain ? selected : focusNodeOf(map, focusDomain);
   const domains = [...new Map(map.nodes.map(n => [n.domain, n.domainName])).entries()];
   const groups = new Map(domains.map(([id]) => [id, map.nodes.filter(n => n.domain === id).sort(byLevel)]));
-  const panel = detailHtml(map, shown, { cards, canPractice, entries, practice, questions, cta });
+  const panel = detailHtml(map, shown, { cards, canPractice, entries, practice, questions, cta,mentor,previewNode:ui.mentorPreviewNode,previewQuestion:ui.mentorPreviewQuestion });
   if (mentor) {
     const rows = domains.map(([id, name]) => compactRow(name, id, groups.get(id), { selected: shown.id, next: map.nextNodeId, focus: false })).join('');
     return `<section class="concept-map overview" aria-labelledby="map-heading">

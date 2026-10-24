@@ -1,5 +1,6 @@
 import { esc, ICON } from './text.js';
 import { initialAssessmentSummary } from '../learning/initial-assessment.js';
+import { learnerPaths } from '../learning/assignments.js';
 
 // 회기 입력 폼은 아직 저장소에 반영되지 않았으므로 나가기 전에 확인한다.
 // 활동일지 내용은 기존 ui.logDraft에 보관되며 이 검사 대상이 아니다.
@@ -14,7 +15,7 @@ export function hasUnsavedSessionForm(root) {
 export function renderDemoEntry({ root, state, onEnter, persistent }) {
   const mentor = state.mentors?.find(person => person.id === state.mentorId);
   const learner = state.learners?.find(person => person.id === state.learnerId);
-  const paths = (state.paths ?? []).filter(path => path.learnerId === state.learnerId);
+  const paths = learnerPaths(state);
   const assessment = initialAssessmentSummary(state, state.learnerId);
   const learnerNext = paths.length ? '지정된 문제와 학습 기록을 이어서 볼 수 있어요.'
     : assessment?.status === 'completed' ? '첫 수준 확인 결과를 보고 멘토의 문제 지정을 기다려요.'

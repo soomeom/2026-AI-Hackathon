@@ -1,4 +1,5 @@
 import { validateLinearPractice, VALIDATOR_VERSION } from './linear-practice.js';
+import {hintsFor} from './hints.js';
 import { buildRoadmap, roadmapCards } from './roadmap.js';
 import { gradeAnswer } from './grading.js';
 const fail=code=>{throw new Error(code);};
@@ -64,6 +65,7 @@ export function submitAIPractice(state,{id,submissionId,choiceId=null,abstained=
  const r=find(state,id);practiceCard(state,r,{catalog});
  if(!identity(submissionId)||!time(at)||typeof abstained!=='boolean'||typeof helpUsed!=='boolean'||abstained&&choiceId!==null)fail('invalid_ai_answer');
  if(state.activeGeneratedPracticeId!==id||!r.presentedAt)fail('ai_not_presented');
+ helpUsed=helpUsed||hintsFor(state,{kind:'generated',practiceId:id}).length>0;
  if(r.attempts.length){const a=r.attempts[0];if(a.id===submissionId&&a.choiceId===choiceId&&a.abstained===abstained&&a.helpUsed===helpUsed)return state;fail('ai_already_answered');}
  const answer={id:submissionId,choiceId,abstained,helpUsed,answeredAt:at,result:gradeAnswer(r.question,{choiceId,abstained}),evidence:'ai_review_practice'};
  return replace(state,{...r,status:'answered',draftChoiceId:choiceId,attempts:[answer]});

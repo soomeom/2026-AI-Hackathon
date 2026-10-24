@@ -45,6 +45,16 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     return pathId;
   }
 
+  function cancelAssignment({assignmentId}) {
+    const assignment=(state.assignments??[]).find(a=>a.id===assignmentId&&a.learnerId===state.learnerId);
+    if(!assignment)throw new Error('assignment_not_found');
+    if(assignment.status==='canceled')return;
+    const paths=(state.paths??[]).filter(p=>p.assignmentId===assignmentId);
+    for(const path of paths)if(path.visible)dispatch({type:'SET_VISIBILITY',pathId:path.id,visible:false});
+    const startedBeforeCancel=(state.attempts??[]).some(a=>paths.some(p=>p.id===a.pathId));
+    publish({...state,assignments:state.assignments.map(a=>a.id===assignmentId?{...a,status:'canceled',canceledAt:now(),startedBeforeCancel}:a)},[{type:'assignmentCanceled',assignmentId}]);
+  }
+
   // 회기·일지·AI 기록처럼 엔진 밖의 변경. fn 은 새 state 를 돌려준다 (같은 객체면 변경 없음).
   // logs.js 함수는 revision 을 이미 올려서 돌려주므로 그대로 쓰고, 아니면 여기서 올린다.
   function update(fn, event = { type: 'stateUpdated' }) {
@@ -68,6 +78,7 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     getState: () => state,
     dispatch,
     assignQuestion,
+    cancelAssignment,
     update,
     replaceState,
     startInitialAssessment: () => update(s => initial.startInitialAssessment(s, { learnerId: s.learnerId, id: `initial-${newId()}`, at: now() }, { catalog })),

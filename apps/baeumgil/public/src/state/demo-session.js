@@ -1,5 +1,6 @@
 // 시연용 화면 입장 상태만 관리한다. 학습 기록 저장소나 실제 인증과는 별개다.
 import { isSubjectEnabled } from '../content/subjects.js';
+import { learnerPaths } from '../learning/assignments.js';
 export const DEMO_SESSION_KEY = 'baeumgil:demo-session:v1';
 const validRole = role => ['mentor','learner','guardian'].includes(role);
 
@@ -58,7 +59,7 @@ export function prepareDemoRole(ui, state, role) {
     ui.mentorTab = 'home';
     return;
   }
-  const paths = (state.paths ?? []).filter(path => path.learnerId === state.learnerId);
+  const paths = learnerPaths(state);
   ui.learnerTab = 'learning';
   const path = paths.find(path => path.status === 'active' || path.status === 'paused') ?? paths.at(-1);
   ui.learnerPathId = path?.id ?? null;

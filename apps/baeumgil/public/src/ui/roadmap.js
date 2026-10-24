@@ -1,5 +1,6 @@
 import { roadmapCards } from '../learning/roadmap.js';
 import { esc, mathHtml, questionBodyHtml, choiceHtml } from './text.js';
+import {renderHintPanel} from './hints.js';
 
 function cardHtml(card, nextCardId) {
   return `<button class="roadmap-card${card.id === nextCardId ? ' recommended' : ''}" data-roadmap-action="open" data-roadmap-card="${esc(card.id)}" data-roadmap-question="${esc(card.questionIds[0])}">
@@ -8,7 +9,7 @@ function cardHtml(card, nextCardId) {
     <small>${card.practiceCorrect}/${card.practiceTotal}문항 연습 · 해설과 문제 열기 →</small></button>`;
 }
 
-export function renderRoadmap(roadmap, practice, bank, ui = {}) {
+export function renderRoadmap(roadmap, practice, bank, ui = {}, context={}) {
   const cards=roadmapCards(roadmap), card=cards.find(c=>c.id===practice.cardId);
   if(card){
     const q=bank.find(q=>q.id===practice.questionId);
@@ -25,8 +26,9 @@ export function renderRoadmap(roadmap, practice, bank, ui = {}) {
       <details class="roadmap-explanation"><summary>개념과 풀이 살펴보기</summary><div>${mathHtml(card.explanation)}</div></details>
       <p class="muted small">진단 문항과 같은 개념의 보충 문제를 연습해요. 해설을 보고 풀어도 괜찮아요. 연습 완료는 최초 진단 수준이나 독립 숙달 판정을 바꾸지 않아요.</p>
       ${questionBodyHtml(q,{promptId:'roadmap-prompt'})}
+      ${!answer?renderHintPanel(context.state,ui,{kind:'roadmap',assessmentId:context.assessmentId,roundId:practice.roundId}):''}
       <div class="choices" role="radiogroup" aria-labelledby="roadmap-prompt">${q.choices.map((c,i)=>`<button class="choice${(answer?.choiceId??ui.roadmapChoice)===c.id?' selected':''}" role="radio" aria-checked="${(answer?.choiceId??ui.roadmapChoice)===c.id}" data-roadmap-action="choice" data-roadmap-choice="${c.id}" data-roadmap-round="${esc(practice.roundId)}" ${answer?'disabled':''}><span class="key">${'ABCD'[i]}</span><span>${choiceHtml(c)}</span></button>`).join('')}</div>
-      ${answer?`<div class="msg" role="status"><b>${answer.result==='correct'?'맞혔어요. 이 문항의 연습을 마쳤어요.':answer.result==='abstained'?'풀이를 보고 다시 연습해 봐요.':'풀이에서 헷갈린 부분을 확인해 봐요.'}</b>${q.solutionSteps.map(s=>`<p>${mathHtml(s)}</p>`).join('')}</div>
+      ${answer?`<div class="msg" role="status"><b>${answer.result==='correct'?(answer.helpUsed?'도움 받고 맞혔어요. 이 문항의 연습을 마쳤어요.':'맞혔어요. 이 문항의 연습을 마쳤어요.'):answer.result==='abstained'?'풀이를 보고 다시 연습해 봐요.':'풀이에서 헷갈린 부분을 확인해 봐요.'}</b>${q.solutionSteps.map(s=>`<p>${mathHtml(s)}</p>`).join('')}</div>
       <div class="action-bar"><button class="ghost" data-roadmap-action="open" data-roadmap-card="${esc(card.id)}" data-roadmap-question="${esc(q.id)}">한 번 더 연습</button>${nextIndex<card.questionIds.length?`<button class="primary" data-roadmap-action="open" data-roadmap-card="${esc(card.id)}" data-roadmap-question="${esc(card.questionIds[nextIndex])}">다음 연습 문제</button>`:'<button class="primary" data-roadmap-action="close">로드맵에서 다음 개념 보기</button>'}</div>`:
       `<div class="action-bar"><button class="primary" data-roadmap-action="submit" data-roadmap-round="${esc(practice.roundId)}" ${ui.roadmapChoice?'':'disabled'}>연습 답 확인</button><button class="ghost" data-roadmap-action="unknown" data-roadmap-round="${esc(practice.roundId)}">잘 모르겠어요</button></div>`}
       ${ui.roadmapError?`<p role="alert">${esc(ui.roadmapError)}</p>`:''}</section>`;

@@ -1,5 +1,7 @@
 import { validInitialRecords } from '../learning/initial-assessment.js';
 import { validAIState } from '../learning/ai-practice.js';
+import {validHintUsage} from '../learning/hints.js';
+import {validGoalMessages} from '../learning/weekly-goal.js';
 
 export const SCHEMA_VERSION = 1;
 const OPTIONAL_COLLECTIONS = ['initialAssessments', 'startingPoints', 'generatedPractice'];
@@ -39,6 +41,8 @@ export function validateState(value) {
   }
   if (!validInitialRecords(value)) errors.push('invalid_initial_records');
   if (!validAIState(value)) errors.push('invalid_ai_practice');
+  if (!validHintUsage(value)) errors.push('invalid_hint_usage');
+  if (!validGoalMessages(value)) errors.push('invalid_goal_messages');
   // 선택적 공유 안내만 추가 검증한다. 필드가 없는 이전 저장본은 그대로 유효하다.
   if (value.guardianMessages !== undefined && (!Array.isArray(value.guardianMessages) || !value.guardianMessages.every(m =>
     plainObject(m) && Array.isArray(value.learners) && value.learners.some(l=>l?.id===m.learnerId)
@@ -52,7 +56,8 @@ export function validateState(value) {
 export function validateAIInput(input) {
   const errors = [];
   if (!plainObject(input)) return { ok: false, errors: ['input_must_be_object'] };
-  if (!['lesson_plan', 'log_narrative'].includes(input.kind)) errors.push('invalid_kind');
+  if (!['lesson_plan', 'log_narrative','hint'].includes(input.kind)) errors.push('invalid_kind');
+  if(input.kind==='hint'&&(!Number.isInteger(input.facts?.hintStep)||input.facts.hintStep<1||input.facts.hintStep>3||!['catalog','generated'].includes(input.hintSource?.kind)))errors.push('invalid_hint_input');
   if (input.contractVersion !== 1) errors.push('unsupported_ai_contract');
   if (typeof input.learnerAlias !== 'string' || !input.learnerAlias.trim()) errors.push('invalid_alias');
   if (!plainObject(input.facts)) errors.push('invalid_facts');

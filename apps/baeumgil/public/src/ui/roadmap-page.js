@@ -17,7 +17,7 @@ export function renderRoadmapPage(props) {
   const canPractice = summary?.status === 'completed';
   const cards = summary?.roadmap ? roadmapCards(summary.roadmap) : [];
   const next = map.nodes.find(n => n.id === map.nextNodeId);
-  const practicing = canPractice && cards.some(c => c.id === summary.practice.cardId);
+  const practicing = !mentor && canPractice && cards.some(c => c.id === summary.practice.cardId);
   // 멘토는 전체 조망(관계 지도), 학생은 내 배움길이 기본
   const view = ['map','relation'].includes(ui.mapView) ? ui.mapView : mentor ? 'relation' : 'map';
   // 학생: 진단 전·진행 중이면 오른쪽 패널 위에 첫 수준 확인 안내를 띄운다
@@ -31,10 +31,17 @@ export function renderRoadmapPage(props) {
       <p class="muted small">각 단계는 학년이 아닌 선수 관계를 뜻해요. 연습 완료는 최초 진단 판정을 바꾸지 않아요.</p>
       ${aiPractice.records.length?`<p class="msg small">AI 추가 연습 ${aiPractice.attempted}회 · 정답 ${aiPractice.correct}회. 아래 등록 문제의 연습 완료 수와 별도로 기록해요.</p>`:''}
       ${summary?.roadmap?.legacy?'<p class="msg">이전 진단 기록은 보존하고, 연결선은 현재 개념 자료를 기준으로 보여요.</p>':''}
-      ${practicing ? renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui) : view==='relation' ? renderRelationMap(map,ui,{cards,canPractice,entries:summary?.entries??[],practice:summary?.practice,questions:catalog.questions,cta:assessmentCta}) : renderConceptMap(map,ui,{cards,canPractice,entries:summary?.entries??[],practice:summary?.practice,questions:catalog.questions,mentor,cta:assessmentCta})}
+      ${practicing ? renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui,{state,assessmentId:summary.assessmentId}) : view==='relation' ? renderRelationMap(map,ui,{cards,canPractice:canPractice&&!mentor,entries:summary?.entries??[],practice:summary?.practice,questions:catalog.questions,cta:assessmentCta,mentor,previewNode:ui.mentorPreviewNode,previewQuestion:ui.mentorPreviewQuestion}) : renderConceptMap(map,ui,{cards,canPractice:canPractice&&!mentor,entries:summary?.entries??[],practice:summary?.practice,questions:catalog.questions,mentor,cta:assessmentCta})}
     </section>`;
   if (!practicing && view === 'relation') animateRelationMap(root, ui);
+  globalThis.document?.documentElement?.classList.toggle('map-modal-open',Boolean(ui.mapOverviewOpen&&!mentor&&view==='map'));
   root.onkeydown = event => {
+    if(event.key==='Tab'&&ui.mapOverviewOpen){
+      const dialog=root.querySelector?.('.map-overview');
+      const controls=[...(dialog?.querySelectorAll?.('button:not([disabled]):not([tabindex="-1"])')??[])];
+      const first=controls[0],last=controls.at(-1),active=globalThis.document?.activeElement;
+      if(first&&((event.shiftKey&&active===first)||(!event.shiftKey&&active===last))){event.preventDefault?.();(event.shiftKey?last:first).focus();}
+    }
     // 지도 노드(SVG)는 Enter·Space로도 고른다
     const node = event.target?.closest?.('g[data-map-action]');
     if (node && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault?.(); root.onclick({ target: node }); return; }
@@ -48,7 +55,8 @@ export function renderRoadmapPage(props) {
     if (button.dataset.tab) { ui.mentorTab = button.dataset.tab; rerender(); return; }
     if (handleInitialAssessmentAction(button,props)) return;
     const action = button.dataset.mapAction, value = button.dataset.mapValue;
-    if (action === 'view' && ['map','relation'].includes(value)) ui.mapView = value;
+    if(action==='preview'&&mentor){ui.mentorPreviewNode=button.dataset.mapNode;ui.mentorPreviewQuestion=button.dataset.mapQuestion??null;}
+    else if (action === 'view' && ['map','relation'].includes(value)) ui.mapView = value;
     else if (action === 'zoom') ui.relationZoom = value === 'on';
     else if (action === 'overview' || action === 'overview-close') ui.mapOverviewOpen = action === 'overview';
     else if (action === 'domain' && map.nodes.some(n=>n.domain===value)) {

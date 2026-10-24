@@ -101,7 +101,7 @@ test('lesson panel lists every diagnostic and review question with its result wi
   const { renderConceptMap, lessonRows } = await import('../public/src/ui/concept-map.js');
   let d=startDiagnostic(bank,config);
   for (let i=0;i<3;i++) d=submitDiagnostic(d,{id:`a${i}`,questionId:d.currentId,abstained:true},bank,config);
-  const practice={attempts:[{cardId:'algebra:roadmap-like-terms',questionId:'roadmap-like-terms',result:'correct'}]};
+  const practice={attempts:[{cardId:'algebra:roadmap-like-terms',questionId:'roadmap-like-terms',result:'correct',helpUsed:true}]};
   const roadmap=buildRoadmap(d,bank,config,practice);
   const map=maps.buildConceptMap(roadmap,bank,config);
   const node=map.nodes.find(n=>n.id==='algebra:roadmap-like-terms');
@@ -109,7 +109,7 @@ test('lesson panel lists every diagnostic and review question with its result wi
   const entries=d.attempts.map(a=>({questionId:a.questionId,result:a.result,independent:a.independent}));
   const rows=lessonRows(node,{cards,entries,practice,questions:bank});
   assert.deepEqual(rows.diagnostic.map(r=>r.result),['abstained']);
-  assert.deepEqual(rows.review.map(r=>r.result),['correct','todo']);
+  assert.deepEqual(rows.review.map(r=>r.result),['helped','todo']);
   const html=renderConceptMap(map,{mapNodeId:node.id},{cards,canPractice:true,entries,practice,questions:bank});
   assert.match(html,/진단에서 푼 문제/);assert.match(html,/보충 연습 문제 <small>1\/2/);
   assert.match(html,/아직 안 풂/);assert.match(html,/모름/);assert.match(html,/50%/);

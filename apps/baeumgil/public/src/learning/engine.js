@@ -56,6 +56,7 @@ export function applyLearningCommand(state, command, { catalog, rng = Math.rando
 
 function getPath(state, cmd) {
   const path = (state.paths ?? []).find((p) => p.id === cmd.pathId) ?? reject('pathNotFound');
+  if((state.assignments??[]).some(a=>a.id===path.assignmentId&&a.status==='canceled'))reject('assignmentCanceled');
   if (cmd.learnerId && path.learnerId && cmd.learnerId !== path.learnerId) reject('learnerMismatch');
   return path;
 }
@@ -214,6 +215,7 @@ const HANDLERS = {
     }
     if (path.routeId) reject('pathAlreadyStarted');
     const assignment = (state.assignments ?? []).find((a) => a.id === path.assignmentId) ?? reject('assignmentNotFound');
+    if(assignment.status==='canceled')reject('assignmentCanceled');
     if (cmd.learnerId && cmd.learnerId !== assignment.learnerId) reject('learnerMismatch');
     const question = listAssignableQuestions(ctx.catalog).find((q) => q.id === assignment.questionId) ?? reject('questionNotAssignable');
     const route = ctx.catalog.routes.find((r) => r.questionId === question.id);

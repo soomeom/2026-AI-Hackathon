@@ -7,6 +7,9 @@ import { createDemoState, createStore } from '../public/src/state/store.js';
 import { saveSession, confirmLog } from '../public/src/mentoring/logs.js';
 import { STORAGE_KEY } from '../public/src/state/persistence.js';
 import { DEMO_SESSION_KEY } from '../public/src/state/demo-session.js';
+import {setupAI,recordFor} from './practice-state-fixtures.js';
+import {catalog as goalCatalog} from './practice-fixtures.js';
+import {acceptAIPractice,presentAIPractice,submitAIPractice,closeAIPractice} from '../public/src/learning/ai-practice.js';
 
 const memoryStorage = () => {
   const data = new Map();
@@ -24,6 +27,31 @@ const enterMath = (h, role) => {
   click(h.app, { subjectId: 'math' });
 };
 let bootId = 0;
+
+test('weekly shared goal appears on mentor home without changing existing records',async t=>{
+ const original=seeded(),h=await boot(t,{saved:original});enterMath(h,'mentor');
+ assert.match(h.app.innerHTML,/이번 주 함께 목표/);
+ assert.match(h.app.innerHTML,/보충 개념/);
+ assert.match(h.app.innerHTML,/함께한 수업/);
+ assert.deepEqual(h.saved().attempts,original.attempts);
+ assert.deepEqual(h.saved().sessions,original.sessions);
+});
+
+test('mentor encouragement reaches learner results after role change and reload even with an old role field',async t=>{
+ let state=setupAI().getState();const at=new Date().toISOString(),localDate=new Date(Date.now()+9*3600000).toISOString().slice(0,10);
+ for(const [i,concept] of ['roadmap-like-terms','roadmap-linear-sum'].entries()){
+  const r=recordFor(state,concept,`goal-ui-${i}`);state=presentAIPractice(acceptAIPractice(state,{record:r},{catalog:goalCatalog}),{id:r.id,at});
+  state=submitAIPractice(state,{id:r.id,submissionId:`goal-ui-answer-${i}`,choiceId:'option-1',at},{catalog:goalCatalog});
+ }
+ state=saveSession(closeAIPractice(state),{id:'goal-session',learnerId:state.learnerId,mentorId:state.mentorId,localDate,attendance:'attended',actualMinutes:30});state.activeRole='mentee';
+ const h=await boot(t,{saved:state,catalog:goalCatalog});enterMath(h,'mentor');
+ assert.match(h.app.innerHTML,/함께 목표 완료/);h.node('weekly-goal-message').value='혼자 애쓰지 않고 함께 해내서 좋아요!';
+ click(h.app,{action:'share-goal-message'});assert.equal(h.saved().weeklyGoalMessages.length,1);
+ click(h.node('change-role'));enterMath(h,'learner');assert.match(h.app.innerHTML,/혼자 애쓰지 않고 함께 해내서 좋아요!/);
+ const reloaded=await boot(t,{local:h.local,tab:h.tab,catalog:goalCatalog});assert.match(reloaded.app.innerHTML,/멘토의 응원/);
+ assert.deepEqual(reloaded.saved().initialAssessments,state.initialAssessments);assert.deepEqual(reloaded.saved().sessions,state.sessions);
+ assert.equal(reloaded.saved().guardianMessages,undefined);
+});
 
 test('completed lesson results resume pending work or open the roadmap while preserving evidence and logs',async t=>{
   const store=createStore({initialState:seeded(),catalog:makeCatalog()});
@@ -96,7 +124,9 @@ test('dedicated roadmap menus explore without writes and share practice across r
   click(h.app,{roadmapAction:'submit',roadmapRound:round});
   click(h.node('change-role'));enterMath(h,'mentor');
   click(h.app,{tab:'roadmap'});
-  assert.match(h.app.innerHTML,/맞혔어요/);
+  assert.match(h.app.innerHTML,/문제·정답·해설 보기/);
+  assert.match(h.app.innerHTML,/학생 기록: 맞힘/);
+  assert.doesNotMatch(h.app.innerHTML,/data-roadmap-action="open"/);
   click(h.app,{roadmapAction:'close'});
   assert.match(h.app.innerHTML,/개념 관계 지도/);
   assert.match(h.app.innerHTML,/class="relation-map"/,'멘토는 관계 지도가 기본');
@@ -155,7 +185,8 @@ test('roadmap card practice survives refresh, role and subject changes without r
   click(restored.node('change-subject'));click(restored.app,{subjectId:'math'});
   click(restored.node('change-role'));enterMath(restored,'mentor');
   click(restored.app,{tab:'roadmap'});
-  assert.match(restored.app.innerHTML,/맞혔어요/);
+  assert.match(restored.app.innerHTML,/문제·정답·해설 보기/);
+  assert.match(restored.app.innerHTML,/학생 기록: 맞힘/);
   assert.deepEqual(restored.saved().initialAssessments[0].diagnostic,diagnostic);
   assert.equal(restored.saved().initialAssessments[0].roadmapPractice.attempts.length,1);
   click(restored.app,{roadmapAction:'close'});
@@ -436,4 +467,33 @@ test('real app AI practice persists draft/answer, reaches mentor and ignores a l
   click(fresh.app,{roadmapAction:'open',roadmapCard:other.cardId,roadmapQuestion:other.baseQuestionId});await tick();
   assert.match(fresh.app.innerHTML,/준비 중/);click(fresh.node('change-role'));resolve();await tick();await tick();
   assert.equal(fresh.saved().generatedPractice.length,1);assert.match(fresh.app.innerHTML,/멘토로 체험하기/);
+});
+
+test('question hints fall back safely, restore three levels, and mark roadmap answers as assisted',async t=>{
+ const {catalog}=await import('./practice-fixtures.js'),{setupAI}=await import('./practice-state-fixtures.js');
+ const initial=setupAI().getState(),h=await boot(t,{catalog,saved:initial});enterMath(h,'learner');
+ click(h.node('learner-roadmap'));
+ click(h.app,{roadmapAction:'open',roadmapCard:'algebra:roadmap-like-terms',roadmapQuestion:'roadmap-like-terms'});await tick();
+ assert.match(h.app.innerHTML,/힌트 받기/);
+ click(h.app,{hintAction:'ask'});await tick();assert.equal(h.saved().hintUsage.length,1);assert.match(h.app.innerHTML,/기본 힌트/);
+ const fresh=await boot(t,{catalog,local:h.local,tab:h.tab});assert.match(fresh.app.innerHTML,/질문 1/);
+ for(let i=0;i<2;i++){click(fresh.app,{hintAction:'ask'});await tick();}
+ assert.equal(fresh.saved().hintUsage.length,3);assert.match(fresh.app.innerHTML,/질문 3/);
+ const round=fresh.saved().initialAssessments[0].roadmapPractice.roundId;
+ click(fresh.app,{roadmapAction:'choice',roadmapChoice:'a',roadmapRound:round});click(fresh.app,{roadmapAction:'submit',roadmapRound:round});
+ assert.equal(fresh.saved().initialAssessments[0].roadmapPractice.attempts[0].helpUsed,true);
+ assert.match(fresh.app.innerHTML,/도움 받고/);
+ assert.deepEqual(fresh.saved().initialAssessments[0].diagnostic,initial.initialAssessments[0].diagnostic);
+});
+
+test('mentor assignment cancellation confirms started work and keeps answers after reassign and reload',async t=>{
+ const h=await boot(t,{saved:seeded()});enterMath(h,'learner');await tick();click(h.app,{choice:'c'});click(h.app,{action:'submit'});
+ const original=h.saved().attempts,assignmentId=h.saved().assignments[0].id;
+ click(h.node('change-role'));enterMath(h,'mentor');click(h.node('mentor-nav-planning'));
+ assert.match(h.app.innerHTML,/指定|지정한 문제/);
+ click(h.app,{assignmentAction:'cancel',assignmentId});assert.match(h.app.innerHTML,/학생이 풀던 문제예요/);assert.notEqual(h.saved().assignments[0].status,'canceled');
+ click(h.app,{assignmentAction:'cancel',assignmentId,confirmed:'yes'});assert.match(h.app.innerHTML,/풀다가 취소됨/);assert.deepEqual(h.saved().attempts,original);
+ click(h.app,{assignmentAction:'reassign',assignmentId});assert.equal(h.saved().paths.length,2);
+ const fresh=await boot(t,{local:h.local,tab:h.tab});assert.deepEqual(fresh.saved().attempts,original);
+ click(fresh.node('change-role'));enterMath(fresh,'learner');await tick();assert.match(fresh.app.innerHTML,/제출하기/);
 });

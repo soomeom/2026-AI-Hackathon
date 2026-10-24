@@ -9,11 +9,14 @@ import { DIAGNOSTIC_STAGE_NAMES } from '../learning/roadmap.js';
 import { renderDiagnosticOverview, nextDiagnosticCard } from './learning-overview.js';
 import { levelLadder, ladderCells, ladderLegend, renderDomainSteps } from './visuals.js';
 import { domainProgress, renderDomainBars } from './mentor-diagrams.js';
+import { learnerPaths } from '../learning/assignments.js';
+import {handleHintAction} from './hints.js';
+import {renderWeeklyGoal} from './weekly-goal.js';
 
 const RESULT = { correct: '정답', incorrect: '추가 확인', abstained: '모름' };
 const EVIDENCE_PILL = { demonstrated: 'ok', insufficient: 'warn', not_demonstrated: 'bad' };
 const conceptName = (catalog, id) => catalog.concepts.find(c => c.id === id)?.name ?? id;
-const hasPath = state => (state.paths ?? []).some(p => p.learnerId === state.learnerId);
+const hasPath = state => learnerPaths(state).length>0;
 const caveat = '선별한 검정고시 기출(2025년 1회)과 기초 확인 문항으로 영역별 시작점을 추정해요. 학년 전체 숙달이나 합격을 판정하는 검사가 아니에요.';
 const plainLabel = q => (q.reference?.year ? `${q.reference.year}년 ${q.reference.session}회 ${q.reference.qualification} ${q.reference.questionNumber}번` : String(q.prompt ?? q.id).replace(/\$/g, ''));
 const now = () => new Date().toISOString();
@@ -71,14 +74,18 @@ export function renderInitialAssessment(props) {
   } else {
     const point = summary.startingPoint;
     const paused = summary.stopReason === 'user_paused';
-    html = summary.practice?.cardId ? `<section class="card roadmap-results">${renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui)}</section>` : ui.initialResultDetails ? `<section class="card overview-result"><button class="ghost" data-initial-action="summary">← 결과 요약</button><h2 id="result-title" tabindex="-1">영역별 결과·응답 기록</h2><span class="pill ${paused ? 'warn' : 'ok'}">${paused ? '중간까지 확인' : '첫 수준 확인 완료'} · ${summary.counts.total}문제</span>
+    html = summary.practice?.cardId ? `<section class="card roadmap-results">${renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui,{state,assessmentId:summary.assessmentId})}</section>` : ui.initialResultDetails ? `<section class="card overview-result"><button class="ghost" data-initial-action="summary">← 결과 요약</button><h2 id="result-title" tabindex="-1">영역별 결과·응답 기록</h2><span class="pill ${paused ? 'warn' : 'ok'}">${paused ? '중간까지 확인' : '첫 수준 확인 완료'} · ${summary.counts.total}문제</span>
       <p class="meta">현재 추정 수준 티어</p><h2>${esc(summary.report.tier)}</h2>
       <p class="muted">${point ? `멘토가 첫 수업 시작 단원을 ‘${esc(conceptName(catalog, point.conceptId))}’로 정했어요.` : '멘토가 결과를 보고 첫 수업 시작점과 문제를 정할 거예요.'}</p>
       ${domainTable(summary, { forMentor: false })}<p class="muted small">${caveat}</p>
       <details><summary>응답별 기록 보기</summary><ul class="initial-attempts">${summary.entries.map(e => `<li>${esc(e.domainName)} · ${esc(DIAGNOSTIC_STAGE_NAMES[e.stage] ?? e.levelName)} · ${esc(e.core)} — ${RESULT[e.result]} <span class="muted small">${esc(e.questionId)}</span></li>`).join('')}</ul></details></section>` : renderDiagnosticOverview(summary);
-    if (!summary.practice?.cardId) html += `<div class="action-bar overview-secondary">${paused && !point ? '<button class="ghost" data-initial-action="resume">중단한 수준 확인 이어서 풀기</button>' : ''}${dismiss}</div>`;
+    if (!summary.practice?.cardId) {
+      const resume=paused&&!point?'<div class="action-bar"><button class="primary" data-initial-action="resume">중단한 수준 확인 이어서 풀기 →</button></div>':'';
+      html=resume+html+`<div class="action-bar overview-secondary">${dismiss}</div>`;
+    }
   }
   root.innerHTML = `${summary?.status === 'completed' ? '' : '<div class="page-head"><h2>나의 첫 배움길</h2></div>'}${html}${ui.initialError ? `<p class="msg warn" role="alert">${esc(ui.initialError)}</p>` : ''}`;
+  if(summary?.status==='completed'&&!summary.practice?.cardId)root.innerHTML+=renderWeeklyGoal(state,catalog);
   root.onchange = event => { if (event.target.id === 'initial-help') ui.initialHelp = event.target.checked; };
   root.onclick = event => {
     const button = event.target.closest('button');
@@ -143,10 +150,10 @@ export function initialAssessmentPanel(state, catalog, ui, { mode = 'full' } = {
   return `<section class="card initial-mentor"><h3>${ICON.target} 첫 수준 확인 결과 ${summary.stopReason === 'user_paused' ? '<span class="pill warn">학생이 중간에 멈춤</span>' : ''}</h3>
     <p class="meta">현재 추정 수준 티어</p><p><b class="initial-tier">${esc(report.tier)}</b></p>
     <p>응답 ${summary.counts.total}문제 · 정답 ${summary.counts.correct} (혼자 처음 풀어 맞힘 ${summary.counts.independentCorrect}) · 추가 확인 ${summary.counts.incorrect} · 모름 ${summary.counts.abstained}</p>
-    ${mode === 'plan' ? `${renderDomainBars(domainProgress(summary, catalog))}<button class="ghost" data-goto="assessment">영역별 결과·응답 기록 확인</button>` : `${domainTable(summary, { forMentor: true })}
+    ${mode === 'plan' ? `${renderDomainBars(domainProgress(summary, catalog))}<button class="secondary" data-goto="assessment">영역별 결과·응답 기록 확인 →</button>` : `${domainTable(summary, { forMentor: true })}
     <p class="muted small">${esc(report.rule)} ${esc(report.disclaimer)}</p>
     <details><summary>응답별 기록 보기</summary><ul class="initial-attempts">${attempts}</ul></details>
-    <div class="row"><button class="ghost small" data-initial-action="export">${ICON.doc} 결과 JSON 저장</button><button class="ghost small" data-goto="roadmap">맞춤형 학습 로드맵 보기</button></div>`}
+    <div class="row"><button class="ghost small" data-initial-action="export">${ICON.doc} 결과 JSON 저장</button><button class="secondary small" data-goto="roadmap">맞춤형 학습 로드맵 보기 →</button></div>`}
     ${mode === 'report' ? '<button class="primary" data-goto="planning">수업 준비하기</button>' : point ? `<div class="initial-decision"><b>첫 수업 시작 단원: ${esc(conceptName(catalog, point.conceptId))}</b><p>첫 문제: ${esc(plainLabel(catalog.questions.find(q => q.id === point.questionId) ?? { id: point.questionId }))}</p>
       ${point.reason ? `<p class="muted">선택 이유: ${esc(point.reason)}</p>` : ''}<button class="ghost" data-goto="learning" data-path="${esc(point.pathId)}">지정한 학습 열기 ${ICON.arrow}</button></div>` : `
       ${rec ? `<div class="msg"><b>추천: ${esc(rec.domainName)} → ${esc(conceptName(catalog, rec.conceptId))}</b><p>${esc(rec.reason)} 추천은 바꿀 수 있어요.</p></div>` : ''}
@@ -187,6 +194,9 @@ export function handleInitialAssessmentAction(button, props) {
 }
 
 function handleInitialRoadmapAction(button,props){
+  if(handleHintAction(button,props))return true;
+  if(button.dataset.roadmapAction&&props.ui.role==='mentor')return true;
+  if(['open','close'].includes(button.dataset.roadmapAction))props.hints?.cancel();
   if(props.practice&&button.dataset.roadmapAction==='open'){
     const summary=initialAssessmentSummary(props.getState(),props.getState().learnerId,{catalog:props.catalog});
     props.practice.open({assessmentId:summary.assessmentId,cardId:button.dataset.roadmapCard,baseQuestionId:button.dataset.roadmapQuestion}).catch(()=>{props.ui.roadmapError='현재 연습을 다시 열어 주세요.';props.rerender();});

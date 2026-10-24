@@ -1,7 +1,8 @@
 import { esc, mathHtml, questionBodyHtml, choiceHtml, resultBadge } from './text.js';
 import { aiPracticeSummary } from '../learning/ai-practice.js';
+import {renderHintPanel,handleHintAction} from './hints.js';
 const title=id=>id==='roadmap-like-terms'?'동류항 정리':'일차식 계산';
-export function renderAIPractice({root,state,catalog,ui,practice}) {
+export function renderAIPractice({root,state,catalog,ui,practice,hints}) {
  const loading=ui.practiceLoading;
  const r=(state.generatedPractice??[]).find(r=>r.id===state.activeGeneratedPracticeId&&r.learnerId===state.learnerId);
  if(!loading&&!r)return false;
@@ -14,15 +15,18 @@ export function renderAIPractice({root,state,catalog,ui,practice}) {
   ${loading?'<p role="status" aria-live="polite">지금 연습할 개념에 맞는 문제를 준비하고 있어요. 최대 5초 기다린 뒤 준비된 문제로 이어가요.</p>':`
    <p class="meta">AI 추가 연습 ${stats.attempted}회 · 정답 ${stats.correct}회 · 공식 기출 아님</p>
    ${questionBodyHtml(r.question,{promptId:'ai-practice-prompt'})}
+   ${!answer?renderHintPanel(state,ui,{kind:'generated',practiceId:r.id}):''}
    <div class="choices" role="radiogroup" aria-labelledby="ai-practice-prompt">${r.question.choices.map((c,i)=>`<button class="choice${r.draftChoiceId===c.id?' selected':''}" role="radio" aria-checked="${r.draftChoiceId===c.id}" data-ai-practice="choice" data-practice-id="${esc(r.id)}" data-choice-id="${esc(c.id)}" ${answer?'disabled':''}><span class="key">${'ABCD'[i]}</span><span>${choiceHtml(c)}</span></button>`).join('')}</div>
    ${answer?`<div class="msg" role="status">${resultBadge(answer.result)}${answer.helpUsed?' · 도움 사용':''}${r.question.solutionSteps.map(s=>`<p>${mathHtml(s)}</p>`).join('')}</div><button class="primary" data-ai-practice="more">같은 개념 더 연습</button>`:`<label><input type="checkbox" id="ai-practice-help" ${ui.practiceHelp?'checked':''}> 도움을 받았어요</label><div class="action-bar"><button class="primary" data-ai-practice="submit" data-practice-id="${esc(r.id)}" ${r.draftChoiceId?'':'disabled'}>연습 답 확인</button><button class="ghost" data-ai-practice="unknown" data-practice-id="${esc(r.id)}">잘 모르겠어요</button></div>`}`}
    <div class="action-bar"><button class="ghost" data-ai-practice="existing">기존 문제로 바로 연습</button></div>
    ${ui.practiceError?`<p role="alert">${esc(ui.practiceError)}</p>`:''}</section>`;
  root.onclick=e=>{
   const b=e.target.closest('button');if(!b||b.disabled)return;
+  if(handleHintAction(b,{ui,hints}))return;
   ui.practiceError=null;
   try {
    const action=b.dataset.aiPractice,id=b.dataset.practiceId;
+   if(['close','more','existing'].includes(action))hints?.cancel();
    if(action==='existing')practice.useExisting('manual',r);
    else if(action==='close'){ui.practiceHelp=false;if(ui.role==='mentor')ui.mentorTab='roadmap';else ui.learnerTab='roadmap';practice.close();}
    else if(action==='more'){ui.practiceHelp=false;practice.more();}
