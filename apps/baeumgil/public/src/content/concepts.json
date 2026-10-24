@@ -60,7 +60,7 @@
       "name": "다항식의 덧셈",
       "summary": "$A+B=(2+a)x^2+4x$이므로 $a=-2$, $b=4$. 따라서 $a+b=2$.",
       "prerequisiteIds": [
-        "astra-algebra-l1-지수법칙"
+        "roadmap-linear-sum"
       ]
     },
     {
@@ -76,7 +76,7 @@
       "name": "판별식",
       "summary": "판별식 $D=a^2-16>0$. 자연수 $a$는 $4$보다 커야 하므로 최솟값은 $5$.",
       "prerequisiteIds": [
-        "astra-equations-l2-이차방정식의 인수분해"
+        "roadmap-real-roots"
       ]
     },
     {
@@ -84,7 +84,7 @@
       "name": "근과 계수의 관계",
       "summary": "두 근의 곱이 $a$이다. $a=(2+\\sqrt{2})(2-\\sqrt{2})=4-2=2$.",
       "prerequisiteIds": [
-        "astra-equations-l2-제곱근"
+        "roadmap-root-product"
       ]
     },
     {
@@ -100,7 +100,7 @@
       "name": "합성함수",
       "summary": "$f(1)=2$이므로 $g(f(1))=g(2)=-4+5=1$.",
       "prerequisiteIds": [
-        "astra-functions-l1-일차함수의 기울기"
+        "roadmap-function-value"
       ]
     },
     {
@@ -108,7 +108,7 @@
       "name": "선분의 내분",
       "summary": "내분점은 $\\left(\\frac{2(-3)+6}{3},\\frac{2(5)-1}{3}\\right)=(0,3)$.",
       "prerequisiteIds": [
-        "astra-geometry-l1-삼각형의 닮음"
+        "roadmap-coordinate-ratio"
       ]
     },
     {
@@ -116,7 +116,8 @@
       "name": "점과 직선 사이의 거리",
       "summary": "거리 공식에 따라 $\\frac{|3(0)+4(0)-12|}{\\sqrt{3^2+4^2}}=\\frac{12}{5}$.",
       "prerequisiteIds": [
-        "astra-geometry-l2-삼각비"
+        "roadmap-pythagoras",
+        "roadmap-line-basic"
       ]
     },
     {
@@ -124,7 +125,7 @@
       "name": "집합의 연산",
       "summary": "$A\\cup B=\\{1,3,4,5,6,7,9\\}$, $A\\cap B=\\{3,5\\}$. 따라서 $7+2=9$.",
       "prerequisiteIds": [
-        "astra-logic-l1-집합의 원소"
+        "roadmap-set-operations"
       ]
     },
     {
@@ -132,7 +133,7 @@
       "name": "필요조건",
       "summary": "$p\\Rightarrow q$여야 한다. $x=3$을 $q$에 대입하면 $9-3a-3=0$이므로 $a=2$.",
       "prerequisiteIds": [
-        "astra-logic-l1-집합의 원소"
+        "roadmap-truth-inclusion"
       ]
     },
     {
@@ -140,7 +141,7 @@
       "name": "경우의 수",
       "summary": "조건을 만족하는 쌍은 $(1,2),(1,5),(2,4),(4,5)$로 $4$가지이다.",
       "prerequisiteIds": [
-        "astra-counting-l1-확률"
+        "roadmap-pairs"
       ]
     },
     {
@@ -148,7 +149,7 @@
       "name": "조합",
       "summary": "제외할 토핑 1개를 고르는 것과 같으므로 $\\binom{5}{4}=5$가지이다.",
       "prerequisiteIds": [
-        "astra-counting-l1-확률"
+        "roadmap-choose-complement"
       ]
     },
     {
@@ -234,7 +235,7 @@
       "name": "제곱근",
       "summary": "양변을 제곱하면 $a=2^2\\times5=20$.",
       "prerequisiteIds": [
-        "astra-equations-l1-일차방정식"
+        "roadmap-signed-square"
       ]
     },
     {
@@ -248,25 +249,23 @@
     {
       "id": "astra-functions-l2-이차함수의 꼭짓점",
       "name": "이차함수의 꼭짓점",
-      "summary": "$y=x^2$를 위로 2만큼 옮긴 그래프이다. 꼭짓점은 $(0,2)$, 축은 $x=0$이며 아래로 볼록하다.",
+      "summary": "제곱항이 0인 $x=2$에서 $y=3$이다.",
       "prerequisiteIds": [
-        "astra-functions-l1-일차함수의 기울기"
+        "roadmap-square-min"
       ]
     },
     {
       "id": "astra-geometry-l2-삼각비",
       "name": "삼각비",
       "summary": "빗변은 $BC$, 각 $B$의 대변은 $CA$이다. $\\sin B=CA/BC=15/17$.",
-      "prerequisiteIds": [
-        "astra-geometry-l1-삼각형의 닮음"
-      ]
+      "prerequisiteIds": []
     },
     {
       "id": "astra-geometry-l2-원의 접선",
       "name": "원의 접선",
       "summary": "$PA=PB$이므로 삼각형 $PAB$는 이등변삼각형이다. 밑각이 $60^\\circ$이므로 정삼각형이며 $AB=5$cm.",
       "prerequisiteIds": [
-        "astra-geometry-l1-삼각형의 닮음"
+        "astra-geometry-l1-이등변삼각형"
       ]
     },
     {
@@ -302,10 +301,170 @@
     {
       "id": "astra-algebra-l2-인수분해",
       "name": "인수분해",
-      "summary": "합이 5, 곱이 6인 두 수는 2와 3이다.",
+      "summary": "제곱의 차 공식 $a^2-b^2=(a-b)(a+b)$를 적용한다.",
       "prerequisiteIds": [
-        "astra-algebra-l1-지수법칙"
+        "roadmap-product"
       ]
+    },
+    {
+      "id": "roadmap-linear-sum",
+      "name": "일차식의 계산",
+      "summary": "괄호를 풀면 $3x+3-x+2=2x+5$입니다.",
+      "prerequisiteIds": [
+        "roadmap-like-terms"
+      ]
+    },
+    {
+      "id": "roadmap-like-terms",
+      "name": "동류항 정리",
+      "summary": "동류항의 계수를 계산하면 $(4-1)y+2=3y+2$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-product",
+      "name": "분배법칙과 다항식의 곱셈",
+      "summary": "각 항에 $2x$를 곱하면 $2x^2+6x$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-real-roots",
+      "name": "제곱과 실근의 존재",
+      "summary": "$x=3$과 $x=-3$의 제곱이 모두 $9$이므로 두 개입니다.",
+      "prerequisiteIds": [
+        "roadmap-signed-square"
+      ]
+    },
+    {
+      "id": "roadmap-signed-square",
+      "name": "음수의 제곱과 부호",
+      "summary": "음수 두 개를 곱하면 양수이므로 $(-4)(-4)=16$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-root-product",
+      "name": "이차방정식의 근과 인수",
+      "summary": "근은 $-1,4$이므로 곱은 $-4$입니다.",
+      "prerequisiteIds": [
+        "roadmap-conjugates"
+      ]
+    },
+    {
+      "id": "roadmap-conjugates",
+      "name": "합차의 곱과 분배법칙",
+      "summary": "전개하면 $x^2-3x+3x-9=x^2-9$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-function-value",
+      "name": "일차함수의 기본 개념과 함숫값",
+      "summary": "입력에 $-1$을 넣으면 $3(-1)+2=-1$입니다.",
+      "prerequisiteIds": [
+        "roadmap-substitution"
+      ]
+    },
+    {
+      "id": "roadmap-substitution",
+      "name": "문자식에 수 대입하기",
+      "summary": "$2(3)-5=6-5=1$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-square-min",
+      "name": "제곱의 비음수성",
+      "summary": "괄호 안이 $0$이어야 하므로 $x-2=0$, 즉 $x=2$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-coordinate-ratio",
+      "name": "좌표에서 내분과 비율",
+      "summary": "길이 $6$을 세 부분으로 나눈 한 부분은 $2$. $A$의 좌표 $2$에서 $2$만큼 이동하면 $4$입니다.",
+      "prerequisiteIds": [
+        "roadmap-ratio-parts"
+      ]
+    },
+    {
+      "id": "roadmap-ratio-parts",
+      "name": "비에 따른 전체 나누기",
+      "summary": "한 부분은 $15/(2+3)=3$. 작은 부분은 두 부분이므로 $6$입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-pythagoras",
+      "name": "피타고라스 정리와 좌표 거리",
+      "summary": "빗변의 제곱은 $6^2+8^2=100$이므로 빗변은 $10$입니다.",
+      "prerequisiteIds": [
+        "roadmap-square-sum"
+      ]
+    },
+    {
+      "id": "roadmap-square-sum",
+      "name": "제곱의 합 계산",
+      "summary": "$36+64=100$입니다. 각 수를 제곱한 뒤 더해야 해요.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-line-basic",
+      "name": "직선의 방정식 기본형",
+      "summary": "$x$와 상수항을 옮기면 $x+y-2=0$입니다.",
+      "prerequisiteIds": [
+        "roadmap-point-value"
+      ]
+    },
+    {
+      "id": "roadmap-point-value",
+      "name": "좌표 대입과 등식",
+      "summary": "$2+1-3=0$이므로 이 점은 직선 $x+y-3=0$ 위에 있어요.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-truth-inclusion",
+      "name": "진리집합의 포함 관계",
+      "summary": "$P$의 모든 원소가 $Q$에 있으므로 $p$이면 $q$. 따라서 $p$는 $q$의 충분조건입니다.",
+      "prerequisiteIds": [
+        "roadmap-truth"
+      ]
+    },
+    {
+      "id": "roadmap-truth",
+      "name": "명제의 참·거짓과 조건 대입",
+      "summary": "$2+1=3$은 $4$와 같지 않으므로 거짓입니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-set-operations",
+      "name": "합집합과 교집합",
+      "summary": "공통 원소는 $3$ 하나이므로 원소 개수는 $1$입니다.",
+      "prerequisiteIds": [
+        "roadmap-set-elements"
+      ]
+    },
+    {
+      "id": "roadmap-pairs",
+      "name": "중복 없는 쌍 나열",
+      "summary": "$(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)$의 여섯 쌍입니다.",
+      "prerequisiteIds": [
+        "roadmap-enumerate"
+      ]
+    },
+    {
+      "id": "roadmap-enumerate",
+      "name": "조건에 맞는 대상 나열",
+      "summary": "$3,6$ 두 개가 조건을 만족합니다.",
+      "prerequisiteIds": []
+    },
+    {
+      "id": "roadmap-choose-complement",
+      "name": "선택과 제외의 대응",
+      "summary": "제외할 한 장을 고르는 여섯 가지 경우와 일대일로 대응해요.",
+      "prerequisiteIds": [
+        "roadmap-enumerate"
+      ]
+    },
+    {
+      "id": "roadmap-set-elements",
+      "name": "공통 원소 찾기",
+      "summary": "두 집합에 모두 들어 있는 원소는 $4$ 하나예요.",
+      "prerequisiteIds": []
     }
   ]
 }

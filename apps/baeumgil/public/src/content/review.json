@@ -711,6 +711,650 @@
         "latexParsed": true
       },
       "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-linear-sum",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-like-terms",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-product",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-real-roots",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-signed-square",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-root-product",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-conjugates",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-function-value",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-substitution",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-square-min",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-coordinate-ratio",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-ratio-parts",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-pythagoras",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-square-sum",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-line-basic",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-point-value",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-truth-inclusion",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-truth",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-set-operations",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-pairs",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-enumerate",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-choose-complement",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-set-elements",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-linear-sum-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-like-terms-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-product-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-real-roots-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-signed-square-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-root-product-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-conjugates-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-function-value-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-substitution-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-square-min-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-coordinate-ratio-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-ratio-parts-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-pythagoras-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-square-sum-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-line-basic-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-point-value-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-truth-inclusion-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-truth-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-set-operations-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-pairs-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-enumerate-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-choose-complement-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
+    },
+    {
+      "questionId": "roadmap-set-elements-practice",
+      "reviewers": [
+        "Codex"
+      ],
+      "reviewedOn": "2026-10-24",
+      "scope": "local_diagnostic_content",
+      "checks": {
+        "answerVerified": true,
+        "singleCorrectAnswer": true,
+        "authoredNotCopied": true
+      },
+      "educatorValidated": false
     }
   ]
 }

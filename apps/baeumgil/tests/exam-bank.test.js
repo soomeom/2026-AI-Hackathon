@@ -76,11 +76,11 @@ test('고졸 이미지 기출 오답 → 중졸 기출로 개념 확인·기초 
   assert.match(first.image, /question-16\.png$/);
 });
 
-test('수식 전사 기출(2025년 1회 고졸 16번)도 같은 경로로 진행하고 연결된 중졸 기출로 개념을 확인한다', () => {
+test('합성함수 보충 경로도 교정한 함숫값 대입 문항으로 개념을 확인한다', () => {
   const id = 'ged-high-2025-1-math-q16';
   const { state, seen } = walk(id, (stage) => stage !== 'original_attempt');
   assert.equal(state.paths[0].stage, 'completed');
-  assert.equal(seen.find((s) => s.stage === 'concept_check').id, 'ged-middle-2025-1-math-q11');
+  assert.equal(seen.find((s) => s.stage === 'concept_check').id, 'roadmap-function-value');
   // 개념 확인을 모두 맞혀 기초 연습 없이 유사 문제로 간다
   assert.equal(seen.some((s) => s.stage === 'foundation_practice'), false);
 });

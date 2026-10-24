@@ -1,23 +1,21 @@
 {
-  "version": 1,
+  "version": 2,
   "domains": [
     {
       "id": "algebra",
       "name": "수와 다항식",
       "levels": {
+        "1": [
+          "roadmap-like-terms",
+          "roadmap-product"
+        ],
+        "2": [
+          "roadmap-linear-sum",
+          "astra-expand"
+        ],
         "3": [
           "ged-high-2025-1-math-q01",
           "ged-high-2025-1-math-q03"
-        ],
-        "2": [
-          "astra-expand",
-          "astra-expand-check"
-        ],
-        "1": [
-          "ged-middle-2025-1-math-q09",
-          "ged-middle-2025-1-math-q03",
-          "ged-middle-2025-1-math-q02",
-          "ged-middle-2025-1-math-q01"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q01"
@@ -26,17 +24,17 @@
       "id": "equations",
       "name": "방정식과 부등식",
       "levels": {
+        "1": [
+          "roadmap-signed-square",
+          "roadmap-conjugates"
+        ],
+        "2": [
+          "roadmap-real-roots",
+          "roadmap-root-product"
+        ],
         "3": [
           "ged-high-2025-1-math-q05",
           "ged-high-2025-1-math-q06"
-        ],
-        "2": [
-          "ged-middle-2025-1-math-q16",
-          "ged-middle-2025-1-math-q15"
-        ],
-        "1": [
-          "ged-middle-2025-1-math-q04",
-          "ged-middle-2025-1-math-q10"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q05"
@@ -45,17 +43,17 @@
       "id": "functions",
       "name": "함수와 그래프",
       "levels": {
-        "3": [
-          "ged-high-2025-1-math-q07",
-          "ged-high-2025-1-math-q16"
+        "1": [
+          "roadmap-square-min",
+          "roadmap-substitution"
         ],
         "2": [
           "ged-middle-2025-1-math-q17",
-          "astra-quadratic-vertex"
+          "roadmap-function-value"
         ],
-        "1": [
-          "ged-middle-2025-1-math-q11",
-          "ged-middle-2025-1-math-q05"
+        "3": [
+          "ged-high-2025-1-math-q07",
+          "ged-high-2025-1-math-q16"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q07"
@@ -64,18 +62,19 @@
       "id": "geometry",
       "name": "도형과 좌표",
       "levels": {
+        "1": [
+          "roadmap-ratio-parts",
+          "roadmap-square-sum",
+          "roadmap-point-value"
+        ],
+        "2": [
+          "roadmap-coordinate-ratio",
+          "roadmap-pythagoras",
+          "roadmap-line-basic"
+        ],
         "3": [
           "ged-high-2025-1-math-q10",
           "ged-high-2025-1-math-q11"
-        ],
-        "2": [
-          "ged-middle-2025-1-math-q18",
-          "ged-middle-2025-1-math-q19"
-        ],
-        "1": [
-          "ged-middle-2025-1-math-q13",
-          "ged-middle-2025-1-math-q12",
-          "ged-middle-2025-1-math-q06"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q10"
@@ -84,14 +83,17 @@
       "id": "logic",
       "name": "집합과 명제",
       "levels": {
+        "1": [
+          "roadmap-set-elements",
+          "roadmap-truth"
+        ],
+        "2": [
+          "roadmap-set-operations",
+          "roadmap-truth-inclusion"
+        ],
         "3": [
           "ged-high-2025-1-math-q14",
           "ged-high-2025-1-math-q15"
-        ],
-        "2": [],
-        "1": [
-          "astra-set-basic",
-          "astra-set-count"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q14"
@@ -100,20 +102,698 @@
       "id": "counting",
       "name": "경우의 수와 확률",
       "levels": {
+        "1": [
+          "roadmap-enumerate"
+        ],
+        "2": [
+          "roadmap-pairs",
+          "roadmap-choose-complement"
+        ],
         "3": [
           "ged-high-2025-1-math-q19",
           "ged-high-2025-1-math-q20"
-        ],
-        "2": [],
-        "1": [
-          "ged-middle-2025-1-math-q14",
-          "astra-count-basic",
-          "astra-count-one"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q19"
     }
   ],
-  "maxQuestions": 30,
-  "minimumIndependentCorrect": 2
+  "maxQuestions": 40,
+  "minimumIndependentCorrect": 2,
+  "learningBundles": [
+    {
+      "id": "astra-algebra-l3-다항식의 덧셈",
+      "conceptId": "astra-algebra-l3-다항식의 덧셈",
+      "domain": "algebra",
+      "level": 3,
+      "title": "다항식의 덧셈",
+      "explanation": "$A+B=(2+a)x^2+4x$이므로 $a=-2$, $b=4$. 따라서 $a+b=2$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q01"
+      ]
+    },
+    {
+      "id": "astra-algebra-l3-인수분해",
+      "conceptId": "astra-algebra-l3-인수분해",
+      "domain": "algebra",
+      "level": 3,
+      "title": "인수분해",
+      "explanation": "합의 세제곱 인수분해 공식으로 $x^3+2^3=(x+2)(x^2-2x+4)$이므로 $a=-2$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q03"
+      ]
+    },
+    {
+      "id": "astra-equations-l3-판별식",
+      "conceptId": "astra-equations-l3-판별식",
+      "domain": "equations",
+      "level": 3,
+      "title": "판별식",
+      "explanation": "판별식 $D=a^2-16>0$. 자연수 $a$는 $4$보다 커야 하므로 최솟값은 $5$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q05"
+      ]
+    },
+    {
+      "id": "astra-equations-l3-근과 계수의 관계",
+      "conceptId": "astra-equations-l3-근과 계수의 관계",
+      "domain": "equations",
+      "level": 3,
+      "title": "근과 계수의 관계",
+      "explanation": "두 근의 곱이 $a$이다. $a=(2+\\sqrt{2})(2-\\sqrt{2})=4-2=2$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q06"
+      ]
+    },
+    {
+      "id": "astra-functions-l3-이차함수의 최솟값",
+      "conceptId": "astra-functions-l3-이차함수의 최솟값",
+      "domain": "functions",
+      "level": 3,
+      "title": "이차함수의 최솟값",
+      "explanation": "구간 안의 $x=1$에서 $(x-1)^2=0$이므로 최솟값은 $2$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q07"
+      ]
+    },
+    {
+      "id": "astra-functions-l3-합성함수",
+      "conceptId": "astra-functions-l3-합성함수",
+      "domain": "functions",
+      "level": 3,
+      "title": "합성함수",
+      "explanation": "$f(1)=2$이므로 $g(f(1))=g(2)=-4+5=1$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q16"
+      ]
+    },
+    {
+      "id": "astra-geometry-l3-선분의 내분",
+      "conceptId": "astra-geometry-l3-선분의 내분",
+      "domain": "geometry",
+      "level": 3,
+      "title": "선분의 내분",
+      "explanation": "내분점은 $\\left(\\frac{2(-3)+6}{3},\\frac{2(5)-1}{3}\\right)=(0,3)$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q10"
+      ]
+    },
+    {
+      "id": "astra-geometry-l3-점과 직선 사이의 거리",
+      "conceptId": "astra-geometry-l3-점과 직선 사이의 거리",
+      "domain": "geometry",
+      "level": 3,
+      "title": "점과 직선 사이의 거리",
+      "explanation": "거리 공식에 따라 $\\frac{|3(0)+4(0)-12|}{\\sqrt{3^2+4^2}}=\\frac{12}{5}$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q11"
+      ]
+    },
+    {
+      "id": "astra-logic-l3-집합의 연산",
+      "conceptId": "astra-logic-l3-집합의 연산",
+      "domain": "logic",
+      "level": 3,
+      "title": "집합의 연산",
+      "explanation": "$A\\cup B=\\{1,3,4,5,6,7,9\\}$, $A\\cap B=\\{3,5\\}$. 따라서 $7+2=9$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q14"
+      ]
+    },
+    {
+      "id": "astra-logic-l3-필요조건",
+      "conceptId": "astra-logic-l3-필요조건",
+      "domain": "logic",
+      "level": 3,
+      "title": "필요조건",
+      "explanation": "$p\\Rightarrow q$여야 한다. $x=3$을 $q$에 대입하면 $9-3a-3=0$이므로 $a=2$.",
+      "questionIds": [
+        "ged-high-2025-1-math-q15"
+      ]
+    },
+    {
+      "id": "astra-counting-l3-경우의 수",
+      "conceptId": "astra-counting-l3-경우의 수",
+      "domain": "counting",
+      "level": 3,
+      "title": "경우의 수",
+      "explanation": "조건을 만족하는 쌍은 $(1,2),(1,5),(2,4),(4,5)$로 $4$가지이다.",
+      "questionIds": [
+        "ged-high-2025-1-math-q19"
+      ]
+    },
+    {
+      "id": "astra-counting-l3-조합",
+      "conceptId": "astra-counting-l3-조합",
+      "domain": "counting",
+      "level": 3,
+      "title": "조합",
+      "explanation": "제외할 토핑 1개를 고르는 것과 같으므로 $\\binom{5}{4}=5$가지이다.",
+      "questionIds": [
+        "ged-high-2025-1-math-q20"
+      ]
+    },
+    {
+      "id": "astra-algebra-l1-소인수분해",
+      "conceptId": "astra-algebra-l1-소인수분해",
+      "domain": "algebra",
+      "level": 1,
+      "title": "소인수분해",
+      "explanation": "$45=3\\times15=3\\times3\\times5=3^2\\times5$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q01"
+      ]
+    },
+    {
+      "id": "astra-algebra-l1-정수의 덧셈",
+      "conceptId": "astra-algebra-l1-정수의 덧셈",
+      "domain": "algebra",
+      "level": 1,
+      "title": "정수의 덧셈",
+      "explanation": "음수를 더하는 것은 그 절댓값을 빼는 것이다. $6-4=2$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q02"
+      ]
+    },
+    {
+      "id": "astra-algebra-l1-문자와 식",
+      "conceptId": "astra-algebra-l1-문자와 식",
+      "domain": "algebra",
+      "level": 1,
+      "title": "문자와 식",
+      "explanation": "한 송이 가격에 송이 수를 곱하므로 $2000\\times a$원이다.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q03"
+      ]
+    },
+    {
+      "id": "astra-equations-l1-일차방정식",
+      "conceptId": "astra-equations-l1-일차방정식",
+      "domain": "equations",
+      "level": 1,
+      "title": "일차방정식",
+      "explanation": "$2x=8$이므로 $x=4$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q04"
+      ]
+    },
+    {
+      "id": "astra-functions-l1-그래프 읽기",
+      "conceptId": "astra-functions-l1-그래프 읽기",
+      "domain": "functions",
+      "level": 1,
+      "title": "그래프 읽기",
+      "explanation": "10분에는 $2$km, 25분에는 $4$km이므로 $4-2=2$km.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q05"
+      ]
+    },
+    {
+      "id": "astra-geometry-l1-부채꼴과 비례",
+      "conceptId": "astra-geometry-l1-부채꼴과 비례",
+      "domain": "geometry",
+      "level": 1,
+      "title": "부채꼴과 비례",
+      "explanation": "같은 원에서 넓이는 중심각에 비례한다. $60\\times\\frac{5}{3}=100^\\circ$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q06"
+      ]
+    },
+    {
+      "id": "astra-statistics-l1-상대도수",
+      "conceptId": "astra-statistics-l1-상대도수",
+      "domain": "statistics",
+      "level": 1,
+      "title": "상대도수",
+      "explanation": "상대도수는 해당 도수를 전체 도수로 나눈 값이다. $a=12/20=0.6$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q07"
+      ]
+    },
+    {
+      "id": "astra-algebra-l1-지수법칙",
+      "conceptId": "astra-algebra-l1-지수법칙",
+      "domain": "algebra",
+      "level": 1,
+      "title": "지수법칙",
+      "explanation": "같은 밑의 곱셈은 지수를 더하고 나눗셈은 뺀다. $a^{2+7-3}=a^6$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q09"
+      ]
+    },
+    {
+      "id": "astra-equations-l1-연립일차방정식",
+      "conceptId": "astra-equations-l1-연립일차방정식",
+      "domain": "equations",
+      "level": 1,
+      "title": "연립일차방정식",
+      "explanation": "아래 식에서 위 식을 빼면 $x=2$. $2-y=1$에서 $y=1$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q10"
+      ]
+    },
+    {
+      "id": "astra-functions-l1-일차함수의 기울기",
+      "conceptId": "astra-functions-l1-일차함수의 기울기",
+      "domain": "functions",
+      "level": 1,
+      "title": "일차함수의 기울기",
+      "explanation": "그래프가 $(-2,0)$을 지나므로 $0=-2a+4$. 따라서 $a=2$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q11"
+      ]
+    },
+    {
+      "id": "astra-geometry-l1-이등변삼각형",
+      "conceptId": "astra-geometry-l1-이등변삼각형",
+      "domain": "geometry",
+      "level": 1,
+      "title": "이등변삼각형",
+      "explanation": "밑각은 $(180-80)/2=50^\\circ$. 외각은 $180-50=130^\\circ$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q12"
+      ]
+    },
+    {
+      "id": "astra-geometry-l1-삼각형의 닮음",
+      "conceptId": "astra-geometry-l1-삼각형의 닮음",
+      "domain": "geometry",
+      "level": 1,
+      "title": "삼각형의 닮음",
+      "explanation": "평행선에 의해 $AD:DB=AE:EC$이다. $6:3=8:x$이므로 $6x=24$, $x=4$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q13"
+      ]
+    },
+    {
+      "id": "astra-counting-l1-확률",
+      "conceptId": "astra-counting-l1-확률",
+      "domain": "counting",
+      "level": 1,
+      "title": "확률",
+      "explanation": "5의 배수는 $5,10$ 두 개이므로 $2/10=1/5$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q14"
+      ]
+    },
+    {
+      "id": "astra-equations-l2-제곱근",
+      "conceptId": "astra-equations-l2-제곱근",
+      "domain": "equations",
+      "level": 2,
+      "title": "제곱근",
+      "explanation": "양변을 제곱하면 $a=2^2\\times5=20$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q15"
+      ]
+    },
+    {
+      "id": "astra-equations-l2-이차방정식의 인수분해",
+      "conceptId": "astra-equations-l2-이차방정식의 인수분해",
+      "domain": "equations",
+      "level": 2,
+      "title": "이차방정식의 인수분해",
+      "explanation": "$(x-1)(x-2)=0$이므로 두 근은 $1,2$이다.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q16"
+      ]
+    },
+    {
+      "id": "astra-functions-l2-이차함수의 꼭짓점",
+      "conceptId": "astra-functions-l2-이차함수의 꼭짓점",
+      "domain": "functions",
+      "level": 2,
+      "title": "이차함수의 꼭짓점",
+      "explanation": "$y=x^2$를 위로 2만큼 옮긴 그래프이다. 꼭짓점은 $(0,2)$, 축은 $x=0$이며 아래로 볼록하다.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q17",
+        "astra-quadratic-vertex"
+      ]
+    },
+    {
+      "id": "astra-geometry-l2-삼각비",
+      "conceptId": "astra-geometry-l2-삼각비",
+      "domain": "geometry",
+      "level": 2,
+      "title": "삼각비",
+      "explanation": "빗변은 $BC$, 각 $B$의 대변은 $CA$이다. $\\sin B=CA/BC=15/17$.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q18"
+      ]
+    },
+    {
+      "id": "astra-geometry-l2-원의 접선",
+      "conceptId": "astra-geometry-l2-원의 접선",
+      "domain": "geometry",
+      "level": 2,
+      "title": "원의 접선",
+      "explanation": "$PA=PB$이므로 삼각형 $PAB$는 이등변삼각형이다. 밑각이 $60^\\circ$이므로 정삼각형이며 $AB=5$cm.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q19"
+      ]
+    },
+    {
+      "id": "astra-statistics-l2-자료의 산포",
+      "conceptId": "astra-statistics-l2-자료의 산포",
+      "domain": "statistics",
+      "level": 2,
+      "title": "자료의 산포",
+      "explanation": "①은 산포가 0이다. ②와 ③의 분산은 $0.24$, ④의 분산은 $0.96$이므로 ④의 표준편차가 가장 크다.",
+      "questionIds": [
+        "ged-middle-2025-1-math-q20"
+      ]
+    },
+    {
+      "id": "astra-logic-l1-집합의 원소",
+      "conceptId": "astra-logic-l1-집합의 원소",
+      "domain": "logic",
+      "level": 1,
+      "title": "집합의 원소",
+      "explanation": "두 집합에 공통으로 들어 있는 원소 $2,3$을 모은다.",
+      "questionIds": [
+        "astra-set-basic"
+      ]
+    },
+    {
+      "id": "astra-logic-l1-조건에 맞는 원소 세기",
+      "conceptId": "astra-logic-l1-조건에 맞는 원소 세기",
+      "domain": "logic",
+      "level": 1,
+      "title": "조건에 맞는 원소 세기",
+      "explanation": "짝수는 $2,4,6$이므로 3개이다.",
+      "questionIds": [
+        "astra-set-count"
+      ]
+    },
+    {
+      "id": "astra-counting-l1-경우 나열",
+      "conceptId": "astra-counting-l1-경우 나열",
+      "domain": "counting",
+      "level": 1,
+      "title": "경우 나열",
+      "explanation": "앞앞, 앞뒤, 뒤앞, 뒤뒤로 4가지이다.",
+      "questionIds": [
+        "astra-count-basic"
+      ]
+    },
+    {
+      "id": "astra-counting-l1-전체와 조건의 개수",
+      "conceptId": "astra-counting-l1-전체와 조건의 개수",
+      "domain": "counting",
+      "level": 1,
+      "title": "전체와 조건의 개수",
+      "explanation": "홀수는 $1,3$ 두 장이다. 전체 4장 중 2장이므로 $1/2$.",
+      "questionIds": [
+        "astra-count-one"
+      ]
+    },
+    {
+      "id": "astra-algebra-l2-인수분해",
+      "conceptId": "astra-algebra-l2-인수분해",
+      "domain": "algebra",
+      "level": 2,
+      "title": "인수분해",
+      "explanation": "합이 5, 곱이 6인 두 수는 2와 3이다.",
+      "questionIds": [
+        "astra-expand",
+        "astra-expand-check"
+      ]
+    },
+    {
+      "id": "roadmap-linear-sum",
+      "conceptId": "roadmap-linear-sum",
+      "domain": "algebra",
+      "level": 2,
+      "title": "일차식의 계산",
+      "explanation": "괄호 앞의 부호를 각 항에 곱한 뒤 동류항을 모아요. $2x+6-x+1=x+7$입니다.",
+      "questionIds": [
+        "roadmap-linear-sum",
+        "roadmap-linear-sum-practice"
+      ]
+    },
+    {
+      "id": "roadmap-like-terms",
+      "conceptId": "roadmap-like-terms",
+      "domain": "algebra",
+      "level": 1,
+      "title": "동류항 정리",
+      "explanation": "문자와 차수가 같은 항끼리 계수를 더해요. $3x+2x=(3+2)x=5x$이고 상수항 $-4$는 따로 둡니다.",
+      "questionIds": [
+        "roadmap-like-terms",
+        "roadmap-like-terms-practice"
+      ]
+    },
+    {
+      "id": "roadmap-product",
+      "conceptId": "roadmap-product",
+      "domain": "algebra",
+      "level": 1,
+      "title": "분배법칙과 다항식의 곱셈",
+      "explanation": "분배법칙으로 $x$를 각 항에 곱해요. $x\\times x=x^2$이므로 $x^2+2x$입니다. 지수법칙은 이런 곱셈·거듭제곱에서 사용해요.",
+      "questionIds": [
+        "roadmap-product",
+        "roadmap-product-practice"
+      ]
+    },
+    {
+      "id": "roadmap-real-roots",
+      "conceptId": "roadmap-real-roots",
+      "domain": "equations",
+      "level": 2,
+      "title": "제곱과 실근의 존재",
+      "explanation": "실수를 제곱한 값은 $0$ 이상이라 $-4$가 될 수 없어요. 이차방정식을 완전제곱으로 바꾸면 판별식의 부호와 실근의 개수를 연결할 수 있어요.",
+      "questionIds": [
+        "roadmap-real-roots",
+        "roadmap-real-roots-practice"
+      ]
+    },
+    {
+      "id": "roadmap-signed-square",
+      "conceptId": "roadmap-signed-square",
+      "domain": "equations",
+      "level": 1,
+      "title": "음수의 제곱과 부호",
+      "explanation": "괄호 안 전체를 두 번 곱해요. $(-3)\\times(-3)=9$입니다. 음수의 제곱도 양수예요.",
+      "questionIds": [
+        "roadmap-signed-square",
+        "roadmap-signed-square-practice"
+      ]
+    },
+    {
+      "id": "roadmap-root-product",
+      "conceptId": "roadmap-root-product",
+      "domain": "equations",
+      "level": 2,
+      "title": "이차방정식의 근과 인수",
+      "explanation": "곱이 $0$이려면 한 인수가 $0$이에요. 근은 $2,3$이고 곱은 $6$입니다. 전개한 식의 상수항과 비교해 보세요.",
+      "questionIds": [
+        "roadmap-root-product",
+        "roadmap-root-product-practice"
+      ]
+    },
+    {
+      "id": "roadmap-conjugates",
+      "conceptId": "roadmap-conjugates",
+      "domain": "equations",
+      "level": 1,
+      "title": "합차의 곱과 분배법칙",
+      "explanation": "분배법칙으로 전개하면 $a^2-ab+ab-b^2=a^2-b^2$입니다. 제곱근을 포함한 두 근의 곱도 이 방식으로 계산해요.",
+      "questionIds": [
+        "roadmap-conjugates",
+        "roadmap-conjugates-practice"
+      ]
+    },
+    {
+      "id": "roadmap-function-value",
+      "conceptId": "roadmap-function-value",
+      "domain": "functions",
+      "level": 2,
+      "title": "일차함수의 기본 개념과 함숫값",
+      "explanation": "일차함수 $f(x)=ax+b$는 입력 $x$에 출력 $ax+b$를 대응시켜요. $f(4)=2\\times4-3=5$. 합성함수에서는 안쪽 함수의 출력이 바깥 함수의 입력이 됩니다.",
+      "questionIds": [
+        "roadmap-function-value",
+        "roadmap-function-value-practice"
+      ]
+    },
+    {
+      "id": "roadmap-substitution",
+      "conceptId": "roadmap-substitution",
+      "domain": "functions",
+      "level": 1,
+      "title": "문자식에 수 대입하기",
+      "explanation": "문자 자리에 수를 괄호와 함께 넣어요. $3\\times(-2)+1=-6+1=-5$입니다.",
+      "questionIds": [
+        "roadmap-substitution",
+        "roadmap-substitution-practice"
+      ]
+    },
+    {
+      "id": "roadmap-square-min",
+      "conceptId": "roadmap-square-min",
+      "domain": "functions",
+      "level": 1,
+      "title": "제곱의 비음수성",
+      "explanation": "실수의 제곱은 음수가 될 수 없고 $x=0$에서 $0$이에요. $y=(x-a)^2+b$는 $x=a$에서 최솟값 $b$를 갖습니다.",
+      "questionIds": [
+        "roadmap-square-min",
+        "roadmap-square-min-practice"
+      ]
+    },
+    {
+      "id": "roadmap-coordinate-ratio",
+      "conceptId": "roadmap-coordinate-ratio",
+      "domain": "geometry",
+      "level": 2,
+      "title": "좌표에서 내분과 비율",
+      "explanation": "전체를 $1+2=3$부분으로 나누면 한 부분은 $6/3=2$예요. $A$에서 한 부분만큼 이동해 좌표는 $2$. 평면에서는 각 좌표에 따로 적용해요.",
+      "questionIds": [
+        "roadmap-coordinate-ratio",
+        "roadmap-coordinate-ratio-practice"
+      ]
+    },
+    {
+      "id": "roadmap-ratio-parts",
+      "conceptId": "roadmap-ratio-parts",
+      "domain": "geometry",
+      "level": 1,
+      "title": "비에 따른 전체 나누기",
+      "explanation": "전체 비의 합은 $3$이에요. 한 부분은 $12/3=4$이고 큰 부분은 $8$입니다.",
+      "questionIds": [
+        "roadmap-ratio-parts",
+        "roadmap-ratio-parts-practice"
+      ]
+    },
+    {
+      "id": "roadmap-pythagoras",
+      "conceptId": "roadmap-pythagoras",
+      "domain": "geometry",
+      "level": 2,
+      "title": "피타고라스 정리와 좌표 거리",
+      "explanation": "빗변 길이 $c$는 $c^2=3^2+4^2=25$, 따라서 $c=5$예요. 거리 공식의 $\\sqrt{a^2+b^2}$도 이 직각삼각형 관계에서 나옵니다.",
+      "questionIds": [
+        "roadmap-pythagoras",
+        "roadmap-pythagoras-practice"
+      ]
+    },
+    {
+      "id": "roadmap-square-sum",
+      "conceptId": "roadmap-square-sum",
+      "domain": "geometry",
+      "level": 1,
+      "title": "제곱의 합 계산",
+      "explanation": "각 수를 먼저 제곱한 뒤 더해요. $3^2+4^2=9+16=25$이며 $(3+4)^2$와 달라요.",
+      "questionIds": [
+        "roadmap-square-sum",
+        "roadmap-square-sum-practice"
+      ]
+    },
+    {
+      "id": "roadmap-line-basic",
+      "conceptId": "roadmap-line-basic",
+      "domain": "geometry",
+      "level": 2,
+      "title": "직선의 방정식 기본형",
+      "explanation": "모든 항을 한쪽으로 옮겨요. $2x-y+1=0$에서 $a=2,b=-1,c=1$. 점과 직선의 거리에는 이 계수와 점의 좌표를 넣어요.",
+      "questionIds": [
+        "roadmap-line-basic",
+        "roadmap-line-basic-practice"
+      ]
+    },
+    {
+      "id": "roadmap-point-value",
+      "conceptId": "roadmap-point-value",
+      "domain": "geometry",
+      "level": 1,
+      "title": "좌표 대입과 등식",
+      "explanation": "좌표를 각각 대입하면 $2\\times1-3+1=0$이에요. 값이 $0$이므로 점 $(1,3)$은 직선 $2x-y+1=0$ 위에 있어요.",
+      "questionIds": [
+        "roadmap-point-value",
+        "roadmap-point-value-practice"
+      ]
+    },
+    {
+      "id": "roadmap-truth-inclusion",
+      "conceptId": "roadmap-truth-inclusion",
+      "domain": "logic",
+      "level": 2,
+      "title": "진리집합의 포함 관계",
+      "explanation": "$P\\subset Q$이므로 $p$이면 $q$예요. $q$는 $p$의 필요조건, $p$는 $q$의 충분조건이에요. 포함 방향을 먼저 확인하세요.",
+      "questionIds": [
+        "roadmap-truth-inclusion",
+        "roadmap-truth-inclusion-practice"
+      ]
+    },
+    {
+      "id": "roadmap-truth",
+      "conceptId": "roadmap-truth",
+      "domain": "logic",
+      "level": 1,
+      "title": "명제의 참·거짓과 조건 대입",
+      "explanation": "$3-3=0$이므로 이 값에서는 참이에요. 조건이 참이 되는 값들의 집합이 진리집합입니다.",
+      "questionIds": [
+        "roadmap-truth",
+        "roadmap-truth-practice"
+      ]
+    },
+    {
+      "id": "roadmap-set-operations",
+      "conceptId": "roadmap-set-operations",
+      "domain": "logic",
+      "level": 2,
+      "title": "합집합과 교집합",
+      "explanation": "합집합은 $\\{1,2,3\\}$으로 $3$개, 교집합은 $\\{2\\}$로 $1$개입니다. 공통 원소를 구분해 $3+1=4$를 계산해요.",
+      "questionIds": [
+        "roadmap-set-operations",
+        "roadmap-set-operations-practice"
+      ]
+    },
+    {
+      "id": "roadmap-pairs",
+      "conceptId": "roadmap-pairs",
+      "domain": "counting",
+      "level": 2,
+      "title": "중복 없는 쌍 나열",
+      "explanation": "$(1,2),(1,3),(2,3)$의 $3$가지예요. 동시에 고르면 $(1,2)$와 $(2,1)$은 같으므로 중복을 빼야 해요.",
+      "questionIds": [
+        "roadmap-pairs",
+        "roadmap-pairs-practice"
+      ]
+    },
+    {
+      "id": "roadmap-enumerate",
+      "conceptId": "roadmap-enumerate",
+      "domain": "counting",
+      "level": 1,
+      "title": "조건에 맞는 대상 나열",
+      "explanation": "조건을 만족하는 $2,4$를 빠짐없이 한 번씩 적어 세면 $2$개예요. 여러 장을 고를 때도 조건을 확인하며 나열해요.",
+      "questionIds": [
+        "roadmap-enumerate",
+        "roadmap-enumerate-practice"
+      ]
+    },
+    {
+      "id": "roadmap-choose-complement",
+      "conceptId": "roadmap-choose-complement",
+      "domain": "counting",
+      "level": 2,
+      "title": "선택과 제외의 대응",
+      "explanation": "고를 $3$장 대신 제외할 $1$장을 정하면 돼요. 제외할 카드가 $4$가지이므로 고르는 방법도 $4$가지입니다.",
+      "questionIds": [
+        "roadmap-choose-complement",
+        "roadmap-choose-complement-practice"
+      ]
+    },
+    {
+      "id": "roadmap-set-elements",
+      "conceptId": "roadmap-set-elements",
+      "domain": "logic",
+      "level": 1,
+      "title": "공통 원소 찾기",
+      "explanation": "두 집합에 모두 들어 있는 것은 $2$예요. 공통 원소를 모으면 교집합이 됩니다.",
+      "questionIds": [
+        "roadmap-set-elements",
+        "roadmap-set-elements-practice"
+      ]
+    }
+  ],
+  "stageMeaning": "단계는 선수 관계의 깊이이며 정규 학년 분류가 아닙니다. 집합·명제 기초는 고1 개념을 단순화한 확인입니다."
 }

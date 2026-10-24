@@ -1,0 +1,16 @@
+main.learner-main:has(.roadmap-results){max-width:1120px}.question-card.roadmap-results{max-width:1100px}.roadmap-study{max-width:720px;margin-left:auto;margin-right:auto}#roadmap-title{scroll-margin-top:6rem}
+.roadmap{margin-top:2rem;padding-top:1.5rem;border-top:1px solid #dbe4e0}
+.roadmap-heading{display:flex;gap:1rem;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.roadmap h3,.roadmap-study h3{font-size:1.45rem;margin:.25rem 0 .8rem}
+.roadmap-domain{margin:1.7rem 0}.roadmap-domain h4{font-size:1.05rem;margin:0 0 .65rem}
+.roadmap-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+.roadmap-step{min-width:0;background:#f5f8f6;border:1px solid #dfe9e2;border-radius:14px;padding:.85rem}
+.roadmap-step h5{font-size:.9rem;line-height:1.6;margin:0 0 .7rem}.roadmap-step h5>span{display:block;color:#356b52;font-size:.8rem}
+.roadmap-card{width:100%;display:flex;flex-direction:column;align-items:flex-start;gap:.5rem;text-align:left;border:1px solid #d4dfd8;border-radius:10px;background:white;color:#213c30;padding:1rem;margin:.5rem 0;white-space:normal;overflow-wrap:anywhere;font:inherit;cursor:pointer}
+.roadmap-card strong{font-size:1rem;line-height:1.5}.roadmap-card span,.roadmap-card small{font-size:.8rem;line-height:1.5}.roadmap-card small{color:#4b6656}
+.roadmap-card.recommended{border:2px solid #2d7556;background:#eef8f1}.roadmap-card-status{color:#276644;font-weight:650}
+.roadmap-card:hover{border-color:#2d7556;background:#edf7f0}.roadmap-card:focus-visible,.roadmap-study button:focus-visible{outline:3px solid #956b09;outline-offset:3px}
+.roadmap-empty{color:#65756b;font-size:.8rem;line-height:1.7}.roadmap-extra{margin:1.25rem 0}.roadmap-extra summary{cursor:pointer;font-weight:650}
+.roadmap-extra-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.6rem}
+.roadmap-study{margin-top:1.5rem;padding:1.25rem;border:1px solid #cadccf;border-radius:16px;background:#fafcfb}.roadmap-study .choices{display:grid;gap:.6rem;margin:1rem 0}.roadmap-study .choice{text-align:left;display:flex;gap:.8rem;padding:1rem;white-space:normal}.roadmap-study .choice.selected{background:#e5f2e9;border-color:#2d7556}.roadmap-study .choice:disabled{opacity:.8}.roadmap-study .action-bar{display:flex;gap:.6rem;flex-wrap:wrap}.roadmap-study .key{font-weight:bold}.roadmap-explanation{padding:1rem;border-radius:10px;background:#eef4ef;margin:1rem 0}.roadmap-explanation summary{cursor:pointer;font-weight:650}.roadmap-explanation>div{margin-top:.8rem;line-height:1.8}.roadmap-study .msg{margin:1rem 0;padding:1rem;background:#eef4ef;border-radius:10px}.roadmap-study .question-body{overflow-wrap:anywhere}
+@media(max-width:740px){#roadmap-title{scroll-margin-top:12rem}.roadmap-steps{grid-template-columns:1fr}.roadmap-study{padding:.8rem}.roadmap-heading{align-items:flex-start}.roadmap-card{padding:.9rem}}

@@ -1,10 +1,11 @@
-// 첫 수업 시작점을 위한 적응형 초기 진단 (6영역, 최대 30문항). 전체 실력·개념 숙달을 확정하는 검사가 아니다.
+// 첫 수업 시작점을 위한 적응형 초기 진단 (6영역, 최대 40문항). 전체 실력·개념 숙달을 확정하는 검사가 아니다.
 // 출제·분기·수준 판정은 learning/diagnostic.js(검정고시 기출 기반 진단)를 그대로 쓰고,
 // 여기서는 앱 상태(state.initialAssessments)에 기록·노출 이력·멘토의 시작점 확정을 연결한다.
 import { fingerprintQuestion, classifyNovelty } from './exposure.js';
 import { applyLearningCommand } from './engine.js';
 import { startDiagnostic, submitDiagnostic, diagnosticReport, LEVELS } from './diagnostic.js';
 import { listAssignableQuestions } from '../content/catalog.js';
+import { buildRoadmap, diagnosticLog, roadmapCards, submitRoadmapPractice, validRoadmapPractice } from './roadmap.js';
 
 const VERSION = 2; // 1: 고정 7문항(이전), 2: 적응형 6영역
 const fail = code => { const error = new Error(code); error.code = code; throw error; };
@@ -80,7 +81,9 @@ export function resumeInitialAssessment(state, { assessmentId, at } = {}) {
   const record = find(state, assessmentId); requireTime(at);
   if (record.stopReason !== 'user_paused' || record.diagnostic.status !== 'active') fail('initial_not_resumable');
   if ((state.startingPoints ?? []).some(p => p.assessmentId === assessmentId)) fail('initial_lesson_already_planned');
-  return replace(state, { ...record, status: 'active', completedAt: null, stopReason: null }, {}, { type: 'initialResumed', assessmentId });
+  const practiced=(state.exposures??[]).filter(e=>e.learnerId===record.learnerId&&e.stage==='roadmap_practice').map(e=>e.sourceQuestionId);
+  const diagnostic={...record.diagnostic,seenBefore:[...new Set([...record.diagnostic.seenBefore,...practiced])]};
+  return replace(state, { ...record, diagnostic, status: 'active', completedAt: null, stopReason: null }, {}, { type: 'initialResumed', assessmentId });
 }
 
 // 시작 개념(검정고시 단원)에 맞는 첫 문제 후보: 기출 보충 경로의 단원 → 자체 제작 경로의 개념.
@@ -138,11 +141,38 @@ export function initialAssessmentSummary(state, learnerId, { catalog } = {}) {
   const report = diagnosticReport(record.diagnostic, bankOf(catalog), configOf(catalog));
   const entries = attempts.map(a => {
     const q = questionOf(catalog, a.questionId);
-    return { questionId: a.questionId, domainName: configOf(catalog).domains.find(d => d.id === a.domain)?.name ?? a.domain, level: a.level,
+    return { ...diagnosticLog(a, bankOf(catalog)), questionId: a.questionId, domainName: configOf(catalog).domains.find(d => d.id === a.domain)?.name ?? a.domain, level: a.level,
       levelName: LEVELS[a.level], core: q.curriculum?.core ?? '', result: a.result, independent: a.independent, helpUsed: a.helpUsed };
   });
-  return { ...base, report, entries, domainCount: configOf(catalog).domains.length, maxQuestions: configOf(catalog).maxQuestions,
+  return { ...base, report, entries, roadmap: buildRoadmap(record.diagnostic, bankOf(catalog), configOf(catalog), record.roadmapPractice), practice: record.roadmapPractice ?? { attempts: [] }, domainCount: configOf(catalog).domains.length, maxQuestions: configOf(catalog).maxQuestions,
     recommendation: record.status === 'completed' ? recommend(record, report, catalog) : null };
+}
+
+/** 로드맵 연습은 최초 진단·정식 학습 회기와 별도 기록. 노출은 공통 기록에 남긴다. */
+export function openInitialRoadmap(state, { assessmentId, cardId = null, questionId, at } = {}, { catalog } = {}) {
+  const record=find(state,assessmentId); requireTime(at);
+  if(record.status!=='completed')fail('initial_not_completed');
+  const practice=record.roadmapPractice??{attempts:[]};
+  if(cardId===null)return replace(state,{...record,roadmapPractice:{...practice,cardId:null,questionId:null,roundId:null,answerId:null}},{},{type:'roadmapClosed',assessmentId});
+  const card=roadmapCards(buildRoadmap(record.diagnostic,bankOf(catalog),configOf(catalog),practice)).find(c=>c.id===cardId);
+  if(!card?.questionIds.includes(questionId))fail('invalid_roadmap_question');
+  const q=questionOf(catalog,questionId), fingerprint=fingerprintQuestion(q);
+  const exposureId=`roadmap:${assessmentId}:${q.id}`;
+  const exposure={id:exposureId,learnerId:record.learnerId,pathId:null,itemId:q.id,sourceQuestionId:q.id,stage:'roadmap_practice',fingerprint,
+    noveltyAtPresentation:classifyNovelty(state,record.learnerId,fingerprint),presentedAt:at};
+  const exposures=(state.exposures??[]).some(e=>e.id===exposureId)?state.exposures:[...(state.exposures??[]),exposure];
+  const roadmapPractice={...practice,cardId,questionId,roundId:`${assessmentId}:practice:${practice.attempts.length}`,answerId:null};
+  return replace(state,{...record,roadmapPractice},{exposures},{type:'roadmapOpened',assessmentId,questionId});
+}
+
+export function answerInitialRoadmap(state, { assessmentId, roundId, choiceId=null, abstained=false, at } = {}, { catalog } = {}) {
+  const record=find(state,assessmentId); requireTime(at);
+  if(record.status!=='completed')fail('initial_not_completed');
+  const practice=record.roadmapPractice;
+  if(!practice?.cardId||!roundId||roundId!==practice.roundId)fail('roadmap_not_presented');
+  const next=submitRoadmapPractice(practice,{id:roundId,cardId:practice.cardId,questionId:practice.questionId,choiceId,abstained,answeredAt:at},record.diagnostic,bankOf(catalog),configOf(catalog));
+  if(next===practice)return state;
+  return replace(state,{...record,roadmapPractice:{...next,answerId:roundId}},{},{type:'roadmapAnswered',assessmentId,questionId:practice.questionId});
 }
 
 /** 멘토의 선택과 과제·경로 시작을 하나의 변경으로 처리한다. */
@@ -181,6 +211,8 @@ export function validInitialRecords(state) {
       if (a.status === 'completed' ? !validTime(a.completedAt) : a.completedAt !== null) return false;
       if (a.status === 'active' && (d.status !== 'active' || !d.currentId)) return false;
       if (!d.attempts.every(x => a.presentedQuestionIds.includes(x.questionId) && ['correct', 'incorrect', 'abstained'].includes(x.result))) return false;
+      if(d.attempts.some(x=>x.independent&&(x.helpUsed||x.previouslySeen===true)))return false;
+      if(a.roadmapPractice&&!validRoadmapPractice(a.roadmapPractice))return false;
     }
     for (const p of state.startingPoints ?? []) {
       const record = state.initialAssessments?.find(a => a.id === p.assessmentId);

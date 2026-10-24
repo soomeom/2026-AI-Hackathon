@@ -107,11 +107,11 @@ export function mathHtml(text) {
   const katex = globalThis.katex;
   return String(text ?? '').split('$').map((part, i) => {
     if (i % 2 === 0 || !katex) return esc(part);
-    try { return katex.renderToString(part, { throwOnError: false, trust: false, output: 'html' }); } catch { return esc(part); }
+    try { return katex.renderToString(part, { throwOnError: false, trust: false, output: 'htmlAndMathml' }); } catch { return esc(part); }
   }).join('');
 }
 
-export const choiceHtml = (c) => (c.latex ? mathHtml(`$${c.latex}$`) : esc(c.text ?? c.value));
+export const choiceHtml = (c) => (c.latex ? mathHtml(`$${c.latex}$`) : mathHtml(c.text ?? c.value));
 
 export function sourceLabel(item) {
   const r = item?.reference;

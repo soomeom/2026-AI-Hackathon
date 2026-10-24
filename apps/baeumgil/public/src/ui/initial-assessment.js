@@ -1,8 +1,11 @@
 // 첫 수준 확인 화면 (적응형 6영역 진단). 멘티: 한 문제씩 풀기 / 멘토: 영역별 결과 확인·시작점 확정.
 import {
   initialAssessmentSummary, initialQuestionOptions, initialConceptOptions, pauseInitialAssessment, resumeInitialAssessment,
+  openInitialRoadmap, answerInitialRoadmap,
 } from '../learning/initial-assessment.js';
 import { esc, ICON, questionBodyHtml, choiceHtml, sourceLabel } from './text.js';
+import { renderRoadmap, handleRoadmapAction } from './roadmap.js';
+import { DIAGNOSTIC_STAGE_NAMES } from '../learning/roadmap.js';
 
 const RESULT = { correct: '정답', incorrect: '추가 확인', abstained: '모름' };
 const EVIDENCE_PILL = { demonstrated: 'ok', insufficient: 'warn', not_demonstrated: 'bad' };
@@ -35,7 +38,7 @@ export function renderInitialAssessment(props) {
   if (!summary) {
     html = `<section class="card question-card initial-intro"><span class="pill primary">첫 멘토링 준비</span>
       <h2>우리, 어디부터 시작할까요?</h2><p>검정고시 문제로 지금 수학 실력을 영역별로 살펴봐요. 결과는 멘토가 첫 수업을 준비하는 데 써요.</p>
-      <div class="initial-facts"><span>6개 영역</span><span>12~30문제</span><span>시간 제한 없음</span><span>모름 선택 가능</span></div>
+      <div class="initial-facts"><span>6개 영역</span><span>12~${catalog.diagnostic?.maxQuestions??40}문제</span><span>시간 제한 없음</span><span>모름 선택 가능</span></div>
       <p class="muted">고졸 문제부터 시작해요. 어려우면 관련된 중학교 기초 문제로 바뀌니 걱정하지 않아도 돼요.</p>
       <p class="muted small">${caveat} 응답은 이 브라우저에 저장되고 멘토가 볼 수 있어요.</p>
       <div class="action-bar"><button class="primary large" data-initial-action="start">첫 수준 확인 시작 ${ICON.arrow}</button>${dismiss}</div></section>`;
@@ -63,10 +66,11 @@ export function renderInitialAssessment(props) {
   } else {
     const point = summary.startingPoint;
     const paused = summary.stopReason === 'user_paused';
-    html = `<section class="card question-card"><span class="pill ${paused ? 'warn' : 'ok'}">${paused ? '중간까지 확인' : '첫 수준 확인 완료'} · ${summary.counts.total}문제</span>
-      <h2>${esc(summary.report.tier)}</h2>
+    html = `<section class="card question-card roadmap-results"><span class="pill ${paused ? 'warn' : 'ok'}">${paused ? '중간까지 확인' : '첫 수준 확인 완료'} · ${summary.counts.total}문제</span>
+      <p class="meta">현재 추정 수준 티어</p><h2>${esc(summary.report.tier)}</h2>
       <p class="muted">${point ? `멘토가 첫 수업 시작 단원을 ‘${esc(conceptName(catalog, point.conceptId))}’로 정했어요.` : '멘토가 결과를 보고 첫 수업 시작점과 문제를 정할 거예요.'}</p>
       ${domainTable(summary, { forMentor: false })}<p class="muted small">${caveat}</p>
+      ${renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui)}
       <div class="action-bar">${paused && !point ? '<button class="primary" data-initial-action="resume">이어서 풀기</button>' : ''}${dismiss}</div></section>`;
   }
   root.innerHTML = `<div class="page-head"><h2>나의 첫 배움길</h2></div>${html}${ui.initialError ? `<p class="msg warn" role="alert">${esc(ui.initialError)}</p>` : ''}`;
@@ -74,6 +78,7 @@ export function renderInitialAssessment(props) {
   root.onclick = event => {
     const button = event.target.closest('button');
     if (!button || button.disabled) return;
+    if(handleInitialRoadmapAction(button,props))return;
     ui.initialError = null;
     try {
       const current = initialAssessmentSummary(props.getState(), state.learnerId, { catalog });
@@ -119,11 +124,12 @@ export function initialAssessmentPanel(state, catalog, ui) {
   const questions = initialQuestionOptions(catalog, selectedConcept);
   const selectedQuestion = questions.find(q => q.id === ui.initialQuestionId)?.id ?? questions[0]?.id;
   const attempts = summary.entries.map(e => `<li><span class="pill ${e.result === 'correct' ? 'ok' : 'warn'}">${RESULT[e.result]}</span>
-    ${esc(e.domainName)} · ${esc(e.levelName)} · ${esc(e.core)} <span class="muted small">${e.result === 'correct' ? (e.independent ? '혼자 처음 풀어 맞힘' : e.helpUsed ? '도움 받아 맞힘' : '이전에 본 문제') : ''}</span></li>`).join('');
+    ${esc(e.domainName)} · ${esc(DIAGNOSTIC_STAGE_NAMES[e.stage]??e.levelName)} · ${esc(e.core)} <span class="muted small">${esc(e.questionId)} · ${e.result === 'correct' ? (e.independent ? '혼자 처음 풀어 맞힘' : e.helpUsed ? '도움 받아 맞힘' : '이전에 본 문제') : ''}</span></li>`).join('');
   return `<section class="card initial-mentor"><h3>${ICON.target} 첫 수준 확인 결과 ${summary.stopReason === 'user_paused' ? '<span class="pill warn">학생이 중간에 멈춤</span>' : ''}</h3>
-    <p><b class="initial-tier">${esc(report.tier)}</b></p>
+    <p class="meta">현재 추정 수준 티어</p><p><b class="initial-tier">${esc(report.tier)}</b></p>
     <p>응답 ${summary.counts.total}문제 · 정답 ${summary.counts.correct} (혼자 처음 풀어 맞힘 ${summary.counts.independentCorrect}) · 추가 확인 ${summary.counts.incorrect} · 모름 ${summary.counts.abstained}</p>
     ${domainTable(summary, { forMentor: true })}
+    ${renderRoadmap(summary.roadmap,summary.practice,catalog.questions,ui)}
     <p class="muted small">${esc(report.rule)} ${esc(report.disclaimer)}</p>
     <details><summary>응답별 기록 보기</summary><ul class="initial-attempts">${attempts}</ul></details>
     <div class="row"><button class="ghost small" data-initial-action="export">${ICON.doc} 결과 JSON 저장</button></div>
@@ -139,7 +145,7 @@ export function initialAssessmentPanel(state, catalog, ui) {
 }
 
 function exportResult(summary) {
-  const blob = new Blob([JSON.stringify({ exportedAt: now(), report: summary.report, attempts: summary.entries }, null, 2)], { type: 'application/json' });
+  const blob = new Blob([JSON.stringify({ exportedAt: now(), report: summary.report, attempts: summary.entries, roadmap: summary.roadmap, practice: summary.practice }, null, 2)], { type: 'application/json' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
   a.download = `baeumgil-initial-${summary.assessmentId}.json`;
@@ -148,6 +154,7 @@ function exportResult(summary) {
 }
 
 export function handleInitialAssessmentAction(button, props) {
+  if(handleInitialRoadmapAction(button,props))return true;
   const action = button.dataset.initialAction;
   if (!['plan', 'export'].includes(action)) return false;
   const { ui, catalog } = props;
@@ -163,6 +170,15 @@ export function handleInitialAssessmentAction(button, props) {
   props.syncVisibility?.();
   props.rerender();
   return true;
+}
+
+function handleInitialRoadmapAction(button,props){
+  return handleRoadmapAction(button,{
+    ui:props.ui,root:props.root,rerender:props.rerender,
+    getSummary:()=>initialAssessmentSummary(props.getState(),props.getState().learnerId,{catalog:props.catalog}),
+    open:(cardId,questionId)=>props.update(s=>openInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,cardId,questionId,at:now()},{catalog:props.catalog})),
+    answer:input=>props.update(s=>answerInitialRoadmap(s,{assessmentId:initialAssessmentSummary(s,s.learnerId).assessmentId,...input,at:now()},{catalog:props.catalog})),
+  });
 }
 
 export function initialLearningNote(state, catalog) {

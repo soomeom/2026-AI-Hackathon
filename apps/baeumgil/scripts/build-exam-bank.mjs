@@ -18,6 +18,8 @@ const overrides = overrideFile.units;
 const confirmed = new Set(overrideFile.confirmed ?? []);
 for (const [id, o] of Object.entries(overrides)) if (!o.unit) throw new Error(`concept-overrides: ${id} 의 unit 이 없음`);
 const transcribed = new Map(read('public/src/content/questions.json').questions.filter((q) => q.kind === 'official').map((q) => [q.id, q]));
+const diagnosticQuestions = new Map(read('public/src/content/questions.json').questions.map(q=>[q.id,q]));
+const diagnostic = read('public/src/content/diagnostic.json');
 
 // ---------- 단원(개념) 정의 ----------
 // rule: 추출 텍스트 핵심어. 위에서부터 먼저 맞는 단원을 쓴다 (구체적인 단원을 앞에 둔다).
@@ -163,7 +165,19 @@ for (const it of usableItems) {
     if (pick && checks.length < 2) checks.push(pick.d.id);
   }
   for (const x of [...prePool, ...same]) if (checks.length < 2 && !checks.includes(x.d.id)) checks.push(x.d.id);
-  const foundation = idsOf(prePool).filter((id) => !checks.includes(id));
+  let foundation = idsOf(prePool).filter((id) => !checks.includes(id));
+  // Reviewed diagnostic originals use the same exact graph in regular remedial lessons.
+  // Otherwise custom fallback questions would be silently replaced with generic exam-unit neighbours.
+  const curated=it.t?.level===3&&it.t.prerequisite_question_ids?.length;
+  if(curated){
+    checks.splice(0,checks.length,...it.t.prerequisite_question_ids.slice(0,2));
+    const visited=new Set();
+    const visit=id=>{if(visited.has(id))return;visited.add(id);(diagnosticQuestions.get(id)?.prerequisite_question_ids??[]).forEach(visit);};
+    it.t.prerequisite_question_ids.forEach(visit);
+    const conceptIds=new Set([...visited].flatMap(id=>diagnosticQuestions.get(id).conceptIds));
+    foundation=[...new Set((diagnostic.learningBundles??[]).filter(b=>conceptIds.has(b.conceptId)).flatMap(b=>b.questionIds))].filter(id=>!checks.includes(id));
+    if(foundation.length<3)throw new Error(`curated foundation pool too small: ${it.d.id}`);
+  }
   let sameIds = idsOf(same).filter((id) => !checks.includes(id));
   // 같은 단원 기출이 적으면(예: 산포도, 판별식) 가장 가까운 단원 기출로 채운다
   if (sameIds.length < 3) {
@@ -177,7 +191,8 @@ for (const it of usableItems) {
     questionId: it.d.id,
     coreConceptId: it.t ? it.t.conceptIds[0] : conceptId(it.unit),
     examUnit: it.unit,
-    prerequisiteUnits: preUnits,
+    prerequisiteUnits: curated ? [] : preUnits,
+    ...(curated ? {prerequisiteConceptIds:it.t.prerequisite_concept,prerequisiteBasis:'reviewed_diagnostic_graph'} : {}),
     conceptCheckQuestionIds: checks.slice(0, 2),
     foundationQuestionIds: ok ? foundation : (foundation.length >= 3 ? foundation : [...foundation, ...sameIds].slice(0, Math.max(3, foundation.length))),
     similarQuestionIds: sameIds,
@@ -205,7 +220,6 @@ const summary = {
 };
 
 // 앱 안 초기 진단(적응형 6영역)이 같은 카탈로그에서 설정을 읽도록 함께 싣는다 (원본: content/diagnostic.json)
-const diagnostic = read('public/src/content/diagnostic.json');
 const out = { schemaVersion: 1, generator: 'scripts/build-exam-bank.mjs', summary, diagnostic, concepts, questions, routes, reviews };
 writeFileSync(new URL('public/src/content/exam-bank.json', root), `${JSON.stringify(out, null, 1)}\n`);
 console.log(JSON.stringify(summary, null, 1));

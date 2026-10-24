@@ -25,6 +25,31 @@ const enterMath = (h, role) => {
 };
 let bootId = 0;
 
+test('roadmap card practice survives refresh, role and subject changes without rewriting diagnostic history',async t=>{
+  const read=name=>JSON.parse(readFileSync(new URL(`../public/src/content/${name}.json`,import.meta.url),'utf8'));
+  const catalog=mergeCatalogParts(['questions','concepts','routes','review','exam-bank'].map(read));
+  const h=await boot(t,{catalog});enterMath(h,'learner');click(h.app,{initialAction:'start'});await tick();
+  for(let i=0;i<3;i++){const id=h.saved().initialAssessments[0].diagnostic.currentId;click(h.app,{initialAction:'unknown',initialQuestion:id});await tick();}
+  click(h.app,{initialAction:'pause'});
+  assert.match(h.app.innerHTML,/맞춤형 학습 로드맵/);
+  const diagnostic=h.saved().initialAssessments[0].diagnostic;
+  const cardId='algebra:roadmap-like-terms',questionId='roadmap-like-terms';
+  click(h.app,{roadmapAction:'open',roadmapCard:cardId,roadmapQuestion:questionId});
+  assert.match(h.app.innerHTML,/연습 답 확인/);
+  const round=h.saved().initialAssessments[0].roadmapPractice.roundId;
+  click(h.app,{roadmapAction:'choice',roadmapChoice:'a',roadmapRound:round});
+  click(h.app,{roadmapAction:'submit',roadmapRound:round});
+  assert.match(h.app.innerHTML,/맞혔어요/);
+  const restored=await boot(t,{catalog,local:h.local,tab:h.tab});
+  assert.match(restored.app.innerHTML,/맞혔어요/);
+  click(restored.node('change-subject'));click(restored.app,{subjectId:'math'});
+  click(restored.node('change-role'));enterMath(restored,'mentor');
+  assert.match(restored.app.innerHTML,/맞혔어요/);
+  assert.deepEqual(restored.saved().initialAssessments[0].diagnostic,diagnostic);
+  assert.equal(restored.saved().initialAssessments[0].roadmapPractice.attempts.length,1);
+  click(restored.app,{roadmapAction:'close'});assert.match(restored.app.innerHTML,/1\/2문항 연습/);
+});
+
 // DOM 경계만 대체하고 app.js와 실제 저장·학습·화면 코드를 실행한다.
 async function boot(t, { saved, local = memoryStorage(), tab = memoryStorage(), confirm = () => true, catalog = makeCatalog() } = {}) {
   const nodes = new Map();

@@ -7,6 +7,13 @@ import { renderMentor } from '../public/src/ui/mentor.js';
 import { createStore, createDemoState } from '../public/src/state/store.js';
 import { initialAssessmentSummary } from '../public/src/learning/initial-assessment.js';
 import { mergeCatalogParts } from '../public/src/content/catalog.js';
+import { mathHtml } from '../public/src/ui/text.js';
+
+test('수식은 스크린리더가 읽을 수 있는 MathML도 함께 렌더링한다',t=>{
+  const old=globalThis.katex;t.after(()=>{globalThis.katex=old;});
+  let output;globalThis.katex={renderToString:(text,options)=>{output=options.output;return text;}};
+  mathHtml('$x^2$');assert.equal(output,'htmlAndMathml');
+});
 
 const read = (name) => JSON.parse(readFileSync(new URL(`../public/src/content/${name}.json`, import.meta.url), 'utf8'));
 const catalog = mergeCatalogParts(['questions', 'concepts', 'routes', 'review', 'exam-bank'].map(read));
