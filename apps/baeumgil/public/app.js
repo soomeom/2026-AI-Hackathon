@@ -49,7 +49,7 @@ function getStorage() {
   try { return window.localStorage; } catch { return null; }
 }
 const storage = getStorage();
-installDisplayControls({document,storage});
+const display=installDisplayControls({document,storage});
 installImageViewer(document);
 const demoSession = createDemoSession((() => { try { return window.sessionStorage; } catch { return null; } })());
 
@@ -147,7 +147,7 @@ function render() {
   app.classList.toggle('entry-main', !inWorkspace());
   app.classList.toggle('learner-main', inWorkspace() && ui.role === 'learner');
   if (!ui.role) {
-    renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent });
+    renderDemoEntry({ root: app, state, onEnter: setRole, persistent: demoSession.persistent, display });
     return;
   }
   if (!inWorkspace()) {

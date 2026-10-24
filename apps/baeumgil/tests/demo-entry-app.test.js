@@ -521,3 +521,17 @@ test('mentor assignment cancellation confirms started work and keeps answers aft
  const fresh=await boot(t,{local:h.local,tab:h.tab});assert.deepEqual(fresh.saved().attempts,original);
  click(fresh.node('change-role'));enterMath(fresh,'learner');await tick();assert.match(fresh.app.innerHTML,/제출하기/);
 });
+
+test('entry large text recommendation turns on the shared large text setting and survives reload', async t => {
+  const h = await boot(t, { saved: seeded() });
+  const before = h.local.getItem(STORAGE_KEY);
+  click(h.app, { ageBand: 'senior' });
+  assert.match(h.app.innerHTML, /큰 글씨로 볼까요/);
+  assert.equal(h.focused(), 'large-text-accept');
+  click(h.app, { displayChoice: 'accept' });
+  assert.equal(h.node('html').classes.has('large-text'), true);
+  assert.equal(h.node('large-text').attrs['aria-pressed'], 'true');
+  assert.equal(h.local.getItem(STORAGE_KEY), before);
+  const fresh = await boot(t, { local: h.local, tab: h.tab });
+  assert.equal(fresh.node('html').classes.has('large-text'), true);
+});

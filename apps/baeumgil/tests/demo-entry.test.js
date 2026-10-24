@@ -150,3 +150,35 @@ test('leaving invalidates a pending AI response even when the provider ignores c
   assert.equal(ui.ai.lesson.status, 'canceled');
   assert.equal(ui.logDraft.session, '소중한 초안');
 });
+
+test('choosing 60s or older recommends large text without storing the age band or entering a role', () => {
+  const root = { innerHTML: '', onclick: null };
+  const state = createDemoState();
+  const roles = [], calls = [];
+  const display = { largeText: false, setLargeText(value) { calls.push(value); this.largeText = value; } };
+  const press = dataset => root.onclick({ target: { closest: () => ({ dataset }) } });
+  renderDemoEntry({ root, state, onEnter: role => roles.push(role), persistent: true, display });
+  assert.match(root.innerHTML, /연령대는 저장하지 않아요/);
+  assert.doesNotMatch(root.innerHTML, /role="dialog"/);
+  press({ ageBand: 'adult' });
+  assert.doesNotMatch(root.innerHTML, /큰 글씨로 볼까요/);
+  press({ ageBand: 'senior' });
+  assert.match(root.innerHTML, /role="dialog"[^>]*aria-modal="true"/);
+  assert.match(root.innerHTML, /큰 글씨로 볼까요/);
+  press({ enterRole: 'guardian' });
+  assert.deepEqual(roles, [], 'the open recommendation blocks role entry');
+  root.onkeydown({ key: 'Escape' });
+  assert.doesNotMatch(root.innerHTML, /큰 글씨로 볼까요/);
+  assert.deepEqual(calls, []);
+  press({ ageBand: 'senior' });
+  press({ displayChoice: 'accept' });
+  assert.deepEqual(calls, [true]);
+  assert.doesNotMatch(root.innerHTML, /role="dialog"/);
+  assert.match(root.innerHTML, /큰 글씨로 바꿨어요/);
+  press({ ageBand: 'senior' });
+  assert.doesNotMatch(root.innerHTML, /role="dialog"/, 'no recommendation when large text is already on');
+  assert.match(root.innerHTML, /이미 큰 글씨로 보고 있어요/);
+  press({ enterRole: 'learner' });
+  assert.deepEqual(roles, ['learner']);
+  assert.ok(!JSON.stringify(state).includes('senior'));
+});

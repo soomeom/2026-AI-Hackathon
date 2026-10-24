@@ -12,7 +12,36 @@ export function hasUnsavedSessionForm(root) {
   });
 }
 
-export function renderDemoEntry({ root, state, onEnter, persistent }) {
+// 연령대는 추천에만 쓰고 저장하지 않는다. 화면을 다시 그려도 이번 방문 동안만 유지된다.
+const AGE_BANDS = [['teen', '10대'], ['adult', '20~50대'], ['senior', '60대 이상']];
+const entryView = { ageBand: null, recommend: false, notice: '' };
+
+function ageSection(display) {
+  if (!display) return '';
+  const options = AGE_BANDS.map(([id, label]) =>
+    `<button class="secondary" data-age-band="${id}" aria-pressed="${entryView.ageBand === id}">${label}</button>`).join('');
+  return `<section class="entry-age" aria-labelledby="entry-age-title">
+      <h2 id="entry-age-title">보기 편한 글씨를 추천해 드려요 <small>(선택)</small></h2>
+      <p class="muted small">연령대를 고르면 알맞은 글씨 크기를 추천해요. 연령대는 저장하지 않아요.</p>
+      <div class="entry-age-options" role="group" aria-label="연령대">${options}</div>
+      <p class="entry-age-notice small" role="status">${entryView.notice}</p>
+    </section>`;
+}
+
+function recommendDialog(display) {
+  if (!display || !entryView.recommend || display.largeText) return '';
+  return `<div class="entry-recommend-backdrop">
+      <div class="entry-recommend" role="dialog" aria-modal="true" aria-labelledby="recommend-title" aria-describedby="recommend-desc">
+        <span class="pill primary">큰 글씨 추천</span>
+        <h2 id="recommend-title">큰 글씨로 볼까요?</h2>
+        <p id="recommend-desc">글씨와 버튼이 커져서 읽고 누르기 편해요.<br>위쪽 '큰글씨' 버튼으로 언제든 되돌릴 수 있어요.</p>
+        <div class="row"><button id="large-text-accept" class="primary large" data-display-choice="accept">큰 글씨로 보기</button>
+          <button class="secondary large" data-display-choice="dismiss">지금 글씨로 계속</button></div>
+      </div>
+    </div>`;
+}
+
+export function renderDemoEntry({ root, state, onEnter, persistent, display }) {
   const mentor = state.mentors?.find(person => person.id === state.mentorId);
   const learner = state.learners?.find(person => person.id === state.learnerId);
   const paths = learnerPaths(state);
@@ -27,6 +56,7 @@ export function renderDemoEntry({ root, state, onEnter, persistent }) {
       <h1 id="entry-title">배움은 함께,<br>시작은 나에게 맞게.</h1>
       <p>학생의 배움을 잇고, 멘토의 준비를 돕는 배움길.<br>어떤 역할로 함께할까요?</p>
     </div>
+    ${ageSection(display)}
     <div class="entry-roles">
       <article class="entry-card entry-mentor">
         <span class="entry-icon" aria-hidden="true">${ICON.target}</span>
@@ -50,10 +80,37 @@ export function renderDemoEntry({ root, state, onEnter, persistent }) {
       <p class="muted small">가상 계정을 사용하는 시연입니다. 기록은 이 브라우저에 저장됩니다.</p>
       ${persistent ? '' : '<p class="warn-text small" role="status">이 환경에서는 입장한 역할을 저장할 수 없어 새로고침하면 다시 선택해야 할 수 있어요.</p>'}
     </div>
-  </section>`;
+  </section>${recommendDialog(display)}`;
+  const redraw = () => {
+    renderDemoEntry({ root, state, onEnter, persistent, display });
+    if (entryView.recommend && !display.largeText) root.querySelector?.('#large-text-accept')?.focus?.();
+  };
   root.onclick = event => {
-    const button = event.target.closest('button[data-enter-role]');
-    const role = button?.dataset.enterRole;
-    if (['mentor','learner','guardian'].includes(role)) onEnter(role);
+    const button = event.target.closest('button[data-enter-role], button[data-age-band], button[data-display-choice]');
+    const { enterRole: role, ageBand, displayChoice } = button?.dataset ?? {};
+    if (display && displayChoice) {
+      entryView.recommend = false;
+      if (displayChoice === 'accept') display.setLargeText(true);
+      entryView.notice = displayChoice === 'accept' ? '큰 글씨로 바꿨어요.' : '지금 글씨로 계속해요. 위쪽 ‘큰글씨’ 버튼으로 언제든 바꿀 수 있어요.';
+      redraw();
+      return;
+    }
+    if (display && AGE_BANDS.some(([id]) => id === ageBand)) {
+      entryView.ageBand = ageBand;
+      entryView.recommend = ageBand === 'senior' && !display.largeText;
+      entryView.notice = ageBand === 'senior' && display.largeText ? '이미 큰 글씨로 보고 있어요.' : '';
+      redraw();
+      return;
+    }
+    if (entryView.recommend) return;
+    if (!['mentor','learner','guardian'].includes(role)) return;
+    entryView.notice = '';
+    onEnter(role);
+  };
+  root.onkeydown = event => {
+    if (event.key !== 'Escape' || !entryView.recommend) return;
+    entryView.recommend = false;
+    entryView.notice = '지금 글씨로 계속해요. 위쪽 ‘큰글씨’ 버튼으로 언제든 바꿀 수 있어요.';
+    redraw();
   };
 }
