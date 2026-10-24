@@ -18,7 +18,7 @@ npm run ai:lab -- --kind=lesson_plan    # prompt-lab/<종류>.txt의 규칙으�
 
 `ai:lab`은 시스템 지시(규칙)만 바꾸고, 학생 기록 데이터·응답 형식·출력 검증은 팀 것을 그대로 쓴다. 서버(`/api/ai`)는 항상 팀 프롬프트(`ai/contracts.js`)를 쓴다.
 
-- Node.js 20.12 이상. 외부 패키지를 쓰지 않는다.
+- Node.js 22.12 이상. 외부 패키지를 쓰지 않는다. `package.json`에 `"type"`을 두지 않는다(진단 테스트가 KaTeX를 CommonJS로 불러옴).
 - 서버는 기본으로 `127.0.0.1`에만 열린다. 본선에서 다른 기기가 접속하려면 `HOST=0.0.0.0`으로 실행한다.
 - `public/`을 정적 파일로 내보낸다. `public/index.html`은 예서님 파일이다.
 
