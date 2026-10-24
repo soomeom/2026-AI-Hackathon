@@ -99,3 +99,5 @@ draftfile=D/'question-drafts.json';draftdata=json.loads(draftfile.read_text())
 for q in draftdata['questions']:
  if q['id'] in ids:q['importStatus']='registered';q['canonicalQuestionId']=q['id'];q['canonicalContentFile']='public/src/content/questions.json'
 draftfile.write_text(json.dumps(draftdata,ensure_ascii=False,indent=2)+'\n')
+
+subprocess.run([sys.executable,str(B/'scripts/correct_prerequisites.py')],check=True)

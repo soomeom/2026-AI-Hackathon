@@ -1,5 +1,5 @@
 import { gradeAnswer } from './grading.js';
-export const LEVELS = {0:'기초 추가 확인 필요',1:'중1~2 기초',2:'중3 수준',3:'고졸 핵심 수준'};
+export const LEVELS = {0:'기초 추가 확인 필요',1:'중1~2 기초',2:'중3~고1 선수 개념',3:'고졸 핵심 수준'};
 export function validateDiagnostic(bank, config) {
   const byId=new Map(bank.map(q=>[q.id,q])); const errors=[];
   for(const d of config.domains) for(const [level,ids] of Object.entries(d.levels)) for(const id of ids){
@@ -15,25 +15,28 @@ export function startDiagnostic(bank,config,{previouslySeen=[]}={}){
   return {version:config.version,status:'active',domainIndex:0,currentId:config.domains[0].rootQuestionId,attempts:[],seenBefore:[...previouslySeen],completedDomains:[],transition:'고졸 핵심 문항부터 시작합니다.'};
 }
 export function submitDiagnostic(state,submission,bank,config){
+  if(state.attempts.some(a=>a.id===submission.id))return state;
   if(state.status!=='active')throw new Error('diagnosticClosed');
   if(!submission.id)throw new Error('submissionIdRequired');
   if(state.attempts.some(a=>a.id===submission.id))return state;
   if(submission.questionId!==state.currentId)throw new Error('staleQuestion');
   const q=bank.find(q=>q.id===state.currentId);const result=gradeAnswer(q,submission);
   const next=structuredClone(state);const independent=!submission.helpUsed&&!next.seenBefore.includes(q.id);
-  next.attempts.push({id:submission.id,questionId:q.id,domain:q.domain,level:q.level,result,choiceId:submission.choiceId??null,independent,helpUsed:!!submission.helpUsed});
+  const prior=next.attempts.at(-1);
+  const originQuestionId=q.level===3?q.id:(prior?.domain===q.domain?prior.originQuestionId:config.domains[next.domainIndex].rootQuestionId);
+  next.attempts.push({id:submission.id,questionId:q.id,domain:q.domain,conceptIds:[...q.conceptIds],level:q.level,stage:({3:'high_school',2:'prerequisite_1',1:'prerequisite_2'})[q.level],originQuestionId,result,choiceId:submission.choiceId??null,independent,helpUsed:!!submission.helpUsed,submittedAt:submission.submittedAt??new Date().toISOString()});
   const domain=config.domains[next.domainIndex];const unused=id=>!next.attempts.some(a=>a.questionId===id);
   const successes=next.attempts.filter(a=>a.domain===q.domain&&a.level===q.level&&a.result==='correct'&&a.independent).length;
   let target=null;
   if(result==='correct'){
-    if(successes<config.minimumIndependentCorrect)target=domain.levels[q.level].find(unused);
+    if(successes<config.minimumIndependentCorrect)target=(q.confirmation_question_ids??domain.levels[q.level]).find(unused);
     next.transition=target?'같은 수준을 확인합니다.':'이 영역의 확인을 마쳤습니다.';
     if(target)next.transition='같은 수준의 다른 문항으로 한 번 더 확인합니다.';
   }else{
     target=q.fallback_question_id&&unused(q.fallback_question_id)?q.fallback_question_id:null;
-    if(!target){for(let l=q.level-1;l>=1&&!target;l--)target=domain.levels[l]?.find(unused);}
+    // Never substitute an unrelated easier concept when this explicit chain is exhausted.
     // At the lowest level, give one different foundation item before concluding insufficient evidence.
-    if(!target&&q.level===1&&next.attempts.filter(a=>a.domain===q.domain&&a.level===1).length<2)target=domain.levels[1].find(unused);
+    if(!target&&q.level===1&&next.attempts.filter(a=>a.domain===q.domain&&a.level===1).length<2)target=(q.confirmation_question_ids??[]).find(unused);
     next.transition=target?'관련 선수 개념을 확인하는 문제로 이동했습니다.':'이 영역은 멘토와 추가 확인이 필요합니다.';
   }
   if(next.attempts.length>=config.maxQuestions){next.status='completed';next.stopReason='question_limit';next.currentId=null;return next;}

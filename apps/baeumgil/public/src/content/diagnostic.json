@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "domains": [
     {
       "id": "algebra",
@@ -10,14 +10,14 @@
           "ged-high-2025-1-math-q03"
         ],
         "2": [
+          "road-like-1",
+          "road-like-2",
           "astra-expand",
           "astra-expand-check"
         ],
         "1": [
-          "ged-middle-2025-1-math-q09",
-          "ged-middle-2025-1-math-q03",
-          "ged-middle-2025-1-math-q02",
-          "ged-middle-2025-1-math-q01"
+          "road-signed-1",
+          "road-signed-2"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q01"
@@ -31,12 +31,14 @@
           "ged-high-2025-1-math-q06"
         ],
         "2": [
-          "ged-middle-2025-1-math-q16",
-          "ged-middle-2025-1-math-q15"
+          "road-discriminant-1",
+          "road-discriminant-2",
+          "road-rootproduct-1",
+          "road-rootproduct-2"
         ],
         "1": [
-          "ged-middle-2025-1-math-q04",
-          "ged-middle-2025-1-math-q10"
+          "road-eqsquare-1",
+          "road-eqsquare-2"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q05"
@@ -51,11 +53,15 @@
         ],
         "2": [
           "ged-middle-2025-1-math-q17",
-          "astra-quadratic-vertex"
+          "astra-quadratic-vertex",
+          "road-value-1",
+          "road-value-2"
         ],
         "1": [
-          "ged-middle-2025-1-math-q11",
-          "ged-middle-2025-1-math-q05"
+          "road-square-1",
+          "road-square-2",
+          "road-substitute-1",
+          "road-substitute-2"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q07"
@@ -69,13 +75,16 @@
           "ged-high-2025-1-math-q11"
         ],
         "2": [
-          "ged-middle-2025-1-math-q18",
-          "ged-middle-2025-1-math-q19"
+          "road-ratio-1",
+          "road-ratio-2",
+          "road-pythagoras-1",
+          "road-pythagoras-2"
         ],
         "1": [
-          "ged-middle-2025-1-math-q13",
-          "ged-middle-2025-1-math-q12",
-          "ged-middle-2025-1-math-q06"
+          "road-fraction-1",
+          "road-fraction-2",
+          "road-coords-1",
+          "road-coords-2"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q10"
@@ -88,10 +97,17 @@
           "ged-high-2025-1-math-q14",
           "ged-high-2025-1-math-q15"
         ],
-        "2": [],
+        "2": [
+          "road-intersection-1",
+          "road-intersection-2",
+          "road-truthset-1",
+          "road-truthset-2"
+        ],
         "1": [
-          "astra-set-basic",
-          "astra-set-count"
+          "road-member-1",
+          "road-member-2",
+          "road-truth-1",
+          "road-truth-2"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q14"
@@ -104,16 +120,24 @@
           "ged-high-2025-1-math-q19",
           "ged-high-2025-1-math-q20"
         ],
-        "2": [],
+        "2": [
+          "road-enumerate-1",
+          "road-enumerate-2"
+        ],
         "1": [
-          "ged-middle-2025-1-math-q14",
-          "astra-count-basic",
-          "astra-count-one"
+          "road-countbase-1",
+          "road-countbase-2"
         ]
       },
       "rootQuestionId": "ged-high-2025-1-math-q19"
     }
   ],
   "maxQuestions": 30,
-  "minimumIndependentCorrect": 2
+  "minimumIndependentCorrect": 2,
+  "roadmapVersion": 1,
+  "stageLabels": {
+    "high_school": "고졸 본문항",
+    "prerequisite_1": "1차 하위 개념",
+    "prerequisite_2": "2차 하위 개념"
+  }
 }

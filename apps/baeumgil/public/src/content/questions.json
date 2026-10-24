@@ -372,9 +372,9 @@
         "core": "다항식의 덧셈"
       },
       "prerequisite_concept": [
-        "astra-algebra-l1-지수법칙"
+        "road-like"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "fallback_question_id": "road-like-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -396,9 +396,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q09"
+          "road-like-1",
+          "road-like-2"
         ],
-        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-01.png"
     },
@@ -479,7 +480,7 @@
           "astra-expand",
           "astra-expand-check"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-03.png"
     },
@@ -533,9 +534,9 @@
         "core": "판별식"
       },
       "prerequisite_concept": [
-        "astra-equations-l2-이차방정식의 인수분해"
+        "road-discriminant"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q16",
+      "fallback_question_id": "road-discriminant-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -557,10 +558,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q16",
-          "ged-middle-2025-1-math-q15"
+          "road-discriminant-1",
+          "road-discriminant-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-05.png"
     },
@@ -614,9 +615,9 @@
         "core": "근과 계수의 관계"
       },
       "prerequisite_concept": [
-        "astra-equations-l2-제곱근"
+        "road-rootproduct"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q15",
+      "fallback_question_id": "road-rootproduct-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -638,9 +639,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q15"
+          "road-rootproduct-1",
+          "road-rootproduct-2"
         ],
-        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-06.png"
     },
@@ -721,7 +723,7 @@
           "ged-middle-2025-1-math-q17",
           "astra-quadratic-vertex"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-07.png",
       "figure": {
@@ -786,9 +788,9 @@
         "core": "합성함수"
       },
       "prerequisite_concept": [
-        "astra-functions-l1-일차함수의 기울기"
+        "road-value"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q11",
+      "fallback_question_id": "road-value-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -810,9 +812,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q11"
+          "road-value-1",
+          "road-value-2"
         ],
-        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-16.png"
     },
@@ -866,9 +869,9 @@
         "core": "선분의 내분"
       },
       "prerequisite_concept": [
-        "astra-geometry-l1-삼각형의 닮음"
+        "road-ratio"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "fallback_question_id": "road-ratio-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -890,9 +893,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q13"
+          "road-ratio-1",
+          "road-ratio-2"
         ],
-        "reason": "해당 문항에 필요한 계산·그래프·비례 선수 개념 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-10.png",
       "figure": {
@@ -957,9 +961,9 @@
         "core": "점과 직선 사이의 거리"
       },
       "prerequisite_concept": [
-        "astra-geometry-l2-삼각비"
+        "road-pythagoras"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q18",
+      "fallback_question_id": "road-pythagoras-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -981,10 +985,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q18",
-          "ged-middle-2025-1-math-q19"
+          "road-pythagoras-1",
+          "road-pythagoras-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-11.png",
       "figure": {
@@ -1049,9 +1053,9 @@
         "core": "집합의 연산"
       },
       "prerequisite_concept": [
-        "astra-logic-l1-집합의 원소"
+        "road-intersection"
       ],
-      "fallback_question_id": "astra-set-basic",
+      "fallback_question_id": "road-intersection-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -1073,10 +1077,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "astra-set-basic",
-          "astra-set-count"
+          "road-intersection-1",
+          "road-intersection-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-14.png"
     },
@@ -1130,9 +1134,9 @@
         "core": "필요조건"
       },
       "prerequisite_concept": [
-        "astra-logic-l1-집합의 원소"
+        "road-truthset"
       ],
-      "fallback_question_id": "astra-set-basic",
+      "fallback_question_id": "road-truthset-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -1154,10 +1158,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "astra-set-basic",
-          "astra-set-count"
+          "road-truthset-1",
+          "road-truthset-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-15.png"
     },
@@ -1211,9 +1215,9 @@
         "core": "경우의 수"
       },
       "prerequisite_concept": [
-        "astra-counting-l1-확률"
+        "road-enumerate"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q14",
+      "fallback_question_id": "road-enumerate-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -1235,11 +1239,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q14",
-          "astra-count-basic",
-          "astra-count-one"
+          "road-enumerate-1",
+          "road-enumerate-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-19.png",
       "figure": {
@@ -1304,9 +1307,9 @@
         "core": "조합"
       },
       "prerequisite_concept": [
-        "astra-counting-l1-확률"
+        "road-enumerate"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q14",
+      "fallback_question_id": "road-enumerate-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -1328,11 +1331,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q14",
-          "astra-count-basic",
-          "astra-count-one"
+          "road-enumerate-1",
+          "road-enumerate-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-high-2025-1-math/question-20.png",
       "figure": {
@@ -1419,7 +1421,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-01.png",
       "figure": {
@@ -1432,7 +1434,8 @@
           345,
           490
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q02",
@@ -1506,9 +1509,10 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-02.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-02.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q03",
@@ -1582,9 +1586,10 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-03.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-03.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q04",
@@ -1658,9 +1663,10 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-04.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-04.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q05",
@@ -1734,7 +1740,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-05.png",
       "figure": {
@@ -1747,7 +1753,8 @@
           470,
           1365
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q06",
@@ -1821,7 +1828,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-06.png",
       "figure": {
@@ -1834,7 +1841,8 @@
           415,
           1720
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q07",
@@ -1908,7 +1916,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "해당 세트의 최하위 확인 또는 보조 문항"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-07.png",
       "figure": {
@@ -1921,7 +1929,8 @@
           1180,
           535
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q09",
@@ -1995,9 +2004,10 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-09.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-09.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q10",
@@ -2071,9 +2081,10 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-10.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-10.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q11",
@@ -2147,7 +2158,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-11.png",
       "figure": {
@@ -2160,7 +2171,8 @@
           1005,
           1720
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q12",
@@ -2234,7 +2246,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-12.png",
       "figure": {
@@ -2247,7 +2259,8 @@
           445,
           405
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q13",
@@ -2321,7 +2334,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-13.png",
       "figure": {
@@ -2334,7 +2347,8 @@
           475,
           880
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q14",
@@ -2408,7 +2422,7 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-14.png",
       "figure": {
@@ -2421,7 +2435,8 @@
           510,
           1225
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q15",
@@ -2472,10 +2487,8 @@
         "unit": "제곱근",
         "core": "제곱근"
       },
-      "prerequisite_concept": [
-        "astra-equations-l1-일차방정식"
-      ],
-      "fallback_question_id": "ged-middle-2025-1-math-q04",
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2496,13 +2509,11 @@
         "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
       },
       "remedialPath": {
-        "questionIds": [
-          "ged-middle-2025-1-math-q04",
-          "ged-middle-2025-1-math-q10"
-        ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-15.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-15.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q16",
@@ -2553,10 +2564,8 @@
         "unit": "이차방정식의 인수분해",
         "core": "이차방정식의 인수분해"
       },
-      "prerequisite_concept": [
-        "astra-equations-l1-일차방정식"
-      ],
-      "fallback_question_id": "ged-middle-2025-1-math-q04",
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2577,13 +2586,11 @@
         "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
       },
       "remedialPath": {
-        "questionIds": [
-          "ged-middle-2025-1-math-q04",
-          "ged-middle-2025-1-math-q10"
-        ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-16.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-16.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q17",
@@ -2635,9 +2642,9 @@
         "core": "이차함수의 꼭짓점"
       },
       "prerequisite_concept": [
-        "astra-functions-l1-일차함수의 기울기"
+        "road-square"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q11",
+      "fallback_question_id": "road-square-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2659,10 +2666,10 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q11",
-          "ged-middle-2025-1-math-q05"
+          "road-square-1",
+          "road-square-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-17.png",
       "figure": {
@@ -2675,7 +2682,10 @@
           1090,
           415
         ]
-      }
+      },
+      "confirmation_question_ids": [
+        "astra-quadratic-vertex"
+      ]
     },
     {
       "id": "ged-middle-2025-1-math-q18",
@@ -2726,10 +2736,8 @@
         "unit": "삼각비",
         "core": "삼각비"
       },
-      "prerequisite_concept": [
-        "astra-geometry-l1-삼각형의 닮음"
-      ],
-      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2750,12 +2758,8 @@
         "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
       },
       "remedialPath": {
-        "questionIds": [
-          "ged-middle-2025-1-math-q13",
-          "ged-middle-2025-1-math-q12",
-          "ged-middle-2025-1-math-q06"
-        ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-18.png",
       "figure": {
@@ -2768,7 +2772,8 @@
           1080,
           935
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q19",
@@ -2819,10 +2824,8 @@
         "unit": "원의 접선",
         "core": "원의 접선"
       },
-      "prerequisite_concept": [
-        "astra-geometry-l1-삼각형의 닮음"
-      ],
-      "fallback_question_id": "ged-middle-2025-1-math-q13",
+      "prerequisite_concept": [],
+      "fallback_question_id": null,
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -2843,12 +2846,8 @@
         "transcription": "수식 전사 및 일부 발문 의미 보존 편집"
       },
       "remedialPath": {
-        "questionIds": [
-          "ged-middle-2025-1-math-q13",
-          "ged-middle-2025-1-math-q12",
-          "ged-middle-2025-1-math-q06"
-        ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
       "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-19.png",
       "figure": {
@@ -2861,7 +2860,8 @@
           1055,
           1450
         ]
-      }
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "ged-middle-2025-1-math-q20",
@@ -2935,9 +2935,10 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "해당 세트의 최하위 확인 또는 보조 문항"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       },
-      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-20.png"
+      "sourceImage": "/assets/exams/ged-middle-2025-1-math/question-20.png",
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "astra-set-basic",
@@ -3001,8 +3002,9 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
-      }
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "astra-set-count",
@@ -3066,8 +3068,9 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
-      }
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "astra-count-basic",
@@ -3131,8 +3134,9 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
-      }
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "astra-count-one",
@@ -3196,8 +3200,9 @@
       },
       "remedialPath": {
         "questionIds": [],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
-      }
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "diagnosticUse": "supplementary"
     },
     {
       "id": "astra-quadratic-vertex",
@@ -3249,9 +3254,9 @@
         "core": "이차함수의 꼭짓점"
       },
       "prerequisite_concept": [
-        "astra-functions-l1-일차함수의 기울기"
+        "road-square"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q11",
+      "fallback_question_id": "road-square-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -3263,11 +3268,14 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q11",
-          "ged-middle-2025-1-math-q05"
+          "road-square-1",
+          "road-square-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
-      }
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "confirmation_question_ids": [
+        "ged-middle-2025-1-math-q17"
+      ]
     },
     {
       "id": "astra-expand",
@@ -3319,9 +3327,9 @@
         "core": "인수분해"
       },
       "prerequisite_concept": [
-        "astra-algebra-l1-지수법칙"
+        "road-signed"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "fallback_question_id": "road-signed-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -3333,13 +3341,14 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q09",
-          "ged-middle-2025-1-math-q03",
-          "ged-middle-2025-1-math-q02",
-          "ged-middle-2025-1-math-q01"
+          "road-signed-1",
+          "road-signed-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
-      }
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "confirmation_question_ids": [
+        "astra-expand-check"
+      ]
     },
     {
       "id": "astra-expand-check",
@@ -3391,9 +3400,9 @@
         "core": "인수분해"
       },
       "prerequisite_concept": [
-        "astra-algebra-l1-지수법칙"
+        "road-signed"
       ],
-      "fallback_question_id": "ged-middle-2025-1-math-q09",
+      "fallback_question_id": "road-signed-1",
       "review": {
         "method": "source_visual_comparison_and_independent_solution",
         "reviewer": "Codex",
@@ -3405,12 +3414,2479 @@
       },
       "remedialPath": {
         "questionIds": [
-          "ged-middle-2025-1-math-q09",
-          "ged-middle-2025-1-math-q03",
-          "ged-middle-2025-1-math-q02",
-          "ged-middle-2025-1-math-q01"
+          "road-signed-1",
+          "road-signed-2"
         ],
-        "reason": "관련 선수 개념의 수행을 직접 확인"
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      },
+      "confirmation_question_ids": [
+        "astra-expand"
+      ]
+    },
+    {
+      "id": "road-like-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$3x+2+4x-5$를 정리한 것은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "7x-3",
+          "latex": "7x-3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "7x+7",
+          "latex": "7x+7"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "12x-3",
+          "latex": "12x-3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "3x-3",
+          "latex": "3x-3"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$3x+4x=7x$, $2-5=-3$이므로 $7x-3$."
+      ],
+      "conceptIds": [
+        "road-like"
+      ],
+      "domain": "algebra",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "동류항 정리와 일차식 계산",
+        "core": "동류항 정리와 일차식 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-signed-1",
+      "prerequisite_concept": [
+        "road-signed"
+      ],
+      "confirmation_question_ids": [
+        "road-like-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-signed-1",
+          "road-signed-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-like-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$5x-3-(2x+4)$를 정리한 것은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3x+1",
+          "latex": "3x+1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "7x-7",
+          "latex": "7x-7"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "3x-7",
+          "latex": "3x-7"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "3x+7",
+          "latex": "3x+7"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "괄호 앞의 음수를 분배하면 $5x-3-2x-4=3x-7$."
+      ],
+      "conceptIds": [
+        "road-like"
+      ],
+      "domain": "algebra",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "동류항 정리와 일차식 계산",
+        "core": "동류항 정리와 일차식 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-signed-1",
+      "prerequisite_concept": [
+        "road-signed"
+      ],
+      "confirmation_question_ids": [
+        "road-like-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-signed-1",
+          "road-signed-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-signed-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$3+(-5)$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "-2",
+          "latex": "-2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "8",
+          "latex": "8"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "-8",
+          "latex": "-8"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$3-5=-2$."
+      ],
+      "conceptIds": [
+        "road-signed"
+      ],
+      "domain": "algebra",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "부호와 계수의 덧셈",
+        "core": "부호와 계수의 덧셈"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-signed-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-signed-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$-2+7$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "-9",
+          "latex": "-9"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "9",
+          "latex": "9"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "-5",
+          "latex": "-5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "5",
+          "latex": "5"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "4",
+      "solutionSteps": [
+        "$7-2=5$."
+      ],
+      "conceptIds": [
+        "road-signed"
+      ],
+      "domain": "algebra",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "수와 다항식",
+        "unit": "부호와 계수의 덧셈",
+        "core": "부호와 계수의 덧셈"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-signed-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-truthset-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$P=\\{2,4\\}$, $Q=\\{1,2,3,4\\}$이다. $p$가 참인 모든 경우에 $q$도 참이 되기 위한 관계는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "P\\subseteq Q",
+          "latex": "P\\subseteq Q"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "Q\\subseteq P",
+          "latex": "Q\\subseteq P"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "P\\cap Q=\\varnothing",
+          "latex": "P\\cap Q=\\varnothing"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "P=\\varnothing",
+          "latex": "P=\\varnothing"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$p\\Rightarrow q$는 $P$의 모든 원소가 $Q$에 포함된다는 뜻이다."
+      ],
+      "conceptIds": [
+        "road-truthset"
+      ],
+      "domain": "logic",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "명제의 진리집합 포함 관계",
+        "core": "명제의 진리집합 포함 관계"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-truth-1",
+      "prerequisite_concept": [
+        "road-truth"
+      ],
+      "confirmation_question_ids": [
+        "road-truthset-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-truth-1",
+          "road-truth-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-truthset-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "진리집합이 $P=\\{1\\}$, $Q=\\{1,2\\}$일 때 옳은 설명은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "p는 q의 필요조건이다.",
+          "latex": null
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "p는 q의 충분조건이다.",
+          "latex": null
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "p와 q는 동치이다.",
+          "latex": null
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "p이면 q가 아니다.",
+          "latex": null
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$P\\subseteq Q$이므로 $p\\Rightarrow q$. 따라서 $p$는 $q$의 충분조건이다."
+      ],
+      "conceptIds": [
+        "road-truthset"
+      ],
+      "domain": "logic",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "명제의 진리집합 포함 관계",
+        "core": "명제의 진리집합 포함 관계"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-truth-1",
+      "prerequisite_concept": [
+        "road-truth"
+      ],
+      "confirmation_question_ids": [
+        "road-truthset-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-truth-1",
+          "road-truth-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-truth-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x=2$일 때 명제 $x>1$은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "참",
+          "latex": null
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "거짓",
+          "latex": null
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "판단할 수 없음",
+          "latex": null
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "명제가 아님",
+          "latex": null
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$2>1$이므로 참이다."
+      ],
+      "conceptIds": [
+        "road-truth"
+      ],
+      "domain": "logic",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "명제의 참과 거짓",
+        "core": "명제의 참과 거짓"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-truth-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-truth-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x=3$일 때 명제 $x<0$은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "참",
+          "latex": null
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "거짓",
+          "latex": null
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "판단할 수 없음",
+          "latex": null
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "명제가 아님",
+          "latex": null
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$3<0$은 성립하지 않으므로 거짓이다."
+      ],
+      "conceptIds": [
+        "road-truth"
+      ],
+      "domain": "logic",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "명제의 참과 거짓",
+        "core": "명제의 참과 거짓"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-truth-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-intersection-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$A=\\{1,2\\}$, $B=\\{2,3\\}$일 때 $n(A\\cup B)$는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "4",
+          "latex": "4"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$A\\cup B=\\{1,2,3\\}$이므로 3개."
+      ],
+      "conceptIds": [
+        "road-intersection"
+      ],
+      "domain": "logic",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "합집합과 교집합의 원소",
+        "core": "합집합과 교집합의 원소"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-member-1",
+      "prerequisite_concept": [
+        "road-member"
+      ],
+      "confirmation_question_ids": [
+        "road-intersection-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-member-1",
+          "road-member-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-intersection-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$A=\\{1,2,3\\}$, $B=\\{2,3,4\\}$일 때 $n(A\\cap B)$는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "4",
+          "latex": "4"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "공통 원소는 $2,3$ 두 개이다."
+      ],
+      "conceptIds": [
+        "road-intersection"
+      ],
+      "domain": "logic",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "합집합과 교집합의 원소",
+        "core": "합집합과 교집합의 원소"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-member-1",
+      "prerequisite_concept": [
+        "road-member"
+      ],
+      "confirmation_question_ids": [
+        "road-intersection-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-member-1",
+          "road-member-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-member-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$A=\\{1,3,5\\}$의 원소인 수는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "6",
+          "latex": "6"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$3$이 집합에 들어 있다."
+      ],
+      "conceptIds": [
+        "road-member"
+      ],
+      "domain": "logic",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "집합의 원소 판별",
+        "core": "집합의 원소 판별"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-member-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-member-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$A=\\{2,4,6\\}$의 원소가 아닌 수는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "6",
+          "latex": "6"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$5$는 집합에 들어 있지 않다."
+      ],
+      "conceptIds": [
+        "road-member"
+      ],
+      "domain": "logic",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "집합과 명제",
+        "unit": "집합의 원소 판별",
+        "core": "집합의 원소 판별"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-member-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-value-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$f(x)=2x+1$일 때 $f(3)$은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "7",
+          "latex": "7"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "8",
+          "latex": "8"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$f(3)=2\\times3+1=7$."
+      ],
+      "conceptIds": [
+        "road-value"
+      ],
+      "domain": "functions",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "함숫값 대입 계산",
+        "core": "함숫값 대입 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-substitute-1",
+      "prerequisite_concept": [
+        "road-substitute"
+      ],
+      "confirmation_question_ids": [
+        "road-value-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-substitute-1",
+          "road-substitute-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-value-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$f(x)=3x-2$일 때 $f(2)$는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "5",
+          "latex": "5"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$f(2)=3\\times2-2=4$."
+      ],
+      "conceptIds": [
+        "road-value"
+      ],
+      "domain": "functions",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "함숫값 대입 계산",
+        "core": "함숫값 대입 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-substitute-1",
+      "prerequisite_concept": [
+        "road-substitute"
+      ],
+      "confirmation_question_ids": [
+        "road-value-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-substitute-1",
+          "road-substitute-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-substitute-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x=2$일 때 $3x+1$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "7",
+          "latex": "7"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "4",
+      "solutionSteps": [
+        "$3\\times2+1=7$."
+      ],
+      "conceptIds": [
+        "road-substitute"
+      ],
+      "domain": "functions",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "문자에 수 대입과 연산 순서",
+        "core": "문자에 수 대입과 연산 순서"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-substitute-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-substitute-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x=-1$일 때 $2x+3$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "-5",
+          "latex": "-5"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "-1",
+          "latex": "-1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "5",
+          "latex": "5"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$2\\times(-1)+3=1$."
+      ],
+      "conceptIds": [
+        "road-substitute"
+      ],
+      "domain": "functions",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "문자에 수 대입과 연산 순서",
+        "core": "문자에 수 대입과 연산 순서"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-substitute-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-square-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$(3-1)^2$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "8",
+          "latex": "8"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$2^2=4$."
+      ],
+      "conceptIds": [
+        "road-square"
+      ],
+      "domain": "functions",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "제곱의 값과 비음수 성질",
+        "core": "제곱의 값과 비음수 성질"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-square-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-square-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$(x-2)^2$의 최솟값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "-2",
+          "latex": "-2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "-1",
+          "latex": "-1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "0",
+          "latex": "0"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "2",
+          "latex": "2"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "실수의 제곱은 0 이상이고 $x=2$에서 0이 된다."
+      ],
+      "conceptIds": [
+        "road-square"
+      ],
+      "domain": "functions",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "함수와 그래프",
+        "unit": "제곱의 값과 비음수 성질",
+        "core": "제곱의 값과 비음수 성질"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-square-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-pythagoras-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "직선 $y=-\\frac34x+3$의 절편은 $(4,0),(0,3)$이다. 두 절편 사이의 길이는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "7",
+          "latex": "7"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "가로 4, 세로 3인 직각삼각형의 빗변이다. $\\sqrt{4^2+3^2}=5$."
+      ],
+      "conceptIds": [
+        "road-pythagoras"
+      ],
+      "domain": "geometry",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "피타고라스 정리와 직선의 기본형",
+        "core": "피타고라스 정리와 직선의 기본형"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-coords-1",
+      "prerequisite_concept": [
+        "road-coords"
+      ],
+      "confirmation_question_ids": [
+        "road-pythagoras-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-coords-1",
+          "road-coords-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-pythagoras-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "직선 $3x+4y-12=0$을 $y=ax+b$로 나타냈을 때 $(a,b)$는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "(-\\frac34,3)",
+          "latex": "(-\\frac34,3)"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "(\\frac34,3)",
+          "latex": "(\\frac34,3)"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "(-\\frac43,4)",
+          "latex": "(-\\frac43,4)"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "(-3,12)",
+          "latex": "(-3,12)"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$4y=-3x+12$에서 $y=-\\frac34x+3$."
+      ],
+      "conceptIds": [
+        "road-pythagoras"
+      ],
+      "domain": "geometry",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "피타고라스 정리와 직선의 기본형",
+        "core": "피타고라스 정리와 직선의 기본형"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-coords-1",
+      "prerequisite_concept": [
+        "road-coords"
+      ],
+      "confirmation_question_ids": [
+        "road-pythagoras-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-coords-1",
+          "road-coords-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-coords-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "점 $(2,1)$이 직선 $x+y=3$ 위에 있는가?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "있다",
+          "latex": null
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "없다",
+          "latex": null
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "판단할 수 없음",
+          "latex": null
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "좌표가 아님",
+          "latex": null
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$2+1=3$이므로 직선 위에 있다."
+      ],
+      "conceptIds": [
+        "road-coords"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "좌표 대입과 제곱 계산",
+        "core": "좌표 대입과 제곱 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-coords-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-coords-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$3^2+4^2$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "7",
+          "latex": "7"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "12",
+          "latex": "12"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "25",
+          "latex": "25"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "49",
+          "latex": "49"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$9+16=25$."
+      ],
+      "conceptIds": [
+        "road-coords"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "좌표 대입과 제곱 계산",
+        "core": "좌표 대입과 제곱 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-coords-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-ratio-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "길이 12인 선분을 $1:2$로 나눌 때 짧은 부분의 길이는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "8",
+          "latex": "8"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "전체를 3등분한 한 부분이므로 $12/3=4$."
+      ],
+      "conceptIds": [
+        "road-ratio"
+      ],
+      "domain": "geometry",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "선분의 내분과 비례",
+        "core": "선분의 내분과 비례"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-fraction-1",
+      "prerequisite_concept": [
+        "road-fraction"
+      ],
+      "confirmation_question_ids": [
+        "road-ratio-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-fraction-1",
+          "road-fraction-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-ratio-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "수직선에서 $0$과 $9$ 사이를 $2:1$로 내분하는 점은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "9",
+          "latex": "9"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "0에서 전체 길이의 $2/3$만큼 이동하므로 6이다."
+      ],
+      "conceptIds": [
+        "road-ratio"
+      ],
+      "domain": "geometry",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "선분의 내분과 비례",
+        "core": "선분의 내분과 비례"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-fraction-1",
+      "prerequisite_concept": [
+        "road-fraction"
+      ],
+      "confirmation_question_ids": [
+        "road-ratio-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-fraction-1",
+          "road-fraction-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-fraction-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$12\\times\\frac13$은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "9",
+          "latex": "9"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$12/3=4$."
+      ],
+      "conceptIds": [
+        "road-fraction"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "비와 분수의 계산",
+        "core": "비와 분수의 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-fraction-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-fraction-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$9\\times\\frac23$은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "9",
+          "latex": "9"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$9/3\\times2=6$."
+      ],
+      "conceptIds": [
+        "road-fraction"
+      ],
+      "domain": "geometry",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "도형과 좌표",
+        "unit": "비와 분수의 계산",
+        "core": "비와 분수의 계산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-fraction-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-discriminant-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x^2+bx+c=0$에서 $D=b^2-4c$가 양수일 때 실근의 개수는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "0",
+          "latex": "0"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "3",
+          "latex": "3"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$D>0$이면 서로 다른 두 실근이 있다."
+      ],
+      "conceptIds": [
+        "road-discriminant"
+      ],
+      "domain": "equations",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "판별식의 부호와 실근 개수",
+        "core": "판별식의 부호와 실근 개수"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-eqsquare-1",
+      "prerequisite_concept": [
+        "road-eqsquare"
+      ],
+      "confirmation_question_ids": [
+        "road-discriminant-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-eqsquare-1",
+          "road-eqsquare-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-discriminant-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$x^2+3x+1=0$의 판별식은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "9",
+          "latex": "9"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$D=3^2-4\\times1=5$."
+      ],
+      "conceptIds": [
+        "road-discriminant"
+      ],
+      "domain": "equations",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "판별식의 부호와 실근 개수",
+        "core": "판별식의 부호와 실근 개수"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-eqsquare-1",
+      "prerequisite_concept": [
+        "road-eqsquare"
+      ],
+      "confirmation_question_ids": [
+        "road-discriminant-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-eqsquare-1",
+          "road-eqsquare-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-eqsquare-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$5^2-16$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "7",
+          "latex": "7"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "9",
+          "latex": "9"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "11",
+          "latex": "11"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$25-16=9$."
+      ],
+      "conceptIds": [
+        "road-eqsquare"
+      ],
+      "domain": "equations",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "제곱과 사칙연산",
+        "core": "제곱과 사칙연산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-eqsquare-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-eqsquare-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$3^2-4$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "6",
+          "latex": "6"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "3",
+      "solutionSteps": [
+        "$9-4=5$."
+      ],
+      "conceptIds": [
+        "road-eqsquare"
+      ],
+      "domain": "equations",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "제곱과 사칙연산",
+        "core": "제곱과 사칙연산"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-eqsquare-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-rootproduct-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$(3+\\sqrt2)(3-\\sqrt2)$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "5",
+          "latex": "5"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "7",
+          "latex": "7"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "9",
+          "latex": "9"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "11",
+          "latex": "11"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "합과 차의 곱은 제곱의 차이다. $9-2=7$."
+      ],
+      "conceptIds": [
+        "road-rootproduct"
+      ],
+      "domain": "equations",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "곱셈 공식과 제곱근",
+        "core": "곱셈 공식과 제곱근"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-eqsquare-1",
+      "prerequisite_concept": [
+        "road-eqsquare"
+      ],
+      "confirmation_question_ids": [
+        "road-rootproduct-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-eqsquare-1",
+          "road-eqsquare-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-rootproduct-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$(2+\\sqrt3)(2-\\sqrt3)$의 값은?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "4",
+          "latex": "4"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "1",
+      "solutionSteps": [
+        "$4-3=1$."
+      ],
+      "conceptIds": [
+        "road-rootproduct"
+      ],
+      "domain": "equations",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "방정식과 부등식",
+        "unit": "곱셈 공식과 제곱근",
+        "core": "곱셈 공식과 제곱근"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-eqsquare-1",
+      "prerequisite_concept": [
+        "road-eqsquare"
+      ],
+      "confirmation_question_ids": [
+        "road-rootproduct-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-eqsquare-1",
+          "road-eqsquare-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-enumerate-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "카드 $1,2,3$ 중 서로 다른 2장을 순서 없이 고르는 경우의 수는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "6",
+          "latex": "6"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$(1,2),(1,3),(2,3)$의 3가지."
+      ],
+      "conceptIds": [
+        "road-enumerate"
+      ],
+      "domain": "counting",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "중복 없이 조합 나열",
+        "core": "중복 없이 조합 나열"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-countbase-1",
+      "prerequisite_concept": [
+        "road-countbase"
+      ],
+      "confirmation_question_ids": [
+        "road-enumerate-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-countbase-1",
+          "road-countbase-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-enumerate-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "4가지 중 서로 다른 3가지를 고르는 경우의 수는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "4",
+          "latex": "4"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "6",
+          "latex": "6"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "12",
+          "latex": "12"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "제외할 1가지를 고르는 것과 같으므로 4가지."
+      ],
+      "conceptIds": [
+        "road-enumerate"
+      ],
+      "domain": "counting",
+      "level": 2,
+      "difficulty": "중학·고1 연계",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "중복 없이 조합 나열",
+        "core": "중복 없이 조합 나열"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": "road-countbase-1",
+      "prerequisite_concept": [
+        "road-countbase"
+      ],
+      "confirmation_question_ids": [
+        "road-enumerate-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [
+          "road-countbase-1",
+          "road-countbase-2"
+        ],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-countbase-1",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "$1,2,3,4$ 중 짝수는 몇 개인가?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "4",
+          "latex": "4"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "$2,4$ 두 개이다."
+      ],
+      "conceptIds": [
+        "road-countbase"
+      ],
+      "domain": "counting",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "조건에 맞는 경우 세기",
+        "core": "조건에 맞는 경우 세기"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-countbase-2"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
+      }
+    },
+    {
+      "id": "road-countbase-2",
+      "kind": "authored",
+      "role": "diagnostic",
+      "contentStatus": "approved",
+      "approvalScope": "local_diagnostic_content",
+      "prompt": "동전을 한 번 던질 때 가능한 결과 수는?",
+      "choices": [
+        {
+          "id": "a",
+          "value": "1",
+          "text": "1",
+          "latex": "1"
+        },
+        {
+          "id": "b",
+          "value": "2",
+          "text": "2",
+          "latex": "2"
+        },
+        {
+          "id": "c",
+          "value": "3",
+          "text": "3",
+          "latex": "3"
+        },
+        {
+          "id": "d",
+          "value": "4",
+          "text": "4",
+          "latex": "4"
+        }
+      ],
+      "answerFormat": "choice",
+      "answer": "2",
+      "solutionSteps": [
+        "앞면과 뒷면 두 가지이다."
+      ],
+      "conceptIds": [
+        "road-countbase"
+      ],
+      "domain": "counting",
+      "level": 1,
+      "difficulty": "중1~2 기초",
+      "curriculum": {
+        "major": "경우의 수와 확률",
+        "unit": "조건에 맞는 경우 세기",
+        "core": "조건에 맞는 경우 세기"
+      },
+      "reference": {
+        "authored": true
+      },
+      "fallback_question_id": null,
+      "prerequisite_concept": [],
+      "confirmation_question_ids": [
+        "road-countbase-1"
+      ],
+      "review": {
+        "method": "independent_arithmetic_and_logic_check",
+        "educatorValidated": false
+      },
+      "remedialPath": {
+        "questionIds": [],
+        "reason": "직접 필요한 연산·표현·논리 선수 개념 확인"
       }
     }
   ]
