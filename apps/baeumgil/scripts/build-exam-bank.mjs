@@ -204,6 +204,8 @@ const summary = {
   byUnit: count(usableItems, (x) => x.unit),
 };
 
-const out = { schemaVersion: 1, generator: 'scripts/build-exam-bank.mjs', summary, concepts, questions, routes, reviews };
+// 앱 안 초기 진단(적응형 6영역)이 같은 카탈로그에서 설정을 읽도록 함께 싣는다 (원본: content/diagnostic.json)
+const diagnostic = read('public/src/content/diagnostic.json');
+const out = { schemaVersion: 1, generator: 'scripts/build-exam-bank.mjs', summary, diagnostic, concepts, questions, routes, reviews };
 writeFileSync(new URL('public/src/content/exam-bank.json', root), `${JSON.stringify(out, null, 1)}\n`);
 console.log(JSON.stringify(summary, null, 1));

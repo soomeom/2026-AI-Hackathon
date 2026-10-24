@@ -68,9 +68,11 @@ export function createStore({ initialState, catalog, rng = Math.random, now = ()
     assignQuestion,
     update,
     replaceState,
-    startInitialAssessment: () => update(s => initial.startInitialAssessment(s, { learnerId: s.learnerId, id: `initial-${globalThis.crypto.randomUUID()}`, at: now() })),
-    presentInitialQuestion: input => update(s => initial.presentInitialQuestion(s, { ...input, at: now() })),
-    submitInitialAnswer: input => update(s => initial.submitInitialAnswer(s, { ...input, at: now() })),
+    startInitialAssessment: () => update(s => initial.startInitialAssessment(s, { learnerId: s.learnerId, id: `initial-${globalThis.crypto.randomUUID()}`, at: now() }, { catalog })),
+    presentInitialQuestion: input => update(s => initial.presentInitialQuestion(s, { ...input, at: now() }, { catalog })),
+    submitInitialAnswer: input => update(s => initial.submitInitialAnswer(s, { ...input, at: now() }, { catalog })),
+    pauseInitialAssessment: input => update(s => initial.pauseInitialAssessment(s, { ...input, at: now() })),
+    resumeInitialAssessment: input => update(s => initial.resumeInitialAssessment(s, { ...input, at: now() })),
     planInitialLesson(input) {
       update(s => initial.planInitialLesson(s, { learnerId: s.learnerId, mentorId: s.mentorId, ...input, at: now() }, { catalog, rng }));
       return state.startingPoints.find(p => p.assessmentId === input.assessmentId).pathId;

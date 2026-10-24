@@ -49,10 +49,15 @@ export function diagnosticReport(state,bank,config){
     const attempts=state.attempts.filter(a=>a.domain===d.id);let demonstrated=0;
     for(let l=1;l<=3;l++)if(attempts.filter(a=>a.level===l&&a.result==='correct'&&a.independent).length>=config.minimumIndependentCorrect)demonstrated=l;
     const weak=[...new Set(attempts.filter(a=>a.result!=='correct').map(a=>byId.get(a.questionId).curriculum.core))];
-    return {id:d.id,name:d.name,demonstrated,label:attempts.length?LEVELS[demonstrated]:'미측정',attempted:attempts.length,correct:attempts.filter(a=>a.result==='correct').length,weak,provisional:!state.completedDomains.includes(d.id)};
+    // 맞혔지만 도움·재노출이라 독립 근거가 안 된 경우는 '낮은 수준'이 아니라 '판단 보류'로 구분한다
+    const evidence=demonstrated>0?'demonstrated':attempts.some(a=>a.result==='correct'&&!a.independent)?'insufficient':'not_demonstrated';
+    const label=!attempts.length?'미측정':evidence==='insufficient'?'판단 보류 · 도움 없이 푼 응답 부족':LEVELS[demonstrated];
+    return {id:d.id,name:d.name,demonstrated,evidence,label,attempted:attempts.length,correct:attempts.filter(a=>a.result==='correct').length,independentCorrect:attempts.filter(a=>a.result==='correct'&&a.independent).length,weak,provisional:!state.completedDomains.includes(d.id)};
   });
-  const measured=domains.filter(d=>d.attempted);const all=domains.every(d=>!d.provisional);const high=domains.filter(d=>d.demonstrated===3).length;
-  const median=measured.length?[...measured].sort((a,b)=>a.demonstrated-b.demonstrated)[Math.floor((measured.length-1)/2)].demonstrated:0;
-  const tier=!all?'진단 진행 중 · 일부 영역 미확인':high===domains.length?'고졸 핵심 수준':high>=3?'고1 기초~고졸 핵심 혼합':LEVELS[median];
-  return {tier,allDomainsCompleted:all,domains,attempts:state.attempts.length,independentCount:state.attempts.filter(a=>a.independent).length,disclaimer:'선별 문항에 근거한 수업 시작점 추정입니다. 학년 전체 숙달·검정고시 합격·표준화된 진단 정확도를 보장하지 않습니다.',rule:'영역·수준별 처음 본 문항 2개를 도움 없이 맞힌 경우 확인. 전체 표시는 영역별 결과를 요약하며 미측정 영역은 제외합니다.'};
+  const measured=domains.filter(d=>d.attempted);const decided=measured.filter(d=>d.evidence!=='insufficient');const insufficient=measured.length-decided.length;
+  const all=domains.every(d=>!d.provisional);const high=domains.filter(d=>d.demonstrated===3).length;
+  const median=decided.length?[...decided].sort((a,b)=>a.demonstrated-b.demonstrated)[Math.floor((decided.length-1)/2)].demonstrated:0;
+  let tier=!all?'진단 진행 중 · 일부 영역 미확인':!decided.length&&measured.length?'판단 보류 · 도움 없이 푼 응답이 부족해요':high===domains.length?'고졸 핵심 수준':high>=3?'고1 기초~고졸 핵심 혼합':LEVELS[median];
+  if(all&&decided.length&&insufficient)tier+=` · 판단 보류 ${insufficient}영역`;
+  return {tier,allDomainsCompleted:all,domains,insufficientDomains:insufficient,attempts:state.attempts.length,independentCount:state.attempts.filter(a=>a.independent).length,disclaimer:'선별 문항에 근거한 수업 시작점 추정입니다. 학년 전체 숙달·검정고시 합격·표준화된 진단 정확도를 보장하지 않습니다.',rule:'초기 운영 규칙(학생 데이터로 보정 전): 영역·수준별 처음 본 문항 2개를 도움 없이 맞힌 경우 그 수준을 확인. 도움·재노출로만 맞힌 영역은 판단 보류로 따로 표시하고 전체 수준 계산에서 뺍니다.'};
 }

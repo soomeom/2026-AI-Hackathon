@@ -10,6 +10,7 @@ import { aiAvailability, runAI, cancelAI, decideAI, statusHtml, decisionHtml } f
 import { renderSessions } from './sessions.js';
 import { buildLogFacts } from '../mentoring/logs.js';
 import { initialAssessmentPanel, handleInitialAssessmentAction } from './initial-assessment.js';
+import { initialAssessmentSummary } from '../learning/initial-assessment.js';
 
 const OVERRIDE_TARGETS = ['concept_check', 'foundation_practice', 'similar_practice', 'original_retry', 'transfer_check', 'completed'];
 const NOVELTY_TEXT = { first_seen: '처음 봄', already_seen: '이미 봄', unknown: '확인 불가' };
@@ -74,7 +75,7 @@ export function renderMentor(props) {
       if (b.dataset.ai === 'request') {
         runAI({
           key: 'lesson', kind: 'lesson_plan', ctx,
-          buildInput: (s, requestId) => buildAIInput(s, { learnerId: s.learnerId, kind: 'lesson_plan', catalog, requestId }),
+          buildInput: (s, requestId) => buildAIInput(s, { learnerId: s.learnerId, kind: 'lesson_plan', catalog, requestId, initialAssessment: initialFacts(s, catalog) }),
         });
       } else if (b.dataset.ai === 'cancel') cancelAI('lesson', ui);
       else decideAI(b.dataset.artifact, b.dataset.ai === 'adopt' ? 'adopted' : 'rejected', ctx);
@@ -194,6 +195,13 @@ function pathList(paths, selectedPath, catalog, gotoTab) {
       <button class="ghost small" ${gotoTab ? `data-goto="${gotoTab}"` : ''} data-path="${esc(p.id)}">자세히</button>
     </div>`;
   }).join('')}</div>`;
+}
+
+// AI 수업 제안에 넘길 첫 수준 확인 요약 (영역별 확인 수준·다시 볼 개념만)
+function initialFacts(state, catalog) {
+  const s = initialAssessmentSummary(state, state.learnerId, { catalog });
+  if (!s?.report || s.status !== 'completed') return null;
+  return { tier: s.report.tier, domains: s.report.domains.filter((d) => d.attempted).map((d) => ({ name: d.name, level: d.label, weak: d.weak })) };
 }
 
 function lessonPanel(state, catalog, summary, ui) {

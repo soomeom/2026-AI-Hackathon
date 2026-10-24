@@ -72,7 +72,8 @@ function sanitizeNote(note, realNames) {
 }
 
 // requestId·inputRevision 은 모델에 보내지 않고, 클라이언트가 늦게 온 이전 응답을 버리는 데 쓴다.
-export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note, requestId = null } = {}) {
+// initialAssessment: 첫 수준 확인의 영역별 요약(선택). 추정치이므로 프롬프트에서 확정 사실처럼 쓰지 않게 한다.
+export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note, requestId = null, initialAssessment = null } = {}) {
   if (!AI_KINDS.includes(kind)) throw new Error(`buildAIInput: kind 는 ${AI_KINDS.join(' | ')} 중 하나여야 함`);
   const summary = buildLearnerSummary(state, learnerId, { catalog });
   const session = (state.sessions ?? []).find((s) => s.id === sessionId);
@@ -103,6 +104,7 @@ export function buildAIInput(state, { learnerId, sessionId, kind, catalog, note,
         questionId: t.questionId, stage: t.stage, result: t.result, noveltyAtPresentation: t.noveltyAtPresentation, helpUsed: t.helpUsed,
       })),
       questions: questionIds.map((id) => ({ id, prompt: promptOf(id) })),
+      ...(initialAssessment ? { initialAssessment } : {}),
     },
     allowedConceptIds: summary.evidence.map((e) => e.conceptId),
     allowedQuestionIds: questionIds,
@@ -128,6 +130,7 @@ function systemInstruction(input) {
     '정답 여부·수치·학습 단계는 facts 에 있는 값만 사용한다. 새로 계산하거나 판정하지 않는다.',
     'conceptId 는 allowedConceptIds, evidenceIds 는 allowedEvidenceIds, questionIds 는 allowedQuestionIds 안의 값만 쓴다. 목록에 없는 ID 를 만들지 않는다.',
     'evidence.status 가 inferred 또는 needs_review 인 개념은 "확인이 필요하다"고 표현하고, 확정된 사실처럼 쓰지 않는다.',
+    'facts.initialAssessment 는 첫 수준 확인의 영역별 추정이다. 수업 시작점을 고르는 참고로만 쓰고, "판단 보류" 영역은 확인이 필요하다고 표현한다.',
     `'찍었다', '과신', '의지 부족' 같은 단정적 평가 대신 관찰된 사실과 확인 질문으로 쓴다.`,
     input.constraints.forbidAffectiveStatements
       ? '멘토 관찰 메모(note)가 비어 있다. 학습자의 감정·태도·자신감·흥미·동기에 관한 문장은 쓰지 마라.'

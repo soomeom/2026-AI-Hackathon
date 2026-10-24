@@ -58,6 +58,125 @@
    "m-inequality": 4
   }
  },
+ "diagnostic": {
+  "version": 1,
+  "domains": [
+   {
+    "id": "algebra",
+    "name": "수와 다항식",
+    "levels": {
+     "1": [
+      "ged-middle-2025-1-math-q09",
+      "ged-middle-2025-1-math-q03",
+      "ged-middle-2025-1-math-q02",
+      "ged-middle-2025-1-math-q01"
+     ],
+     "2": [
+      "astra-expand",
+      "astra-expand-check"
+     ],
+     "3": [
+      "ged-high-2025-1-math-q01",
+      "ged-high-2025-1-math-q03"
+     ]
+    },
+    "rootQuestionId": "ged-high-2025-1-math-q01"
+   },
+   {
+    "id": "equations",
+    "name": "방정식과 부등식",
+    "levels": {
+     "1": [
+      "ged-middle-2025-1-math-q04",
+      "ged-middle-2025-1-math-q10"
+     ],
+     "2": [
+      "ged-middle-2025-1-math-q16",
+      "ged-middle-2025-1-math-q15"
+     ],
+     "3": [
+      "ged-high-2025-1-math-q05",
+      "ged-high-2025-1-math-q06"
+     ]
+    },
+    "rootQuestionId": "ged-high-2025-1-math-q05"
+   },
+   {
+    "id": "functions",
+    "name": "함수와 그래프",
+    "levels": {
+     "1": [
+      "ged-middle-2025-1-math-q11",
+      "ged-middle-2025-1-math-q05"
+     ],
+     "2": [
+      "ged-middle-2025-1-math-q17",
+      "astra-quadratic-vertex"
+     ],
+     "3": [
+      "ged-high-2025-1-math-q07",
+      "ged-high-2025-1-math-q16"
+     ]
+    },
+    "rootQuestionId": "ged-high-2025-1-math-q07"
+   },
+   {
+    "id": "geometry",
+    "name": "도형과 좌표",
+    "levels": {
+     "1": [
+      "ged-middle-2025-1-math-q13",
+      "ged-middle-2025-1-math-q12",
+      "ged-middle-2025-1-math-q06"
+     ],
+     "2": [
+      "ged-middle-2025-1-math-q18",
+      "ged-middle-2025-1-math-q19"
+     ],
+     "3": [
+      "ged-high-2025-1-math-q10",
+      "ged-high-2025-1-math-q11"
+     ]
+    },
+    "rootQuestionId": "ged-high-2025-1-math-q10"
+   },
+   {
+    "id": "logic",
+    "name": "집합과 명제",
+    "levels": {
+     "1": [
+      "astra-set-basic",
+      "astra-set-count"
+     ],
+     "2": [],
+     "3": [
+      "ged-high-2025-1-math-q14",
+      "ged-high-2025-1-math-q15"
+     ]
+    },
+    "rootQuestionId": "ged-high-2025-1-math-q14"
+   },
+   {
+    "id": "counting",
+    "name": "경우의 수와 확률",
+    "levels": {
+     "1": [
+      "ged-middle-2025-1-math-q14",
+      "astra-count-basic",
+      "astra-count-one"
+     ],
+     "2": [],
+     "3": [
+      "ged-high-2025-1-math-q19",
+      "ged-high-2025-1-math-q20"
+     ]
+    },
+    "rootQuestionId": "ged-high-2025-1-math-q19"
+   }
+  ],
+  "maxQuestions": 30,
+  "minimumIndependentCorrect": 2
+ },
  "concepts": [
   {
    "id": "ged-h-rational",
